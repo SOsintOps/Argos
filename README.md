@@ -24,4 +24,4 @@ Every OSINT investigation should use a clean VM. Thankfully, Michael Bazzell and
 - [Setup scripts](https://inteltechniques.com/osintbook/vm-files.zip)
 
 
-Note that all the licenses mentioned in Bazzell's book apply. 
+Note that all the licenses mentioned in Bazzell's book apply and are located at the "license.txt" 

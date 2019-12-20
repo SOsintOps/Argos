@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=HTTrack
+Categories=Network;OSINT
+Exec=webhttrack
+Icon=/home/osint/Documents/icons/domains.png
+Terminal=true

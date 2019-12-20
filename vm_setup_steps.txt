@@ -1,0 +1,318 @@
+Step by step instructions to set up the OSINT VM
+
+From https://inteltechniques.com/osintbook/linux.txt
+
+Verion 1.1
+
+NOTES: 
+This is the text file with a summary of all REQUIRED steps present in Chapter Five. 
+These will assist with the creation of your custom machine. These will be updated as things change.
+
+Open VirtualBox and delete any previous virtual machines created from this book.
+Within VirtualBox, click on the button labeled 'New'.
+Provide a name of 'OSINT Master'. 
+Choose your desired location to save the machine on your host. 
+Select 'Linux' as the type, and 'Debian 64-bit' as the version. 
+Click Continue. 
+In the Memory size window, move the slider to select 50% of your system memory. 
+Click Continue. 
+Click Create. 
+Leave the hard disk file type as VDI and click Continue. 
+Select the default option of 'Dynamically allocated' and click Continue. 
+Choose the desired size of your virtual hard drive (20GB+). 
+Click Create.
+Click the Settings icon. 
+Click the Storage icon. 
+Click the CD icon which displays 'Empty' in the left menu. 
+Click the small blue circle to the far right in the 'Optical Drive' option. 
+Select 'Choose Virtual Optical Disk File'. 
+Select the Ubuntu ISO downloaded previously. 
+Click 'OK'. 
+Click 'Start' In the main menu. 
+Select 'Install Ubuntu'. 
+Select your desired language and location, then click 'Continue'. 
+Select 'Normal Installation', 'Download Updates', and 'Install third party...' 
+Click 'Continue'. 
+Select 'Erase disk and install Ubuntu', then 'Install Now'. Confirm with 'Continue'. 
+Choose your desired time zone and click 'Continue'. 
+Choose a name, user name, computer name, and password of 'osint' for each.
+Select 'Log in automatically'.
+Allow Ubuntu to complete the installation, and choose 'Restart Now', 
+Press 'Enter' to reboot.
+Press 'Next' twice. 
+Select 'No' and then 'Next' when asked to help improve Ubuntu. 
+Click 'Done' to remove the welcome screen. 
+If prompted to install updates, click 'Remind me later'. 
+In the VirtualBox Menu, select Devices > 'Insert Guest Additions CD Image'
+Click 'Run' when the dialogue box pops up, provide your password when prompted. 
+Allow the process to complete, press enter, and shut down the VM (Upper right ). 
+In VirtualBox, select your VM and click 'Settings'.
+In the 'General' icon, click on the 'Advanced' tab. 
+Change 'Shared clipboard' and Drag nâ€™ Drop' to 'Bidirectional'. 
+In the 'Display' icon, change the Video Memory to the maximum. 
+In the 'Shared Folders' icon, click the green '+' . 
+Click the dropdown menu under 'Folder Path'. 
+Select 'Other'. 
+Choose a desired folder on your host to share data back and forth. 
+Select the 'Auto-mount' option and then 'OK'. 
+Click 'OK' to close the settings window. 
+Restart your Ubuntu VM. 
+Right-click and eject the CD on the Desktop.
+In Terminal, type sudo adduser osint vboxsf
+Right-click on the Desktop and select 'Change Background'. 
+Click the 'Background' image and then 'Colors'. 
+Choose a solid color of preference. 
+Repeat the process with the 'Lock Screen' image. 
+Back in the 'Settings' menu, click 'Notifications' and disable both options. 
+Click the 'Privacy' option, then click 'Screen Lock' and disable the option. 
+Close the window and click 'Usage and History', then disable the option. 
+Close the window and click 'Problem Reporting', then disable the option. 
+Close the window and click Power, changing 'Blank Screen' to 'Never'. 
+Click 'Automatic Suspend' and disable the feature. 
+Close all open windows. 
+Right-click any undesired icons from the dock and select 'Remove from Favorites'. 
+Click the nine small dots in the lower left to launch the Applications menu. 
+Type Terminal in the search field and click on the application, 
+Type: sudo apt purge ubuntu-web-launchers, click 'Y' when prompted. 
+Click the nine dots to launch the Applications option. 
+Type Terminal into the search field. 
+Right-click on the application and select 'Add to Favorites'. 
+Type Software into the search field and right-click on 'Software Updater'. 
+Select 'Add to Favorites'. 
+Press escape until all windows are gone. 
+Launch the Software Updater icon from the Dock. 
+Click 'Install Now' and allow the updates to complete. 
+Open Firefox.
+Click on the menu in the upper right and select 'Preferences'. 
+In the General options, uncheck 'Recommend extensions as you browse'.
+In the General options, if present, uncheck 'Recommend features as you browse'.  
+In the Home options, change 'Homepage andâ€¦' and 'New tabs' to 'Blank page'. 
+In the Privacy & Security options, select the Strict option under Content Blocking. 
+Check the box titled 'Delete cookies and site data when Firefox is closed'. 
+Uncheck the box titled 'Ask to save logins and passwords for websites'. 
+Change the History setting to 'Firefox will use custom settings for history'. 
+Uncheck the boxes 'Remember browsingâ€¦' and 'Remember searchâ€¦'. 
+Check the box titled 'Clear history when Firefox closes'. 
+Uncheck 'Browsing history' from the 'Address Bar' menu. 
+In the Permissions menu, click 'Settings' next to 'Location, Camera, Microphoneâ€¦'.
+Check the box titled 'Block new requests...' on each of these options. 
+Uncheck all options under 'Firefox Data Collection and Use'. 
+Uncheck all options under 'Deceptive Content and Dangerous Software Protection'. 
+Close all menus and return to Firefox.
+Enter 'about:config' into the address field and hit enter.
+Search and change geo.enabled to FALSE. 
+Search and change browser.safebrowsing.phishing.enabled to FALSE.
+Search and change browser.safebrowsing.malware.enabled to FALSE. 
+Search and change media.navigator.enabled to FALSE.
+Search and change dom.battery.enabled to FALSE. 
+Search and change extensions.pocket.enabled to FALSE.
+Search and change network.trr.mode from 0 to 2. 
+Search and change network.security.esni.enabled from False to True.
+Search and change media.peerconnection.enabled to FALSE. 
+Search and change media.peerconnection.turn.disable to TRUE. 
+Search and change media.peerconnection.use_document_iceservers to FALSE. 
+Search and change media.peerconnection.video.enabled to FALSE. 
+Click the Firefox menu and choose 'Addons'.
+Search and Install Add-on titled Firefox Containers.
+Search and Install Add-on titled uBlock Origin.
+Search and Install Add-on titled DownThemAll.
+Search and Install Add-on titled VideoDownloadHelper.
+Search and Install Add-on titled FireShot.
+Search and Install Add-on titled Nimbus.
+Search and Install Add-on titled HTTPS Everywhere.
+Search and Install Add-on titled MJSONViewer.
+Search and Install Add-on titled User Agent Switcher.
+Search and Install Add-on titled OneTab.
+Search and Install Add-on titled Image Search Options.
+Search and Install Add-on titled Resurrect Pages.
+Search and Install Add-on titled Copy Selected Links.
+Search and Install Add-on titled KeePassXC Browser. 
+Close Firefox and open Terminal.
+sudo snap install vlc
+sudo apt-get install ffmpeg (press Y)
+sudo apt-get install python-pip (press Y)
+sudo apt-get install python3-pip (press Y)
+sudo pip install --upgrade youtube_dl (press Y)
+Download https://inteltechniques.com/osintbook/vm-files.zip to VM Desktop
+Right-click file and choose 'Extract here'.
+mkdir ~/Documents/scripts
+mkdir ~/Documents/icons
+cd ~/Desktop/vm-files/scripts
+sudo mv * ~/Documents/scripts
+cd ~/Desktop/vm-files/icons
+sudo mv * ~/Documents/icons
+cd ~/Desktop/vm-files/shortcuts
+sudo mv * /usr/share/applications/
+Delete vm-files file and folder from Desktop.
+Open Applications menu.
+Right-click Domains, EyeWitness, Instagram, Twitter, and Video Utilities/Download.
+Choose 'Add to Favorites'. 
+cd ~/Downloads
+mkdir Programs
+cd Programs
+sudo pip install Instalooter
+sudo pip3 install Instaloader
+sudo apt install git (press Y)
+git clone https://github.com/twintproject/twint.git
+cd twint
+sudo python3 setup.py install
+cd ~/Downloads/Programs
+git clone https://github.com/ChrisTruncer/EyeWitness.git
+cd EyeWitness/setup
+sudo ./setup.sh
+sudo apt-get install xvfb
+cd ~/Downloads/Programs
+sudo snap install amass
+git clone https://github.com/aboul3la/Sublist3r.git
+cd Sublist3r && sudo pip install -r requirements.txt
+cd ~/Downloads/Programs
+git clone https://github.com/s0md3v/Photon.git
+cd Photon && sudo pip3 install -r requirements.txt
+cd ~/Downloads/Programs 
+git clone https://github.com/laramies/theHarvester.git
+cd theHarvester && git checkout 8b88a66
+sudo pip3 install -r requirements.txt
+sudo apt-get install mediainfo-gui (press Y)
+sudo apt install libimage-exiftool-perl (press Y)
+sudo apt-get install webhttrack (press Y)
+wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+sudo dpkg -i google-earth64.deb
+sudo apt-get -f install; rm google-earth64.deb
+sudo snap install keepassxc
+sudo apt install kazam
+Shut down the VM from the menu in the upper right of the Desktop.
+
+Updates:
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo -H pip install --upgrade youtube-dl
+sudo pip install instalooter -U
+sudo pip3 install Instaloader -U
+sudo pip3 install Twint -U
+cd ~/Downloads/Programs/EyeWitness
+git pull https://github.com/ChrisTruncer/EyeWitness.git
+cd ~/Downloads/Programs/Sublist3r
+git pull https://github.com/aboul3la/Sublist3r.git
+cd ~/Downloads/Programs/Photon
+git pull https://github.com/s0md3v/Photon.git
+sudo snap refresh
+
+Metagoofil:
+
+cd ~/Downloads/Programs
+git clone https://github.com/opsdisk/metagoofil.git
+cd metagoofil
+pip3 install -r requirements.txt
+
+Metagoofil Update:
+
+cd ~/Downloads/Programs/metagoofil
+git pull https://github.com/opsdisk/metagoofil.git
+
+RipMe:
+
+sudo apt install default-jre 
+Download 'ripme.jar' from github.com/ripmeapp/ripme/releases to 'Downloads'.
+Right-click this file and choose 'Properties'. 
+In the Permissions tab, select 'Allow executing fileâ€¦'.
+
+Advanced Linux Applications:
+
+Recon-ng:
+
+cd ~/Downloads/Programs
+git clone https://github.com/lanmaster53/recon-ng.git
+cd recon-ng
+sudo pip3 install -r REQUIREMENTS
+./recon-ng
+
+Update Recon-ng:
+
+cd ~/Downloads/Programs/recon-ng
+git pull https://github.com/lanmaster53/recon-ng.git
+
+Skiptracer
+
+cd ~/Downloads/Programs
+git clone https://github.com/xillwillx/skiptracer.git skiptracer
+cd skiptracer
+pip install -r requirements.txt
+
+Update Skiptracer
+
+cd ~/Downloads/Programs/skiptracer
+git pull https://github.com/xillwillx/skiptracer.git
+
+Sherlock:
+
+cd ~/Downloads/Programs
+git clone https://github.com/sherlock-project/sherlock.git
+cd sherlock
+python3 -m pip install -r requirements.txt
+
+Update Sherlock:
+
+cd ~/Downloads/Programs/sherlock
+git pull https://github.com/sherlock-project/sherlock.git
+
+Spiderfoot:
+
+sudo apt-get update
+sudo apt install docker.io
+sudo systemctl start docker
+sudo systemctl enable docker
+Navigate to https://www.spiderfoot.net/download.
+Download the Linux package file directly to your desktop. 
+Right-click on the file and choose 'Extract here'.
+Open Terminal and navigate to the Spiderfoot folder. 
+(Current example: cd ~/Desktop/spiderfoot-2.12.0-src/spiderfoot-2.12/)
+In Terminal, enter sudo docker build -t spiderfoot .
+In Terminal, enter sudo docker run -p 5009:5001 -d spiderfoot
+Remove Spiderfoot folders and files from Desktop if desired.
+
+Update Script:
+
+#!/usr/bin/env bash
+##Updates Script
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo -H pip install --upgrade youtube-dl
+sudo pip install instalooter -U
+sudo pip3 install Instaloader -U
+sudo pip3 install Twint -U
+cd ~/Downloads/Programs/EyeWitness
+git pull https://github.com/ChrisTruncer/EyeWitness.git
+cd ~/Downloads/Programs/Sublist3r
+git pull https://github.com/aboul3la/Sublist3r.git
+cd ~/Downloads/Programs/Photon
+git pull https://github.com/s0md3v/Photon.git
+sudo snap refresh
+cd ~/Downloads/Programs/metagoofil
+git pull https://github.com/opsdisk/metagoofil.git
+cd ~/Downloads/Programs/recon-ng
+git pull https://github.com/lanmaster53/recon-ng.git
+cd ~/Downloads/Programs/skiptracer
+git pull https://github.com/xillwillx/skiptracer.git
+cd ~/Downloads/Programs/sherlock
+git pull https://github.com/sherlock-project/sherlock.git
+
+Elasticsearch Crawler:
+
+cd ~/Downloads/Programs
+git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git
+cd Elasticsearch-Crawler
+pip install nested-lookup
+
+Elasticsearch Crawler Update:
+cd ~/Downloads/Programs/Elasticsearch-Crawler
+git pull https://github.com/AmIJesse/Elasticsearch-Crawler.git
+
+InternetArchive:
+
+sudo pip install internetarchive
+
+InternetArchive Update:
+
+sudo pip install internetarchive -U

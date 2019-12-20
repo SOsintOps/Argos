@@ -82,6 +82,9 @@ Select 'Add to Favorites'.
 Press escape until all windows are gone. 
 Launch the Software Updater icon from the Dock. 
 Click 'Install Now' and allow the updates to complete. 
+
+FF UPDATES
+
 Open Firefox.
 Click on the menu in the upper right and select 'Preferences'. 
 In the General options, uncheck 'Recommend extensions as you browse'.
@@ -128,6 +131,9 @@ Search and Install Add-on titled Resurrect Pages.
 Search and Install Add-on titled Copy Selected Links.
 Search and Install Add-on titled KeePassXC Browser. 
 Close Firefox and open Terminal.
+
+ADD APPS and TOOLS
+
 sudo snap install vlc
 sudo apt-get install ffmpeg (press Y)
 sudo apt-get install python-pip (press Y)

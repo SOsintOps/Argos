@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Instagram     
-Comment=Launch Instalooter
-Exec="/home/osint/Documents/scripts/instagram.sh"
-Type=Application
-Categories=Application;OSINT
-Icon=/home/osint/Documents/icons/instagram.png
-Terminal=false

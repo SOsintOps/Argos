@@ -7,6 +7,27 @@ Every OSINT investigation should use a clean VM. Thankfully, Michael Bazzell and
 ## Requirements:
 For the tool to work, please ensure you are running an Ubuntu 20.4 virtual machine. Also, your username has to be "OSINT" for the bash shortcuts to work.
 
+## Usage:
+1) Ensure you are in your terminal and located at the ```/Desktop/```.
+
+2) Copy this repository link, and clone it to the desktop with 
+
+    ```bash
+    git clone https://github.com/Skykn0t/OSINT_VM_Setup
+    ```
+
+3) Make the setup script executible with the following command:
+
+    ```bash
+    sudo chmod +x setup.sh
+    ```
+
+4) Run the install command with the following:
+
+    ```bash
+    ./setup.sh
+    ```
+
 
 ## Future Plans:
 - Add bookmarks file for FireFox, then import it.

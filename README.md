@@ -40,7 +40,7 @@ For the tool to work, please ensure you are running an Ubuntu 20.4 virtual machi
 ## Resources:
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
 
-- [Step by step setup guide](https://inteltechniques.com/osintbook/linux.txt)
+- [Step by step setup guide](https://inteltechniques.com/osintbook/linux.20.txt)
 
 ## License:
 All the licenses mentioned in Bazzell's book apply and are located in this repository in "license.txt" 

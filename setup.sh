@@ -21,6 +21,8 @@ for requirements in $requirements; do
     sudo apt-get install -y $(requirements)
 done
 
+#ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
+
 #Install scripts and launchers
 cd ~/Desktop && curl -O https://inteltechniques.com/osintbook/vm-files.zip
 unzip vm-files.zip -d /home/osint/Desktop/
@@ -32,13 +34,12 @@ cd ~/Desktop/vm-files/icons
 cp * ~/Documents/icons
 cd ~/Desktop/vm-files/shortcuts
 sudo cp * /usr/share/applications/
-
 cd ~/Downloads
 mkdir Programs
 cd Programs
 
 # Tools
-# Assorted media tools
+# media tools
 sudo snap install vlc
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt-get install -y ffmpeg
@@ -140,7 +141,7 @@ sudo -H pip3 install nested-lookup
 sudo -H pip3 install internetarchive
 cd ~/Downloads/Programs                                    
                                     
-                                    
+sudo chmod +x udate_osint_tools.sh                                   
                                     
                                     
                                     

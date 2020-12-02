@@ -2,11 +2,11 @@
 # Most of this script is supplied by Michael Bazzel, so credit where credit is due.
 
 sudo apt-get -y update
-sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # Requirements for installing tools
 
-requirements = ("python3"
+requirements=("python3"
                 "python-setuptools"
                 "jq"                    
                 "python3-pip"
@@ -24,8 +24,8 @@ done
 #ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
 
 #Install scripts and launchers
-cd ~/Desktop && curl -O https://inteltechniques.com/osintbook/vm-files.zip
-unzip vm-files.zip -d /home/osint/Desktop/
+# pls download the password protected https://inteltechniques.com/osintbooksecure/vm-files.zip file into the ~/Desktop
+cd ~/Desktop && unzip vm-files.zip -d /home/osint/Desktop/
 mkdir ~/Documents/scripts
 mkdir ~/Documents/icons
 cd ~/Desktop/vm-files/scripts
@@ -87,6 +87,7 @@ sudo apt-get install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
 sudo apt-get install -y webhttrack
 sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+# ATTENZIONE ! Other assorted tools aggiungere comando per scaricare la chiave pgp di validazione repository
 sudo dpkg -i google-earth64.deb
 sudo apt-get -f install; sudo rm google-earth64.deb
 sudo snap install keepassxc
@@ -143,57 +144,10 @@ cd ~/Downloads/Programs
                                     
 sudo chmod +x udate_osint_tools.sh                                   
                                     
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 #ToDo: VMware tools installation
+#ToDo: set up installation of extra programs: maltego, pycharm, cherrytree, the brothers of sherlock, Holehe
+#ToDo: set osint report templates for libreoffice
+#ToDo: set choice in the user profile script of your interest
+

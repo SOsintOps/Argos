@@ -2,7 +2,7 @@
 # Most of this script is supplied by Michael Bazzel, so credit where credit is due.
 
 sudo apt-get -y update
-sudo apt-get -y update
+sudo apt-get -y upgrade
 
 # Requirements for installing tools
 
@@ -31,7 +31,7 @@ sudo apt-get install -y python3-pip
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 
-#pls change [PASSWORD] with the password protected https://inteltechniques.com/osintbooksecure/vm-files.zip file
+#pls change [PASSWORD] with the current one
 cd ~/Desktop && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
 unzip vm-files.zip -d /home/osint/Desktop/
 mkdir ~/Documents/scripts

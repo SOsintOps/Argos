@@ -41,3 +41,4 @@ sudo -H python3 -m pip install -r requirements.txt
 cd ~/Downloads/Programs/Elasticsearch-Crawler
 git pull https://github.com/AmIJesse/Elasticsearch-Crawler.git
 sudo apt autoremove -y
+

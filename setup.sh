@@ -2,7 +2,7 @@
 # Most of this script is supplied by Michael Bazzel, so credit where credit is due.
 
 sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo apt-get -y update
 
 # Requirements for installing tools
 
@@ -24,8 +24,16 @@ done
 #ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
 
 #Install scripts and launchers
-# pls download the password protected https://inteltechniques.com/osintbooksecure/vm-files.zip file into the ~/Desktop
-cd ~/Desktop && unzip vm-files.zip -d /home/osint/Desktop/
+
+sudo snap install vlc
+sudo apt-get install -y ffmpeg
+sudo apt-get install -y python3-pip
+sudo -H pip3 install --upgrade youtube_dl
+sudo apt install -y curl
+
+#pls change [PASSWORD] with the password protected https://inteltechniques.com/osintbooksecure/vm-files.zip file
+cd ~/Desktop && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
+unzip vm-files.zip -d /home/osint/Desktop/
 mkdir ~/Documents/scripts
 mkdir ~/Documents/icons
 cd ~/Desktop/vm-files/scripts
@@ -34,17 +42,13 @@ cd ~/Desktop/vm-files/icons
 cp * ~/Documents/icons
 cd ~/Desktop/vm-files/shortcuts
 sudo cp * /usr/share/applications/
+Delete the 'vm-files' file and folder from Desktop if desired
 cd ~/Downloads
 mkdir Programs
 cd Programs
-
-# Tools
-# media tools
-sudo snap install vlc
-sudo -H pip3 install --upgrade youtube_dl
-sudo apt-get install -y ffmpeg
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
+sudo apt install -y git
 
 # Twint
 git clone https://github.com/twintproject/twint.git
@@ -60,34 +64,28 @@ sudo -H ./setup.sh
 cd ~/Documents/scripts
 sed -i "s/Programs\/EyeWitness/Programs\/EyeWitness\/Python/g" eyewitness.sh
 cd ~/Downloads/Programs
-
 # Amass
 sudo snap install amass
-
 # sublist3r
 git clone https://github.com/aboul3la/Sublist3r.git
 cd Sublist3r && sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
-
 #Photon
 git clone https://github.com/s0md3v/Photon.git
 cd Photon && sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
-
 # The Harvester
 git clone https://github.com/laramies/theHarvester.git
-cd theHarvester 
+cd theHarvester
 git checkout 8b88a66
 sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
-
 # Other assorted tools
 sudo python3 -m pip install pipenv
 sudo apt-get install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
 sudo apt-get install -y webhttrack
 sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
-# ATTENZIONE ! Other assorted tools aggiungere comando per scaricare la chiave pgp di validazione repository
 sudo dpkg -i google-earth64.deb
 sudo apt-get -f install; sudo rm google-earth64.deb
 sudo snap install keepassxc
@@ -108,13 +106,13 @@ cd metagoofil
 sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
 
-# Recon-NG (Install your api keys to get full functionality)
+# recon-ng
 git clone https://github.com/lanmaster53/recon-ng.git
 cd recon-ng
 sudo -H pip3 install -r REQUIREMENTS
 cd ~/Downloads/Programs
 
-# Sherlock
+# sherlock
 git clone https://github.com/sherlock-project/sherlock.git
 cd sherlock
 python3 -m pip install -r requirements.txt
@@ -122,7 +120,7 @@ cd ~/Documents/scripts/
 sed -i 's/Programs\/sherlock/Programs\/sherlock\/sherlock/g' sherlock.sh
 cd ~/Downloads/Programs
 
-# Spiderfoot (Install your api keys to get full functionality)
+# # recon-ng
 git clone https://github.com/smicallef/spiderfoot.git
 cd spiderfoot
 sudo -H pip3 install -r requirements.txt
@@ -140,14 +138,12 @@ git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git
 cd Elasticsearch-Crawler
 sudo -H pip3 install nested-lookup
 sudo -H pip3 install internetarchive
-cd ~/Downloads/Programs                                    
-                                    
-sudo chmod +x udate_osint_tools.sh                                   
-                                    
+cd ~/Downloads/Programs
+sudo chmod +x udate_osint_tools.sh
+
 
 
 #ToDo: VMware tools installation
 #ToDo: set up installation of extra programs: maltego, pycharm, cherrytree, the brothers of sherlock, Holehe
 #ToDo: set osint report templates for libreoffice
 #ToDo: set choice in the user profile script of your interest
-

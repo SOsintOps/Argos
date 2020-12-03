@@ -22,7 +22,7 @@ Your user has to be "**osint**" for the bash shortcuts to work.
     git clone https://github.com/SOsintOps/OsintUbU
     ```
 
-3) go to the ```/OsintUbU/``` and make the setup script executible:
+3) Go to ```/OsintUbU/``` and make the setup script executible:
 
     ```bash
     sudo chmod +x setup.sh

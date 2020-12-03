@@ -169,6 +169,12 @@ sudo apt-get install -y mediainfo-gui
 #Exiftool
 sudo apt install -y libimage-exiftool-perl
 
+
+#google earth
+sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+sudo dpkg -i google-earth64.deb
+sudo apt-get -f install; sudo rm google-earth64.deb
+
 #amass
 sudo snap install amass
 
@@ -180,7 +186,6 @@ sudo apt install openjdk-11-jre
 
 sudo snap install cherrytree
 sudo apt install calibre
-sudo snap install vlc
 sudo apt install audacity
 sudo snap install atom --classic
 sudo snap install keepassxc

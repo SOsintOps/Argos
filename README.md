@@ -18,10 +18,10 @@ For the tool to work, please ensure you are running an Ubuntu 20.4 virtual machi
 2) Copy this repository link, and clone it to the desktop with 
 
     ```bash
-    git clone https://github.com/SOsintOps/OSINT_VM_Setup/
+    git clone https://github.com/SOsintOps/OsintUbU
     ```
 
-3) go to the ```/OSINT_VM_Setup/``` and make the setup script executible:
+3) go to the ```/OsintUbU/``` and make the setup script executible:
 
     ```bash
     sudo chmod +x setup.sh
@@ -38,10 +38,10 @@ For the tool to work, please ensure you are running an Ubuntu 20.4 virtual machi
 - Add bookmarks file for FireFox, then import it.
 - Edit .bash_profile
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
-- VMware tools installation
+- VMware tools installation.
 - set up  of extra tools: maltego, pycharm, cherrytree, sherlock's clones, Holehe, etc.
-- set osint report templates as libreoffice's templates
-- customise the user profile
+- set osint report templates as libreoffice's templates.
+- customise the user profile.
 
 ## Resources:
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)

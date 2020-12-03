@@ -27,8 +27,9 @@ Your user has to be "**osint**" for the bash shortcuts to work.
     ```bash
     sudo chmod +x setup.sh
     ```
+4) Within the ```setup.sh``` replace [PASSWORD] with the current password
 
-4) Run the install command:
+5) Run the install command:
 
     ```bash
     ./setup.sh

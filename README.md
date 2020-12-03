@@ -10,7 +10,8 @@ This script will setup the VM by installing all the tools recommended by Bazzell
 Bazzel's book uses virtual box, but I personally use VmWare, so will include a commented out portion of code which will install vmware tools. 
 
 ## Requirements:
-For the tool to work, please ensure you are running an Ubuntu 20.4 virtual machine. Also, your username has to be "OSINT" for the bash shortcuts to work.
+For the tool to work, please ensure you are running an Ubuntu* 20.4 virtual machine.
+Your user has to be "**osint**" for the bash shortcuts to work.
 
 ## Usage:
 1) Ensure you are in your terminal and located at the ```/Desktop/```.

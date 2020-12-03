@@ -1,7 +1,7 @@
 # OsintUbU
 This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).
 It automatically setup  an osint desktop from a clean Ubuntu* 20.4 Virtual Machine. 
-Based on the [Open Source Intelligence Techniques - 7th Edition (2019)](https://inteltechniques.com/book1.html)
+Based on the [Open Source Intelligence Techniques - 7th Edition (2019)](https://inteltechniques.com/book1.html).
 
 ## Summary:
 Every OSINT investigation should use a clean VM.

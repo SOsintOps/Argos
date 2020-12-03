@@ -171,9 +171,9 @@ sudo apt install -y libimage-exiftool-perl
 
 
 #google earth
-sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
-sudo dpkg -i google-earth64.deb
-sudo apt-get -f install; sudo rm google-earth64.deb
+#sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+#sudo dpkg -i google-earth64.deb
+#sudo apt-get -f install; sudo rm google-earth64.deb
 
 #amass
 sudo snap install amass

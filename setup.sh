@@ -1,8 +1,14 @@
 #!/bin/bash
 # Most of this script is based on the Michael Bazzell's txt, so credit where credit is due.
 
-sudo apt-get -y update
+sudo apt-get -y update && sudo snap refresh
 sudo apt-get -y upgrade
+
+# Optional Virtualbox tools.
+# sudo add-apt-repository multiverse
+# sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
+# sudo reboot now
+# sudo adduser osint vboxsf
 
 # Requirements for installing tools
 
@@ -32,8 +38,11 @@ sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 
 #pls change [PASSWORD] with the current one
-cd ~/Desktop && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
+cd ~/Downloads && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
 unzip vm-files.zip -d /home/osint/Desktop/
+cd ~/Downloads/ && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/templates.zip
+mkdir ~/Documents/templates && unzip templates.zip -d /home/osint/Documents/templates
+
 mkdir ~/Documents/scripts
 mkdir ~/Documents/icons
 cd ~/Desktop/vm-files/scripts
@@ -42,7 +51,7 @@ cd ~/Desktop/vm-files/icons
 cp * ~/Documents/icons
 cd ~/Desktop/vm-files/shortcuts
 sudo cp * /usr/share/applications/
-Delete the 'vm-files' file and folder from Desktop if desired
+#Delete the 'vm-files' file and folder from Desktop if desired
 cd ~/Downloads
 mkdir Programs
 cd Programs
@@ -64,23 +73,28 @@ sudo -H ./setup.sh
 cd ~/Documents/scripts
 sed -i "s/Programs\/EyeWitness/Programs\/EyeWitness\/Python/g" eyewitness.sh
 cd ~/Downloads/Programs
+
 # Amass
 sudo snap install amass
+
 # sublist3r
 git clone https://github.com/aboul3la/Sublist3r.git
 cd Sublist3r && sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
+
 #Photon
 git clone https://github.com/s0md3v/Photon.git
 cd Photon && sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
+
 # The Harvester
 git clone https://github.com/laramies/theHarvester.git
 cd theHarvester
 git checkout 8b88a66
 sudo -H pip3 install -r requirements.txt
 cd ~/Downloads/Programs
-# Other assorted tools
+
+# Tools
 sudo python3 -m pip install pipenv
 sudo apt-get install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
@@ -141,7 +155,40 @@ sudo -H pip3 install internetarchive
 cd ~/Downloads/Programs
 sudo chmod +x udate_osint_tools.sh
 
+#Ripgrep
+cd ~/Downloads/
+curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+sudo dpkg -i ripgrep_11.0.2_amd64.deb
 
+#FFMpeg
+sudo apt install ffmpeg
+
+#Mediainfo
+sudo apt-get install -y mediainfo-gui
+
+#Exiftool
+sudo apt install -y libimage-exiftool-perl
+
+#amass
+sudo snap install amass
+
+# General Purpose tools
+sudo apt install ubuntu-restricted-extras p7zip unrar
+sudo apt install fonts-crosextra-caladea fonts-crosextra-carlito
+
+sudo apt install openjdk-11-jre
+
+sudo snap install cherrytree
+sudo apt install calibre
+sudo snap install vlc
+sudo apt install audacity
+sudo snap install atom --classic
+sudo snap install keepassxc
+sudo apt install -y kazam
+sudo snap install pycharm-professional --classic --edge
+
+#Telegram
+sudo snap install telegram-desktop
 
 #ToDo: VMware tools installation
 #ToDo: set up installation of extra programs: maltego, pycharm, cherrytree, the brothers of sherlock, Holehe

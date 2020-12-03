@@ -1,5 +1,5 @@
 #!/bin/bash
-# Most of this script is supplied by Michael Bazzel, so credit where credit is due.
+# Most of this script is based on the Michael Bazzell's txt, so credit where credit is due.
 
 sudo apt-get -y update
 sudo apt-get -y upgrade

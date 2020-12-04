@@ -190,7 +190,7 @@ sudo apt install audacity
 sudo snap install atom --classic
 sudo snap install keepassxc
 sudo apt install -y kazam
-sudo snap install pycharm-professional --classic --edge
+#sudo snap install pycharm-professional --classic --edge
 
 #Telegram
 sudo snap install telegram-desktop

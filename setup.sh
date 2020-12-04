@@ -99,9 +99,6 @@ sudo python3 -m pip install pipenv
 sudo apt-get install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
 sudo apt-get install -y webhttrack
-sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
-sudo dpkg -i google-earth64.deb
-sudo apt-get -f install; sudo rm google-earth64.deb
 sudo snap install keepassxc
 sudo apt install -y kazam
 

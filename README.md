@@ -24,7 +24,7 @@ Please ensure that:
     ```bash
     cd ~/Desktop/
     ```
-3) make sure you that the GIT command is avaible in your sistem:
+3) Make sure that the GIT command is avaible in your sistem:
     ```bash
     sudo apt install git
     ```
@@ -39,8 +39,7 @@ Please ensure that:
     ```
 6) Within the ```setup.sh``` replace [PASSWORD] with the current website's password
 
-7) Run the install file:
-
+7) Run the file:
     ```bash
     ./setup.sh
     ```

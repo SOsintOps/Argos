@@ -6,7 +6,7 @@ Credit to [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
 
 ## Summary:
 Best practices recommend using a new VM for each OSInt investigation.\
-There are several ready-made VMs available on the Internet.\ 
+There are several ready-made VMs available on the Internet.\
 Michael Bazzell and David Westcott proposed a procedure to create your own custom VM.\
 This script will setup the VM by installing all the tools recommended by Bazzell, plus the automated bash scripts he supplies on websites.\
 This script implies that you rely on VmWare for virtualization. Just in case, I include a commented out portion of code which will install virtual box tools. 

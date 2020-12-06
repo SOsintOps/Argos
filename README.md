@@ -1,7 +1,8 @@
 # OsintUbU
-This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).
-It automatically setup  an osint desktop from a clean Ubuntu* 20.4 Virtual Machine. 
+This script will automatically set up an OSINnt Desktop starting from a clean Ubuntu* 20.4 Virtual Machine/Workstation. 
 Based on the [Open Source Intelligence Techniques - 7th Edition (2019)](https://inteltechniques.com/book1.html).
+This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).
+
 
 ## Summary:
 Every OSINT investigation should use a clean VM.
@@ -9,34 +10,43 @@ Thankfully, Michael Bazzell and David Westcott have outlined an excellent method
 This script will setup the VM by installing all the tools recommended by Bazzell, plus the automated bash scripts he supplies on websites.
 Bazzel's book uses virtual box, but I personally use VmWare, so will include a commented out portion of code which will install vmware tools. 
 
+
 ## Requirements:
-For the tool to work, please ensure you are running an Ubuntu* 20.4 virtual machine.
-Your user has to be "**osint**" for the bash shortcuts to work.
+Please ensure that:
+- You are running an Ubuntu* 20.4 virtual machine.
+- Your user has to be "**osint**" for the bash shortcuts to work.
 
-## Usage:
-1) Ensure you are in your terminal and located at the ```/Desktop/```.
 
-2) Copy this repository link, and clone it to the desktop with 
+## How to install:
+1) Open the Terminal app
 
+2) type:
+    ```bash
+    cd ~/Desktop/
+    ```
+3) make sure you that the GIT command is avaible in your sistem:
+    ```bash
+    sudo apt install git
+    ```
+4) Clone this repository to the desktop: 
     ```bash
     git clone https://github.com/SOsintOps/OsintUbU
     ```
 
-3) Go to ```/OsintUbU/``` and make the setup script executible:
-
+5) Go to ```/OsintUbU/``` and make the setup script executible:
     ```bash
     sudo chmod +x setup.sh
     ```
-4) Within the ```setup.sh``` replace [PASSWORD] with the current website's password
+6) Within the ```setup.sh``` replace [PASSWORD] with the current website's password
 
-5) Run the install command:
+7) Run the install file:
 
     ```bash
     ./setup.sh
     ```
 
 
-## Future Plans:
+## TO DO:
 - Add bookmarks file for FireFox, then import it.
 - Edit .bash_profile
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 

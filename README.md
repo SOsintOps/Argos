@@ -36,6 +36,7 @@ Please ensure that:
 
 5) Go to ```/OsintUbU/``` and make the setup script executible:
     ```bash
+    cd ~/Downloads/OsintUbU/
     sudo chmod +x setup.sh
     ```
 6) Within the ```setup.sh``` replace [PASSWORD] with the current website's password

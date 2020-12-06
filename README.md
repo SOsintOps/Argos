@@ -23,7 +23,7 @@ Please ensure that:
 
 2) type:
     ```bash
-    cd ~/Desktop/
+    cd ~/Downloads/
     ```
 3) Make sure that the GIT command is avaible in your sistem:
     ```bash

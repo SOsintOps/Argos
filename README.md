@@ -1,3 +1,5 @@
+![screenshot](https://github.com/SOsintOps/Argos/blob/master/wallpaper/banner%20-%20be-quiet-priest-sculpture-in-venlo_by_raffael_herrmann.jpg)
+
 # ARGOS
 This script will automatically set up an OSInt workstation starting from a clean Ubuntu* 20.4 Virtual Machine/Workstation.\
 It's based on the [Open Source Intelligence Techniques - 7th Edition (2019)](https://inteltechniques.com/book1.html).\

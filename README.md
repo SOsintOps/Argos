@@ -31,12 +31,12 @@ Please ensure that:
     ```
 4) Clone this repository to the desktop: 
     ```bash
-    git clone https://github.com/SOsintOps/OsintUbU
+    git clone https://github.com/SOsintOps/Argos
     ```
 
-5) Go to ```/OsintUbU/``` and make the setup script executible:
+5) Go to ```/Argos/``` and make the setup script executable:
     ```bash
-    cd ~/Downloads/OsintUbU/
+    cd ~/Downloads/Argos/
     sudo chmod +x setup.sh
     ```
 6) Within the ```setup.sh``` replace [PASSWORD] with the current website's password

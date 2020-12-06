@@ -17,7 +17,7 @@ sudo apt-get -y upgrade
 # sudo reboot now
 # sudo adduser osint vboxsf
 
-# Requirements for installing tools
+# Requirements for installing tools, scripts and launchers
 
 sudo apt install -y python3
 sudo apt install -y python-setuptools
@@ -28,9 +28,6 @@ sudo apt install -y curl
 sudo apt install -y wget
 #  (missing)  "python-pip"
 #  (missing)  "xargs"
-
-#Install scripts and launchers
-
 sudo snap install vlc
 sudo apt-get install -y ffmpeg
 sudo -H pip3 install --upgrade youtube_dl
@@ -69,10 +66,9 @@ sudo cp * /usr/share/applications/
 #Delete the 'vm-files' file and folder from Desktop if desired
 cd ~/Downloads
 mkdir Programs
-cd Programs
+cd ~/Downloads/Programs
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
-sudo apt install -y git
 
 # Twint
 git clone https://github.com/twintproject/twint.git

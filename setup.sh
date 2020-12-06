@@ -38,10 +38,23 @@ sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 
 #pls change [PASSWORD] with the current one
-cd ~/Downloads && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
+cd ~/Downloads
+
+curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
 unzip vm-files.zip -d ~/Desktop/
-cd ~/Downloads/ && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/templates.zip
-mkdir ~/Documents/templates && unzip templates.zip -d /home/osint/Documents/templates
+
+curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/workflow.zip
+unzip workflow.zip -d ~/Documents/
+
+curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/tools.zip
+unzip tools.zip -d ~/Documents/
+
+curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/templates.zip
+mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
+
+cd ~/Documents/
+curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/linux.20.txt
+
 cd ~/Downloads/OsintUbU/wallpaper/ 
 sudo cp * ~/Pictures
 

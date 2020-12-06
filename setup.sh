@@ -19,26 +19,20 @@ sudo apt-get -y upgrade
 
 # Requirements for installing tools
 
-requirements=("python3"
-                "python-setuptools"
-                "jq"                    
-                "python3-pip"
-#  (missing)    "python-pip"
-                "git"
-#  (missing)    "xargs"
-                "curl"
-                "wget")
-
-for requirements in $requirements; do
-    echo "Installing $(requirements)..."
-    sudo apt-get install -y $(requirements)
-done
+sudo apt install -y python3
+sudo apt install -y python-setuptools
+sudo apt install -y jq
+sudo apt install -y python3-pip
+sudo apt install -y git
+sudo apt install -y curl
+sudo apt install -y wget
+#  (missing)  "python-pip"
+#  (missing)  "xargs"
 
 #Install scripts and launchers
 
 sudo snap install vlc
 sudo apt-get install -y ffmpeg
-sudo apt-get install -y python3-pip
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 

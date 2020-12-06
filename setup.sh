@@ -109,8 +109,7 @@ cd ~/Downloads/Programs
 # Tools
 sudo python3 -m pip install pipenv
 sudo apt-get install -y webhttrack
-sudo snap install keepassxc
-sudo apt install -y kazam
+
 
 # Modify scripts
 cd ~/Documents/scripts/
@@ -186,9 +185,7 @@ sudo snap install amass
 # General Purpose tools
 sudo apt install ubuntu-restricted-extras p7zip unrar
 sudo apt install fonts-crosextra-caladea fonts-crosextra-carlito
-
 sudo apt install openjdk-11-jre
-
 sudo snap install cherrytree
 #sudo apt install calibre
 sudo apt install audacity
@@ -196,6 +193,4 @@ sudo snap install atom --classic
 sudo snap install keepassxc
 sudo apt install -y kazam
 #sudo snap install pycharm-professional --classic --edge
-
-#Telegram
 sudo snap install telegram-desktop

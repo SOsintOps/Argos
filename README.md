@@ -5,9 +5,9 @@ This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_V
 
 
 ## Summary:
-Every OSINT investigation should use a clean VM.
-Thankfully, Michael Bazzell and David Westcott have outlined an excellent method for setting up a VM as well as many helpful tools.
-This script will setup the VM by installing all the tools recommended by Bazzell, plus the automated bash scripts he supplies on websites.
+Every OSINT investigation should use a clean VM.\
+Thankfully, Michael Bazzell and David Westcott have outlined an excellent method for setting up a VM as well as many helpful tools.\
+This script will setup the VM by installing all the tools recommended by Bazzell, plus the automated bash scripts he supplies on websites.\
 Bazzel's book uses virtual box, but I personally use VmWare, so will include a commented out portion of code which will install vmware tools. 
 
 

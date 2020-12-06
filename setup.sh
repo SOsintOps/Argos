@@ -66,7 +66,9 @@ sudo cp * /usr/share/applications/
 #Delete the 'vm-files' file and folder from Desktop if desired
 cd ~/Downloads
 mkdir Programs
-cd ~/Downloads/Programs
+cd Programs
+cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
+sudo chmod +x update_osint_tools.sh
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
 
@@ -160,8 +162,6 @@ git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git
 cd Elasticsearch-Crawler
 sudo -H pip3 install nested-lookup
 sudo -H pip3 install internetarchive
-cd ~/Downloads/Programs
-sudo chmod +x udate_osint_tools.sh
 
 #Ripgrep
 cd ~/Downloads/

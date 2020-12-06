@@ -142,7 +142,7 @@ cd ~/Documents/scripts/
 sed -i 's/Programs\/sherlock/Programs\/sherlock\/sherlock/g' sherlock.sh
 cd ~/Downloads/Programs
 
-# # recon-ng
+# spiderfoot
 git clone https://github.com/smicallef/spiderfoot.git
 cd spiderfoot
 sudo -H pip3 install -r requirements.txt

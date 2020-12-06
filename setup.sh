@@ -29,7 +29,6 @@ sudo apt install -y wget
 #  (missing)  "python-pip"
 #  (missing)  "xargs"
 sudo snap install vlc
-sudo apt-get install -y ffmpeg
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 
@@ -109,8 +108,6 @@ cd ~/Downloads/Programs
 
 # Tools
 sudo python3 -m pip install pipenv
-sudo apt-get install -y mediainfo-gui
-sudo apt install -y libimage-exiftool-perl
 sudo apt-get install -y webhttrack
 sudo snap install keepassxc
 sudo apt install -y kazam
@@ -193,7 +190,7 @@ sudo apt install fonts-crosextra-caladea fonts-crosextra-carlito
 sudo apt install openjdk-11-jre
 
 sudo snap install cherrytree
-sudo apt install calibre
+#sudo apt install calibre
 sudo apt install audacity
 sudo snap install atom --classic
 sudo snap install keepassxc

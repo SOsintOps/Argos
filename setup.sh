@@ -23,9 +23,9 @@ requirements=("python3"
                 "python-setuptools"
                 "jq"                    
                 "python3-pip"
-                "python-pip"
+#  (missing)    "python-pip"
                 "git"
-                "xargs"
+#  (missing)    "xargs"
                 "curl"
                 "wget")
 

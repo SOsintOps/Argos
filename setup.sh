@@ -1,5 +1,12 @@
+
+#ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
+#ToDo: VMware tools installation
+#ToDo: set up installation of extra programs: maltego, pycharm, cherrytree, the brothers of sherlock, Holehe
+#ToDo: set osint report templates for libreoffice
+#ToDo: set choice in the user profile script of your interest
+
 #!/bin/bash
-# Most of this script is based on the Michael Bazzell's txt, so credit where credit is due.
+# Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
 
 sudo apt-get -y update && sudo snap refresh
 sudo apt-get -y upgrade
@@ -27,8 +34,6 @@ for requirements in $requirements; do
     sudo apt-get install -y $(requirements)
 done
 
-#ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
-
 #Install scripts and launchers
 
 sudo snap install vlc
@@ -55,7 +60,7 @@ mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
 cd ~/Documents/
 curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
-cd ~/Downloads/OsintUbU/wallpaper/ 
+cd ~/Downloads/Argos/wallpaper/ 
 sudo cp * ~/Pictures
 
 
@@ -207,8 +212,3 @@ sudo apt install -y kazam
 
 #Telegram
 sudo snap install telegram-desktop
-
-#ToDo: VMware tools installation
-#ToDo: set up installation of extra programs: maltego, pycharm, cherrytree, the brothers of sherlock, Holehe
-#ToDo: set osint report templates for libreoffice
-#ToDo: set choice in the user profile script of your interest

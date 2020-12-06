@@ -39,9 +39,12 @@ sudo apt install -y curl
 
 #pls change [PASSWORD] with the current one
 cd ~/Downloads && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
-unzip vm-files.zip -d /home/osint/Desktop/
+unzip vm-files.zip -d ~/Desktop/
 cd ~/Downloads/ && curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/templates.zip
 mkdir ~/Documents/templates && unzip templates.zip -d /home/osint/Documents/templates
+cd ~/Downloads/OsintUbU/wallpaper/ 
+sudo cp * ~/Pictures
+
 
 mkdir ~/Documents/scripts
 mkdir ~/Documents/icons

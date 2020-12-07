@@ -9,7 +9,7 @@ Full details can be found at https://creativecommons.org/licenses/by-nc-sa/4.0/.
 
 **The software is provided “as is”**, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the software or the use or other dealings in the software.
 
-**images**\
+**IMAGES**\
 "Be quiet! – Priest sculpture in Venlo" image is  by Raffael Herrmann.
 This photo is made available under the CC0 1.0 Universal Public Domain Dedication
 Original photo in https://cc0.photo/2016/03/12/be-quiet-priest-sculpture-in-venlo/

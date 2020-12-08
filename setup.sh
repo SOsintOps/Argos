@@ -7,7 +7,7 @@
 #!/bin/bash
 # Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
 echo '#######################################################################'
-echo '#                       Let's Update the distro!                      #'
+echo '#                       Let me Update the distro                      #'
 echo '#######################################################################'
 
 sudo apt-get -y update && sudo snap refresh
@@ -26,7 +26,7 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictu
 
 # Bazzell goodies - Please change PASSWORD with the current one!
 echo '#######################################################################'
-echo '#                       Bazzell's goodies                             #'
+echo '#                       Bazzell''s goodies                            #'
 echo '#######################################################################'
 cd ~/Documents/
 curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt

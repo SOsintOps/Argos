@@ -27,26 +27,26 @@ sudo apt install -y curl
 sudo apt install -y wget
 #  (missing)  "python-pip"
 #  (missing)  "xargs"
-sudo snap install vlc
+sudo snap install -y vlc
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
 cd ~/Downloads/Argos/wallpaper/ 
 sudo cp * ~/Pictures
 
 # setting the 'quiet' background image
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Wallpapers/Be-quiet-Priest-sculpture-in-Venlo.jpg'
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
-# Bazzell goodies - Please change [PASSWORD] with the current one!
+# Bazzell goodies - Please change PASSWORD with the current one!
 cd ~/Documents/
-curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/linux.20.txt
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 cd ~/Downloads
-curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/vm-files.zip
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip
 unzip vm-files.zip -d ~/Desktop/
-curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/workflow.zip
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip
 unzip workflow.zip -d ~/Documents/
-curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/tools.zip
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip
 unzip tools.zip -d ~/Documents/
-curl -u osint:[PASSWORD] -O https://inteltechniques.com/osintbooksecure/templates.zip
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip
 mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
 
 
@@ -67,7 +67,7 @@ sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
 sudo apt-get install -y webhttrack
-sudo apt install ffmpeg
+sudo apt install -y ffmpeg
 sudo apt-get install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
 
@@ -192,13 +192,13 @@ cd ~/Downloads/Programs
 
 # General Purpose tools
 sudo snap install cherrytree
-sudo apt install audacity
 sudo snap install atom --classic
 sudo snap install keepassxc
 sudo apt install -y kazam
-sudo apt install openjdk-11-jre
-sudo apt install ubuntu-restricted-extras p7zip unrar
-sudo apt install fonts-crosextra-caladea fonts-crosextra-carlito
+sudo apt install -y audacity
+sudo apt install -y openjdk-11-jre
+sudo apt install -y ubuntu-restricted-extras p7zip unrar
+sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge

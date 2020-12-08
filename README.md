@@ -16,6 +16,40 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 **N.B.** This script has been tested on a [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10.
 
+## TOOLS
+
+### OSInt
+- [Amass](https://github.com/OWASP/Amass)
+- [twint](https://github.com/twintproject/twint)
+- [instaloader](https://instaloader.github.io/)
+- [InstaLooter](https://github.com/althonos/InstaLooter)
+- [HTTrack](https://www.httrack.com/)
+- [MediaInfo](https://mediaarea.net/en/MediaInfo/Download/Ubuntu)
+- [ExifTool](https://github.com/pandastream/libimage-exiftool-perl-9.27)
+- [EyeWitness](https://github.com/ChrisTruncer/EyeWitness)
+- [sublist3r](https://github.com/aboul3la/Sublist3r)
+- [Photon](https://github.com/s0md3v/Photon)
+- [Metagoofil](https://github.com/opsdisk/metagoofil)
+- [recon-ng](https://github.com/lanmaster53/recon-ng)
+- [sherlock](https://github.com/sherlock-project/sherlock)
+- [spiderfoot](https://github.com/smicallef/spiderfoot)
+- [Elasticsearch-Crawler](https://github.com/AmIJesse/Elasticsearch-Crawler)
+- [Ripgrep](https://github.com/BurntSushi/ripgrep)
+- [holehe](https://github.com/megadose/holehe)
+- [kali-anonstealth](https://github.com/Und3rf10w/kali-anonsurf)
+- and more!
+
+### General Purpose tools
+- [vlc](https://www.videolan.org/vlc/index.html)
+- [wget](https://www.gnu.org/software/wget/)
+- [cherrytree](https://www.giuspen.com/cherrytree/)
+- [Atom](https://atom.io/)
+- [KeepassXC](https://keepassxc.org/)
+- [Kazam](https://launchpad.net/kazam)
+- [Audacity](https://www.audacityteam.org/)
+- and more!
+
+
 ## INSTALLING & RUNNING
 1) Open the Terminal app
 
@@ -37,7 +71,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     cd ~/Downloads/Argos/
     sudo chmod +x setup.sh
     ```
-6) Within the ```setup.sh``` replace [PASSWORD] with the current website's password
+6) Within the ```setup.sh``` replace PASSWORD with the current website's password
 
 7) Run the file:
     ```bash

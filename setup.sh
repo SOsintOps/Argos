@@ -153,7 +153,13 @@ sudo dpkg -i ripgrep_11.0.2_amd64.deb
 cd ~/Downloads/Programs
 git clone https://github.com/megadose/holehe.git
 cd holehe
-python3 setup.py install
+sudo python3 setup.py install
+
+#anonsurf (credit to Und3rf10w)
+cd ~/Downloads/
+git clone https://github.com/Und3rf10w/kali-anonsurf.git
+cd kali-anonsurf/
+sudo ./installer.sh
 
 #Moriarty-Project
 #cd ~/Downloads/Programs

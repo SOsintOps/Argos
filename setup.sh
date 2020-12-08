@@ -156,7 +156,7 @@ cd holehe
 sudo python3 setup.py install
 
 #anonsurf (credit to Und3rf10w)
-cd ~/Downloads/
+cd ~/Downloads/Programs
 git clone https://github.com/Und3rf10w/kali-anonsurf.git
 cd kali-anonsurf/
 sudo ./installer.sh

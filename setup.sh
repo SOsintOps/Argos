@@ -13,11 +13,51 @@ sudo apt-get -y upgrade
 # Optional Virtualbox tools.
 # sudo add-apt-repository multiverse
 # sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
-# sudo reboot now
 # sudo adduser osint vboxsf
 
-# Requirements for installing tools, scripts and launchers
+# setting the 'quiet' background image
+cd ~/Downloads/Argos/wallpaper/ 
+sudo cp * ~/Pictures
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
+
+# Bazzell goodies - Please change PASSWORD with the current one!
+cd ~/Documents/
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
+
+cd ~/Downloads
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip
+unzip vm-files.zip -d ~/Desktop/
+
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip
+unzip workflow.zip -d ~/Documents/
+
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip
+unzip tools.zip -d ~/Documents/
+
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip
+mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
+
+mkdir ~/Documents/scripts
+cd ~/Desktop/vm-files/scripts
+sudo cp * ~/Documents/scripts
+sudo chown -R $USER ~/Documents/scripts/
+
+mkdir ~/Documents/icons
+cd ~/Desktop/vm-files/icons
+cp * ~/Documents/icons
+
+cd ~/Desktop/vm-files/shortcuts
+sudo cp * /usr/share/applications/
+
+# the date_osint_tools.sh is copied in the program folder
+cd ~/Downloads
+mkdir Programs
+cd Programs
+cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
+sudo chmod +x update_osint_tools.sh
+
+# Requirements for installing tools, scripts and launchers
 sudo apt install -y python3
 sudo apt install -y python-setuptools
 sudo apt install -y jq
@@ -30,39 +70,6 @@ sudo apt install -y wget
 sudo snap install -y vlc
 sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
-cd ~/Downloads/Argos/wallpaper/ 
-sudo cp * ~/Pictures
-
-# setting the 'quiet' background image
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
-
-# Bazzell goodies - Please change PASSWORD with the current one!
-cd ~/Documents/
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
-cd ~/Downloads
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip
-unzip vm-files.zip -d ~/Desktop/
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip
-unzip workflow.zip -d ~/Documents/
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip
-unzip tools.zip -d ~/Documents/
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip
-mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
-
-
-mkdir ~/Documents/scripts
-mkdir ~/Documents/icons
-cd ~/Desktop/vm-files/scripts
-sudo cp * ~/Documents/scripts
-cd ~/Desktop/vm-files/icons
-cp * ~/Documents/icons
-cd ~/Desktop/vm-files/shortcuts
-sudo cp * /usr/share/applications/
-cd ~/Downloads
-mkdir Programs
-cd Programs
-cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-sudo chmod +x update_osint_tools.sh
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
@@ -203,3 +210,5 @@ sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge
 #sudo snap install telegram-desktop
+
+sudo reboot now

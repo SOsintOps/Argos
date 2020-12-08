@@ -79,11 +79,11 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```
 
 ## TO DO
-- Add bookmarks file for FireFox, then import it.
+- Setup an OSInt custom Browser.
 - Edit .bash_profile
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
 - VMware tools installation.
-- set up  of extra tools: maltego, pycharm, cherrytree, sherlock's clones, Holehe, etc.
+- set up  of extra tools: maltego, pycharm, sherlock's clones, etc.
 - set osint report templates as libreoffice's templates.
 - customise the user profile.
 

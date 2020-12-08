@@ -33,6 +33,8 @@ sudo apt install -y curl
 cd ~/Downloads/Argos/wallpaper/ 
 sudo cp * ~/Pictures
 
+# setting the 'quiet' background image
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Wallpapers/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
 # Bazzell goodies - Please change [PASSWORD] with the current one!
 cd ~/Documents/
@@ -197,9 +199,6 @@ sudo apt install -y kazam
 sudo apt install openjdk-11-jre
 sudo apt install ubuntu-restricted-extras p7zip unrar
 sudo apt install fonts-crosextra-caladea fonts-crosextra-carlito
-
-# setting the 'quiet' background image
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Wallpapers/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge

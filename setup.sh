@@ -1,8 +1,11 @@
 
-#ToDo: Move user.js file to proper directory ~/.mozilla/ http://kb.mozillazine.org/Profile_folder
+#ToDo: code cleanup (who said shellcheck?)
+#ToDo: implement the proper internal variables of the file (directories, users, etc.).
+#ToDo: declare the directories at the beginning of the script as variables
+#ToDo: setting up a Custom Osint Fireforx browser
 #ToDo: set up installation of extra programs: maltego, sherlock's brothers,
 #ToDo: set osint report templates for libreoffice
-#ToDo: set choice in the user profile script of your interest
+
 
 #!/bin/bash
 # Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
@@ -57,11 +60,7 @@ cd ~/Desktop/vm-files/shortcuts
 sudo cp * /usr/share/applications/
 
 # the date_osint_tools.sh is copied in the program folder
-cd ~/Downloads
-mkdir Programs
-cd Programs
-cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-sudo chmod +x update_osint_tools.sh
+mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
 
 # Requirements for installing tools, scripts and launchers
 echo '#######################################################################'

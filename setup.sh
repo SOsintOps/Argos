@@ -66,6 +66,7 @@ mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Do
 echo '#######################################################################'
 echo '#      Requirements for installing tools, scripts and launchers       #'
 echo '#######################################################################'
+sudo snap install -y vlc
 sudo apt install -y python3
 sudo apt install -y python-setuptools
 sudo apt install -y jq
@@ -73,24 +74,20 @@ sudo apt install -y python3-pip
 sudo apt install -y git
 sudo apt install -y curl
 sudo apt install -y wget
-#  (missing)  "python-pip"
-#  (missing)  "xargs"
-sudo snap install -y vlc
-sudo -H pip3 install --upgrade youtube_dl
 sudo apt install -y curl
+sudo apt install -y webhttrack
+sudo apt install -y ffmpeg
+sudo apt install -y mediainfo-gui
+sudo apt install -y libimage-exiftool-perl
+sudo -H pip3 install --upgrade youtube_dl
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
-sudo apt-get install -y webhttrack
-sudo apt install -y ffmpeg
-sudo apt-get install -y mediainfo-gui
-sudo apt install -y libimage-exiftool-perl
 
 
 echo '#######################################################################'
 echo '#                             Amass                                   #'
 echo '#######################################################################'
-echo
 sudo snap install amass
 
 # Twint

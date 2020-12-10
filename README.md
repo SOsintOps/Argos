@@ -100,7 +100,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [OSInt Daily News](https://osintops.com/en/)
 
 ## ACKNOWLEDGEMENTS
-- This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).\
+- This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).
 - Credit to [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
 
 ## LICENSES

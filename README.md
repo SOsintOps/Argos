@@ -14,7 +14,7 @@ To install and run Argos, you need:
 
 This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools. 
 
-**N.B.** This script has been tested on a [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10.
+**N.B.** This script has been tested on a [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10 VM.
 
 ## TOOLS
 
@@ -53,15 +53,15 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 ## INSTALLING & RUNNING
 1) Open the Terminal app
 
-2) type:
-    ```bash
-    cd ~/Downloads/
-    ```
-3) Make sure that the GIT command is avaible in your sistem:
+2) Make sure that the [GIT command](https://linuxize.com/post/how-to-install-git-on-ubuntu-20-04/) is available in your VM:
     ```bash
     sudo apt install git
     ```
-4) Clone this repository to the desktop: 
+3) type:
+    ```bash
+    cd ~/Downloads/
+    ```
+4) Clone this repository in the ```/Download/``` directory: 
     ```bash
     git clone https://github.com/SOsintOps/Argos
     ```

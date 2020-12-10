@@ -72,16 +72,15 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     cd ~/Downloads/ && git clone https://github.com/SOsintOps/Argos
     ```
 
-4) Go to ```/Argos/``` and make the setup script executable:
+4) make the setup script executable:
     ```bash
-    cd ~/Downloads/Argos/
-    sudo chmod +x setup.sh
+    sudo chmod +x ~/Downloads/Argos/setup.sh
     ```
 5) Within the ```setup.sh``` replace [PASSWORD](https://inteltechniques.com/osintbook/)  with the current website's password
 
 6) Run the file:
     ```bash
-    ./setup.sh
+    ./Argos/setup.sh
     ```
 
 ## TO DO

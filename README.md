@@ -63,27 +63,23 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 ## INSTALLING & RUNNING
 1) Open the Terminal app
 
-2) Make sure that the [GIT command](https://linuxize.com/post/how-to-install-git-on-ubuntu-20-04/) is available in your VM:
+2) Make sure and/or install that the [GIT command](https://linuxize.com/post/how-to-install-git-on-ubuntu-20-04/) is available in your VM:
     ```bash
     sudo apt install git
     ```
-3) type:
+3) Clone this repository in the ```/Download/``` directory: 
     ```bash
-    cd ~/Downloads/
-    ```
-4) Clone this repository in the ```/Download/``` directory: 
-    ```bash
-    git clone https://github.com/SOsintOps/Argos
+    cd ~/Downloads/ && git clone https://github.com/SOsintOps/Argos
     ```
 
-5) Go to ```/Argos/``` and make the setup script executable:
+4) Go to ```/Argos/``` and make the setup script executable:
     ```bash
     cd ~/Downloads/Argos/
     sudo chmod +x setup.sh
     ```
-6) Within the ```setup.sh``` replace [PASSWORD](https://inteltechniques.com/osintbook/)  with the current website's password
+5) Within the ```setup.sh``` replace [PASSWORD](https://inteltechniques.com/osintbook/)  with the current website's password
 
-7) Run the file:
+6) Run the file:
     ```bash
     ./setup.sh
     ```
@@ -99,7 +95,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 ## RESOURCES
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
-- [Step by step setup guide](https://inteltechniques.com/osintbook/linux.20.txt) (well... you will need a password to download it!)
+- [Step by step setup guide](https://inteltechniques.com/osintbook/linux.20.txt) (well... you will need a password to read this file!)
 - [Open-Source Intelligence Video Training](https://www.inteltechniques.net/courses/open-source-intelligence)
 - [OSInt Daily News](https://osintops.com/en/)
 

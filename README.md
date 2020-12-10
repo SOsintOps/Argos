@@ -71,7 +71,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     cd ~/Downloads/Argos/
     sudo chmod +x setup.sh
     ```
-6) Within the ```setup.sh``` replace PASSWORD with the current website's password
+6) Within the ```setup.sh``` replace [PASSWORD](https://inteltechniques.com/osintbook/)  with the current website's password
 
 7) Run the file:
     ```bash

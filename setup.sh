@@ -31,33 +31,19 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictu
 echo '#######################################################################'
 echo '#                       Bazzell''s goodies                            #'
 echo '#######################################################################'
-cd ~/Documents/
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
+cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
-cd ~/Downloads
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip
-unzip vm-files.zip -d ~/Desktop/
+cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
+mkdir ~/Documents/scripts && cd ~/Desktop/vm-files/scripts && sudo cp * ~/Documents/scripts && sudo chown -R $USER ~/Documents/scripts/
+mkdir ~/Documents/icons && cd ~/Desktop/vm-files/icons && cp * ~/Documents/icons
+cd ~/Desktop/vm-files/shortcuts && sudo cp * /usr/share/applications/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip
-unzip workflow.zip -d ~/Documents/
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip
-unzip tools.zip -d ~/Documents/
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip
-mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
+curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
 
-mkdir ~/Documents/scripts
-cd ~/Desktop/vm-files/scripts
-sudo cp * ~/Documents/scripts
-sudo chown -R $USER ~/Documents/scripts/
-
-mkdir ~/Documents/icons
-cd ~/Desktop/vm-files/icons
-cp * ~/Documents/icons
-
-cd ~/Desktop/vm-files/shortcuts
-sudo cp * /usr/share/applications/
 
 # the date_osint_tools.sh is copied in the program folder
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/

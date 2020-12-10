@@ -47,6 +47,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [KeepassXC](https://keepassxc.org/)
 - [Kazam](https://launchpad.net/kazam)
 - [Audacity](https://www.audacityteam.org/)
+- [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) *(just added!)*
 - and more!
 
 

@@ -6,6 +6,15 @@ Best practices recommend using a new VM for each OSInt investigation.\
 There are several ready-made VMs available on the Internet. I wanted to study how to customise my own workstation following what Michael Bazzell suggest in his own book, [Open Source Intelligence Techniques - 7th Edition (2019)](https://inteltechniques.com/book1.html), about creating your own custom VM.\
 This script will setup the workstation by installing mostly of the scripts suggested by Michael, plus the other tools he supplies on his website.
 
+##INDEX##
+- [REQUIREMENTS](https://github.com/SOsintOps/Argos/blob/master/README.md#REQUIREMENTS)
+- [TOOLS](https://github.com/SOsintOps/Argos/blob/master/README.md#TOOLS)
+- [INSTALLING & RUNNING](https://github.com/SOsintOps/Argos#installing--running)
+- [TO DO](https://github.com/SOsintOps/Argos#to-do)
+- [RESOURCES](https://github.com/SOsintOps/Argos/blob/master/README.md#resources)
+- [ACKNOWLEDGEMENTS](https://github.com/SOsintOps/Argos#acknowledgements)
+- [LICENSES](https://github.com/SOsintOps/Argos#licenses)
+
 
 ## REQUIREMENTS
 To install and run Argos, you need:
@@ -99,4 +108,4 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - Credit to [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
 
 ## LICENSES
-All the licenses mentioned in Bazzell's book apply and are located in this repository in "license.txt"
+All the licenses mentioned in Bazzell's book apply and are located in this repository in "[license.md](https://github.com/SOsintOps/Argos/blob/master/License.md)"

@@ -52,7 +52,7 @@ mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Do
 echo '#######################################################################'
 echo '#      Requirements for installing tools, scripts and launchers       #'
 echo '#######################################################################'
-sudo snap install vlc
+sudo apt install -y vlc
 sudo apt install -y python3
 sudo apt install -y python-setuptools
 sudo apt install -y jq

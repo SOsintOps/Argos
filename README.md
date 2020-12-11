@@ -49,6 +49,8 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [kali-anonstealth](https://github.com/Und3rf10w/kali-anonsurf)
 - [Moriarty-Project V2.6](https://github.com/AzizKpln/Moriarty-Project)
 - [maigret](https://github.com/soxoj/maigret)
+- [Maltego](https://www.maltego.com/)
+
 - and more!
 
 ### General Purpose tools

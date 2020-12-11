@@ -229,6 +229,22 @@ echo '#######################################################################'
 sudo wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
 sudo dpkg -i maltego.deb && sudo apt -f install && sudo rm maltego.deb
 
+#echo '#######################################################################'
+#echo '#                               Hunchly                               #'
+#echo '#######################################################################'
+#https://support.hunch.ly/article/15-installing-hunchly-on-linux
+
+#at first ... chrome! mmm what about Chromium ?
+#cd ~/Downloads/Programs
+#wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#sudo apt install ./google-chrome-stable_current_amd64.deb
+
+#WHAT ABOUT CHROMIUM? Brave?
+#sudo apt install chromium-browser
+
+#wget https://www.hunch.ly/installers/hunchly.deb
+#sudo apt install ./hunchly.deb
+#sudo apt --fix-broken install
 
 
 # Modify scripts

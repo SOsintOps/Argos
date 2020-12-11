@@ -13,8 +13,7 @@ echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
 
-sudo apt-get -y update && sudo snap refresh
-sudo apt-get -y upgrade
+sudo apt-get -y update && sudo apt-get -y upgrade && sudo snap refresh
 
 # Optional Virtualbox tools.
 # sudo add-apt-repository multiverse

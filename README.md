@@ -96,6 +96,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - VMware tools installation.
 - set osint report templates as libreoffice's templates.
 - customise the user profile.
+- add Nmap/zenmap, electrum wallet, gpa giu for PGP keys, Openshot video editor, etc.
 
 ## RESOURCES
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)

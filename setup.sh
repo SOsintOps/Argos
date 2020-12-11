@@ -213,7 +213,6 @@ git clone https://github.com/soxoj/maigret
 cd maigret
 pip3 install .
 
-
 echo '#######################################################################'
 echo '#                           Google Earth                              #'
 echo '#######################################################################'
@@ -228,24 +227,6 @@ echo '#######################################################################'
 
 sudo wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
 sudo dpkg -i maltego.deb && sudo apt -f install && sudo rm maltego.deb
-
-#echo '#######################################################################'
-#echo '#                               Hunchly                               #'
-#echo '#######################################################################'
-#https://support.hunch.ly/article/15-installing-hunchly-on-linux
-
-#at first ... chrome! mmm what about Chromium ?
-#cd ~/Downloads/Programs
-#wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-#sudo apt install ./google-chrome-stable_current_amd64.deb
-
-#WHAT ABOUT CHROMIUM? Brave?
-#sudo apt install chromium-browser
-
-#wget https://www.hunch.ly/installers/hunchly.deb
-#sudo apt install ./hunchly.deb
-#sudo apt --fix-broken install
-
 
 # Modify scripts
 echo '#######################################################################'
@@ -274,6 +255,53 @@ sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
 sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
+
+#echo '#######################################################################'
+#echo '#                         WORK IN PROGRESS                            #'
+#echo '#######################################################################'
+#https://github.com/ivolo/disposable-email-domains
+#https://github.com/jsvine/waybackpack
+#https://github.com/UnkL4b/GitMiner
+#https://github.com/jarun/googler
+#https://github.com/bjoernkarmann/project_alias
+#https://github.com/sundowndev/PhoneInfoga
+#https://github.com/graniet/operative-framework
+#https://github.com/firstlookmedia/dangerzone
+#https://github.com/lulz3xploit/LittleBrother
+#https://github.com/Lazza/Carbon14
+#https://github.com/woj-ciech/Kamerka-GUI
+
+#echo '#######################################################################'
+#echo '#                               Hunchly                               #'
+#echo '#######################################################################'
+#https://support.hunch.ly/article/15-installing-hunchly-on-linux
+
+#at first ... chrome! mmm what about Chromium ?
+#cd ~/Downloads/Programs
+#wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+#sudo apt install ./google-chrome-stable_current_amd64.deb
+
+#WHAT ABOUT CHROMIUM? Brave?
+#sudo apt install chromium-browser
+
+#wget https://www.hunch.ly/installers/hunchly.deb
+#sudo apt install ./hunchly.deb
+#sudo apt --fix-broken install
+
+#echo '#######################################################################'
+#echo '#                             userrecon                               #'
+#echo '#######################################################################'
+#https://github.com/stjordanis/userrecon-py
+#sudo -H pip3 install git+https://github.com/stjordanis/userrecon-py.git
+#userrecon-py --help
+
+#echo '#######################################################################'
+#echo '#                               fawkes                                #'
+#echo '#######################################################################'
+#https://github.com/Shawn-Shan/fawkes
+
+
+
 
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge

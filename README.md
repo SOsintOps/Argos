@@ -38,6 +38,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [EyeWitness](https://github.com/ChrisTruncer/EyeWitness)
 - [sublist3r](https://github.com/aboul3la/Sublist3r)
 - [Photon](https://github.com/s0md3v/Photon)
+- [The Harvester](https://github.com/laramies/theHarvester)
 - [Metagoofil](https://github.com/opsdisk/metagoofil)
 - [recon-ng](https://github.com/lanmaster53/recon-ng)
 - [sherlock](https://github.com/sherlock-project/sherlock)
@@ -46,10 +47,13 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Ripgrep](https://github.com/BurntSushi/ripgrep)
 - [holehe](https://github.com/megadose/holehe)
 - [kali-anonstealth](https://github.com/Und3rf10w/kali-anonsurf)
+- [Moriarty-Project V2.6](https://github.com/AzizKpln/Moriarty-Project)
+- [maigret](https://github.com/soxoj/maigret)
 - and more!
 
 ### General Purpose tools
-- [vlc](https://www.videolan.org/vlc/index.html)
+- [VLC](https://www.videolan.org/vlc/index.html)
+- [Google Earth](https://www.google.com/earth/versions/#earth-pro)
 - [wget](https://www.gnu.org/software/wget/)
 - [cherrytree](https://www.giuspen.com/cherrytree/)
 - [Atom](https://atom.io/)

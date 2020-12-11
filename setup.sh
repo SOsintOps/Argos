@@ -10,7 +10,7 @@
 #!/bin/bash
 # Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
 echo '#######################################################################'
-echo '#                       Let me Update the distro                      #'
+echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
 
 sudo apt-get -y update && sudo snap refresh

@@ -1,12 +1,3 @@
-
-#ToDo: code cleanup (who said shellcheck?)
-#ToDo: implement the proper internal variables of the file (directories, users, etc.).
-#ToDo: declare the directories at the beginning of the script as variables
-#ToDo: setting up a Custom Osint Fireforx browser
-#ToDo: set up installation of extra programs: maltego,
-#ToDo: set osint report templates for libreoffice
-
-
 #!/bin/bash
 # Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
 echo '#######################################################################'

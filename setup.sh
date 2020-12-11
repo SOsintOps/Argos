@@ -3,7 +3,7 @@
 #ToDo: implement the proper internal variables of the file (directories, users, etc.).
 #ToDo: declare the directories at the beginning of the script as variables
 #ToDo: setting up a Custom Osint Fireforx browser
-#ToDo: set up installation of extra programs: maltego, sherlock's brothers,
+#ToDo: set up installation of extra programs: maltego,
 #ToDo: set osint report templates for libreoffice
 
 

@@ -227,8 +227,18 @@ echo '#######################################################################'
 echo '#                           Google Earth                              #'
 echo '#######################################################################'
 
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
 sudo dpkg -i google-earth64.deb && sudo apt -f install && sudo rm google-earth64.deb
+
+echo '#######################################################################'
+echo '#                               Maltego                               #'
+echo '#######################################################################'
+
+sudo wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
+sudo dpkg -i maltego.deb && sudo apt -f install && sudo rm maltego.deb
+
+
 
 # Modify scripts
 echo '#######################################################################'

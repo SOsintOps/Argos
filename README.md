@@ -20,6 +20,7 @@ This script will setup the workstation by installing mostly of the scripts sugge
 To install and run Argos, you need:
 - an Ubuntu* 20.4 virtual machine/workstation
 - set your user on "**osint**"
+- Please use English Language!
 
 This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools. 
 

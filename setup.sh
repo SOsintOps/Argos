@@ -223,14 +223,13 @@ git clone https://github.com/soxoj/maigret
 cd maigret
 pip3 install .
 
-#Google earth (still unable to fix an issue with the package key)
-#echo '#######################################################################'
-#echo '#                               maigret                               #'
-#echo '#######################################################################'
-#Google earth (still unable to fix an issue with the package key)
-#sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
-#sudo dpkg -i google-earth64.deb
-#sudo apt-get -f install; sudo rm google-earth64.deb
+
+echo '#######################################################################'
+echo '#                           Google Earth                              #'
+echo '#######################################################################'
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - && sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
+sudo dpkg -i google-earth64.deb && sudo apt -f install && sudo rm google-earth64.deb
 
 # Modify scripts
 echo '#######################################################################'
@@ -248,9 +247,10 @@ cd ~/Downloads/Programs
 echo '#######################################################################'
 echo '#                       General Purpose tools                         #'
 echo '#######################################################################'
-sudo snap install cherrytree
-sudo snap install atom --classic
-sudo snap install keepassxc
+sudo add-apt-repository -y ppa:giuspen/ppa && sudo apt install -y cherrytree
+wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add - && sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
+sudo apt update && sudo apt install -y atom
+sudo apt install -y keepassxc
 sudo apt install -y kazam
 sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre

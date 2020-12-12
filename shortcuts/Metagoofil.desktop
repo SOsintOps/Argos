@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Metagoofil
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/metagoofil.sh
+Icon=/home/osint/Pictures/icons/metagoofil.png
+Terminal=true

@@ -1,0 +1,2 @@
+2020.12.12
+the icon path has been changed from /documents/ to /Pictures/

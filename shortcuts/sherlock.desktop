@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Sherlock
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/sherlock.sh
+Icon=/home/osint/Pictures/icons/sherlock.png
+Terminal=true

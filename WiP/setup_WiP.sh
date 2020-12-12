@@ -21,20 +21,32 @@ gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictu
 echo '#######################################################################'
 echo '#                       Bazzell''s goodies                            #'
 echo '#######################################################################'
-cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
+#this is the actual procedure by M. Bazzell
+#cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
-mkdir ~/Documents/scripts && cd ~/Desktop/vm-files/scripts && sudo cp * ~/Documents/scripts && sudo chown -R $USER ~/Documents/scripts/
-mkdir ~/Documents/icons && cd ~/Desktop/vm-files/icons && cp * ~/Documents/icons
-cd ~/Desktop/vm-files/shortcuts && sudo cp * /usr/share/applications/
-# the vm-files directory in the Desktop directory have to be deleted.
+#those are M. Bazzell Workflows
+#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
+#those are M. Bazzell HTML TOOLS
+#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
+#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && unzip templates.zip -d ~/Templates
-# delete o move to another directory all the default templates in the Templates directory
+mkdir ~/Documents/scripts
+cd ~/Downloads/Argos/scripts
+sudo cp * ~/Documents/scripts
+sudo chown -R $USER ~/Documents/scripts/
+
+mkdir ~/Pictures/icons
+cd ~/Downloads/Argos/multimedia/icons
+cp * ~/Pictures/icons
+
+cd ~/Downloads/Argos/shortcuts
+sudo cp * /usr/share/applications/
+
+cd ~/Downloads/Argos/templates
+cp * ~/Templates
+# delete o move to another directory all the Templates directory's default templates
 
 # the date_osint_tools.sh is copied in the program folder
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/

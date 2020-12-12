@@ -28,11 +28,11 @@ mkdir ~/Documents/scripts && cd ~/Desktop/vm-files/scripts && sudo cp * ~/Docume
 mkdir ~/Documents/icons && cd ~/Desktop/vm-files/icons && cp * ~/Documents/icons
 cd ~/Desktop/vm-files/shortcuts && sudo cp * /usr/share/applications/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
+cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
+cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
 
-curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
+cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
 
 
 # the date_osint_tools.sh is copied in the program folder

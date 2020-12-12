@@ -1,0 +1,137 @@
+Case #:	
+Investigator:
+Target:	
+Date:
+
+Executive Summary
+
+
+
+Summary of Findings
+
+[Summary Details: Clear and concise synopsis of the case and findings. Information critical to understanding can be included as bullet points. Detailed evidence will be included in subsequent sections of the report.
+
+1.	[Finding 1]
+
+2.	[Finding 2]
+
+3.	[Finding 3]
+
+4.	[Finding 4]
+
+5.	[Finding 5]
+
+
+Additional Details
+
+[Sample: The following pages represent the evidence of these findings. Please note that all screen captures were preserved in digital format and are included within the DVD attached to this report.]
+
+
+
+Target Details
+
+Target Full Name:			Age:				DOB:
+Home Address:
+Mailing Address:
+Telephone 1:							
+Telephone 2:
+Target Email:
+Target User Names:
+Target Social Network Profiles
+Facebook:	
+Twitter:
+Instagram:	
+Google:
+Other:	
+Other:
+
+Spouse Name:
+Spouse Address:
+Spouse Email:
+Spouse User Names:
+Spouse Social Network Profiles:
+Facebook:	
+Twitter:
+Instagram:	
+Google:
+Other:	
+Other:
+ 
+
+Relative#1 Name:
+Relative #1 Email:
+Relative #1 User Names:
+Relative #1 Social Network Profiles
+Facebook:	
+Twitter:
+Instagram:	
+Google:
+Other:	
+Other:
+
+Relative#2 Name:
+Relative #2 Email:
+Relative #2 User Names:
+Relative #2 Social Network Profiles
+Facebook:	
+Twitter:
+Instagram:	
+Google:
+Other:	
+Other:
+
+Relative#3 Name:
+Relative #3 Email:
+Relative #3 User Names:
+Relative #3 Social Network Profiles
+Facebook:	
+Twitter:
+Instagram:	
+Google:
+Other:	
+Other:
+ 
+
+
+Narrative Report
+Summary
+[Summary Details: Keep this section brief. For each finding do not include actual screen shots, photos, media files, etc. Reference file location only.]
+Finding 1
+[Summary]
+These files were saved to disk and titled as follows:
+
+
+
+
+
+
+Finding 2
+[Summary]
+These files were saved to disk and titled as follows:
+
+
+
+
+
+
+
+Finding 3
+[Summary]
+These files were saved to disk and titled as follows:
+
+
+
+
+
+
+
+This entire report was conducted within a Linux virtual machine. This operating system was created on [insert date] and saved as a master copy. All security updates were applied at that time and no online investigation was conducted within this master copy. A clone of this system was created and titled [case number]. This clone was used as the only operating system resource for the entire investigation. No other investigations were conducted within this clone. At the end of the investigation, this virtual machine was exported as [file name] This file can be used to recreate the entire investigation environment exactly as it appeared during the actual investigation. 
+Investigation Number:	Date:
+Investigator:	Suspect:
+
+Summary Report
+Summary
+
+[Summary Details: Brief description of investigation and objectives, future investigation needs and whether the incident is resolved.]
+
+

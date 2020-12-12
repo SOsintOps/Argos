@@ -14,12 +14,13 @@ sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
 # setting the 'quiet' background image
 cd ~/Downloads/Argos/multimedia/wallpapers 
 sudo cp * ~/Pictures
+sudo chown -R $USER ~/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
 
 # Bazzell goodies - Please change PASSWORD with the current one!
 echo '#######################################################################'
-echo '#                       Bazzell''s goodies                            #'
+echo '#                            A few scripts                           #'
 echo '#######################################################################'
 #this is the actual procedure by M. Bazzell
 #cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
@@ -36,7 +37,7 @@ mkdir ~/Documents/scripts
 cd ~/Downloads/Argos/scripts
 sudo cp * ~/Documents/scripts
 sudo chown -R $USER ~/Documents/scripts/
-sudo chown +x ~/Documents/scripts/*.sh
+sudo chmod +x ~/Documents/scripts/*.sh
 
 mkdir ~/Pictures/icons
 cd ~/Downloads/Argos/multimedia/icons

@@ -275,6 +275,7 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #echo '#######################################################################'
 #echo '#                         WORK IN PROGRESS                            #'
 #echo '#######################################################################'
+#fix https://itsfoss.com/ubuntu-keyring/
 #https://github.com/ivolo/disposable-email-domains
 #https://github.com/jsvine/waybackpack
 #https://github.com/UnkL4b/GitMiner

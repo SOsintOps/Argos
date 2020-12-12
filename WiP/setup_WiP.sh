@@ -12,7 +12,7 @@ sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
 # sudo adduser osint vboxsf
 
 # setting the 'quiet' background image
-cd ~/Downloads/Argos/wallpaper/ 
+cd ~/Downloads/Argos/multimedia/wallpapers 
 sudo cp * ~/Pictures
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 

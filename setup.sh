@@ -11,8 +11,8 @@ sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
 # sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
 # sudo adduser osint vboxsf
 
-# setting the 'quiet' background image
-cd ~/Downloads/Argos/wallpaper/ 
+# setting the 'be quiet' background image
+cd ~/Downloads/Argos/multimedia/wallpapers 
 sudo cp * ~/Pictures
 gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 

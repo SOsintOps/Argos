@@ -319,5 +319,4 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge
 #sudo snap install telegram-desktop
-
-sudo reboot now
+#sudo reboot now

@@ -4,7 +4,8 @@ echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
 
-sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
+sudo apt -y update && sudo apt -y upgrade
+# sudo snap refresh
 
 # Optional Virtualbox tools
 # sudo add-apt-repository multiverse

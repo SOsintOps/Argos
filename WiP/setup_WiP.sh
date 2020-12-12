@@ -287,6 +287,7 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #https://github.com/lulz3xploit/LittleBrother
 #https://github.com/Lazza/Carbon14
 #https://github.com/woj-ciech/Kamerka-GUI
+#$ sudo apt-get install macchanger
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'

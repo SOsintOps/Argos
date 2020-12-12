@@ -1,5 +1,5 @@
 # ARGOS
-<img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/wallpaper/scribblenauts-argos.png">
+<img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
 
 This script will automatically set up an open source intelligence (OSINT) workstation starting from a clean Ubuntu* 20.4 Virtual Machine/Workstation.\
 Best practices recommend using a new VM for each OSInt investigation.\

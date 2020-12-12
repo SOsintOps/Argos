@@ -292,6 +292,7 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #https://github.com/alpkeskin/mosint
 #https://dissenter.com/
 #$ sudo apt-get install macchanger
+#a script to update the right distro (ubuntu, debian)  
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'

@@ -233,4 +233,4 @@ sudo apt install -y ubuntu-restricted-extras p7zip unrar
 sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 
-sudo reboot now
+# sudo reboot now

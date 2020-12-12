@@ -33,18 +33,14 @@ echo '#######################################################################'
 
 #cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
 
-mkdir ~/Documents/scripts
-cd ~/Downloads/Argos/scripts
-sudo cp * ~/Documents/scripts
+mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
 sudo chown -R $USER ~/Documents/scripts/
 sudo chmod +x ~/Documents/scripts/*.sh
 
-mkdir ~/Pictures/icons
-cd ~/Downloads/Argos/multimedia/icons
-cp * ~/Pictures/icons
+mkdir ~/Pictures/icons cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
 
-cd ~/Downloads/Argos/shortcuts
-sudo cp * /usr/share/applications/
+sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
+
 
 cd ~/Downloads/Argos/templates
 cp -r * ~/Templates

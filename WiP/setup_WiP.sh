@@ -36,6 +36,7 @@ mkdir ~/Documents/scripts
 cd ~/Downloads/Argos/scripts
 sudo cp * ~/Documents/scripts
 sudo chown -R $USER ~/Documents/scripts/
+sudo chown -X ~/Documents/scripts/
 
 mkdir ~/Pictures/icons
 cd ~/Downloads/Argos/multimedia/icons

@@ -16,7 +16,6 @@ sudo apt -y update && sudo apt -y upgrade
 cd ~/Downloads/Argos/multimedia/wallpapers 
 sudo cp * ~/Pictures
 sudo chown -R $USER ~/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
 
 
 # Bazzell goodies - Please change PASSWORD with the current one!
@@ -53,6 +52,9 @@ cp -r * ~/Templates
 
 # the date_osint_tools.sh is copied in the program folder
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
+
+# changing the backround image with a 'quiet' one
+cd ~/Documents/scripts/ && ./background.sh
 
 # Requirements for installing tools, scripts and launchers
 echo '#######################################################################'
@@ -317,7 +319,6 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #echo '#                               fawkes                                #'
 #echo '#######################################################################'
 #https://github.com/Shawn-Shan/fawkes
-
 
 
 

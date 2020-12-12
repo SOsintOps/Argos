@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Spiderfoot
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/spiderfoot.sh
+Icon=/home/osint/Pictures/icons/spiderfoot.png
+Terminal=true

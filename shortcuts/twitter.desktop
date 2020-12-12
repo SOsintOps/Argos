@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Twitter
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/twitter.sh
+Icon=/home/osint/Pictures/icons/twitter.png
+Terminal=true

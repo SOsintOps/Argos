@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Domains
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/domains.sh
+Icon=/home/osint/Pictures/icons/domains.png
+Terminal=true

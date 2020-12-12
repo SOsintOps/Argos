@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=EyeWitness
+Categories=Network;OSINT
+Exec=/home/osint/Documents/scripts/eyewitness.sh
+Icon=/home/osint/Pictures/icons/eyewitness.png
+Terminal=true

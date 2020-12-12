@@ -34,8 +34,7 @@ cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbo
 
 cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && mkdir ~/Documents/templates && unzip templates.zip -d ~/Documents/templates
 
-
-# the date_osint_tools.sh is copied in the program folder
+# the update_osint_tools.sh is copied in the Programs folder
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
 
 echo '#######################################################################'

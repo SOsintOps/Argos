@@ -45,7 +45,7 @@ cd ~/Downloads/Argos/shortcuts
 sudo cp * /usr/share/applications/
 
 cd ~/Downloads/Argos/templates
-cp * ~/Templates
+cp -r * ~/Templates
 # delete o move to another directory all the Templates directory's default templates
 
 # the date_osint_tools.sh is copied in the program folder

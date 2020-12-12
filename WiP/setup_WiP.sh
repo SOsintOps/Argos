@@ -27,6 +27,7 @@ cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbo
 mkdir ~/Documents/scripts && cd ~/Desktop/vm-files/scripts && sudo cp * ~/Documents/scripts && sudo chown -R $USER ~/Documents/scripts/
 mkdir ~/Documents/icons && cd ~/Desktop/vm-files/icons && cp * ~/Documents/icons
 cd ~/Desktop/vm-files/shortcuts && sudo cp * /usr/share/applications/
+# the vm-files directory in the Desktop directory have to be deleted.
 
 cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
 

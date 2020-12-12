@@ -6,7 +6,7 @@ echo '#######################################################################'
 
 sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
 
-# Optional Virtualbox tools.
+# Optional Virtualbox tools
 # sudo add-apt-repository multiverse
 # sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
 # sudo adduser osint vboxsf

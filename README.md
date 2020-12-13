@@ -13,6 +13,7 @@ This script will setup the workstation by installing mostly of the scripts sugge
 - [TO DO](https://github.com/SOsintOps/Argos#to-do)
 - [RESOURCES](https://github.com/SOsintOps/Argos/blob/master/README.md#resources)
 - [ACKNOWLEDGEMENTS](https://github.com/SOsintOps/Argos#acknowledgements)
+- [CREDITS](https://github.com/SOsintOps/Argos#credits)
 - [LICENSES](https://github.com/SOsintOps/Argos#licenses)
 
 
@@ -75,7 +76,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 2) Make sure and/or install that the [GIT command](https://linuxize.com/post/how-to-install-git-on-ubuntu-20-04/) is available in your VM:
     ```bash
-    sudo apt install git
+    sudo apt install -y git
     ```
 3) Clone this repository in the ```/Download/``` directory: 
     ```bash
@@ -86,12 +87,12 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```bash
     sudo chmod +x ~/Downloads/Argos/setup.sh
     ```
-5) Within the ```setup.sh``` replace [PASSWORD](https://inteltechniques.com/osintbook/)  with the current website's password
 
-6) Run the file:
+5) Run the file:
     ```bash
     ./Argos/setup.sh
     ```
+6) IF you want to download a few additional tools from [Michael Bazzell's website](https://inteltechniques.com/osintbook/) Within the ```setup.sh``` replace PASSWORD  with the current website's area password.
 
 ## TO DO
 - Setup an OSInt custom Browser.
@@ -103,14 +104,15 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - add Nmap/zenmap, electrum wallet, gpa giu for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
 
 ## RESOURCES
+- [OSInOps website](https://osintops.com/en/)
+- [OSInt Daily News](https://t.me/Osintlatestnews)
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
-- [Step by step setup guide](https://inteltechniques.com/osintbook/linux.20.txt) (well... you will need a password to read this file!)
-- [Open-Source Intelligence Video Training](https://www.inteltechniques.net/courses/open-source-intelligence)
-- [OSInt Daily News](https://osintops.com/en/)
 
 ## ACKNOWLEDGEMENTS
 - This is a fork of the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup) by [Skykn0t](https://github.com/Skykn0t).
-- Credit to [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
+
+## CREDITS 
+- [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
 
 ## LICENSES
 All the licenses mentioned in Bazzell's book apply and are located in this repository in "[license.md](https://github.com/SOsintOps/Argos/blob/master/License.md)"

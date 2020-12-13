@@ -270,7 +270,16 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #echo '#######################################################################'
 #echo '#                         WORK IN PROGRESS                            #'
 #echo '#######################################################################'
+
+#echo '##########################################'
+#echo '#        WHAT WE WHANT TO FIX            #'
+#echo '##########################################'
 #fix https://itsfoss.com/ubuntu-keyring/
+#a script to update the right distro (ubuntu, debian)  
+
+#echo '##########################################'
+#echo '#            NEW TOOLS                   #'
+#echo '##########################################'
 #https://github.com/ivolo/disposable-email-domains
 #https://github.com/jsvine/waybackpack
 #https://github.com/UnkL4b/GitMiner
@@ -286,12 +295,9 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #https://dissenter.com/
 #$ sudo apt-get install macchanger
 #sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
-#a script to update the right distro (ubuntu, debian)  
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge
 #sudo snap install telegram-desktop
-#sudo reboot now
-
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'
@@ -321,4 +327,3 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #echo '#                               fawkes                                #'
 #echo '#######################################################################'
 #https://github.com/Shawn-Shan/fawkes
-

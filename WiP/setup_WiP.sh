@@ -265,7 +265,6 @@ sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
-sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 
 #echo '#######################################################################'
@@ -286,6 +285,7 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #https://github.com/alpkeskin/mosint
 #https://dissenter.com/
 #$ sudo apt-get install macchanger
+#sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
 #a script to update the right distro (ubuntu, debian)  
 
 #echo '#######################################################################'

@@ -46,11 +46,9 @@ cd ~/Downloads/Argos/templates
 cp -r * ~/Templates
 # delete o move to another directory all the Templates directory's default templates
 
-# the date_osint_tools.sh is copied in the program folder
+# changing the background image with a 'quiet' one
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-
-# changing the backround image with a 'quiet' one
-cd ~/Documents/scripts/ && ./background.sh
+~/Documents/scripts/background.sh
 
 # Requirements for installing tools, scripts and launchers
 echo '#######################################################################'

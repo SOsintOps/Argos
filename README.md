@@ -91,7 +91,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```bash
     ./Argos/setup.sh
     ```
-6) IF you want to download a few additional tools from [Michael Bazzell's website](https://inteltechniques.com/osintbook/) Within the ```setup.sh``` replace PASSWORD  with the current website's area password.
+6) IF you want to download a few additional tools from [Michael Bazzell's website](https://inteltechniques.com/osintbook/) replace PASSWORD  with the current website's area password within the ```setup.sh``` script.
 
 ## TO DO
 - Setup an OSInt custom Browser.

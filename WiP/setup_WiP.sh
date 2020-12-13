@@ -1,5 +1,5 @@
 #!/bin/bash
-# Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
+
 echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
@@ -12,16 +12,11 @@ sudo apt -y update && sudo apt -y upgrade
 # sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
 # sudo adduser osint vboxsf
 
-# setting the 'quiet' background image
-cd ~/Downloads/Argos/multimedia/wallpapers 
-sudo cp * ~/Pictures
-sudo chown -R $USER ~/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg
-
-
-# Bazzell goodies - Please change PASSWORD with the current one!
 echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
+#######################################################################
+#If you want to download those Bazzell goodies - Please change PASSWORD with the current one!
 #this is the actual procedure by M. Bazzell
 #cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
@@ -30,25 +25,24 @@ echo '#######################################################################'
 
 #those are M. Bazzell HTML TOOLS
 #cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
-
-#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
+#######################################################################
 
 mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
-sudo chown -R $USER ~/Documents/scripts/
+#sudo chown -R $USER ~/Documents/scripts/ (it shouldn't be needed)
 sudo chmod +x ~/Documents/scripts/*.sh
 
-mkdir ~/Pictures/icons cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
+mkdir ~/Pictures/icons && cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
 
 sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
 
+# this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
+cp -r ~/Downloads/Argos/templates/* ~/Templates
 
-cd ~/Downloads/Argos/templates
-cp -r * ~/Templates
-# delete o move to another directory all the Templates directory's default templates
-
-# changing the background image with a 'quiet' one
+# moving update_osint_tools.sh in the programs directory
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-~/Documents/scripts/background.sh
+
+# setting the 'quiet priest' background image
+cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
 
 # Requirements for installing tools, scripts and launchers
 echo '#######################################################################'

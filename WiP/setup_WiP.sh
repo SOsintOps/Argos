@@ -287,6 +287,11 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #$ sudo apt-get install macchanger
 #sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
 #a script to update the right distro (ubuntu, debian)  
+#sudo apt install calibre
+#sudo snap install pycharm-professional --classic --edge
+#sudo snap install telegram-desktop
+#sudo reboot now
+
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'
@@ -317,9 +322,3 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #echo '#######################################################################'
 #https://github.com/Shawn-Shan/fawkes
 
-
-
-#sudo apt install calibre
-#sudo snap install pycharm-professional --classic --edge
-#sudo snap install telegram-desktop
-#sudo reboot now

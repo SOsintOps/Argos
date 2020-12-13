@@ -24,7 +24,9 @@ To install and run Argos, you need:
 
 This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools. 
 
-**N.B.** This script has been tested on a [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10 VM.
+**N.B.**: This script has been tested on:
+- [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10 VM.
+- [Ubuntu](https://ubuntu.com/download) 20.10 VM.
 
 ## TOOLS
 

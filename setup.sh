@@ -1,41 +1,49 @@
 #!/bin/bash
-# Most of this script is based on the Michael Bazzell's txt and Skykn0t's OSINT_VM_Setup script, so credit where credit is due.
+
 echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
 
-sudo apt -y update && sudo apt -y upgrade && sudo snap refresh
+sudo apt -y update && sudo apt -y upgrade
+# sudo snap refresh
 
 # Optional Virtualbox tools
 # sudo add-apt-repository multiverse
 # sudo apt install virtualbox-guest-dkms virtualbox-guest-x11
 # sudo adduser osint vboxsf
 
-# setting the 'be quiet' background image
-cd ~/Downloads/Argos/multimedia/wallpapers 
-sudo cp * ~/Pictures
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
-
-
-# Bazzell goodies - Please change PASSWORD with the current one!
 echo '#######################################################################'
-echo '#                       Bazzell''s goodies                            #'
+echo '#                            A few scripts                           #'
 echo '#######################################################################'
-cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/vm-files.zip && unzip vm-files.zip -d ~/Desktop/
-mkdir ~/Documents/scripts && cd ~/Desktop/vm-files/scripts && sudo cp * ~/Documents/scripts && sudo chown -R $USER ~/Documents/scripts/
-mkdir ~/Documents/icons && cd ~/Desktop/vm-files/icons && cp * ~/Documents/icons
-cd ~/Desktop/vm-files/shortcuts && sudo cp * /usr/share/applications/
+#######################################################################
+#If you want to download those Bazzell goodies - Please change PASSWORD with the current one!
+#this is the actual procedure by M. Bazzell
+#cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
+#those are M. Bazzell Workflows
+#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
+#those are M. Bazzell HTML TOOLS
+#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
+#######################################################################
 
-cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/templates.zip && unzip templates.zip -d ~/Templates
+mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
+sudo chmod +x ~/Documents/scripts/*.sh
 
-# the update_osint_tools.sh is copied in the Programs folder
+mkdir ~/Pictures/icons && cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
+
+sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
+
+# this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
+cp -r ~/Downloads/Argos/templates/* ~/Templates
+
+# moving update_osint_tools.sh in the programs directory
 mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
+
+# setting the 'quiet priest' background image
+cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
+
 
 echo '#######################################################################'
 echo '#      Requirements for installing tools, scripts and launchers       #'
@@ -230,7 +238,4 @@ sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
-sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito
 cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
-
-# sudo reboot now

@@ -12,6 +12,9 @@ case $DESKTOP_SESSION in
 	feh --bg-scale ~/Pictures/image.jpg # set
 	echo "exec feh --bg-scale /home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg" >> ~/.config/i3/config 
 	;;
+"budgie-desktop")
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/osint/Pictures/Be-quiet-Priest-sculpture-in-Venlo.jpg'
+	;;
 *)
 echo Unknown graphical system.
 ;;

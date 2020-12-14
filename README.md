@@ -110,6 +110,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 ## CREDITS 
 - [Skykn0t](https://github.com/Skykn0t) for writing the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup).
 - [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
+- [pinkevilpimp](https://github.com/pinkevilpimp) for the wallpaper script
 
 ## LICENSES
 Please refer to the license files.

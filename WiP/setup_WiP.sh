@@ -287,11 +287,21 @@ cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
 #https://github.com/woj-ciech/Kamerka-GUI
 #https://github.com/alpkeskin/mosint
 #https://dissenter.com/
-#$ sudo apt-get install macchanger
+
+# https://github.com/ScriptSmith/instamancer
+# https://github.com/bernsteining/instaloctrack
+# https://github.com/Datalux/Osintgram
+# https://github.com/kpcyrd/sn0int
+
+
+#sudo apt install -y macchanger
 #sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge
 #sudo snap install telegram-desktop
+
+
+
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'

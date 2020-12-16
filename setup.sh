@@ -215,7 +215,7 @@ echo '#                               maigret                               #'
 echo '#######################################################################'
 
 git clone https://github.com/soxoj/maigret ~/Downloads/Programs/maigret
-pip3 install pip3 install ~/Downloads/Programs/maigret/.
+pip3 install ~/Downloads/Programs/maigret/.
 
 echo '#######################################################################'
 echo '#                           Google Earth                              #'

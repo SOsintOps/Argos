@@ -3,67 +3,29 @@
 #echo '#######################################################################'
 
 #echo '##########################################'
-#echo '#        WHAT WE WHANT TO FIX            #'
 #echo '##########################################'
+#echo '##       WHAT WE WHANT TO FIX           ##'
+#echo '##########################################'
+#echo '##########################################'
+
 #fix https://itsfoss.com/ubuntu-keyring/
 #a script to update the right distro (ubuntu, debian)  
 
+#echo '##########################################'
+#echo '##########################################'
+#echo '##   Docs, template, frameworks, etc.   ##'
+#echo '##########################################'
+#echo '##########################################'
 
-#echo '##########################################'
-#echo '#    Docs, template, frameworks, etc.    #'
-#echo '##########################################'
 #https://github.com/ivolo/disposable-email-domains
 #https://github.com/lockfale/osint-framework
 
 
 #echo '##########################################'
-#echo '#            NEW TOOLS                   #'
 #echo '##########################################'
-
-#https://github.com/jsvine/waybackpack
-#https://github.com/UnkL4b/GitMiner
-#https://github.com/jarun/googler
-#https://github.com/bjoernkarmann/project_alias
-#https://github.com/sundowndev/PhoneInfoga
-#https://github.com/graniet/operative-framework
-#https://github.com/firstlookmedia/dangerzone
-#https://github.com/lulz3xploit/LittleBrother
-#https://github.com/Lazza/Carbon14
-#https://github.com/woj-ciech/Kamerka-GUI
-#https://github.com/alpkeskin/mosint
-#https://dissenter.com/
-#https://github.com/huginn/huginn
-
-
-#echo '#######################################################################'
-#echo '#                             userrecon                               #'
-#echo '#######################################################################'
-#https://github.com/stjordanis/userrecon-py
-#sudo -H pip3 install git+https://github.com/stjordanis/userrecon-py.git
-#userrecon-py --help
-
-
-
+#echo '##              NEW TOOLS               ##'
 #echo '##########################################'
-#echo '#              INSTAGRAM                 #'
 #echo '##########################################'
-
-#https://github.com/ScriptSmith/instamancer
-#https://github.com/bernsteining/instaloctrack
-#https://github.com/Datalux/Osintgram
-#https://github.com/kpcyrd/sn0int
-#https://github.com/hehpollon/Instagram-Crawler
-
-#echo '##########################################'
-#echo '#                 others                 #'
-#echo '##########################################'
-
-#sudo apt install -y macchanger
-#sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
-#sudo apt install calibre
-#sudo snap install pycharm-professional --classic --edge
-#sudo snap install telegram-desktop
-
 
 #echo '#######################################################################'
 #echo '#                               Hunchly                               #'
@@ -81,6 +43,71 @@
 #wget https://www.hunch.ly/installers/hunchly.deb
 #sudo apt install ./hunchly.deb
 #sudo apt --fix-broken install
+
+#echo '##########################################'
+#echo '##########################################'
+#echo '##                USERNAME              ##'
+#echo '##########################################'
+#echo '##########################################'
+
+#echo '#######################################################################'
+#echo '#                         LittleBrother                               #'
+#echo '#######################################################################'
+#https://github.com/lulz3xploit/LittleBrother
+
+#echo '#######################################################################'
+#echo '#                             userrecon                               #'
+#echo '#######################################################################'
+#https://github.com/stjordanis/userrecon-py
+#sudo -H pip3 install git+https://github.com/stjordanis/userrecon-py.git
+#userrecon-py --help
+
+#echo '##########################################'
+#echo '##########################################'
+#echo '##         INSTAGRAM's tools            ##'
+#echo '##########################################'
+#echo '##########################################'
+
+#https://github.com/ScriptSmith/instamancer
+#https://github.com/bernsteining/instaloctrack
+#https://github.com/kpcyrd/sn0int
+#https://github.com/hehpollon/Instagram-Crawler
+
+
+#echo '#######################################################################'
+#echo '#                             Osintgram                               #'
+#echo '#######################################################################'
+
+#https://github.com/Datalux/Osintgram
+
+#echo '##########################################'
+#echo '##########################################'
+#echo '##                 others               ##'
+#echo '##########################################'
+#echo '##########################################'
+
+
+#https://github.com/jsvine/waybackpack
+#https://github.com/UnkL4b/GitMiner
+#https://github.com/jarun/googler
+#https://github.com/bjoernkarmann/project_alias
+#https://github.com/sundowndev/PhoneInfoga
+#https://github.com/graniet/operative-framework
+#https://github.com/firstlookmedia/dangerzone
+#https://github.com/Lazza/Carbon14
+#https://github.com/woj-ciech/Kamerka-GUI
+#https://github.com/alpkeskin/mosint
+#https://dissenter.com/
+#https://github.com/huginn/huginn
+
+
+
+#sudo apt install -y macchanger
+#sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
+#sudo apt install calibre
+#sudo snap install pycharm-professional --classic --edge
+#sudo snap install telegram-desktop
+
 
 
 #echo '#######################################################################'

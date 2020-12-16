@@ -90,17 +90,17 @@ sudo snap install amass
 echo '#######################################################################'
 echo '#                             Twint                                   #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/twintproject/twint.git
+cd 
+git clone https://github.com/twintproject/twint.git ~/Downloads/Programs/twint
 cd twint
-sudo -H pip3 install twint
-sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install ~/Downloads/Programs/twint/twint
+sudo -H pip3 install -r ~/Downloads/Programs/twint/requirements.txt
 
 echo '#######################################################################'
 echo '#                          EyeWitness                                 #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/ChrisTruncer/EyeWitness.git
+
+git clone https://github.com/ChrisTruncer/EyeWitness.git ~/Downloads/Programs/EyeWitness
 cd EyeWitness/Python/setup
 sudo -H ./setup.sh
 cd ~/Documents/scripts
@@ -109,22 +109,22 @@ sed -i "s/Programs\/EyeWitness/Programs\/EyeWitness\/Python/g" eyewitness.sh
 echo '#######################################################################'
 echo '#                           sublist3r                                 #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/aboul3la/Sublist3r.git
+cd 
+git clone https://github.com/aboul3la/Sublist3r.git ~/Downloads/Programs/Sublist3r
 cd Sublist3r && sudo -H pip3 install -r requirements.txt
 
 echo '#######################################################################'
 echo '#                              Photon                                 #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/s0md3v/Photon.git
+
+git clone https://github.com/s0md3v/Photon.git ~/Downloads/Programs/Photon
 cd Photon && sudo -H pip3 install -r requirements.txt
 
 echo '#######################################################################'
 echo '#                       The Harvester                                 #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/laramies/theHarvester.git
+
+git clone https://github.com/laramies/theHarvester.git ~/Downloads/Programs/theHarvester
 cd theHarvester
 git checkout 8b88a66
 sudo -H pip3 install -r requirements.txt
@@ -132,24 +132,24 @@ sudo -H pip3 install -r requirements.txt
 echo '#######################################################################'
 echo '#                           Metagoofil                                #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/opsdisk/metagoofil.git
+
+git clone https://github.com/opsdisk/metagoofil.git ~/Downloads/Programs/metagoofil
 cd metagoofil
 sudo -H pip3 install -r requirements.txt
 
 echo '#######################################################################'
 echo '#                              recon-ng                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/lanmaster53/recon-ng.git
+
+git clone https://github.com/lanmaster53/recon-ng.git ~/Downloads/Programs/recon-ng
 cd recon-ng
 sudo -H pip3 install -r REQUIREMENTS
 
 echo '#######################################################################'
 echo '#                              sherlock                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/sherlock-project/sherlock.git
+
+git clone https://github.com/sherlock-project/sherlock.git ~/Downloads/Programs/sherlock
 cd sherlock
 python3 -m pip install -r requirements.txt
 cd ~/Documents/scripts/
@@ -158,8 +158,8 @@ sed -i 's/Programs\/sherlock/Programs\/sherlock\/sherlock/g' sherlock.sh
 echo '#######################################################################'
 echo '#                            spiderfoot                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/smicallef/spiderfoot.git
+
+git clone https://github.com/smicallef/spiderfoot.git ~/Downloads/Programs/spiderfoot
 cd spiderfoot
 sudo -H pip3 install -r requirements.txt
 cd ~/Documents/scripts
@@ -173,8 +173,8 @@ echo "firefox http://127.0.0.1:5001" >> spiderfoot.sh
 echo '#######################################################################'
 echo '#                     Elasticsearch-Crawler                           #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git
+
+git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git ~/Downloads/Programs/Elasticsearch-Crawler
 cd Elasticsearch-Crawler
 sudo -H pip3 install nested-lookup
 sudo -H pip3 install internetarchive
@@ -189,32 +189,32 @@ sudo dpkg -i ripgrep_11.0.2_amd64.deb
 echo '#######################################################################'
 echo '#                                holehe                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/megadose/holehe.git
+
+git clone https://github.com/megadose/holehe.git ~/Downloads/Programs/holehe
 cd holehe
 sudo python3 setup.py install
 
 echo '#######################################################################'
 echo '#                              anonsurf                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/Und3rf10w/kali-anonsurf.git
+
+git clone https://github.com/Und3rf10w/kali-anonsurf.git ~/Downloads/Programs/kali-anonsurf
 cd kali-anonsurf/
 sudo ./installer.sh
 
 echo '#######################################################################'
 echo '#                        Moriarty-Project                             #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/AzizKpln/Moriarty-Project
+
+git clone https://github.com/AzizKpln/Moriarty-Project ~/Downloads/Programs/Moriarty-Project
 cd Moriarty-Project
 chmod 755 install.sh ./install.sh
 
 echo '#######################################################################'
 echo '#                               maigret                               #'
 echo '#######################################################################'
-cd ~/Downloads/Programs
-git clone https://github.com/soxoj/maigret
+
+git clone https://github.com/soxoj/maigret ~/Downloads/Programs/maigret
 cd maigret
 pip3 install .
 
@@ -246,12 +246,11 @@ echo '#######################################################################'
 echo '#                       General Purpose tools                         #'
 echo '#######################################################################'
 sudo add-apt-repository -y ppa:giuspen/ppa && sudo apt install -y cherrytree
-wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add - && sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list'
-sudo apt update && sudo apt install -y atom
+wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add - && sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list' && sudo apt update && sudo apt install -y atom
 sudo apt install -y keepassxc
 sudo apt install -y kazam
 sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
-cd ~/Documents && git clone https://github.com/pstirparo/threatintel-resources
+git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources

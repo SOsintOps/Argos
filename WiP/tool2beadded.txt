@@ -8,10 +8,18 @@
 #fix https://itsfoss.com/ubuntu-keyring/
 #a script to update the right distro (ubuntu, debian)  
 
+
+#echo '##########################################'
+#echo '#    Docs, template, frameworks, etc.    #'
+#echo '##########################################'
+#https://github.com/ivolo/disposable-email-domains
+#https://github.com/lockfale/osint-framework
+
+
 #echo '##########################################'
 #echo '#            NEW TOOLS                   #'
 #echo '##########################################'
-#https://github.com/ivolo/disposable-email-domains
+
 #https://github.com/jsvine/waybackpack
 #https://github.com/UnkL4b/GitMiner
 #https://github.com/jarun/googler
@@ -27,19 +35,34 @@
 #https://github.com/huginn/huginn
 
 
+#echo '#######################################################################'
+#echo '#                             userrecon                               #'
+#echo '#######################################################################'
+#https://github.com/stjordanis/userrecon-py
+#sudo -H pip3 install git+https://github.com/stjordanis/userrecon-py.git
+#userrecon-py --help
+
+
+
+#echo '##########################################'
+#echo '#              INSTAGRAM                 #'
+#echo '##########################################'
+
 #https://github.com/ScriptSmith/instamancer
 #https://github.com/bernsteining/instaloctrack
 #https://github.com/Datalux/Osintgram
 #https://github.com/kpcyrd/sn0int
 #https://github.com/hehpollon/Instagram-Crawler
 
+#echo '##########################################'
+#echo '#                 others                 #'
+#echo '##########################################'
+
 #sudo apt install -y macchanger
 #sudo apt install -y fonts-crosextra-caladea fonts-crosextra-carlito (those are extra font for writing docs)
 #sudo apt install calibre
 #sudo snap install pycharm-professional --classic --edge
 #sudo snap install telegram-desktop
-
-
 
 
 #echo '#######################################################################'
@@ -59,12 +82,6 @@
 #sudo apt install ./hunchly.deb
 #sudo apt --fix-broken install
 
-#echo '#######################################################################'
-#echo '#                             userrecon                               #'
-#echo '#######################################################################'
-#https://github.com/stjordanis/userrecon-py
-#sudo -H pip3 install git+https://github.com/stjordanis/userrecon-py.git
-#userrecon-py --help
 
 #echo '#######################################################################'
 #echo '#                               fawkes                                #'

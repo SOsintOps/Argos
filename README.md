@@ -79,7 +79,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```
 3) Clone this repository in the ```/Download/``` directory: 
     ```bash
-    cd ~/Downloads/ && git clone https://github.com/SOsintOps/Argos
+    git clone https://github.com/SOsintOps/Argos ~/Downloads/Argos
     ```
 
 4) make the setup script executable:
@@ -89,7 +89,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 5) Run the file:
     ```bash
-    ./Argos/setup.sh
+    ~/Downloads/Argos/setup.sh
     ```
 6) IF you want to download a few additional tools from [Michael Bazzell's website](https://inteltechniques.com/osintbook/) replace PASSWORD  with the current website's area password within the ```setup.sh``` script.
 

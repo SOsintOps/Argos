@@ -254,3 +254,4 @@ sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources
+sudo apt autoremove

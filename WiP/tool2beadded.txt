@@ -69,16 +69,6 @@
 #echo '##########################################'
 
 #https://github.com/ScriptSmith/instamancer
-#https://github.com/bernsteining/instaloctrack
-#https://github.com/kpcyrd/sn0int
-#https://github.com/hehpollon/Instagram-Crawler
-
-
-#echo '#######################################################################'
-#echo '#                             Osintgram                               #'
-#echo '#######################################################################'
-
-#https://github.com/Datalux/Osintgram
 
 #echo '##########################################'
 #echo '##########################################'

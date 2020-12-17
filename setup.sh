@@ -101,31 +101,30 @@ echo '#                          EyeWitness                                 #'
 echo '#######################################################################'
 
 git clone https://github.com/ChrisTruncer/EyeWitness.git ~/Downloads/Programs/EyeWitness
-cd EyeWitness/Python/setup
-sudo -H ./setup.sh
+sudo -H ~/Downloads/Programs/EyeWitness/setup.sh
 cd ~/Documents/scripts
 sed -i "s/Programs\/EyeWitness/Programs\/EyeWitness\/Python/g" eyewitness.sh
 
 echo '#######################################################################'
 echo '#                           sublist3r                                 #'
 echo '#######################################################################'
-cd 
+
 git clone https://github.com/aboul3la/Sublist3r.git ~/Downloads/Programs/Sublist3r
-cd Sublist3r && sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install -r ~/Downloads/Programs/Sublist3r/requirements.txt
 
 echo '#######################################################################'
 echo '#                              Photon                                 #'
 echo '#######################################################################'
 
 git clone https://github.com/s0md3v/Photon.git ~/Downloads/Programs/Photon
-cd Photon && sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install -r ~/Downloads/Programs/Photon/requirements.txt
 
 echo '#######################################################################'
 echo '#                       The Harvester                                 #'
 echo '#######################################################################'
 
 git clone https://github.com/laramies/theHarvester.git ~/Downloads/Programs/theHarvester
-cd theHarvester
+cd ~/Downloads/Programs/theHarvester
 git checkout 8b88a66
 sudo -H pip3 install -r requirements.txt
 
@@ -134,15 +133,14 @@ echo '#                           Metagoofil                                #'
 echo '#######################################################################'
 
 git clone https://github.com/opsdisk/metagoofil.git ~/Downloads/Programs/metagoofil
-cd metagoofil
-sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install -r ~/Downloads/Programs/metagoofil/requirements.txt
 
 echo '#######################################################################'
 echo '#                              recon-ng                               #'
 echo '#######################################################################'
 
 git clone https://github.com/lanmaster53/recon-ng.git ~/Downloads/Programs/recon-ng
-cd recon-ng
+cd ~/Downloads/Programs/recon-ng
 sudo -H pip3 install -r REQUIREMENTS
 
 echo '#######################################################################'
@@ -150,8 +148,7 @@ echo '#                              sherlock                               #'
 echo '#######################################################################'
 
 git clone https://github.com/sherlock-project/sherlock.git ~/Downloads/Programs/sherlock
-cd sherlock
-python3 -m pip install -r requirements.txt
+python3 -m pip install -r ~/Downloads/Programs/sherlock/requirements.txt
 cd ~/Documents/scripts/
 sed -i 's/Programs\/sherlock/Programs\/sherlock\/sherlock/g' sherlock.sh
 
@@ -160,8 +157,7 @@ echo '#                            spiderfoot                               #'
 echo '#######################################################################'
 
 git clone https://github.com/smicallef/spiderfoot.git ~/Downloads/Programs/spiderfoot
-cd spiderfoot
-sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install -r ~/Downloads/Programs/spiderfoot/requirements.txt
 cd ~/Documents/scripts
 sed -i '/^sudo/ d' spiderfoot.sh
 sed -i '/^firefox/ d' spiderfoot.sh
@@ -175,7 +171,7 @@ echo '#                     Elasticsearch-Crawler                           #'
 echo '#######################################################################'
 
 git clone https://github.com/AmIJesse/Elasticsearch-Crawler.git ~/Downloads/Programs/Elasticsearch-Crawler
-cd Elasticsearch-Crawler
+cd ~/Downloads/Programs/Elasticsearch-Crawler
 sudo -H pip3 install nested-lookup
 sudo -H pip3 install internetarchive
 
@@ -191,24 +187,21 @@ echo '#                                holehe                               #'
 echo '#######################################################################'
 
 git clone https://github.com/megadose/holehe.git ~/Downloads/Programs/holehe
-cd holehe
-sudo python3 setup.py install
+cd ~/Downloads/Programs/holehe && sudo python3 setup.py install
 
 echo '#######################################################################'
 echo '#                              anonsurf                               #'
 echo '#######################################################################'
 
 git clone https://github.com/Und3rf10w/kali-anonsurf.git ~/Downloads/Programs/kali-anonsurf
-cd kali-anonsurf/
-sudo ./installer.sh
+cd ~/Downloads/Programs/kali-anonsurf && sudo ./installer.sh
 
 echo '#######################################################################'
 echo '#                        Moriarty-Project                             #'
 echo '#######################################################################'
 
 git clone https://github.com/AzizKpln/Moriarty-Project ~/Downloads/Programs/Moriarty-Project
-cd Moriarty-Project
-chmod 755 install.sh ./install.sh
+cd ~/Downloads/Programs/Moriarty-Project && chmod 755 install.sh ./install.sh
 
 echo '#######################################################################'
 echo '#                               maigret                               #'
@@ -228,7 +221,7 @@ echo '#######################################################################'
 echo '#                               Maltego                               #'
 echo '#######################################################################'
 sudo wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
-sudo dpkg -i maltego.deb && sudo apt -f install && sudo rm maltego.deb
+sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 
 echo '#######################################################################'
 echo '#                       Customising scripts                           #'
@@ -253,4 +246,4 @@ sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y ubuntu-restricted-extras p7zip unrar
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources
-sudo apt autoremove
+sudo apt autoremove -y

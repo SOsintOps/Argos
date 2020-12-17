@@ -94,8 +94,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 6) IF you want to download a few additional tools from [Michael Bazzell's website](https://inteltechniques.com/osintbook/) replace PASSWORD  with the current website's area password within the ```setup.sh``` script.
 
 ## TO DO
-- Setup an OSInt custom Browser.
-- Edit .bash_profile
+- Set-up an OSInt custom Browser.
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
 - VMware tools installation.
 - set osint report templates as libreoffice's templates.

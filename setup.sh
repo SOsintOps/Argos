@@ -90,10 +90,9 @@ sudo snap install amass
 echo '#######################################################################'
 echo '#                             Twint                                   #'
 echo '#######################################################################'
-cd 
+
 git clone https://github.com/twintproject/twint.git ~/Downloads/Programs/twint
-cd twint
-sudo -H pip3 install ~/Downloads/Programs/twint/twint
+sudo -H pip3 install ~/Downloads/Programs/twint
 sudo -H pip3 install -r ~/Downloads/Programs/twint/requirements.txt
 
 echo '#######################################################################'
@@ -220,7 +219,7 @@ sudo dpkg -i google-earth64.deb && sudo apt -f install && sudo rm google-earth64
 echo '#######################################################################'
 echo '#                               Maltego                               #'
 echo '#######################################################################'
-sudo wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
+wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
 sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 
 echo '#######################################################################'

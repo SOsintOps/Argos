@@ -89,6 +89,7 @@
 #https://github.com/alpkeskin/mosint
 #https://dissenter.com/
 #https://github.com/huginn/huginn
+#sudo apt install whois
 
 
 

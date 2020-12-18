@@ -230,7 +230,7 @@ sed -i "s/python3\.6/python3/g" domains.sh
 sed -i "s/python\ sublist3r/python3\ sublist3r/g" domains.sh
 sed -i "s/pip\ install/pip3\ install/g" updates.sh
 sed -i "s/sudo\ pip3/sudo\ \-H\ pip3/g" updates.sh
-pip3 install --upgrade pip
+sudo pip3 install --upgrade pip
 cd ~/Downloads/Programs
 
 echo '#######################################################################'

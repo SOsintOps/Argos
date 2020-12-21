@@ -239,6 +239,7 @@ echo '#######################################################################'
 sudo add-apt-repository -y ppa:giuspen/ppa && sudo apt install -y cherrytree
 wget -qO - https://packagecloud.io/AtomEditor/atom/gpgkey | sudo apt-key add - && sudo sh -c 'echo "deb [arch=amd64] https://packagecloud.io/AtomEditor/atom/any/ any main" > /etc/apt/sources.list.d/atom.list' && sudo apt update && sudo apt install -y atom
 sudo apt install -y keepassxc
+sudo apt install -y torbrowser-launcher
 sudo apt install -y kazam
 sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre

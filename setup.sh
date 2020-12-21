@@ -245,6 +245,7 @@ sudo apt install -y audacity
 sudo apt install -y openjdk-11-jre
 sudo apt install -y ripgrep
 sudo apt install -y p7zip unrar
+sudo apt install -y openshot
 #sudo apt install -y ubuntu-restricted-extras
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources
 sudo apt autoremove -y

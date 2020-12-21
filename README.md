@@ -67,6 +67,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Audacity](https://www.audacityteam.org/)
 - [Ripgrep](https://github.com/BurntSushi/ripgrep)
 - [Tor Browser](https://www.torproject.org/)
+- [OpenShot](https://www.openshot.org/)
 - [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) *(just added!)* Please read those articles [1](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+ACH+part+1/22460/) and [2](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+WCry+and+Lazarus+ACH+part+2/22470/)
 - and more!
 

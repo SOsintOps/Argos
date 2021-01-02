@@ -101,7 +101,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - VMware tools installation.
 - set osint report templates as libreoffice's templates.
 - customise the user profile.
-- add Nmap/zenmap, electrum wallet, gpa giu for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
+- add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
 
 ## RESOURCES
 - [OSInOps website](https://osintops.com/en/)

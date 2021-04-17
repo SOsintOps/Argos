@@ -275,6 +275,15 @@ sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
+mkdir ~/mozillabackup
+mv ~/.mozilla/firefox/* ~/mozillabackup/
+cat ~/Downloads/Argos/argosfox/ArgosFox.tar.gz.part* > ~/Downloads/Argos/argosfox/ArgosFox.tar.gz
+tar xzvf ~/Downloads/Argos/argosfox/ArgosFox.tar.gz -C ~/.mozilla/firefox/
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
 
 echo '#######################################################################'
 echo '#                       Customising scripts                           #'

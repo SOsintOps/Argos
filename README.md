@@ -89,13 +89,12 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     sudo chmod +x ~/Downloads/Argos/setup.sh
     ```
 
-5) Run the file:
+5) Close FireFox and run the file:
     ```bash
     ~/Downloads/Argos/setup.sh
     ```
 
 ## TO DO
-- Set-up an OSInt custom Browser.
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
 - VMware tools installation.
 - set osint report templates as libreoffice's templates.

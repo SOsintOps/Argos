@@ -96,7 +96,6 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 ## TO DO
 - Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
-- VMware tools installation.
 - set osint report templates as libreoffice's templates.
 - customise the user profile.
 - add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.

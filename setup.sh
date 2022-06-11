@@ -317,4 +317,5 @@ git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threati
 sudo apt autoremove -y
 echo -e "$OKRED +----=[Si vis pacem, para bellum]=----+ $RESET"
 echo "    "
-
+read -rsp $'Press enter to reboot...\n'
+sudo reboot now

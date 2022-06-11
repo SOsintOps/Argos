@@ -260,7 +260,7 @@ echo "    "
 echo '#######################################################################'
 echo '#                               Maltego                               #'
 echo '#######################################################################'
-wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.2.14.13579.deb
+wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.3.0.deb
 sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "

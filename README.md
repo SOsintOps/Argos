@@ -32,7 +32,6 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 ### OSInt
 - [Amass](https://github.com/OWASP/Amass)
-- [twint](https://github.com/twintproject/twint)
 - [instaloader](https://instaloader.github.io/)
 - [InstaLooter](https://github.com/althonos/InstaLooter)
 - [HTTrack](https://www.httrack.com/)

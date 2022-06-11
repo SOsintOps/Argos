@@ -104,16 +104,6 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
-echo '#                             Twint                                   #'
-echo '#######################################################################'
-
-git clone https://github.com/twintproject/twint.git ~/Downloads/Programs/twint
-sudo -H pip3 install ~/Downloads/Programs/twint
-sudo -H pip3 install -r ~/Downloads/Programs/twint/requirements.txt
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-
-echo '#######################################################################'
 echo '#                          EyeWitness                                 #'
 echo '#######################################################################'
 

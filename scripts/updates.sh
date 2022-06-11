@@ -6,7 +6,6 @@ sudo apt-get upgrade
 sudo -H pip install --upgrade youtube-dl
 sudo pip install instalooter -U
 sudo pip3 install Instaloader -U
-sudo pip3 install Twint -U
 cd ~/Downloads/Programs/EyeWitness
 git pull https://github.com/ChrisTruncer/EyeWitness.git
 cd ~/Downloads/Programs/Sublist3r

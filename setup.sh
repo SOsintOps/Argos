@@ -233,7 +233,7 @@ echo '#                        Moriarty-Project                             #'
 echo '#######################################################################'
 
 git clone https://github.com/AzizKpln/Moriarty-Project ~/Downloads/Programs/Moriarty-Project
-cd ~/Downloads/Programs/Moriarty-Project && chmod 755 install.sh ./install.sh
+cd ~/Downloads/Programs/Moriarty-Project && chmod 755 install.sh && bash install.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

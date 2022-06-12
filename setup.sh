@@ -107,8 +107,8 @@ echo '#######################################################################'
 echo '#                          EyeWitness                                 #'
 echo '#######################################################################'
 
-git clone https://github.com/ChrisTruncer/EyeWitness.git ~/Downloads/Programs/EyeWitness
-sudo -H ~/Downloads/Programs/EyeWitness/setup.sh
+git clone https://github.com/FortyNorthSecurity/EyeWitness.git ~/Downloads/Programs/EyeWitness
+sudo -H ~/Downloads/Programs/EyeWitness/Python/setup/setup.sh
 cd ~/Documents/scripts
 sed -i "s/Programs\/EyeWitness/Programs\/EyeWitness\/Python/g" eyewitness.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"

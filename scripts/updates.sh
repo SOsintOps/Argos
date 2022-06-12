@@ -7,7 +7,7 @@ sudo -H pip install --upgrade youtube-dl
 sudo pip install instalooter -U
 sudo pip3 install Instaloader -U
 cd ~/Downloads/Programs/EyeWitness
-git pull https://github.com/ChrisTruncer/EyeWitness.git
+git pull https://github.com/FortyNorthSecurity/EyeWitness.git
 cd ~/Downloads/Programs/Sublist3r
 git pull https://github.com/aboul3la/Sublist3r.git
 cd ~/Downloads/Programs/Photon

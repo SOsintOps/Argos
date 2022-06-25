@@ -31,7 +31,7 @@ echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
 
 sudo apt -y update && sudo apt -y upgrade
-# sudo snap refresh
+sudo snap refresh
 
 # Optional Virtualbox tools
 # sudo add-apt-repository multiverse
@@ -89,6 +89,7 @@ sudo apt install -y webhttrack
 sudo apt install -y ffmpeg
 sudo apt install -y mediainfo-gui
 sudo apt install -y libimage-exiftool-perl
+sudo apt install -y subversion
 sudo -H pip3 install --upgrade youtube_dl
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
@@ -174,6 +175,15 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
+echo '#                              sherloq                                #'
+echo '#######################################################################'
+
+git clone https://github.com/GuidoBartoli/sherloq.git  ~/Downloads/Programs/sherloq
+sudo -H pip3 install -r ~/Downloads/Programs/sherloq/gui/requirements.txt -I
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
+echo '#######################################################################'
 echo '#                            spiderfoot                               #'
 echo '#######################################################################'
 
@@ -200,10 +210,10 @@ sudo -H pip3 install internetarchive
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-
 echo '#######################################################################'
 echo '#                               Ripgrep                               #'
 echo '#######################################################################'
+
 cd ~/Downloads/
 curl -LO https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 sudo dpkg -i ripgrep_11.0.2_amd64.deb
@@ -246,20 +256,20 @@ pip3 install ~/Downloads/Programs/maigret/.
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-
 echo '#######################################################################'
 echo '#                           Google Earth                              #'
 echo '#######################################################################'
-wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
 sudo wget -O google-earth64.deb http://dl.google.com/dl/earth/client/current/google-earth-stable_current_amd64.deb
 sudo dpkg -i google-earth64.deb && sudo apt -f install && sudo rm google-earth64.deb
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-
 echo '#######################################################################'
 echo '#                               Maltego                               #'
 echo '#######################################################################'
+
 wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/Maltego.v4.3.0.deb
 sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
@@ -268,6 +278,10 @@ echo "    "
 echo '#######################################################################'
 echo '#                          Customizing Firefox                        #'
 echo '#######################################################################'
+
+firefox &
+sleep 30
+pkill -f firefox
 mkdir ~/mozillabackup
 mv ~/.mozilla/firefox/* ~/mozillabackup/
 cat ~/Downloads/Argos/argosfox/ArgosFox.tar.gz.part* > ~/Downloads/Argos/argosfox/ArgosFox.tar.gz

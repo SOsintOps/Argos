@@ -98,6 +98,18 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
+echo '#                           Obsidian                                  #'
+echo '#######################################################################'
+cd ~/Downloads
+wget https://github.com/obsidianmd/obsidian-releases/releases/download/v0.14.6/obsidian_0.14.6_amd64.snap
+sudo snap install --dangerous obsidian_0.14.6_amd64.snap
+sudo rm obsidian_0.14.6_amd64.snap
+git clone https://github.com/WebBreacher/obsidian-osint-templates ~/Documents/obsidian-osint-templates #template osint di obsidian
+git clone https://github.com/theNerdInTheHighCastle/Obsidian ~/Documents/obsidian-criptovalute #template osint di obsidian
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
+echo '#######################################################################'
 echo '#                             Amass                                   #'
 echo '#######################################################################'
 sudo snap install amass

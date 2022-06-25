@@ -67,6 +67,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Ripgrep](https://github.com/BurntSushi/ripgrep)
 - [Tor Browser](https://www.torproject.org/)
 - [OpenShot](https://www.openshot.org/)
+- [Obisidian](https://obsidian.md/) Please refer to this article [1](https://webbreacher.com/2022/03/15/obsidian/)
 - [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) Please refer to those articles [1](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+ACH+part+1/22460/) and [2](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+WCry+and+Lazarus+ACH+part+2/22470/)
 - and more!
 

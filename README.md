@@ -22,7 +22,7 @@ To install and run Argos, you need:
 - set your user on "**osint**"
 - Please use English Language!
 
-This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools. 
+This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools.
 
 **N.B.**: This script has been tested on:
 - [Ubuntu Budgie](https://ubuntubudgie.org/) 20.10 VM.
@@ -78,7 +78,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```bash
     sudo apt install -y git
     ```
-3) Clone this repository in the ```/Download/``` directory: 
+3) Clone this repository in the ```/Download/``` directory:
     ```bash
     git clone https://github.com/SOsintOps/Argos ~/Downloads/Argos
     ```
@@ -94,7 +94,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```
 
 ## TO DO
-- Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI. 
+- Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI.
 - set osint report templates as libreoffice's templates.
 - customise the user profile.
 - add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
@@ -104,8 +104,8 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [OSInt Daily News](https://t.me/Osintlatestnews)
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
 
-## CREDITS 
-- [Skykn0t](https://github.com/Skykn0t) for writing the [OSINT_VM_Setup script](https://github.com/Skykn0t/OSINT_VM_Setup).
+## CREDITS
+- Skykn0t for writing the original OSINT_VM_Setup script
 - [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
 - [pinkevilpimp](https://github.com/pinkevilpimp) for the wallpaper script
 

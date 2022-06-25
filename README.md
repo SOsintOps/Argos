@@ -52,7 +52,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Moriarty-Project V2.6](https://github.com/AzizKpln/Moriarty-Project)
 - [maigret](https://github.com/soxoj/maigret)
 - [Maltego](https://www.maltego.com/)
-
+- [Sherloq](https://github.com/GuidoBartoli/sherloq.git)
 - and more!
 
 ### General Purpose tools

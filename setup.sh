@@ -187,15 +187,6 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
-echo '#                              sherloq                                #'
-echo '#######################################################################'
-
-git clone https://github.com/GuidoBartoli/sherloq.git  ~/Downloads/Programs/sherloq
-sudo -H pip3 install -r ~/Downloads/Programs/sherloq/gui/requirements.txt -I
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-
-echo '#######################################################################'
 echo '#                            spiderfoot                               #'
 echo '#######################################################################'
 

@@ -203,6 +203,26 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
+echo '#                             W3b0s1nt                                #'
+echo '#######################################################################'
+
+git clone https://github.com/C3n7ral051nt4g3ncy/webosint.git ~/Downloads/Programs/webosint
+cd ~/Downloads/Programs/webosint
+sudo -H pip3 install -r requirements.txt
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
+echo '#######################################################################'
+echo '#                             blackbird                               #'
+echo '#######################################################################'
+
+git clone https://github.com/p1ngul1n0/blackbird.git ~/Downloads/Programs/blackbird
+cd ~/Downloads/Programs/blackbird
+sudo -H pip3 install -r requirements.txt
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
+echo '#######################################################################'
 echo '#                     Elasticsearch-Crawler                           #'
 echo '#######################################################################'
 

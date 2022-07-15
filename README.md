@@ -45,6 +45,8 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [recon-ng](https://github.com/lanmaster53/recon-ng)
 - [sherlock](https://github.com/sherlock-project/sherlock)
 - [spiderfoot](https://github.com/smicallef/spiderfoot)
+- [webosint](https://github.com/C3n7ral051nt4g3ncy/webosint)
+- [blackbird](https://github.com/p1ngul1n0/blackbird)
 - [Elasticsearch-Crawler](https://github.com/AmIJesse/Elasticsearch-Crawler)
 - [Ripgrep](https://github.com/BurntSushi/ripgrep)
 - [holehe](https://github.com/megadose/holehe)

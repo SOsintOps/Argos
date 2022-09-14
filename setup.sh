@@ -7,25 +7,6 @@ OKGREEN='\033[92m'
 OKORANGE='\033[93m'
 RESET='\e[0m'
 
-echo -e "$OKBLUE          _                   _           _              _            _        "
-echo -e "$OKBLUE         / /\                /\ \        /\ \           /\ \         / /\      "
-echo -e "$OKBLUE        / /  \              /  \ \      /  \ \         /  \ \       / /  \     "
-echo -e "$OKBLUE       / / /\ \            / /\ \ \    / /\ \_\       / /\ \ \     / / /\ \__  "
-echo -e "$OKBLUE      / / /\ \ \          / / /\ \_\  / / /\/_/      / / /\ \ \   / / /\ \___\ "
-echo -e "$OKBLUE    / / /  \ \ \        / / /_/ / / / / / ______   / / /  \ \_\  \ \ \ \/___/ "
-echo -e "$OKBLUE    / / /___/ /\ \      / / /__\/ / / / / /\_____\ / / /   / / /   \ \ \       "
-echo -e "$OKBLUE   / / /_____/ /\ \    / / /_____/ / / /  \/____ // / /   / / /_    \ \ \      "
-echo -e "$OKBLUE  / /_________/\ \ \  / / /\ \ \  / / /_____/ / // / /___/ / //_/\__/ / /      "
-echo -e "$OKBLUE / / /_       __\ \_\/ / /  \ \ \/ / /______\/ // / /____\/ / \ \/___/ /       "
-echo -e "$OKBLUE \_\___\     /____/_/\/_/    \_\/\/___________/ \/_________/   \_____\/        "
-echo "    "
-echo -e "$RESET"
-echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
-
-
-
-
-
 echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
@@ -42,18 +23,6 @@ echo "    "
 echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
-
-#######################################################################
-#If you want to download those Bazzell goodies - Please change PASSWORD with the current one!
-#this is the actual procedure by M. Bazzell
-#cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
-
-#those are M. Bazzell Workflows
-#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
-
-#those are M. Bazzell HTML TOOLS
-#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
-#######################################################################
 
 mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
 sudo chmod +x ~/Documents/scripts/*.sh

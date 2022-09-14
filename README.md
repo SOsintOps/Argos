@@ -17,9 +17,10 @@ This script will setup the workstation by installing mostly of the scripts sugge
 
 
 ## REQUIREMENTS
-To install and run Argos, you need:
+To install and run OI-VM, you need:
 - an Ubuntu* 20.4 virtual machine/workstation
 - set your user on "**osint**"
+- set your password on "**osint**"
 - Please use English Language!
 
 This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools.
@@ -82,12 +83,12 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
     ```
 3) Clone this repository in the ```/Download/``` directory:
     ```bash
-    git clone https://github.com/SOsintOps/Argos ~/Downloads/Argos
+    git clone https://github.com/osintitalia/OI-vm ~/Downloads/OI-vm
     ```
 
 4) make the setup script executable:
     ```bash
-    sudo chmod +x ~/Downloads/Argos/setup.sh
+    sudo chmod +x ~/Downloads/OI-vm/setup.sh
     ```
 
 5) Close FireFox and run the file:

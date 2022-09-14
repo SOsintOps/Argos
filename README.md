@@ -103,7 +103,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
 
 ## RESOURCES
-- [Osintitalia website](https://osintitalia.it/)
+- [OsintItalia website](https://osintitalia.it/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
 - [Open Source Intelligence Techniques - 9th Edition (2022) - Michael Bazzell](https://inteltechniques.com/book1.html)
 

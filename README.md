@@ -1,5 +1,5 @@
 # Osint Virtual Machine
-<img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
+
 
 This script will automatically set up an open source intelligence (OSINT) workstation starting from a clean Ubuntu* 20.4 Virtual Machine/Workstation.\
 Best practices recommend using a new VM for each OSInt investigation.\
@@ -7,13 +7,13 @@ There are several ready-made VMs available on the Internet. I wanted to study ho
 This script will setup the workstation by installing mostly of the scripts suggested by Michael and more and more other tools will be added in the future.
 
 ## INDEX
-- [REQUIREMENTS](https://github.com/SOsintOps/Argos/blob/master/README.md#REQUIREMENTS)
-- [TOOLS](https://github.com/SOsintOps/Argos/blob/master/README.md#TOOLS)
-- [INSTALLING & RUNNING](https://github.com/SOsintOps/Argos#installing--running)
-- [TO DO](https://github.com/SOsintOps/Argos#to-do)
-- [RESOURCES](https://github.com/SOsintOps/Argos/blob/master/README.md#resources)
-- [CREDITS](https://github.com/SOsintOps/Argos#credits)
-- [LICENSES](https://github.com/SOsintOps/Argos#licenses)
+- [REQUIREMENTS](https://github.com/osintitalia/OI-vm/blob/master/README.md#REQUIREMENTS)
+- [TOOLS](https://github.com/osintitalia/OI-vm/blob/master/README.md#TOOLS)
+- [INSTALLING & RUNNING](https://github.com/osintitalia/OI-vm#installing--running)
+- [TO DO](https://github.com/osintitalia/OI-vm#to-do)
+- [RESOURCES](https://github.com/osintitalia/OI-vm/master/README.md#resources)
+- [CREDITS](https://github.com/osintitalia/OI-vm#credits)
+- [LICENSES](https://github.com/osintitalia/OI-vm#licenses)
 
 
 ## REQUIREMENTS

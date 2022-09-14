@@ -1,4 +1,4 @@
-# ARGOS
+# Osint Virtual Machine
 <img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
 
 This script will automatically set up an open source intelligence (OSINT) workstation starting from a clean Ubuntu* 20.4 Virtual Machine/Workstation.\
@@ -92,7 +92,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 5) Close FireFox and run the file:
     ```bash
-    ~/Downloads/Argos/setup.sh
+    ~/Downloads/OI-vm/setup.sh
     ```
 
 ## TO DO
@@ -102,14 +102,13 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
 
 ## RESOURCES
-- [OSInOps website](https://osintops.com/en/)
+- [Osintitalia website](https://osintitalia.it/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
-- [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
+- [Open Source Intelligence Techniques - 9th Edition (2022) - Michael Bazzell](https://inteltechniques.com/book1.html)
 
 ## CREDITS
-- Skykn0t for writing the original OSINT_VM_Setup script
-- [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
-- [pinkevilpimp](https://github.com/pinkevilpimp) for the wallpaper script
+- [SOsintOps](https://github.com/SOsintOps) for writing the original OSINT_VM_Setup script
+
 
 ## LICENSES
 Please refer to the license files.

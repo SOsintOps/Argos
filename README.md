@@ -108,7 +108,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Open Source Intelligence Techniques - 9th Edition (2022) - Michael Bazzell](https://inteltechniques.com/book1.html)
 
 ## CREDITS
-- [SOsintOps](https://github.com/SOsintOps) for writing the original OSINT_VM_Setup script
+- [SOsintOps](https://github.com/SOsintOps) for writing the original Argos script
 
 
 ## LICENSES

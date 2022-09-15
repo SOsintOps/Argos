@@ -305,9 +305,9 @@ echo '#######################################################################'
 firefox &
 sleep 30
 pkill -f firefox
-mkdir ~/mozillabackup
-mv ~/snap/firefox/common/.mozilla/firefox/*.default/* ~/mozillabackup/
-unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip -C ~/snap/firefox/common/.mozilla/firefox/*.default
+unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip -C
+cd ~/Downloads/Argos/argosfox/argos-ff-template/
+cp -R * ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

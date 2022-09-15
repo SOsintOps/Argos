@@ -24,21 +24,21 @@ echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
 
-mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
+mkdir ~/Documents/scripts && cp ~/Downloads/OI-vm/scripts/* ~/Documents/scripts
 sudo chmod +x ~/Documents/scripts/*.sh
 
-mkdir ~/Pictures/icons && cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
+mkdir ~/Pictures/icons && cp ~/Downloads/OI-vm/multimedia/icons/* ~/Pictures/icons
 
-sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
+sudo cp ~/Downloads/OI-vm/shortcuts/* /usr/share/applications/
 
 # this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
-cp -r ~/Downloads/Argos/templates/* ~/Templates
+cp -r ~/Downloads/OI-vm/templates/* ~/Templates
 
 # moving update_osint_tools.sh in the programs directory
-mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
+mkdir -p ~/Downloads/Programs && cp ~/Downloads/OI-vm/update_osint_tools.sh ~/Downloads/Programs/
 
 # setting the 'quiet priest' background image
-cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
+cp ~/Downloads/OI-vm/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

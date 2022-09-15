@@ -308,7 +308,7 @@ pkill -f firefox
 mkdir ~/mozillabackup
 mv ~/.mozilla/firefox/* ~/mozillabackup/
 cat ~/Downloads/Argos/argosfox/ArgosFox.tar.gz.part* > ~/Downloads/Argos/argosfox/ArgosFox.tar.gz
-tar xzvf ~/Downloads/Argos/argosfox/ArgosFox.tar.gz -C ~/.mozilla/firefox/
+tar xzvf ~/Downloads/Argos/argosfox/ArgosFox.tar.gz -C ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

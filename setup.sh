@@ -303,11 +303,11 @@ echo '#                          Customizing Firefox                        #'
 echo '#######################################################################'
 
 firefox &
-sleep 30
+sleep 15
 pkill -f firefox
-unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip -C
-cd ~/Downloads/Argos/argosfox/argos-ff-template/
-cp -R * ~/snap/firefox/common/.mozilla/firefox/*.default
+cd ~/Downloads/Argos/argosfox/
+unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

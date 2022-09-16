@@ -18,7 +18,7 @@ This script will setup the workstation by installing mostly of the scripts sugge
 
 ## REQUIREMENTS
 To install and run Argos, you need:
-- an Ubuntu* 20.4 virtual machine/workstation
+- an Ubuntu* 22.04 LTS virtual machine/workstation
 - set your user on "**osint**"
 - Please use English Language!
 

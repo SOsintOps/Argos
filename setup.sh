@@ -64,9 +64,6 @@ sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
 # this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
 cp -r ~/Downloads/Argos/templates/* ~/Templates
 
-# moving update_osint_tools.sh in the programs directory
-mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-
 # setting the 'quiet priest' background image
 cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"

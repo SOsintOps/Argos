@@ -103,8 +103,8 @@ echo '#######################################################################'
 echo '#                          Customizing Firefox                        #'
 echo '#######################################################################'
 
-firefox &
-sleep 30
+# firefox &
+# sleep 30
 pkill -f firefox
 # rm -rfv ~/snap/firefox/common/.mozilla/firefox/*.default
 cd ~/Downloads/Argos/argosfox/

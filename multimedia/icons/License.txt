@@ -1,4 +1,17 @@
-This Icon pack has been originaly released by Michael Bazzell in the https://inteltechniques.com/book1.html.
+This Icon pack has been originaly coolected by SOsintOps ( https://github.com/SOsintOps)
+
+icon attribution:
+domains.png: <a href="https://www.flaticon.com/free-icons/geography" title="geography icons">Geography icons created by juicy_fish - Flaticon</a>
+eyewitness.png: <a href="https://www.flaticon.com/free-icons/eye" title="eye icons">Eye icons created by juicy_fish - Flaticon</a>
+ffmpeg.png: <a href="https://www.flaticon.com/free-icons/play-button" title="play button icons">Play button icons created by juicy_fish - Flaticon</a>
+httrack.png: <a href="https://www.flaticon.com/free-icons/box" title="box icons">Box icons created by juicy_fish - Flaticon</a>
+instagram.png: <a href="https://www.flaticon.com/free-icons/instagram" title="instagram icons">Instagram icons created by juicy_fish - Flaticon</a>
+metagoofil.png: <a href="https://www.flaticon.com/free-icons/direct-download" title="direct download icons">Direct download icons created by juicy_fish - Flaticon</a>
+recon-ng.png: <a href="https://www.flaticon.com/free-icons/letter-r" title="letter r icons">Letter r icons created by juicy_fish - Flaticon</a>
+sherlock.png: <a href="https://www.flaticon.com/free-icons/novel" title="novel icons">Novel icons created by juicy_fish - Flaticon</a>
+twitter.png: <a href="https://www.flaticon.com/free-icons/twitter" title="twitter icons">Twitter icons created by juicy_fish - Flaticon</a>
+youtube.png: <a href="https://www.flaticon.com/free-icons/youtube" title="youtube icons">Youtube icons created by Freepik - Flaticon</a>
+spiderfoot.png: <a href="https://www.flaticon.com/free-icons/spider-web" title="spider web icons">Spider web icons created by Freepik - Flaticon</a>
 
 These tools are released to you for free under a Creative Commons Attribution-NonCommercial-ShareAlike license. Full details can be found at https://creativecommons.org/licenses/by-nc-sa/4.0/. You are free to share and modify the content any way you desire, as long as you respect the following conditions. 
 

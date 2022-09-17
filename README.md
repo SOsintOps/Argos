@@ -27,6 +27,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 **N.B.**: This script has been tested on:
 - [Ubuntu Budgie](https://ubuntubudgie.org/) 22.04 LTS VM.
 - [Ubuntu](https://ubuntu.com/download) 22.04 LTS VM.
+- [Ubuntu](https://ubuntu.com/download) 20.04 LTS VM (Firefox will not be customised).
 
 ## TOOLS
 

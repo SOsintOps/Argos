@@ -35,6 +35,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [Amass](https://github.com/OWASP/Amass)
 - [instaloader](https://instaloader.github.io/)
 - [InstaLooter](https://github.com/althonos/InstaLooter)
+- [Toutatis](https://github.com/megadose/toutatis)
 - [HTTrack](https://www.httrack.com/)
 - [MediaInfo](https://mediaarea.net/en/MediaInfo/Download/Ubuntu)
 - [ExifTool](https://github.com/pandastream/libimage-exiftool-perl-9.27)

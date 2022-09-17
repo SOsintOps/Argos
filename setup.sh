@@ -23,9 +23,6 @@ echo -e "$RESET"
 echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 
 
-
-
-
 echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
 echo '#######################################################################'
@@ -39,6 +36,8 @@ sudo snap refresh
 # sudo adduser osint vboxsf
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
+
+
 echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
@@ -65,26 +64,12 @@ sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
 # this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
 cp -r ~/Downloads/Argos/templates/* ~/Templates
 
-# moving update_osint_tools.sh in the programs directory
-mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Downloads/Programs/
-
 # setting the 'quiet priest' background image
 cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
 
-firefox &
-sleep 15
-pkill -f firefox
-cd ~/Downloads/Argos/argosfox/
-unzip argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
 
 echo '#######################################################################'
 echo '#      Requirements for installing tools, scripts and launchers       #'
@@ -106,9 +91,26 @@ sudo apt install -y subversion
 sudo -H pip3 install --upgrade youtube_dl
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
+sudo -H pip3 install toutatis
 sudo python3 -m pip install pipenv
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
+
+
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
+
+# firefox &
+# sleep 30
+pkill -f firefox
+# rm -rfv ~/snap/firefox/common/.mozilla/firefox/*.default
+cd ~/Downloads/Argos/argosfox/
+unzip argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
 echo '#######################################################################'
 echo '#                           Obsidian                                  #'
 echo '#######################################################################'

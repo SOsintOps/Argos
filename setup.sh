@@ -96,7 +96,18 @@ sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
 
+firefox &
+sleep 15
+pkill -f firefox
+cd ~/Downloads/Argos/argosfox/
+unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
 echo '#######################################################################'
 echo '#                           Obsidian                                  #'
 echo '#######################################################################'
@@ -297,20 +308,6 @@ wget -O maltego.deb https://maltego-downloads.s3.us-east-2.amazonaws.com/linux/M
 sudo dpkg -i maltego.deb && sudo apt -f install && rm maltego.deb
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
-
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
-
-firefox &
-sleep 15
-pkill -f firefox
-cd ~/Downloads/Argos/argosfox/
-unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-
 echo '#######################################################################'
 echo '#                       Customising scripts                           #'
 echo '#######################################################################'

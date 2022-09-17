@@ -72,21 +72,6 @@ cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/b
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
-
-firefox &
-sleep 30
-pkill -f firefox
-# rm -rfv ~/snap/firefox/common/.mozilla/firefox/*.default
-cd ~/Downloads/Argos/argosfox/
-unzip argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-
-
 
 
 echo '#######################################################################'
@@ -112,6 +97,22 @@ sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
+
+
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
+
+firefox &
+sleep 30
+pkill -f firefox
+# rm -rfv ~/snap/firefox/common/.mozilla/firefox/*.default
+cd ~/Downloads/Argos/argosfox/
+unzip argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
 echo '#######################################################################'
 echo '#                           Obsidian                                  #'
 echo '#######################################################################'

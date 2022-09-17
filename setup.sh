@@ -24,7 +24,18 @@ echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 
 
 
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
 
+firefox &
+sleep 30
+pkill -f firefox
+cd ~/Downloads/Argos/argosfox/
+unzip argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
 
 echo '#######################################################################'
 echo '#                         Let me update your OS                       #'
@@ -40,19 +51,6 @@ sudo snap refresh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
-
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
-
-firefox &
-sleep 30
-pkill -f firefox
-cd ~/Downloads/Argos/argosfox/
-unzip argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
 
 echo '#######################################################################'
 echo '#                            A few scripts                           #'

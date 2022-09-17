@@ -91,6 +91,7 @@ sudo apt install -y subversion
 sudo -H pip3 install --upgrade youtube_dl
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
+sudo -H pip3 install toutatis
 sudo python3 -m pip install pipenv
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "

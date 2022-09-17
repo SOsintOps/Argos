@@ -78,7 +78,7 @@ echo '#                          Customizing Firefox                        #'
 echo '#######################################################################'
 
 firefox &
-sleep 15
+sleep 30
 pkill -f firefox
 cd ~/Downloads/Argos/argosfox/
 unzip argos-ff-template.zip

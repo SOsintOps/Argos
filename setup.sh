@@ -165,8 +165,7 @@ echo '#######################################################################'
 
 git clone https://github.com/laramies/theHarvester.git ~/Downloads/Programs/theHarvester
 cd ~/Downloads/Programs/theHarvester
-git checkout 8b88a66
-sudo -H pip3 install -r requirements.txt
+sudo -H pip3 install -r requirements/base.txt
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

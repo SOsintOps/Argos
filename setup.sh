@@ -39,6 +39,21 @@ sudo snap refresh
 # sudo adduser osint vboxsf
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
+
+
+echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
+
+firefox &
+sleep 30
+pkill -f firefox
+cd ~/Downloads/Argos/argosfox/
+unzip argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
 echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
@@ -70,19 +85,6 @@ mkdir -p ~/Downloads/Programs && cp ~/Downloads/Argos/update_osint_tools.sh ~/Do
 
 # setting the 'quiet priest' background image
 cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
-
-firefox &
-sleep 30
-pkill -f firefox
-cd ~/Downloads/Argos/argosfox/
-unzip argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

@@ -1,6 +1,7 @@
 [Desktop Entry]
-Name=Instagram     
-Comment=Launch Instalooter
+Version=1.0
+Name=Instagram OSInt
+Comment=Launch Instagram OSInt tools
 Exec="/home/osint/Documents/scripts/instagram.sh"
 Type=Application
 Categories=Application;OSINT

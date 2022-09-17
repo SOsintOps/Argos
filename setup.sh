@@ -74,6 +74,19 @@ echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 
 echo '#######################################################################'
+echo '#                          Customizing Firefox                        #'
+echo '#######################################################################'
+
+firefox &
+sleep 15
+pkill -f firefox
+cd ~/Downloads/Argos/argosfox/
+unzip argos-ff-template.zip
+cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
+echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
+echo "    "
+
+echo '#######################################################################'
 echo '#      Requirements for installing tools, scripts and launchers       #'
 echo '#######################################################################'
 sudo apt install -y vlc
@@ -94,18 +107,6 @@ sudo -H pip3 install --upgrade youtube_dl
 sudo -H pip3 install Instalooter
 sudo -H pip3 install Instaloader
 sudo python3 -m pip install pipenv
-echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
-echo "    "
-echo '#######################################################################'
-echo '#                          Customizing Firefox                        #'
-echo '#######################################################################'
-
-firefox &
-sleep 15
-pkill -f firefox
-cd ~/Downloads/Argos/argosfox/
-unzip ~/Downloads/Argos/argosfox/argos-ff-template.zip
-cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 echo '#######################################################################'

@@ -106,7 +106,8 @@ echo '#######################################################################'
 pkill -f firefox
 # rm -rfv ~/snap/firefox/common/.mozilla/firefox/*.default
 cd ~/Downloads/Argos/argosfox/
-unzip argos-ff-template.zip
+zip -F argos-ff-template.zip --out argos-ff-template2.zip
+unzip argos-ff-template2.zip
 cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* ~/snap/firefox/common/.mozilla/firefox/*.default
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "

@@ -8,7 +8,7 @@ opt3="Toutatis"
 
 timestamp=$(date +%Y-%m-%d:%H:%M)
 
-socialmenu=$(zenity  --list  --title "Instagram:Choose Tool" --text "What do you want to do?" --width=400 --height=200 --radiolist  --column "Choose" --column "Option" TRUE "$opt1" FALSE "$opt2"  2> >(grep -v 'GtkDialog' >&2))
+socialmenu=$(zenity  --list  --title "Instagram:Choose Tool" --text "What do you want to do?" --width=400 --height=200 --radiolist  --column "Choose" --column "Option" TRUE "$opt1" FALSE "$opt2" FALSE "$opt3" 2> >(grep -v 'GtkDialog' >&2))
 
 case $socialmenu in
 
@@ -32,19 +32,22 @@ case $socialmenu in
 	  fi
 
 	;;
+	
 	$opt2) #Instaloader
 	mkdir ~/Documents/instaloader
 	cd ~/Documents/instaloader
 	handle=$(zenity --entry --title "Instaloader" --text "Enter Instagram User ID" 2> >(grep -v 'GtkDialog' >&2))
 	instaloader $handle
 	nautilus /home/osint/Documents/instaloader/$handle/ >/dev/null 2>&1
-
-	$opt3)
-  handle=$(zenity --entry --title "Toutatis" --text "Enter TARGET Instagram User ID")
-    session=$(zenity --entry --title "Session" --text "Enter YOUR Session ID")
-    toutatis -u $handle -s $session
-    read -rsp $'Press enter to continue...\n'
-    exit;;
+	;;
+	
+	$opt3) #Toutatis
+  	handle=$(zenity --entry --title "Toutatis" --text "Enter TARGET Instagram User ID")
+    	session=$(zenity --entry --title "Session" --text "Enter YOUR Session ID")
+    	toutatis -u $handle -s $session
+    	read -rsp $'Press enter to continue...\n'
+    	exit
+	;;
 
 
 esac

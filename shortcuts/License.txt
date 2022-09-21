@@ -1,4 +1,4 @@
-These tools were originaly released by Michael Bazzell in the https://inteltechniques.com/book1.html.
+These tools were originaly released by Michael Bazzell in the Open Source Intelligence Techniques - 7th Edition https://inteltechniques.com/book1.html.
 
 changes made to those tools are in the changes.txt
 

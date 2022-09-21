@@ -105,6 +105,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 
 ## RESOURCES
 - [OSInOps website](https://osintops.com/en/)
+- [Presentazione Argos - lingua italiana](https://osintops.com/progetto-argos/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
 - [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
 

@@ -42,18 +42,6 @@ echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
 
-#######################################################################
-#If you want to download those Bazzell goodies - Please change PASSWORD with the current one!
-#this is the actual procedure by M. Bazzell
-#cd ~/Documents/ && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/linux.20.txt
-
-#those are M. Bazzell Workflows
-#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/workflow.zip && unzip workflow.zip -d ~/Documents/
-
-#those are M. Bazzell HTML TOOLS
-#cd ~/Downloads  && curl -u osint:PASSWORD -O https://inteltechniques.com/osintbooksecure/tools.zip && unzip tools.zip -d ~/Documents/
-#######################################################################
-
 mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
 sudo chmod +x ~/Documents/scripts/*.sh
 

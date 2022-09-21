@@ -3,7 +3,7 @@
 
 This script will automatically set up an open source intelligence (OSINT) workstation starting from a clean Ubuntu* 22.04 LTS Virtual Machine/Workstation.\
 Best practices recommend using a new VM for each OSInt investigation.\
-There are several ready-made VMs available on the Internet. I wanted to study how to customise my own workstation following what Michael Bazzell suggest in his own book, [Open Source Intelligence Techniques - 9th Edition (2022)](https://inteltechniques.com/book1.html), about creating your own custom VM.\
+There are several ready-made VMs available on the Internet. I wanted to study how to customise my own workstation following what Michael Bazzell suggest in his own book, Open Source Intelligence Techniques - 7th Edition](https://inteltechniques.com/book1.html), about creating your own custom VM.\
 This script will setup the workstation by installing mostly of the scripts suggested by Michael and more and more other tools will be added in the future.
 
 ## INDEX

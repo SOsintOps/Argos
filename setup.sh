@@ -53,7 +53,7 @@ sudo cp ~/Downloads/Argos/shortcuts/*.desktop /usr/share/applications/
 cp -r ~/Downloads/Argos/templates/* ~/Templates
 
 # setting the 'quiet priest' background image
-cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Downloads/Argos/multimedia/wallpapers/background.sh
+cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && sudo chmod +x ~/Downloads/Argos/multimedia/wallpapers/background.sh && ~/Downloads/Argos/multimedia/wallpapers/background.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

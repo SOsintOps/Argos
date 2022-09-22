@@ -42,18 +42,18 @@ echo '#######################################################################'
 echo '#                            A few scripts                           #'
 echo '#######################################################################'
 
-mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/* ~/Documents/scripts
+mkdir ~/Documents/scripts && cp ~/Downloads/Argos/scripts/*.sh ~/Documents/scripts
 sudo chmod +x ~/Documents/scripts/*.sh
 
 mkdir ~/Pictures/icons && cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
 
-sudo cp ~/Downloads/Argos/shortcuts/* /usr/share/applications/
+sudo cp ~/Downloads/Argos/shortcuts/*.desktop /usr/share/applications/
 
 # this command will copy all the OSINT templates to the Templates Directory. I may need to delete o move to another directory all the Templates directory's default templates
 cp -r ~/Downloads/Argos/templates/* ~/Templates
 
 # setting the 'quiet priest' background image
-cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Documents/scripts/background.sh
+cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures && ~/Downloads/Argos/multimedia/wallpapers/background.sh
 echo -e "$OKGREEN +----=[DOOONE!!!]=----+ $RESET"
 echo "    "
 

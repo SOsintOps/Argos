@@ -107,7 +107,7 @@ This script implies that you rely on VmWare for virtualization. Just in case, I 
 - [OSInOps website](https://osintops.com/en/)
 - [Presentazione Argos - lingua italiana](https://osintops.com/progetto-argos/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
-- [Open Source Intelligence Techniques - 7th Edition (2019) - Michael Bazzell](https://inteltechniques.com/book1.html)
+- [Open Source Intelligence Techniques - Michael Bazzell](https://inteltechniques.com/book1.html)
 
 ## CREDITS
 - Skykn0t for writing the original OSINT_VM_Setup script

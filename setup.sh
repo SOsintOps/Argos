@@ -328,6 +328,7 @@ sudo apt install -y openshot
 sudo apt install -y open-vm-tools
 #sudo apt install -y ubuntu-restricted-extras
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources
+git clone https://github.com/mxm0z/awesome-intelligence-writing ~/Documents/awesome-intelligence-writing
 sudo apt autoremove -y
 echo -e "$OKRED +----=[Si vis pacem, para bellum]=----+ $RESET"
 echo "    "

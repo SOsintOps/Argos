@@ -1,2 +1,5 @@
 2020.12.12
 the icon path has been changed from /documents/ to /Pictures/
+
+2022.09.22
+sherlock.desktop renamed to usernames.desktop

@@ -170,6 +170,17 @@ FIREFOX_SNAP_DIR="$HOME/snap/firefox/common/.mozilla/firefox"
 FIREFOX_DEB_DIR="$HOME/.mozilla/firefox"
 FF_PROFILE=""
 
+# Se Firefox non e' mai stato aperto, avviarlo una volta per creare il profilo
+if [ ! -d "$FIREFOX_SNAP_DIR" ] && [ ! -d "$FIREFOX_DEB_DIR" ]; then
+    log_warn "Profilo Firefox non trovato. Avvio Firefox per inizializzarlo..."
+    firefox &>/dev/null &
+    FF_INIT_PID=$!
+    sleep 15
+    kill "$FF_INIT_PID" 2>/dev/null || true
+    pkill -f firefox 2>/dev/null || true
+    sleep 3
+fi
+
 if [ -d "$FIREFOX_SNAP_DIR" ]; then
     FF_PROFILE=$(find "$FIREFOX_SNAP_DIR" -maxdepth 1 -name "*.default*" -type d 2>/dev/null | head -1)
 elif [ -d "$FIREFOX_DEB_DIR" ]; then

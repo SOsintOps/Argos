@@ -6,6 +6,42 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.0.1-beta] — 2026-04-01
+
+Patch release focused on robustness, portability, and Wayland compatibility.
+No new tools added. All changes are backwards-compatible.
+
+### Fixed
+
+#### setup.sh
+- Firefox profile customisation failed silently on a clean VM where Firefox had never been opened. `setup.sh` now launches Firefox automatically, waits 15 seconds for the default profile to be written, then closes it before applying the Argos template.
+- `.desktop` shortcut files contained hardcoded `/home/osint/` paths. `setup.sh` now replaces them with the real `$HOME` at install time using `sed`. Any Linux username now works.
+
+#### scripts/domains.sh
+- theHarvester writes progress to stderr. The output was silently dropped before reaching the zenity progress bar. Added `2>&1` before the pipe.
+
+#### scripts/usernames.sh
+- `sherlock` and `maigret` were called without explicit paths. Changed to `$HOME/.local/bin/sherlock` and `$HOME/.local/bin/maigret` to ensure they are found in all launch contexts, including `Terminal=true` sessions where `.bashrc` may not be fully loaded.
+
+#### scripts/youtubedl.sh
+- `yt-dlp` was called without an explicit path in a `Terminal=false` launcher. Changed to `/usr/bin/yt-dlp`.
+
+#### scripts/spiderfoot.sh
+- `pgrep` was called without an explicit path in a `Terminal=false` launcher. Changed to `/usr/bin/pgrep`.
+
+#### scripts/ffmpeg_interact.sh
+- `ffmpeg` and `ffplay` were called without explicit paths in a `Terminal=false` launcher. Both now use `$FFMPEG_BIN` and `$FFPLAY_BIN` variables pointing to `/usr/bin/`.
+
+#### All scripts in scripts/
+- zenity dialogs would not appear on Wayland sessions. All 10 launcher scripts now export `GDK_BACKEND=x11` when `XDG_SESSION_TYPE=wayland`, routing zenity through XWayland transparently. No user action required.
+
+### Changed
+
+#### setup.sh
+- Installation log moved from `$HOME/argos_install_*.log` to `$HOME/Downloads/argos_install_*.log` to keep the home directory clean.
+
+---
+
 ## [2.0.0-beta] — 2026-03-31
 
 > **BREAKING CHANGE**: Ubuntu 22.04 LTS is no longer supported.
@@ -19,7 +55,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 - Helper functions: `log_ok`, `log_warn`, `log_error`, `log_step` for structured output
 - Root user check: prevents accidental execution as root
 - `sudo add-apt-repository multiverse` before install (required for `unrar`)
-- `open-vm-tools-desktop`: VMware clipboard and fullscreen support on desktop environments (Budgie)
+- `virtualbox-guest-utils`, `virtualbox-guest-x11`: VirtualBox clipboard and fullscreen support on desktop environments (Budgie)
 - `python3-venv`, `pipx`: Python isolation tooling for PEP 668 compliance
 - Dynamic Obsidian version via GitHub API (no longer hardcoded)
 - Dynamic Firefox profile detection (supports both snap and .deb installs)

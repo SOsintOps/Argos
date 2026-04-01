@@ -1,7 +1,7 @@
 # Argos — Project Status & AI Handoff Document
 
 **Last updated:** 2026-04-01
-**Current version:** 2.0.0-beta
+**Current version:** 2.0.1-beta
 **Target platform:** Ubuntu 24.04 LTS (Noble Numbat) + Ubuntu Budgie 24.04 LTS
 
 ---
@@ -14,7 +14,7 @@ Argos is a **bash-based OSINT workstation setup script** for Ubuntu. It:
 3. Installs `.desktop` shortcuts to the application menu
 4. Customizes Firefox, wallpaper, and desktop environment
 
-The intended user sets their Linux username to `osint` before running the setup.
+Any Linux username is supported. The `.desktop` files contain `/home/osint/` as a placeholder; `setup.sh` substitutes the real `$HOME` at install time via `sed`.
 The scripts in `scripts/` are GUI wrappers (zenity dialogs) for OSINT tools.
 The files in `shortcuts/` are `.desktop` entries that call those wrappers.
 
@@ -93,11 +93,9 @@ Python tools are split into two categories to comply with PEP 668 (Python 3.12, 
    on a fresh Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS VM is required before
    removing the beta label.
 
-2. **Firefox profile customization may fail silently.**
-   `setup.sh` attempts to apply the Argos Firefox profile template. This requires Firefox
-   to have been opened at least once to create a default profile. On a clean VM,
-   Firefox may never have been opened before running setup. Consider adding a step that
-   launches and immediately closes Firefox to trigger profile creation.
+2. ~~**Firefox profile customization may fail silently.**~~
+   **Fixed 2026-04-01.** `setup.sh` now launches Firefox automatically in the background,
+   waits 15 seconds for the profile to be created, then kills it before applying the Argos template.
 
 3. **Maltego removed.**
    Maltego required a paid account and the automated download URL was unreliable.
@@ -128,9 +126,9 @@ Python tools are split into two categories to comply with PEP 668 (Python 3.12, 
    `sudo snap install cherrytree`. Verify this is the correct snap name on Ubuntu 24.04.
    The alternative PPA fallback exists but the PPA may not have a Noble (24.04) build.
 
-9. **Wayland compatibility for zenity.**
-   On Ubuntu 24.04 with Wayland sessions, zenity dialogs may require
-   `--display=:0` or `DISPLAY=:0` prefix. Not currently handled.
+9. ~~**Wayland compatibility for zenity.**~~
+   **Fixed 2026-04-01.** All 10 launcher scripts now export `GDK_BACKEND=x11` when
+   `XDG_SESSION_TYPE=wayland`. No user action required.
 
 ### Low Priority: Nice to Have
 
@@ -198,15 +196,16 @@ The `.gitignore` already excludes:
 1. **Test on a clean VM.** This is the most important next step.
    Provision Ubuntu Budgie 24.04 LTS in VirtualBox, clone the repo to `~/Downloads/Argos`,
    run `setup.sh`, and verify each tool launches correctly.
+   VM testing is in progress as of 2026-04-01.
 
 2. **Check the log file.** `setup.sh` writes a full log to `~/Downloads/argos_install_*.log`.
    Review it for any failed steps or warnings after a test run.
 
-3. **Fix issues found during testing.** Focus on the Maltego download,
-   the Firefox first-run issue, and zenity Wayland compatibility.
+3. **Fix issues found during testing.** Focus on the CherryTree snap name (issue 8)
+   and the Google Earth Pro `.deb` download (issue 4).
 
-4. **Implement medium-priority items.** Focus on the `domains.sh` stderr pipe fix
-   and the explicit PATH for sherlock/maigret in `usernames.sh`.
+4. **Implement medium-priority items.** Add `.desktop` shortcuts for holehe, maigret
+   standalone, and blackbird standalone (issue 5).
 
 5. **Remove the BETA label.** Only remove it after a successful end-to-end test on both
    Ubuntu 24.04 and Ubuntu Budgie 24.04.

@@ -1,30 +1,28 @@
 #!/usr/bin/env bash
-##usernames Menu Script
+# Test script per usernames.sh
+# Verifica che i tool siano raggiungibili prima di aprire il menu
 
-url=$(zenity --entry --title "Sherlock" --text "Enter target Username" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
-#define choices
-opt1="Sherlock"
-opt2="Maigret - WIP"
-opt3="Moriarty - WIP"
+echo "=== Test tool username OSINT ==="
 
-#timestamp=$(date +%Y-%m-%d:%H:%M)
+check_tool() {
+    local name=$1
+    local cmd=$2
+    if command -v "$cmd" &>/dev/null; then
+        echo "[OK]   $name ($cmd)"
+    else
+        echo "[FAIL] $name ($cmd) — non trovato, verificare setup.sh"
+    fi
+}
 
-socialmenu=$(zenity  --list  --title "Usernames:Choose Tool" --text "What do you want to do?" --width=400 --height=200 --radiolist  --column "Choose" --column "Option" TRUE "$opt1" FALSE "$opt2" FALSE "$opt3" 2> >(grep -v 'GtkDialog' >&2))
+check_tool "Sherlock"  "sherlock"
+check_tool "Maigret"   "maigret"
 
-case $socialmenu in
-
-$opt1 ) #Sherlock
-
-if [ -n "$url" ]; then
-	cd ~/Downloads/Programs/sherlock/ || exit
-	python3 sherlock.py "$url" --csv -o ~/Documents/"$url".csv | zenity --progress --pulsate --no-cancel --auto-close --title="Sherlock Downloader" --text="Report being saved to ~/Documents/" 2> >(grep -v 'GtkDialog' >&2)
-	sleep 2
-	nautilus ~/Documents/ >/dev/null 2>&1
+BLACKBIRD_VENV="$HOME/Downloads/Programs/blackbird/.venv/bin/python"
+if [ -f "$BLACKBIRD_VENV" ]; then
+    echo "[OK]   Blackbird (venv: $BLACKBIRD_VENV)"
 else
-	zenity --error --text "Missing Username, exiting"
-   	exit
+    echo "[FAIL] Blackbird — venv non trovato in $HOME/Downloads/Programs/blackbird/.venv"
 fi
 
-;;
-
-esac
+echo ""
+echo "Se tutti i tool mostrano [OK], avvia usernames.sh"

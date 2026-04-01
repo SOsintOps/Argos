@@ -1,0 +1,20 @@
+# ── AI / Claude Code ────────────────────────────────────────
+.claude/
+.claude-flow/
+.mcp.json
+CLAUDE.md
+start.ps1
+
+# ── IDE ──────────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── Log installazione generati da setup.sh ───────────────────
+argos_install_*.log
+
+# ── File temporanei sistema ──────────────────────────────────
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db

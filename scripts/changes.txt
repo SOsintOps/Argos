@@ -1,3 +1,59 @@
+2026.03.31
+Aggiornamento generale per Ubuntu 24.04 LTS e Ubuntu Budgie 24.04 LTS
+
+youtubedl.sh:
+  - youtube-dl sostituito con yt-dlp
+  - nautilus sostituito con xdg-open (compatibilita' Budgie)
+  - /home/osint/ sostituito con $HOME
+
+instagram.sh:
+  - Rimosso Instalooter (abbandonato)
+  - Instaloader aggiornato all'API corrente
+  - Quote variabili corrette
+  - nautilus -> xdg-open, /home/osint/ -> $HOME
+
+usernames.sh:
+  - Rimosso Moriarty-Project (abbandonato)
+  - Aggiunto Blackbird (venv)
+  - Maigret da WIP a funzionante (pipx)
+  - Sherlock via pipx (non piu' da clone locale)
+  - nautilus -> xdg-open
+
+spiderfoot.sh:
+  - Riscritto completamente (era un stub inutilizzabile)
+  - Lancia SpiderFoot via pipx, apre browser con xdg-open
+
+domains.sh:
+  - Rimossi Sublist3r (abbandonato) e Photon (abbandonato)
+  - theHarvester usa venv dedicato
+  - Amass aggiornato alla sintassi v4 (amass enum)
+  - firefox -> xdg-open, nautilus -> xdg-open
+  - /home/osint/ -> $HOME
+
+elasticsearch.sh:
+  - Convertito in avviso di deprecazione
+  - Tool non mantenuto, Elasticsearch 8.x richiede auth
+  - Suggerisce Shodan CLI come alternativa
+
+eyewitness.sh:
+  - Path corretto: EyeWitness/Python/EyeWitness.py
+  - /home/osint/ -> $HOME, mkdir -p per output dir
+
+metagoofil.sh:
+  - Usa venv dedicato per Python
+  - /home/osint/ -> $HOME, mkdir -p
+  - Correzione invocazione exiftool
+
+recon-ng.sh:
+  - Usa venv dedicato per Python
+
+ffmpeg_interact.sh:
+  - nautilus -> xdg-open (compatibilita' Budgie)
+  - /home/osint/ -> $HOME
+  - Rimosso flag -strict -2 (obsoleto in ffmpeg moderno)
+
+---
+
 2022.09.19
 instagram.sh: added support for Toutatis
 

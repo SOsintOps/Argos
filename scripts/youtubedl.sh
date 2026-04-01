@@ -1,12 +1,21 @@
 #!/usr/bin/env bash
-timestamp=$(date +%Y-%m-%d:%H:%M)
-url=$(zenity --entry --title "Video Downloader" --text "Enter target URL" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
-if [ -n "$url" ]; then
-	youtube-dl "$url" -o ~/Videos/"$timestamp%(title)s.%(ext)s" -i --all-subs| zenity --progress --pulsate --no-cancel --auto-close --title="Video Downloader" --text="Video being saved to ~/Videos/" 2> >(grep -v 'GtkDialog' >&2)
-	sleep 2
-	nautilus ~/Videos/ >/dev/null 2>&1
-else
-	zenity --error --text "Missing URL, exiting"
-   	exit
-fi 
+# Video Downloader — usa yt-dlp (sostituto di youtube-dl)
+# Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+timestamp=$(date +%Y-%m-%d_%H%M)
+url=$(zenity --entry --title "Video Downloader" --text "Inserisci URL del video" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
+
+if [ -n "$url" ]; then
+    mkdir -p "$HOME/Videos"
+    yt-dlp "$url" \
+        -o "$HOME/Videos/${timestamp}_%(title)s.%(ext)s" \
+        -i --all-subs \
+        | zenity --progress --pulsate --no-cancel --auto-close \
+            --title="Video Downloader" \
+            --text="Video salvato in ~/Videos/" 2> >(grep -v 'GtkDialog' >&2)
+    sleep 2
+    xdg-open "$HOME/Videos/" >/dev/null 2>&1
+else
+    zenity --error --text "URL mancante, uscita" 2> >(grep -v 'GtkDialog' >&2)
+    exit 1
+fi

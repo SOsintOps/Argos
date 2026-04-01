@@ -199,7 +199,7 @@ The `.gitignore` already excludes:
    Provision Ubuntu Budgie 24.04 LTS in VirtualBox, clone the repo to `~/Downloads/Argos`,
    run `setup.sh`, and verify each tool launches correctly.
 
-2. **Check the log file.** `setup.sh` writes a full log to `~/argos_install_*.log`.
+2. **Check the log file.** `setup.sh` writes a full log to `~/Downloads/argos_install_*.log`.
    Review it for any failed steps or warnings after a test run.
 
 3. **Fix issues found during testing.** Focus on the Maltego download,

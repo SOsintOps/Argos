@@ -2,6 +2,8 @@
 # Video Downloader — usa yt-dlp (sostituto di youtube-dl)
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 timestamp=$(date +%Y-%m-%d_%H%M)
 url=$(zenity --entry --title "Video Downloader" --text "Inserisci URL del video" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
 

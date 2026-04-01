@@ -4,6 +4,8 @@
 # Tool: Sherlock (pipx), Maigret (pipx), Blackbird (venv)
 # Moriarty-Project rimosso (abbandonato)
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 opt1="Sherlock"
 opt2="Maigret"
 opt3="Blackbird"

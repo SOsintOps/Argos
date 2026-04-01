@@ -20,17 +20,18 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 - [Resources](#resources)
 - [Credits](#credits)
 - [Licences](#licences)
+- [Version History](docs/VERSION_HISTORY.md)
 
 ---
 
 ## Requirements
 
 - Ubuntu **24.04 LTS** or **Ubuntu Budgie 24.04 LTS** (VM or workstation)
-- System user set to **`osint`**
+- Any Linux username (the previous requirement to use `osint` has been removed)
 - System language: **English**
 - Active internet connection during installation
 
-> The script is optimised for VMware. Code for VirtualBox Guest Tools is available in the comments.
+> The script is optimised for VirtualBox. Code for VMware Tools is available in the comments.
 
 **Tested on:**
 - Ubuntu Budgie 24.04 LTS (VM)
@@ -113,19 +114,21 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
     chmod +x ~/Downloads/Argos/setup.sh
     ```
 
-5. Close Firefox and run the script:
+5. Run the script:
     ```bash
     ~/Downloads/Argos/setup.sh
     ```
+
+    > Firefox does not need to be closed or opened manually. The script initialises the Firefox profile automatically if it has not been created yet.
 
 ---
 
 ## Installation Log
 
-The script automatically generates a log file in the user's home directory:
+The script automatically generates a log file in the Downloads directory:
 
 ```
-~/argos_install_YYYYMMDD_HHMMSS.log
+~/Downloads/argos_install_YYYYMMDD_HHMMSS.log
 ```
 
 The log contains the full installation output with timestamps. If an error occurs, the exact line number is recorded in the log.
@@ -137,8 +140,8 @@ The log contains the full installation output with timestamps. If an error occur
 - Add PhoneInfoga as a replacement for Moriarty-Project
 - Add Katana or GoSpider as a replacement for Photon
 - Update LibreOffice report templates for OSINT investigations
-- Complete testing on Ubuntu Budgie 24.04 LTS VM
-- Add Wayland support for zenity scripts
+- Complete end-to-end testing on Ubuntu Budgie 24.04 LTS VM
+- Add shortcuts for holehe, maigret standalone, and blackbird standalone
 
 ---
 

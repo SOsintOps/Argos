@@ -1,6 +1,6 @@
 # Argos — Project Status & AI Handoff Document
 
-**Last updated:** 2026-03-31
+**Last updated:** 2026-04-01
 **Current version:** 2.0.0-beta
 **Target platform:** Ubuntu 24.04 LTS (Noble Numbat) + Ubuntu Budgie 24.04 LTS
 
@@ -99,16 +99,15 @@ Python tools are split into two categories to comply with PEP 668 (Python 3.12, 
    Firefox may never have been opened before running setup. Consider adding a step that
    launches and immediately closes Firefox to trigger profile creation.
 
-3. **Maltego download URL is not reliable.**
-   `setup.sh` attempts `wget https://www.maltego.com/downloads/linux` but this URL
-   may return an HTML page rather than a `.deb` file. Maltego requires an account
-   and the download link changes with versions. The current fallback just warns the user.
-   Consider documenting manual installation steps instead.
+3. **Maltego removed.**
+   Maltego required a paid account and the automated download URL was unreliable.
+   Removed from `setup.sh`. Install manually from https://www.maltego.com/downloads/linux if needed.
 
-4. **Google Earth Pro repo may be inactive.**
-   The `http://dl.google.com/linux/earth/deb/` repository has historically gone offline
-   for extended periods. The fallback (direct `.deb` download) should work, but verify
-   both paths on a real machine.
+4. **Google Earth Pro repo removed; direct .deb used instead.**
+   The `http://dl.google.com/linux/earth/deb/` APT repo has no Noble (24.04) index entry
+   and causes `apt update` errors. `setup.sh` now downloads the `.deb` directly from
+   `https://dl.google.com/linux/direct/google-earth-pro-stable_current_amd64.deb` and
+   removes the broken `.list` file added by the post-install script.
 
 ### Medium Priority: Should Fix
 
@@ -117,15 +116,13 @@ Python tools are split into two categories to comply with PEP 668 (Python 3.12, 
    no UI wrapper at all (holehe). Consider adding shortcuts or integrating into
    existing menus.
 
-6. **`usernames.sh` does not use explicit path for `sherlock` and `maigret`.**
-   These scripts have `Terminal=true`, so `~/.local/bin` is in PATH via `.bashrc`.
-   This works for interactive terminal launches but could fail in edge cases
-   (e.g. if `.bashrc` doesn't export PATH). Consider using `$HOME/.local/bin/sherlock`
-   for consistency.
+6. ~~**`usernames.sh` does not use explicit path for `sherlock` and `maigret`.**~~
+   **Fixed 2026-04-01.** Both tools now use `$HOME/.local/bin/sherlock` and
+   `$HOME/.local/bin/maigret` explicitly in `usernames.sh`.
 
-7. **`domains.sh` menu shows theHarvester progress via zenity pipe,
-   but theHarvester writes progress to stderr.**
-   Same issue that was fixed for `instagram.sh`. Apply `2>&1` before the pipe.
+7. ~~**`domains.sh` menu shows theHarvester progress via zenity pipe,
+   but theHarvester writes progress to stderr.**~~
+   **Fixed 2026-04-01.** Added `2>&1` before the zenity pipe in `domains.sh` line 57.
 
 8. **`cherrytree` snap package name may differ.**
    `sudo snap install cherrytree`. Verify this is the correct snap name on Ubuntu 24.04.
@@ -199,7 +196,7 @@ The `.gitignore` already excludes:
 ## How to Continue This Work
 
 1. **Test on a clean VM.** This is the most important next step.
-   Provision Ubuntu Budgie 24.04 LTS in VMware, clone the repo to `~/Downloads/Argos`,
+   Provision Ubuntu Budgie 24.04 LTS in VirtualBox, clone the repo to `~/Downloads/Argos`,
    run `setup.sh`, and verify each tool launches correctly.
 
 2. **Check the log file.** `setup.sh` writes a full log to `~/argos_install_*.log`.

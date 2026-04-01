@@ -1,62 +1,73 @@
 #!/usr/bin/env bash
-#Script for ffmpeg interaction
+# Video Utilities — ffmpeg
+# Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
-zenity --info --text="The next window will prompt for a target media file" --title="Video Utilities"
-
+zenity --info --text="La prossima finestra chiede di selezionare un file video" --title="Video Utilities" 2> >(grep -v 'GtkDialog' >&2)
 sleep 1
 
-#prompt for file selection
-ffmpeg_file=$(zenity --file-selection --title "Video Utilities")
-timestamp=$(date +%Y-%m-%d:%H:%M)
+ffmpeg_file=$(zenity --file-selection --title "Video Utilities" 2> >(grep -v 'GtkDialog' >&2))
+timestamp=$(date +%Y-%m-%d_%H%M)
 
-#define choices
-opt1="Play a video"
-opt2="Convert a video to mp4"
-opt3="Extract video frames"
-opt4="Shorten a video (Low Activity)"
-opt5="Shorten a video (High Activity)"
-opt6="Extract Audio"
-opt7="Rotate Video"
+opt1="Riproduci video"
+opt2="Converti in mp4"
+opt3="Estrai frame"
+opt4="Comprimi video (bassa attivita')"
+opt5="Comprimi video (alta attivita')"
+opt6="Estrai audio (mp3)"
+opt7="Ruota video"
 
-#make sure file is selected
 if [ -n "$ffmpeg_file" ]; then
 
-        #prompt for user choice selection
-        ffmpeg=$(zenity  --list  --title "Video Utilities" --text "What do you want to do?" --width=400 --height=400 --radiolist  --column "Choose" --column "Option" TRUE "$opt1" FALSE "$opt2" FALSE "$opt3" FALSE "$opt4" FALSE "$opt5" FALSE "$opt6" FALSE "$opt7")
+    mkdir -p "$HOME/Videos"
 
-        #perform actions based on selection
-        case $ffmpeg in
+    ffmpeg=$(zenity --list \
+        --title "Video Utilities" \
+        --text "Cosa vuoi fare?" \
+        --width=400 --height=400 \
+        --radiolist \
+        --column "Scegli" --column "Opzione" \
+        TRUE "$opt1" FALSE "$opt2" FALSE "$opt3" FALSE "$opt4" FALSE "$opt5" FALSE "$opt6" FALSE "$opt7" \
+        2> >(grep -v 'GtkDialog' >&2))
 
-        $opt1 )
-          ffplay "$ffmpeg_file"
-          ;;
-        $opt2 )
-          ffmpeg -i "$ffmpeg_file" -vcodec mpeg4 -strict -2 "/home/osint/Videos/$timestamp.mp4" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Converting Video to mp4"
-           nautilus "/home/osint/Videos/" >/dev/null 2>&1
-          ;;
-        $opt3 )
-          mkdir "/home/osint/Videos/$timestamp-frames"
-          ffmpeg -y -i "$ffmpeg_file" -an -r 10 "/home/osint/Videos/$timestamp-frames/img%03d.bmp" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Extracting Frames"
-          nautilus "/home/osint/Videos/" >/dev/null 2>&1
-          ;;
-        $opt4 )
-          ffmpeg -i "$ffmpeg_file" -strict -2 -vf "select=gt(scene\,0.003),setpts=N/(25*TB)" "/home/osint/Videos/$timestamp-low.mp4" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Shortening video (Low Activity)"
-          nautilus "/home/osint/Videos/" >/dev/null 2>&1
-          ;;
-        $opt5 )
-          ffmpeg -i "$ffmpeg_file" -strict -2 -vf "select=gt(scene\,0.005),setpts=N/(25*TB)" "/home/osint/Videos/$timestamp-high.mp4" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Shortening video (High Activity)"
-          nautilus "/home/osint/Videos/" >/dev/null 2>&1
-          ;;
-        $opt6 )
-          ffmpeg -i "$ffmpeg_file" -vn -ac 2 -ar 44100 -ab 320k -f mp3 "/home/osint/Videos/$timestamp.mp3" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Extracting Audio"
-           nautilus "/home/osint/Videos/" >/dev/null 2>&1
-	  ;;
-        $opt7 )
-          ffmpeg -i "$ffmpeg_file" -vf transpose=0 "/home/osint/Videos/$timestamp.mp4" | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Rotating Video"
-           nautilus "/home/osint/Videos/" >/dev/null 2>&1
-        esac
+    case $ffmpeg in
+
+        "$opt1")
+            ffplay "$ffmpeg_file"
+            ;;
+        "$opt2")
+            ffmpeg -i "$ffmpeg_file" -vcodec mpeg4 "$HOME/Videos/${timestamp}.mp4" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Conversione in mp4..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/" >/dev/null 2>&1
+            ;;
+        "$opt3")
+            mkdir -p "$HOME/Videos/${timestamp}-frames"
+            ffmpeg -y -i "$ffmpeg_file" -an -r 10 "$HOME/Videos/${timestamp}-frames/img%03d.bmp" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Estrazione frame..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/${timestamp}-frames/" >/dev/null 2>&1
+            ;;
+        "$opt4")
+            ffmpeg -i "$ffmpeg_file" -vf "select=gt(scene\,0.003),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-low.mp4" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Compressione (bassa attivita')..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/" >/dev/null 2>&1
+            ;;
+        "$opt5")
+            ffmpeg -i "$ffmpeg_file" -vf "select=gt(scene\,0.005),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-high.mp4" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Compressione (alta attivita')..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/" >/dev/null 2>&1
+            ;;
+        "$opt6")
+            ffmpeg -i "$ffmpeg_file" -vn -ac 2 -ar 44100 -ab 320k -f mp3 "$HOME/Videos/${timestamp}.mp3" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Estrazione audio..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/" >/dev/null 2>&1
+            ;;
+        "$opt7")
+            ffmpeg -i "$ffmpeg_file" -vf transpose=0 "$HOME/Videos/${timestamp}-rotated.mp4" \
+                | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Rotazione video..." 2> >(grep -v 'GtkDialog' >&2)
+            xdg-open "$HOME/Videos/" >/dev/null 2>&1
+            ;;
+    esac
 
 else
-    zenity --error --text "No file selected, exiting"
-    exit
+    zenity --error --text "Nessun file selezionato, uscita" 2> >(grep -v 'GtkDialog' >&2)
+    exit 1
 fi

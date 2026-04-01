@@ -1,7 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=Twitter
+Name=Twitter / X OSINT
+Comment=Apre Twitter/X nel browser
 Categories=Network;OSINT
-Exec=/home/osint/Documents/scripts/twitter.sh
+Exec=xdg-open https://x.com
 Icon=/home/osint/Pictures/icons/twitter.png
-Terminal=true
+Terminal=false

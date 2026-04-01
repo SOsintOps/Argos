@@ -1,0 +1,14 @@
+
+# ── IDE ──────────────────────────────────────────────────────
+.idea/
+.vscode/
+
+# ── Log installazione generati da setup.sh ───────────────────
+argos_install_*.log
+
+# ── File temporanei sistema ──────────────────────────────────
+*.tmp
+*.bak
+*~
+.DS_Store
+Thumbs.db

@@ -2,6 +2,6 @@
 Type=Application
 Name=HTTrack
 Categories=Network;OSINT
-Exec=webhttrack
+Exec=httrack
 Icon=/home/osint/Pictures/icons/httrack.png
 Terminal=true

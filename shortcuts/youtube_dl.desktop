@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Video Download        
-Comment=Launch Youtube-DL
+Name=Video Downloader
+Comment=Scarica video con yt-dlp
 Exec=/home/osint/Documents/scripts/youtubedl.sh
 Terminal=false
 Type=Application

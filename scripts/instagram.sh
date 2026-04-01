@@ -3,6 +3,8 @@
 # Instalooter rimosso (abbandonato). Tool disponibili: Instaloader, Toutatis
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 opt1="Instaloader"
 opt2="Toutatis"
 

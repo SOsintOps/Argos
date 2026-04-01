@@ -2,6 +2,8 @@
 # Video Utilities — ffmpeg
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 FFMPEG_BIN="/usr/bin/ffmpeg"
 FFPLAY_BIN="/usr/bin/ffplay"
 

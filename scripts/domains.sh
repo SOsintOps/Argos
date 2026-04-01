@@ -3,6 +3,8 @@
 # Sublist3r e Photon rimossi (abbandonati). Tool disponibili: Amass, theHarvester
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 opt1="Amass"
 opt2="TheHarvester"
 

@@ -2,6 +2,8 @@
 # EyeWitness Screenshot Tool
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 EYEWITNESS_DIR="$HOME/Downloads/Programs/EyeWitness/Python"
 EYEWITNESS_BIN="$EYEWITNESS_DIR/EyeWitness.py"
 OUTPUT_DIR="$HOME/Documents/EyeWitness"

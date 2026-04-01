@@ -17,7 +17,7 @@ OKORANGE='\033[93m'
 RESET='\e[0m'
 
 # ── Log ─────────────────────────────────────────────────────
-LOG_FILE="$HOME/argos_install_$(date +%Y%m%d_%H%M%S).log"
+LOG_FILE="$HOME/Downloads/argos_install_$(date +%Y%m%d_%H%M%S).log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 echo "Log di installazione: $LOG_FILE"
 echo "Inizio: $(date)"
@@ -115,8 +115,8 @@ sudo apt install -y \
     ripgrep \
     7zip p7zip-full unrar \
     openshot \
-    open-vm-tools \
-    open-vm-tools-desktop \
+    virtualbox-guest-utils \
+    virtualbox-guest-x11 \
     keepassxc \
     torbrowser-launcher \
     kazam \
@@ -310,41 +310,21 @@ echo '#######################################################################'
 echo '#                          Google Earth Pro                           #'
 echo '#######################################################################'
 
-# Metodo moderno (non usa apt-key deprecato)
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub \
-    | gpg --dearmor \
-    | sudo tee /etc/apt/keyrings/google-earth.gpg > /dev/null
-echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-earth.gpg] http://dl.google.com/linux/earth/deb/ stable main" \
-    | sudo tee /etc/apt/sources.list.d/google-earth-pro.list > /dev/null
-sudo apt update -qq
-sudo apt install -y google-earth-pro-stable || {
-    log_warn "Installazione via repo fallita, provo download diretto"
-    wget -q -O ~/Downloads/google-earth64.deb \
-        https://dl.google.com/dl/earth/client/current/google-earth-pro-stable_current_amd64.deb
-    sudo dpkg -i ~/Downloads/google-earth64.deb && sudo apt -f install -y
+# Il repo APT ufficiale (dl.google.com/linux/earth/deb/) non include Noble (24.04)
+# e causa errori ad ogni apt update. Si usa il download diretto del .deb.
+wget -q -O ~/Downloads/google-earth64.deb \
+    https://dl.google.com/linux/direct/google-earth-pro-stable_current_amd64.deb || {
+    log_warn "Download Google Earth Pro fallito. Scaricare manualmente da https://www.google.com/earth/about/versions/"
+}
+if [ -f ~/Downloads/google-earth64.deb ]; then
+    sudo apt install -y "$HOME/Downloads/google-earth64.deb" || { sudo dpkg -i "$HOME/Downloads/google-earth64.deb"; sudo apt -f install -y; }
     rm -f ~/Downloads/google-earth64.deb
-}
-log_ok "Google Earth Pro installato"
-
-# ============================================================
-log_step "Maltego"
-# ============================================================
-echo '#######################################################################'
-echo '#                            Maltego                                  #'
-echo '#######################################################################'
-
-# Recupera dinamicamente l'ultima versione disponibile
-MALTEGO_URL="https://www.maltego.com/downloads/linux"
-log_warn "Scaricando Maltego — verificare manualmente l'URL se il download fallisce"
-wget -q -O ~/Downloads/maltego.deb "$MALTEGO_URL" || {
-    log_warn "Download Maltego automatico fallito. Scaricare manualmente da https://www.maltego.com/downloads/linux"
-}
-if [ -f ~/Downloads/maltego.deb ]; then
-    sudo dpkg -i ~/Downloads/maltego.deb && sudo apt -f install -y
-    rm -f ~/Downloads/maltego.deb
-    log_ok "Maltego installato"
+    # Il post-install del .deb aggiunge un repo APT rotto su Noble — va rimosso
+    sudo rm -f /etc/apt/sources.list.d/google-earth-pro.list
+    sudo apt update -qq
+    log_ok "Google Earth Pro installato"
 else
-    log_warn "Maltego non installato — procedere manualmente"
+    log_warn "Google Earth Pro non installato — procedere manualmente"
 fi
 
 # ============================================================

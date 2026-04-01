@@ -54,7 +54,7 @@ case $domainmenu in
                     -d "$domain" \
                     -b bing,yahoo,virustotal \
                     -f "$OUTFILE" \
-                    | zenity --progress --pulsate --no-cancel --auto-close \
+                    2>&1 | zenity --progress --pulsate --no-cancel --auto-close \
                         --title="TheHarvester" \
                         --text="Raccolta dati: $domain" 2> >(grep -v 'GtkDialog' >&2)
                 if [ -f "$OUTFILE" ]; then

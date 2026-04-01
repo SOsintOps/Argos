@@ -25,7 +25,7 @@ case $socialmenu in
         username=$(zenity --entry --title "Sherlock" --text "Inserisci username target" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
         if [ -n "$username" ]; then
             mkdir -p "$HOME/Documents/sherlock"
-            sherlock "$username" --csv -o "$HOME/Documents/sherlock/${timestamp}_${username}.csv" \
+            "$HOME/.local/bin/sherlock" "$username" --csv -o "$HOME/Documents/sherlock/${timestamp}_${username}.csv" \
                 | zenity --progress --pulsate --no-cancel --auto-close \
                     --title="Sherlock" \
                     --text="Report salvato in ~/Documents/sherlock/" 2> >(grep -v 'GtkDialog' >&2)
@@ -41,7 +41,7 @@ case $socialmenu in
         username=$(zenity --entry --title "Maigret" --text "Inserisci username target" --entry-text "" 2> >(grep -v 'GtkDialog' >&2))
         if [ -n "$username" ]; then
             mkdir -p "$HOME/Documents/maigret"
-            maigret "$username" \
+            "$HOME/.local/bin/maigret" "$username" \
                 --html --pdf \
                 -o "$HOME/Documents/maigret/${timestamp}_${username}" \
                 | zenity --progress --pulsate --no-cancel --auto-close \

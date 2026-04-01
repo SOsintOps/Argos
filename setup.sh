@@ -77,7 +77,9 @@ sudo chmod +x ~/Documents/scripts/*.sh
 mkdir -p ~/Pictures/icons
 cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
 
-sudo cp ~/Downloads/Argos/shortcuts/*.desktop /usr/share/applications/
+for f in ~/Downloads/Argos/shortcuts/*.desktop; do
+    sed "s|/home/osint/|$HOME/|g" "$f" | sudo tee "/usr/share/applications/$(basename "$f")" > /dev/null
+done
 
 cp -r ~/Downloads/Argos/templates/* ~/Templates
 

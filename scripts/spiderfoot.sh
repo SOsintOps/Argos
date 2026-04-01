@@ -3,6 +3,8 @@
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 # SpiderFoot installato via pipx
 
+[ "$XDG_SESSION_TYPE" = "wayland" ] && export GDK_BACKEND=x11
+
 HOST="127.0.0.1"
 PORT="5001"
 

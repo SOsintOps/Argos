@@ -186,7 +186,7 @@ The `.gitignore` already excludes:
 | Use `pipx` for CLI Python tools | PEP 668: Ubuntu 24.04 / Python 3.12 blocks system-wide `pip install` |
 | Use `venv` per project for tools with `requirements.txt` | Isolation, reproducibility, no global Python env pollution |
 | Use `xdg-open` instead of `nautilus` or `firefox` | Works on all desktop environments including Budgie (uses Nemo) |
-| Use `$HOME` instead of `/home/osint/` in scripts | Robustness; `.desktop` files still use `/home/osint/` (by design, as README requires username `osint`) |
+| Use `$HOME` instead of `/home/osint/` in scripts | Robustness; `.desktop` files source still contain `/home/osint/` but `setup.sh` substitutes the real `$HOME` at install time via `sed` |
 | Use explicit `$HOME/.local/bin/<tool>` for pipx in `Terminal=false` launchers | `~/.bashrc` is not sourced for non-terminal desktop launches |
 | `/etc/apt/keyrings/` instead of `apt-key add` | `apt-key` deprecated since Ubuntu 22.04 |
 | Global variable `$DOCS_DIR` in `metagoofil.sh` instead of `echo` + `$()` | Command substitution `$()` captures ALL stdout, and metagoofil output was corrupting the path variable |

@@ -2,6 +2,9 @@
 # Video Utilities — ffmpeg
 # Compatibile con: Ubuntu 24.04 LTS, Ubuntu Budgie 24.04 LTS
 
+FFMPEG_BIN="/usr/bin/ffmpeg"
+FFPLAY_BIN="/usr/bin/ffplay"
+
 zenity --info --text="La prossima finestra chiede di selezionare un file video" --title="Video Utilities" 2> >(grep -v 'GtkDialog' >&2)
 sleep 1
 
@@ -32,36 +35,36 @@ if [ -n "$ffmpeg_file" ]; then
     case $ffmpeg in
 
         "$opt1")
-            ffplay "$ffmpeg_file"
+            "$FFPLAY_BIN" "$ffmpeg_file"
             ;;
         "$opt2")
-            ffmpeg -i "$ffmpeg_file" -vcodec mpeg4 "$HOME/Videos/${timestamp}.mp4" \
+            "$FFMPEG_BIN" -i "$ffmpeg_file" -vcodec mpeg4 "$HOME/Videos/${timestamp}.mp4" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Conversione in mp4..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/" >/dev/null 2>&1
             ;;
         "$opt3")
             mkdir -p "$HOME/Videos/${timestamp}-frames"
-            ffmpeg -y -i "$ffmpeg_file" -an -r 10 "$HOME/Videos/${timestamp}-frames/img%03d.bmp" \
+            "$FFMPEG_BIN" -y -i "$ffmpeg_file" -an -r 10 "$HOME/Videos/${timestamp}-frames/img%03d.bmp" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Estrazione frame..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/${timestamp}-frames/" >/dev/null 2>&1
             ;;
         "$opt4")
-            ffmpeg -i "$ffmpeg_file" -vf "select=gt(scene\,0.003),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-low.mp4" \
+            "$FFMPEG_BIN" -i "$ffmpeg_file" -vf "select=gt(scene\,0.003),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-low.mp4" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Compressione (bassa attivita')..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/" >/dev/null 2>&1
             ;;
         "$opt5")
-            ffmpeg -i "$ffmpeg_file" -vf "select=gt(scene\,0.005),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-high.mp4" \
+            "$FFMPEG_BIN" -i "$ffmpeg_file" -vf "select=gt(scene\,0.005),setpts=N/(25*TB)" "$HOME/Videos/${timestamp}-high.mp4" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Compressione (alta attivita')..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/" >/dev/null 2>&1
             ;;
         "$opt6")
-            ffmpeg -i "$ffmpeg_file" -vn -ac 2 -ar 44100 -ab 320k -f mp3 "$HOME/Videos/${timestamp}.mp3" \
+            "$FFMPEG_BIN" -i "$ffmpeg_file" -vn -ac 2 -ar 44100 -ab 320k -f mp3 "$HOME/Videos/${timestamp}.mp3" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Estrazione audio..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/" >/dev/null 2>&1
             ;;
         "$opt7")
-            ffmpeg -i "$ffmpeg_file" -vf transpose=0 "$HOME/Videos/${timestamp}-rotated.mp4" \
+            "$FFMPEG_BIN" -i "$ffmpeg_file" -vf transpose=0 "$HOME/Videos/${timestamp}-rotated.mp4" \
                 | zenity --progress --pulsate --no-cancel --auto-close --title="ffmpeg" --text="Rotazione video..." 2> >(grep -v 'GtkDialog' >&2)
             xdg-open "$HOME/Videos/" >/dev/null 2>&1
             ;;

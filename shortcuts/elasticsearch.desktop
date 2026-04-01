@@ -1,7 +1,8 @@
 [Desktop Entry]
 Type=Application
-Name=ElasticSearch
+Name=Elasticsearch-Crawler
+Comment=Tool obsoleto - vedere avviso
 Categories=Network;OSINT
 Exec=/home/osint/Documents/scripts/elasticsearch.sh
 Icon=/home/osint/Pictures/icons/elasticsearch.png
-Terminal=true
+Terminal=false

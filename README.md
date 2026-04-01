@@ -1,118 +1,164 @@
-# ARGOS
+# ARGOS — Beta
 <img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
 
-This script will automatically set up an open source intelligence (OSINT) workstation starting from a clean Ubuntu* 22.04 LTS Virtual Machine/Workstation.\
-Best practices recommend using a new VM for each OSInt investigation.\
-Even if there are several ready-made VMs available on the Internet,  I wanted to study how to customise my workstation following what Michael Bazzell suggests in his book, [Open Source Intelligence Techniques - 7th Edition](https://inteltechniques.com/book1.html), about creating your own custom VM.\
-This script will set up the workstation by installing most of the scripts suggested by Michael, and further tools will be added in the future.
+> **WARNING: BETA VERSION**
+> This script has been updated for Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS.
+> It is under active testing. Always run it on a clean VM before using it in production.
+> Report any problems by opening an issue.
 
-## INDEX
-- [REQUIREMENTS](https://github.com/SOsintOps/Argos/blob/master/README.md#REQUIREMENTS)
-- [TOOLS](https://github.com/SOsintOps/Argos/blob/master/README.md#TOOLS)
-- [INSTALLING & RUNNING](https://github.com/SOsintOps/Argos#installing--running)
-- [TO DO](https://github.com/SOsintOps/Argos#to-do)
-- [RESOURCES](https://github.com/SOsintOps/Argos/blob/master/README.md#resources)
-- [CREDITS](https://github.com/SOsintOps/Argos#credits)
-- [LICENSES](https://github.com/SOsintOps/Argos#licenses)
+Argos automatically configures an open-source OSINT workstation from a clean Ubuntu 24.04 LTS virtual machine.
 
+Best practice recommends using a dedicated VM for each OSINT investigation.
+This script follows the methods described by Michael Bazzell in [Open Source Intelligence Techniques](https://inteltechniques.com/book1.html).
 
-## REQUIREMENTS
-To install and run Argos, you need:
-- an Ubuntu* 22.04 LTS virtual machine/workstation
-- set your user on "**osint**"
-- Please use English Language!
+## Contents
+- [Requirements](#requirements)
+- [Tools](#tools)
+- [Installation](#installation)
+- [Installation Log](#installation-log)
+- [To Do](#to-do)
+- [Resources](#resources)
+- [Credits](#credits)
+- [Licences](#licences)
 
-This script implies that you rely on VmWare for virtualization. Just in case, I included a commented out portion of code which will install virtual box tools.
+---
 
-**N.B.**: This script has been tested on:
-- [Ubuntu Budgie](https://ubuntubudgie.org/) 22.04 LTS VM.
-- [Ubuntu](https://ubuntu.com/download) 22.04 LTS VM.
-- [Ubuntu](https://ubuntu.com/download) 20.04 LTS VM (Firefox will not be customised).
+## Requirements
 
-## TOOLS
+- Ubuntu **24.04 LTS** or **Ubuntu Budgie 24.04 LTS** (VM or workstation)
+- System user set to **`osint`**
+- System language: **English**
+- Active internet connection during installation
 
-### OSInt
-- [Amass](https://github.com/OWASP/Amass)
-- [instaloader](https://instaloader.github.io/)
-- [InstaLooter](https://github.com/althonos/InstaLooter)
-- [Toutatis](https://github.com/megadose/toutatis)
-- [HTTrack](https://www.httrack.com/)
-- [MediaInfo](https://mediaarea.net/en/MediaInfo/Download/Ubuntu)
-- [ExifTool](https://github.com/pandastream/libimage-exiftool-perl-9.27)
-- [EyeWitness](https://github.com/ChrisTruncer/EyeWitness)
-- [sublist3r](https://github.com/aboul3la/Sublist3r)
-- [Photon](https://github.com/s0md3v/Photon)
-- [The Harvester](https://github.com/laramies/theHarvester)
-- [Metagoofil](https://github.com/opsdisk/metagoofil)
-- [recon-ng](https://github.com/lanmaster53/recon-ng)
-- [sherlock](https://github.com/sherlock-project/sherlock)
-- [spiderfoot](https://github.com/smicallef/spiderfoot)
-- [webosint](https://github.com/C3n7ral051nt4g3ncy/webosint)
-- [blackbird](https://github.com/p1ngul1n0/blackbird)
-- [Elasticsearch-Crawler](https://github.com/AmIJesse/Elasticsearch-Crawler)
-- [Ripgrep](https://github.com/BurntSushi/ripgrep)
-- [holehe](https://github.com/megadose/holehe)
-- [kali-anonstealth](https://github.com/Und3rf10w/kali-anonsurf)
-- [Moriarty-Project V2.6](https://github.com/AzizKpln/Moriarty-Project)
-- [maigret](https://github.com/soxoj/maigret)
-- [Maltego](https://www.maltego.com/)
-- and more!
+> The script is optimised for VMware. Code for VirtualBox Guest Tools is available in the comments.
 
-### General Purpose tools
-- [VLC](https://www.videolan.org/vlc/index.html)
-- [Google Earth](https://www.google.com/earth/versions/#earth-pro)
-- [wget](https://www.gnu.org/software/wget/)
-- [cherrytree](https://www.giuspen.com/cherrytree/)
-- [Atom](https://atom.io/)
-- [KeepassXC](https://keepassxc.org/)
-- [Kazam](https://launchpad.net/kazam)
-- [Audacity](https://www.audacityteam.org/)
-- [Ripgrep](https://github.com/BurntSushi/ripgrep)
-- [Tor Browser](https://www.torproject.org/)
-- [OpenShot](https://www.openshot.org/)
-- [Obisidian](https://obsidian.md/) Please refer to this article [1](https://webbreacher.com/2022/03/15/obsidian/)
-- [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) Please refer to those articles [1](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+ACH+part+1/22460/) and [2](https://isc.sans.edu/forums/diary/Analysis+of+Competing+Hypotheses+WCry+and+Lazarus+ACH+part+2/22470/)
-- and more!
+**Tested on:**
+- Ubuntu Budgie 24.04 LTS (VM)
+- Ubuntu 24.04 LTS (VM)
 
+**No longer supported:**
+- Ubuntu 22.04 LTS (some dependencies are incompatible)
+- Ubuntu 20.04 LTS
 
-## INSTALLING & RUNNING
-1) Open the Terminal app
+---
 
-2) Make sure and/or install that the [GIT command](https://linuxize.com/post/how-to-install-git-on-ubuntu-20-04/) is available in your VM:
+## Tools
+
+### OSINT
+
+| Tool | Status | Notes |
+|------|--------|-------|
+| [Amass](https://github.com/owasp-amass/amass) | Active | Subdomain enumeration |
+| [Instaloader](https://instaloader.github.io/) | Active | Instagram OSINT |
+| [Toutatis](https://github.com/megadose/toutatis) | Limited | Requires Instagram session ID |
+| [HTTrack](https://www.httrack.com/) | Active | Web crawling and mirroring |
+| [MediaInfo](https://mediaarea.net/en/MediaInfo) | Active | Media metadata analysis |
+| [ExifTool](https://exiftool.org/) | Active | Metadata from documents and images |
+| [EyeWitness](https://github.com/FortyNorthSecurity/EyeWitness) | Active | Website screenshots |
+| [The Harvester](https://github.com/laramies/theHarvester) | Active | Email and domain recon |
+| [Metagoofil](https://github.com/opsdisk/metagoofil) | Active | Metadata from public documents |
+| [recon-ng](https://github.com/lanmaster53/recon-ng) | Active | Modular OSINT framework |
+| [Sherlock](https://github.com/sherlock-project/sherlock) | Active | Username search |
+| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation |
+| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Advanced username search |
+| [holehe](https://github.com/megadose/holehe) | Active | Email OSINT |
+| [maigret](https://github.com/soxoj/maigret) | Active | Username search (advanced Sherlock fork) |
+| [Maltego](https://www.maltego.com/) | Active | Link analysis (requires account) |
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Active | Video downloader (replaces youtube-dl) |
+
+**Removed tools (abandoned or discontinued):**
+- ~~Instalooter~~: use Instaloader
+- ~~Sublist3r~~: use Amass
+- ~~Photon~~: use Katana or GoSpider
+- ~~youtube-dl~~: replaced by yt-dlp
+- ~~Moriarty-Project~~: use PhoneInfoga
+- ~~Elasticsearch-Crawler~~: use Shodan CLI
+- ~~Atom Editor~~ (discontinued December 2022): replaced by VSCodium
+
+### General Tools
+
+| Tool | Status |
+|------|--------|
+| [VLC](https://www.videolan.org/vlc/) | Active |
+| [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) | Active |
+| [VSCodium](https://vscodium.com/) | Active (replaces Atom) |
+| [CherryTree](https://www.giuspen.com/cherrytree/) | Active |
+| [KeePassXC](https://keepassxc.org/) | Active |
+| [Kazam](https://launchpad.net/kazam) | Active |
+| [Audacity](https://www.audacityteam.org/) | Active |
+| [Tor Browser](https://www.torproject.org/) | Active |
+| [OpenShot](https://www.openshot.org/) | Active |
+| [Obsidian](https://obsidian.md/) | Active (latest version fetched dynamically) |
+| [Ripgrep](https://github.com/BurntSushi/ripgrep) | Active |
+| [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) | Active |
+
+---
+
+## Installation
+
+1. Open a terminal.
+
+2. Install Git if it is not already present:
     ```bash
     sudo apt install -y git
     ```
-3) Clone this repository in the ```/Download/``` directory:
+
+3. Clone the repository into the `Downloads` directory:
     ```bash
     git clone https://github.com/SOsintOps/Argos ~/Downloads/Argos
     ```
 
-4) make the setup script executable:
+4. Make the script executable:
     ```bash
-    sudo chmod +x ~/Downloads/Argos/setup.sh
+    chmod +x ~/Downloads/Argos/setup.sh
     ```
 
-5) Close FireFox and run the file:
+5. Close Firefox and run the script:
     ```bash
     ~/Downloads/Argos/setup.sh
     ```
 
-## TO DO
-- Add more functionality to the existing bash shortcuts, such as predefined spiderfoot searches or RiskIQ CLI.
-- set osint report templates as libreoffice's templates.
-- customise the user profile.
-- add Nmap/zenmap, electrum wallet, gpa gui for PGP keys, Openshot video editor, [hunchly](https://www.hunch.ly/), etc.
+---
 
-## RESOURCES
-- [OSInOps website](https://osintops.com/en/)
-- [Presentazione Argos - lingua italiana](https://osintops.com/progetto-argos/)
+## Installation Log
+
+The script automatically generates a log file in the user's home directory:
+
+```
+~/argos_install_YYYYMMDD_HHMMSS.log
+```
+
+The log contains the full installation output with timestamps. If an error occurs, the exact line number is recorded in the log.
+
+---
+
+## To Do
+
+- Add PhoneInfoga as a replacement for Moriarty-Project
+- Add Katana or GoSpider as a replacement for Photon
+- Update LibreOffice report templates for OSINT investigations
+- Complete testing on Ubuntu Budgie 24.04 LTS VM
+- Add Wayland support for zenity scripts
+
+---
+
+## Resources
+
+- [OSIntOps website](https://osintops.com/en/)
+- [Argos project presentation (Italian)](https://osintops.com/progetto-argos/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
-- [Open Source Intelligence Techniques - Michael Bazzell](https://inteltechniques.com/book1.html)
+- [Open Source Intelligence Techniques by Michael Bazzell](https://inteltechniques.com/book1.html)
 
-## CREDITS
-- Skykn0t for writing the original OSINT_VM_Setup script
-- [oh6hay](https://github.com/oh6hay) for suggesting the script's name!
+---
+
+## Credits
+
+- Skykn0t for the original OSINT_VM_Setup script
+- [oh6hay](https://github.com/oh6hay) for the script name
 - [pinkevilpimp](https://github.com/pinkevilpimp) for the wallpaper script
 
-## LICENSES
-Please refer to the license files.
+---
+
+## Licences
+
+See the licence files included in the repository.

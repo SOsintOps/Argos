@@ -7,7 +7,7 @@ url=$(zenity --entry --title "Video Downloader" --text "Inserisci URL del video"
 
 if [ -n "$url" ]; then
     mkdir -p "$HOME/Videos"
-    yt-dlp "$url" \
+    /usr/bin/yt-dlp "$url" \
         -o "$HOME/Videos/${timestamp}_%(title)s.%(ext)s" \
         -i --all-subs \
         | zenity --progress --pulsate --no-cancel --auto-close \

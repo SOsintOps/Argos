@@ -15,7 +15,7 @@ if [ ! -x "$SPIDERFOOT_BIN" ]; then
 fi
 
 # Avvia SpiderFoot in background se non e' gia' in ascolto su quella porta
-if ! pgrep -f "spiderfoot -l" >/dev/null; then
+if ! /usr/bin/pgrep -f "spiderfoot -l" >/dev/null; then
     "$SPIDERFOOT_BIN" -l "${HOST}:${PORT}" &
     sleep 5
 fi

@@ -189,6 +189,7 @@ for _pkg in \
     zip \
     openshot-qt \
     keepassxc \
+    torbrowser-launcher \
     kazam \
     audacity \
     tor \

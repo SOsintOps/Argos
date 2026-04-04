@@ -21,6 +21,8 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 - [Credits](#credits)
 - [Licences](#licences)
 - [Version History](docs/VERSION_HISTORY.md)
+- [OSINT Analysis Guidelines](docs/guidelines.md)
+- [FAQ](docs/faq.md)
 
 ---
 

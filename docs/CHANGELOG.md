@@ -6,6 +6,49 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.0.3-beta] — 2026-04-04
+
+Patch release focused on installation resilience and failure transparency.
+
+### Added
+
+#### setup.sh
+- `FAILED_PACKAGES` array: tracks every apt package that fails to install during the session.
+- `install_apt()` function: wraps each apt package install individually. On failure, logs a `[WARN]` message and appends the package name to `FAILED_PACKAGES`. The script continues rather than aborting.
+- Failed packages summary block: printed before the final reboot prompt. Lists every package that did not install, with the log file path for diagnosis.
+- Known failure points comment block near the top of the script (after the banner). Documents six categories of expected failure: VirtualBox packages on bare-metal, snap/snapd in restricted environments, `torbrowser-launcher` repository issues, network-dependent steps, Firefox auto-launch in headless sessions, and EyeWitness bundled pip dependencies.
+
+### Fixed
+
+#### setup.sh
+- `python3 -m venv` calls for all four venv-based tools (theHarvester, metagoofil, recon-ng, blackbird) are now wrapped in an if/else block. A failed venv creation logs a clear warning and skips the pip install step rather than producing a cryptic error.
+- Replaced the `git clone || (cd && git pull)` pattern with a `clone_or_update()` helper function that handles three cases: clean clone, existing valid repo (pull), and corrupted/partial directory (remove and re-clone).
+- `snap refresh` now runs with a 30-second timeout. In restricted VM environments where snapd cannot complete a systemd restart, the previous call would hang indefinitely. The script now continues after 30 seconds and logs a warning.
+- All 31 apt packages now install individually via `install_apt()`. A single unavailable package no longer aborts the entire dependency block.
+- `sudo snap install --dangerous "obsidian_..."` now has a `|| log_warn` fallback, consistent with the `amass` and `cherrytree` snap installs.
+- `pip install` calls for theHarvester, metagoofil, recon-ng, and blackbird now each have a `|| log_warn` fallback. A dependency conflict in one tool's venv no longer aborts the remaining tool installations.
+- `sudo rm` on the Obsidian snap file changed to `sudo rm -f` to avoid aborting if the file was not created (e.g. after a failed download).
+
+---
+
+## [2.0.2-beta] — 2026-04-04
+
+Patch release focused on package compatibility and script internationalisation.
+
+### Fixed
+
+#### setup.sh
+- `openshot` replaced with `openshot-qt` — the former package does not exist on Ubuntu 24.04 Noble. Installation would abort at the apt install block.
+- `zip` added to the apt dependency list — it is used by the Firefox customisation step but was not explicitly installed, causing failure on minimal systems.
+
+### Changed
+
+#### setup.sh
+- All user-facing messages, log output, echo statements and inline comments translated to English. Script was previously a mix of Italian and English.
+- Header updated: `Compatibile con` → `Compatible with`, `Aggiornato` → `Updated`.
+
+---
+
 ## [2.0.1-beta] — 2026-04-01
 
 Patch release focused on robustness, portability, and Wayland compatibility.

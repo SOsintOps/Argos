@@ -80,33 +80,27 @@ echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 # The following steps may fail under certain conditions.
 # The script will log a warning and continue where possible.
 #
-#  1. virtualbox-guest-utils / virtualbox-guest-x11
-#     These packages are only useful inside a VirtualBox VM.
-#     On bare-metal or other hypervisors the install will succeed but
-#     the kernel modules will not load. If the target is not a VirtualBox
-#     guest, these packages can safely be ignored.
-#
-#  2. snap operations (obsidian, amass, cherrytree, snap refresh)
+#  1. snap operations (obsidian, amass, cherrytree, snap refresh)
 #     snapd requires a fully operational systemd. In restricted VM
 #     environments or containers, snapd may hang rather than fail cleanly.
 #     All snap calls are wrapped with a timeout or a || log_warn fallback.
 #
-#  3. torbrowser-launcher
+#  2. torbrowser-launcher
 #     On some Ubuntu 24.04 configurations this package requires the
 #     universe repository and may fail to fetch the upstream launcher.
 #     Install manually if the apt step reports a download error.
 #
-#  4. Network-dependent steps
+#  3. Network-dependent steps
 #     wget, curl, and git clone calls all require a working internet
 #     connection. Any network failure will abort that individual step.
 #     The script does not retry failed downloads automatically.
 #
-#  5. Firefox auto-launch
+#  4. Firefox auto-launch
 #     The profile initialisation block launches Firefox in the background
 #     and waits 15 seconds. This will not work in headless environments or
 #     minimal desktop sessions where a display is not available.
 #
-#  6. EyeWitness/Python/setup/setup.sh
+#  5. EyeWitness/Python/setup/setup.sh
 #     EyeWitness runs its own bundled setup script, which installs pip
 #     dependencies inside its own virtualenv. If those dependencies
 #     conflict with the system Python or each other, the step will fail.
@@ -194,10 +188,7 @@ for _pkg in \
     unrar \
     zip \
     openshot-qt \
-    virtualbox-guest-utils \
-    virtualbox-guest-x11 \
     keepassxc \
-    torbrowser-launcher \
     kazam \
     audacity \
     tor \

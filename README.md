@@ -30,6 +30,7 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 - Any Linux username (the previous requirement to use `osint` has been removed)
 - System language: **English**
 - Active internet connection during installation
+- **VirtualBox Guest Additions already installed** — the script does not install them. Install Guest Additions before running `setup.sh` to enable clipboard sharing, drag-and-drop, and fullscreen support.
 
 > The script is optimised for VirtualBox. Code for VMware Tools is available in the comments.
 

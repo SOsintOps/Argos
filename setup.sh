@@ -162,7 +162,7 @@ log_step "Installing system dependencies"
 echo '#######################################################################'
 echo '#      Dependencies: apt, curl, python, java, multimedia tools        #'
 echo '#######################################################################'
-log_quip "Installing 31 packages. I built a suit faster. Then again, I had better hardware."
+log_quip "Installing 29 packages. I built a suit faster. Then again, I had better hardware."
 
 for _pkg in \
     vlc \
@@ -489,7 +489,7 @@ echo -e "$OKGREEN  Installation complete!$RESET"
 echo "  Log saved to: $LOG_FILE"
 echo "══════════════════════════════════════════════════════"
 echo ""
-echo -e "$OKRED +----=[Si vis pacem, para bellum]=----+ $RESET"
+echo -e "$OKRED +----=[Audi, vide, tace]=----+ $RESET"
 echo ""
 echo "NOTE: Run 'source ~/.bashrc' or open a new terminal"
 echo "      to update the PATH with pipx tools."

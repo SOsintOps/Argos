@@ -14,6 +14,7 @@ OKBLUE='\033[94m'
 OKRED='\033[91m'
 OKGREEN='\033[92m'
 OKORANGE='\033[93m'
+OKCYAN='\033[96m'
 RESET='\e[0m'
 
 # ── Log ─────────────────────────────────────────────────────
@@ -27,6 +28,7 @@ log_ok()    { echo -e "${OKGREEN}[OK]${RESET}    $1"; }
 log_warn()  { echo -e "${OKORANGE}[WARN]${RESET}  $1"; }
 log_error() { echo -e "${OKRED}[ERROR]${RESET} $1"; }
 log_step()  { echo -e "\n${OKBLUE}▶ $1${RESET}"; }
+log_quip()  { echo -e "${OKCYAN}[STARK]${RESET} $1"; }
 
 # ── Failed package tracking ─────────────────────────────────
 FAILED_PACKAGES=()
@@ -112,6 +114,8 @@ echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 #
 # ─────────────────────────────────────────────────────────────
 
+log_quip "JARVIS is unavailable. You get the manual installation. Try to keep up."
+
 # ── User check ──────────────────────────────────────────────
 if [ "$(id -u)" -eq 0 ]; then
     log_error "Do not run this script as root. Use a regular user with sudo."
@@ -130,6 +134,7 @@ sudo add-apt-repository -y multiverse 2>/dev/null || true
 sudo apt -y update -qq
 timeout 30 sudo snap refresh 2>/dev/null || log_warn "snap refresh failed or timed out"
 log_ok "System updated"
+log_quip "System patched. Unlike some people's situational awareness."
 
 # ============================================================
 log_step "Copying scripts, icons, shortcuts and templates"
@@ -163,6 +168,7 @@ log_step "Installing system dependencies"
 echo '#######################################################################'
 echo '#      Dependencies: apt, curl, python, java, multimedia tools        #'
 echo '#######################################################################'
+log_quip "Installing 31 packages. I built a suit faster. Then again, I had better hardware."
 
 for _pkg in \
     vlc \
@@ -203,6 +209,7 @@ done
 pipx ensurepath || true
 
 log_ok "System dependencies installed"
+log_quip "Dependencies resolved. You'd think they'd standardise this by now. They won't."
 
 # ============================================================
 log_step "Installing Python OSINT tools via pipx"
@@ -227,6 +234,7 @@ install_pipx sherlock-project sherlock
 install_pipx spiderfoot
 
 log_ok "Python tools installed via pipx"
+log_quip "Isolated environments. Because dependency conflicts are someone else's problem now."
 
 # ============================================================
 log_step "Firefox customisation"
@@ -234,6 +242,7 @@ log_step "Firefox customisation"
 echo '#######################################################################'
 echo '#                        Customising Firefox                          #'
 echo '#######################################################################'
+log_quip "Firefox. Not my first choice. Or my second. But it is open source, I'll give it that."
 
 pkill -f firefox 2>/dev/null || true
 sleep 2
@@ -284,6 +293,7 @@ log_step "Obsidian"
 echo '#######################################################################'
 echo '#                           Obsidian                                  #'
 echo '#######################################################################'
+log_quip "Obsidian. Note-taking for people who think in graphs. I can respect that."
 
 # Fetch the latest version dynamically
 OBSIDIAN_VERSION=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest \
@@ -334,6 +344,7 @@ log_step "theHarvester"
 echo '#######################################################################'
 echo '#                       The Harvester                                 #'
 echo '#######################################################################'
+log_quip "theHarvester. I built something similar once. In an afternoon. With worse coffee."
 
 clone_or_update "https://github.com/laramies/theHarvester.git" "$HOME/Downloads/Programs/theHarvester"
 if python3 -m venv ~/Downloads/Programs/theHarvester/.venv; then
@@ -408,6 +419,7 @@ echo '#######################################################################'
 echo '#                          Google Earth Pro                           #'
 echo '#######################################################################'
 
+log_quip "Google Earth. I have better satellite access. It's classified. You're welcome."
 # The official APT repo (dl.google.com/linux/earth/deb/) does not include Noble (24.04)
 # and causes errors on every apt update. Using the direct .deb download instead.
 wget -q -O ~/Downloads/google-earth64.deb \
@@ -480,6 +492,7 @@ fi
 # ============================================================
 echo ""
 echo "══════════════════════════════════════════════════════"
+log_quip "Installation complete. The world is marginally better equipped. You're welcome."
 echo -e "$OKGREEN  Installation complete!$RESET"
 echo "  Log saved to: $LOG_FILE"
 echo "══════════════════════════════════════════════════════"

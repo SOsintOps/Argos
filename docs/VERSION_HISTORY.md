@@ -5,6 +5,43 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v2.0.3-beta — 2026-04-04
+
+Patch release focused on installation resilience. No new tools added.
+
+### Highlights
+
+**Resilient apt installation.**
+The 31-package apt install block has been replaced with a per-package wrapper function. If any individual package is unavailable or fails, the script logs a warning, records the package name, and continues. A summary of all failed packages is printed at the end of the run, before the reboot prompt.
+
+**pip install fallbacks.**
+The four venv-based tools (theHarvester, metagoofil, recon-ng, blackbird) now each have a `|| log_warn` fallback on their `pip install` call. A broken `requirements.txt` or upstream dependency conflict no longer kills the rest of the installation.
+
+**Obsidian snap fallback added.**
+The `snap install --dangerous` call for Obsidian previously had no error handling. It now logs a warning and continues if snap fails, consistent with the amass and cherrytree installs.
+
+**Known failure points documented.**
+A comment block near the top of `setup.sh` lists six categories of expected failure with explanations: VirtualBox packages on non-VirtualBox hosts, snapd in restricted environments, `torbrowser-launcher` repository issues, network-dependent steps, Firefox auto-launch in headless sessions, and EyeWitness bundled pip dependencies.
+
+---
+
+## v2.0.2-beta — 2026-04-04
+
+Patch release fixing two package issues and translating all script messages to English.
+
+### Highlights
+
+**`openshot` corrected to `openshot-qt`.**
+The `openshot` package does not exist on Ubuntu 24.04 Noble. The apt install block would abort immediately when this package was not found. The correct package name is `openshot-qt`.
+
+**`zip` added to dependencies.**
+The Firefox customisation step uses `zip -F` to repair the profile archive, but `zip` was not listed as a dependency. On minimal Ubuntu installs where `zip` is not pre-installed this would cause a silent failure.
+
+**All script messages translated to English.**
+User-facing messages, log output and inline comments were a mix of Italian and English. All text is now in English for consistency.
+
+---
+
 ## v2.0.1-beta — 2026-04-01
 
 Patch release focused on robustness, portability, and Wayland compatibility.

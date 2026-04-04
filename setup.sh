@@ -2,14 +2,14 @@
 
 # ============================================================
 # ARGOS - OSINT Workstation Setup Script
-# Compatibile con: Ubuntu 24.04 LTS (Noble Numbat), Ubuntu Budgie 24.04 LTS
-# Aggiornato: 2026-03-31
+# Compatible with: Ubuntu 24.04 LTS (Noble Numbat), Ubuntu Budgie 24.04 LTS
+# Updated: 2026-04-04
 # ============================================================
 
 set -euo pipefail
-trap 'log_error "ERRORE alla riga $LINENO. Installazione interrotta."; exit 1' ERR
+trap 'log_error "ERROR at line $LINENO. Installation aborted."; exit 1' ERR
 
-# ── Colori ──────────────────────────────────────────────────
+# ── Colours ─────────────────────────────────────────────────
 OKBLUE='\033[94m'
 OKRED='\033[91m'
 OKGREEN='\033[92m'
@@ -19,14 +19,43 @@ RESET='\e[0m'
 # ── Log ─────────────────────────────────────────────────────
 LOG_FILE="$HOME/Downloads/argos_install_$(date +%Y%m%d_%H%M%S).log"
 exec > >(tee -a "$LOG_FILE") 2>&1
-echo "Log di installazione: $LOG_FILE"
-echo "Inizio: $(date)"
+echo "Installation log: $LOG_FILE"
+echo "Start: $(date)"
 echo "──────────────────────────────────────────────────────"
 
 log_ok()    { echo -e "${OKGREEN}[OK]${RESET}    $1"; }
 log_warn()  { echo -e "${OKORANGE}[WARN]${RESET}  $1"; }
 log_error() { echo -e "${OKRED}[ERROR]${RESET} $1"; }
 log_step()  { echo -e "\n${OKBLUE}▶ $1${RESET}"; }
+
+# ── Failed package tracking ─────────────────────────────────
+FAILED_PACKAGES=()
+
+# install_apt: install a single apt package, log warning on failure
+install_apt() {
+    local pkg="$1"
+    if sudo apt install -y "$pkg"; then
+        log_ok "  apt: $pkg"
+    else
+        log_warn "Package '$pkg' failed to install — continuing"
+        FAILED_PACKAGES+=("$pkg")
+    fi
+}
+
+# clone_or_update: clone a repo or pull if already present; handle partial clones
+clone_or_update() {
+    local repo="$1"
+    local dest="$2"
+    if [ -d "$dest/.git" ]; then
+        git -C "$dest" pull || log_warn "git pull failed for $dest"
+    elif [ -d "$dest" ]; then
+        log_warn "$dest exists but is not a git repo — removing and re-cloning"
+        rm -rf "$dest"
+        git clone "$repo" "$dest" || log_warn "git clone failed for $dest"
+    else
+        git clone "$repo" "$dest" || log_warn "git clone failed for $dest"
+    fi
+}
 
 # ── Banner ──────────────────────────────────────────────────
 echo -e "$OKBLUE          _                   _           _              _            _        "
@@ -44,30 +73,69 @@ echo "    "
 echo -e "$RESET"
 echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 
-# ── Verifica utente ─────────────────────────────────────────
+# ── Known potential failure points ──────────────────────────
+#
+# The following steps may fail under certain conditions.
+# The script will log a warning and continue where possible.
+#
+#  1. virtualbox-guest-utils / virtualbox-guest-x11
+#     These packages are only useful inside a VirtualBox VM.
+#     On bare-metal or other hypervisors the install will succeed but
+#     the kernel modules will not load. If the target is not a VirtualBox
+#     guest, these packages can safely be ignored.
+#
+#  2. snap operations (obsidian, amass, cherrytree, snap refresh)
+#     snapd requires a fully operational systemd. In restricted VM
+#     environments or containers, snapd may hang rather than fail cleanly.
+#     All snap calls are wrapped with a timeout or a || log_warn fallback.
+#
+#  3. torbrowser-launcher
+#     On some Ubuntu 24.04 configurations this package requires the
+#     universe repository and may fail to fetch the upstream launcher.
+#     Install manually if the apt step reports a download error.
+#
+#  4. Network-dependent steps
+#     wget, curl, and git clone calls all require a working internet
+#     connection. Any network failure will abort that individual step.
+#     The script does not retry failed downloads automatically.
+#
+#  5. Firefox auto-launch
+#     The profile initialisation block launches Firefox in the background
+#     and waits 15 seconds. This will not work in headless environments or
+#     minimal desktop sessions where a display is not available.
+#
+#  6. EyeWitness/Python/setup/setup.sh
+#     EyeWitness runs its own bundled setup script, which installs pip
+#     dependencies inside its own virtualenv. If those dependencies
+#     conflict with the system Python or each other, the step will fail.
+#     The outer script captures this with || log_warn and continues.
+#
+# ─────────────────────────────────────────────────────────────
+
+# ── User check ──────────────────────────────────────────────
 if [ "$(id -u)" -eq 0 ]; then
-    log_error "Non eseguire questo script come root. Usare un utente normale con sudo."
+    log_error "Do not run this script as root. Use a regular user with sudo."
     exit 1
 fi
 
 # ============================================================
-log_step "Aggiornamento sistema operativo"
+log_step "System update"
 # ============================================================
 echo '#######################################################################'
-echo '#                         Aggiornamento OS                            #'
+echo '#                           OS Update                                #'
 echo '#######################################################################'
 
 sudo apt -y update && sudo apt -y upgrade
 sudo add-apt-repository -y multiverse 2>/dev/null || true
 sudo apt -y update -qq
-sudo snap refresh || log_warn "snap refresh fallito (snap potrebbe non essere installato)"
-log_ok "Sistema aggiornato"
+timeout 30 sudo snap refresh 2>/dev/null || log_warn "snap refresh failed or timed out"
+log_ok "System updated"
 
 # ============================================================
-log_step "Copia script, icone, shortcut e template"
+log_step "Copying scripts, icons, shortcuts and templates"
 # ============================================================
 echo '#######################################################################'
-echo '#                         File di supporto                            #'
+echo '#                         Support files                              #'
 echo '#######################################################################'
 
 mkdir -p ~/Documents/scripts
@@ -85,18 +153,18 @@ cp -r ~/Downloads/Argos/templates/* ~/Templates
 
 cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures
 sudo chmod +x ~/Downloads/Argos/multimedia/wallpapers/background.sh
-~/Downloads/Argos/multimedia/wallpapers/background.sh || log_warn "Script wallpaper fallito"
+~/Downloads/Argos/multimedia/wallpapers/background.sh || log_warn "Wallpaper script failed"
 
-log_ok "File di supporto copiati"
+log_ok "Support files copied"
 
 # ============================================================
-log_step "Installazione dipendenze di sistema"
+log_step "Installing system dependencies"
 # ============================================================
 echo '#######################################################################'
-echo '#      Dipendenze: apt, curl, python, java, multimedia tools          #'
+echo '#      Dependencies: apt, curl, python, java, multimedia tools        #'
 echo '#######################################################################'
 
-sudo apt install -y \
+for _pkg in \
     vlc \
     python3 \
     python3-setuptools \
@@ -115,8 +183,11 @@ sudo apt install -y \
     httrack \
     openjdk-21-jre \
     ripgrep \
-    7zip p7zip-full unrar \
-    openshot \
+    7zip \
+    p7zip-full \
+    unrar \
+    zip \
+    openshot-qt \
     virtualbox-guest-utils \
     virtualbox-guest-x11 \
     keepassxc \
@@ -124,26 +195,28 @@ sudo apt install -y \
     kazam \
     audacity \
     tor \
-    proxychains4
+    proxychains4; do
+    install_apt "$_pkg"
+done
 
-# Assicura che pipx sia nel PATH
+# Ensure pipx is in PATH
 pipx ensurepath || true
 
-log_ok "Dipendenze di sistema installate"
+log_ok "System dependencies installed"
 
 # ============================================================
-log_step "Installazione tool Python OSINT via pipx"
+log_step "Installing Python OSINT tools via pipx"
 # ============================================================
 echo '#######################################################################'
-echo '#              Tool Python (pipx - Ubuntu 24.04 PEP 668)              #'
+echo '#           Python tools (pipx - Ubuntu 24.04 PEP 668)               #'
 echo '#######################################################################'
 
-# pipx isola ogni tool in un venv dedicato, compatibile con PEP 668 (Python 3.12)
+# pipx isolates each tool in a dedicated venv, compatible with PEP 668 (Python 3.12)
 install_pipx() {
     local pkg=$1
     local name=${2:-$pkg}
     log_step "  pipx: $name"
-    pipx install "$pkg" --force 2>&1 || log_warn "pipx install $pkg fallito, continuo"
+    pipx install "$pkg" --force 2>&1 || log_warn "pipx install $pkg failed, continuing"
 }
 
 install_pipx instaloader
@@ -153,26 +226,26 @@ install_pipx holehe
 install_pipx sherlock-project sherlock
 install_pipx spiderfoot
 
-log_ok "Tool Python installati via pipx"
+log_ok "Python tools installed via pipx"
 
 # ============================================================
-log_step "Personalizzazione Firefox"
+log_step "Firefox customisation"
 # ============================================================
 echo '#######################################################################'
-echo '#                        Customizing Firefox                          #'
+echo '#                        Customising Firefox                          #'
 echo '#######################################################################'
 
 pkill -f firefox 2>/dev/null || true
 sleep 2
 
-# Rileva il profilo Firefox in modo dinamico (snap o deb)
+# Detect Firefox profile dynamically (snap or deb)
 FIREFOX_SNAP_DIR="$HOME/snap/firefox/common/.mozilla/firefox"
 FIREFOX_DEB_DIR="$HOME/.mozilla/firefox"
 FF_PROFILE=""
 
-# Se Firefox non e' mai stato aperto, avviarlo una volta per creare il profilo
+# If Firefox has never been opened, launch it once to create the default profile
 if [ ! -d "$FIREFOX_SNAP_DIR" ] && [ ! -d "$FIREFOX_DEB_DIR" ]; then
-    log_warn "Profilo Firefox non trovato. Avvio Firefox per inizializzarlo..."
+    log_warn "Firefox profile not found. Launching Firefox to initialise it..."
     firefox &>/dev/null &
     FF_INIT_PID=$!
     sleep 15
@@ -193,16 +266,16 @@ if cd ~/Downloads/Argos/argosfox/ 2>/dev/null; then
         unzip -o argos-ff-template2.zip
         if [ -n "$FF_PROFILE" ]; then
             cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* "$FF_PROFILE"
-            log_ok "Profilo Firefox personalizzato: $FF_PROFILE"
+            log_ok "Firefox profile customised: $FF_PROFILE"
         else
-            log_warn "Profilo Firefox non trovato. Aprire Firefox almeno una volta prima di eseguire lo script."
+            log_warn "Firefox profile not found. Open Firefox at least once before running this script."
         fi
     else
-        log_warn "argos-ff-template.zip non trovato, salto personalizzazione Firefox"
+        log_warn "argos-ff-template.zip not found, skipping Firefox customisation"
     fi
     cd - > /dev/null
 else
-    log_warn "Directory argosfox non trovata, salto personalizzazione Firefox"
+    log_warn "argosfox directory not found, skipping Firefox customisation"
 fi
 
 # ============================================================
@@ -212,25 +285,26 @@ echo '#######################################################################'
 echo '#                           Obsidian                                  #'
 echo '#######################################################################'
 
-# Recupera dinamicamente l'ultima versione
+# Fetch the latest version dynamically
 OBSIDIAN_VERSION=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest \
     | jq -r '.tag_name' | sed 's/v//')
 if [ -z "$OBSIDIAN_VERSION" ]; then
-    log_warn "Impossibile recuperare la versione Obsidian. Uso versione di fallback 1.7.7"
+    log_warn "Unable to retrieve Obsidian version. Using fallback 1.7.7"
     OBSIDIAN_VERSION="1.7.7"
 fi
-log_step "  Obsidian versione: $OBSIDIAN_VERSION"
+log_step "  Obsidian version: $OBSIDIAN_VERSION"
 cd ~/Downloads
 wget -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.snap"
-sudo snap install --dangerous "obsidian_${OBSIDIAN_VERSION}_amd64.snap"
-sudo rm "obsidian_${OBSIDIAN_VERSION}_amd64.snap"
+sudo snap install --dangerous "obsidian_${OBSIDIAN_VERSION}_amd64.snap" \
+    || log_warn "snap install obsidian failed — install manually from https://obsidian.md"
+sudo rm -f "obsidian_${OBSIDIAN_VERSION}_amd64.snap"
 
 git clone https://github.com/WebBreacher/obsidian-osint-templates ~/Documents/obsidian-osint-templates 2>/dev/null \
-    || log_warn "obsidian-osint-templates già presente"
+    || log_warn "obsidian-osint-templates already present"
 git clone https://github.com/theNerdInTheHighCastle/Obsidian ~/Documents/obsidian-criptovalute 2>/dev/null \
-    || log_warn "obsidian-criptovalute già presente"
+    || log_warn "obsidian-criptovalute already present"
 
-log_ok "Obsidian $OBSIDIAN_VERSION installato"
+log_ok "Obsidian $OBSIDIAN_VERSION installed"
 
 # ============================================================
 log_step "Amass"
@@ -239,8 +313,8 @@ echo '#######################################################################'
 echo '#                             Amass                                   #'
 echo '#######################################################################'
 
-sudo snap install amass || log_warn "snap install amass fallito"
-log_ok "Amass installato"
+sudo snap install amass || log_warn "snap install amass failed"
+log_ok "Amass installed"
 
 # ============================================================
 log_step "EyeWitness"
@@ -250,10 +324,9 @@ echo '#                          EyeWitness                                 #'
 echo '#######################################################################'
 
 mkdir -p ~/Downloads/Programs
-git clone https://github.com/FortyNorthSecurity/EyeWitness.git ~/Downloads/Programs/EyeWitness 2>/dev/null \
-    || (cd ~/Downloads/Programs/EyeWitness && git pull)
-bash ~/Downloads/Programs/EyeWitness/Python/setup/setup.sh || log_warn "Setup EyeWitness fallito"
-log_ok "EyeWitness installato"
+clone_or_update "https://github.com/FortyNorthSecurity/EyeWitness.git" "$HOME/Downloads/Programs/EyeWitness"
+bash ~/Downloads/Programs/EyeWitness/Python/setup/setup.sh || log_warn "EyeWitness setup failed"
+log_ok "EyeWitness installed"
 
 # ============================================================
 log_step "theHarvester"
@@ -262,11 +335,14 @@ echo '#######################################################################'
 echo '#                       The Harvester                                 #'
 echo '#######################################################################'
 
-git clone https://github.com/laramies/theHarvester.git ~/Downloads/Programs/theHarvester 2>/dev/null \
-    || (cd ~/Downloads/Programs/theHarvester && git pull)
-python3 -m venv ~/Downloads/Programs/theHarvester/.venv
-~/Downloads/Programs/theHarvester/.venv/bin/pip install -r ~/Downloads/Programs/theHarvester/requirements/base.txt
-log_ok "theHarvester installato"
+clone_or_update "https://github.com/laramies/theHarvester.git" "$HOME/Downloads/Programs/theHarvester"
+if python3 -m venv ~/Downloads/Programs/theHarvester/.venv; then
+    ~/Downloads/Programs/theHarvester/.venv/bin/pip install -r ~/Downloads/Programs/theHarvester/requirements/base.txt \
+        || log_warn "pip install for theHarvester failed — check requirements/base.txt"
+else
+    log_warn "venv creation failed for theHarvester — python3-venv may not be installed"
+fi
+log_ok "theHarvester installed"
 
 # ============================================================
 log_step "metagoofil"
@@ -275,11 +351,14 @@ echo '#######################################################################'
 echo '#                           Metagoofil                                #'
 echo '#######################################################################'
 
-git clone https://github.com/opsdisk/metagoofil.git ~/Downloads/Programs/metagoofil 2>/dev/null \
-    || (cd ~/Downloads/Programs/metagoofil && git pull)
-python3 -m venv ~/Downloads/Programs/metagoofil/.venv
-~/Downloads/Programs/metagoofil/.venv/bin/pip install -r ~/Downloads/Programs/metagoofil/requirements.txt
-log_ok "metagoofil installato"
+clone_or_update "https://github.com/opsdisk/metagoofil.git" "$HOME/Downloads/Programs/metagoofil"
+if python3 -m venv ~/Downloads/Programs/metagoofil/.venv; then
+    ~/Downloads/Programs/metagoofil/.venv/bin/pip install -r ~/Downloads/Programs/metagoofil/requirements.txt \
+        || log_warn "pip install for metagoofil failed — check requirements.txt"
+else
+    log_warn "venv creation failed for metagoofil — python3-venv may not be installed"
+fi
+log_ok "metagoofil installed"
 
 # ============================================================
 log_step "recon-ng"
@@ -288,11 +367,14 @@ echo '#######################################################################'
 echo '#                            recon-ng                                 #'
 echo '#######################################################################'
 
-git clone https://github.com/lanmaster53/recon-ng.git ~/Downloads/Programs/recon-ng 2>/dev/null \
-    || (cd ~/Downloads/Programs/recon-ng && git pull)
-python3 -m venv ~/Downloads/Programs/recon-ng/.venv
-~/Downloads/Programs/recon-ng/.venv/bin/pip install -r ~/Downloads/Programs/recon-ng/REQUIREMENTS
-log_ok "recon-ng installato"
+clone_or_update "https://github.com/lanmaster53/recon-ng.git" "$HOME/Downloads/Programs/recon-ng"
+if python3 -m venv ~/Downloads/Programs/recon-ng/.venv; then
+    ~/Downloads/Programs/recon-ng/.venv/bin/pip install -r ~/Downloads/Programs/recon-ng/REQUIREMENTS \
+        || log_warn "pip install for recon-ng failed — check REQUIREMENTS"
+else
+    log_warn "venv creation failed for recon-ng — python3-venv may not be installed"
+fi
+log_ok "recon-ng installed"
 
 # ============================================================
 log_step "blackbird"
@@ -301,11 +383,14 @@ echo '#######################################################################'
 echo '#                            blackbird                                #'
 echo '#######################################################################'
 
-git clone https://github.com/p1ngul1n0/blackbird.git ~/Downloads/Programs/blackbird 2>/dev/null \
-    || (cd ~/Downloads/Programs/blackbird && git pull)
-python3 -m venv ~/Downloads/Programs/blackbird/.venv
-~/Downloads/Programs/blackbird/.venv/bin/pip install -r ~/Downloads/Programs/blackbird/requirements.txt
-log_ok "blackbird installato"
+clone_or_update "https://github.com/p1ngul1n0/blackbird.git" "$HOME/Downloads/Programs/blackbird"
+if python3 -m venv ~/Downloads/Programs/blackbird/.venv; then
+    ~/Downloads/Programs/blackbird/.venv/bin/pip install -r ~/Downloads/Programs/blackbird/requirements.txt \
+        || log_warn "pip install for blackbird failed — check requirements.txt"
+else
+    log_warn "venv creation failed for blackbird — python3-venv may not be installed"
+fi
+log_ok "blackbird installed"
 
 # ============================================================
 log_step "spiderfoot (script launcher)"
@@ -314,7 +399,7 @@ echo '#######################################################################'
 echo '#                           spiderfoot                                #'
 echo '#######################################################################'
 
-log_ok "spiderfoot configurato (via pipx)"
+log_ok "spiderfoot configured (via pipx)"
 
 # ============================================================
 log_step "Google Earth Pro"
@@ -323,74 +408,86 @@ echo '#######################################################################'
 echo '#                          Google Earth Pro                           #'
 echo '#######################################################################'
 
-# Il repo APT ufficiale (dl.google.com/linux/earth/deb/) non include Noble (24.04)
-# e causa errori ad ogni apt update. Si usa il download diretto del .deb.
+# The official APT repo (dl.google.com/linux/earth/deb/) does not include Noble (24.04)
+# and causes errors on every apt update. Using the direct .deb download instead.
 wget -q -O ~/Downloads/google-earth64.deb \
     https://dl.google.com/linux/direct/google-earth-pro-stable_current_amd64.deb || {
-    log_warn "Download Google Earth Pro fallito. Scaricare manualmente da https://www.google.com/earth/about/versions/"
+    log_warn "Google Earth Pro download failed. Download manually from https://www.google.com/earth/about/versions/"
 }
 if [ -f ~/Downloads/google-earth64.deb ]; then
     sudo apt install -y "$HOME/Downloads/google-earth64.deb" || { sudo dpkg -i "$HOME/Downloads/google-earth64.deb"; sudo apt -f install -y; }
     rm -f ~/Downloads/google-earth64.deb
-    # Il post-install del .deb aggiunge un repo APT rotto su Noble — va rimosso
+    # The .deb post-install adds a broken APT repo on Noble — remove it
     sudo rm -f /etc/apt/sources.list.d/google-earth-pro.list
     sudo apt update -qq
-    log_ok "Google Earth Pro installato"
+    log_ok "Google Earth Pro installed"
 else
-    log_warn "Google Earth Pro non installato — procedere manualmente"
+    log_warn "Google Earth Pro not installed — proceed manually"
 fi
 
 # ============================================================
-log_step "Tool generici"
+log_step "General purpose tools"
 # ============================================================
 echo '#######################################################################'
 echo '#                       General Purpose Tools                         #'
 echo '#######################################################################'
 
-# CherryTree via snap (piu' affidabile del PPA su Ubuntu 24.04)
+# CherryTree via snap (more reliable than the PPA on Ubuntu 24.04)
 sudo snap install cherrytree || {
-    log_warn "snap cherrytree fallito, provo apt"
+    log_warn "snap cherrytree failed, trying apt"
     sudo add-apt-repository -y ppa:giuspen/ppa 2>/dev/null && sudo apt install -y cherrytree \
-        || log_warn "cherrytree non installato"
+        || log_warn "cherrytree not installed"
 }
 
-# VSCodium al posto di Atom (discontinuato dic 2022)
+# VSCodium instead of Atom (discontinued Dec 2022)
 wget -qO- https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
     | sudo tee /etc/apt/keyrings/vscodium.gpg > /dev/null
 echo "deb [ signed-by=/etc/apt/keyrings/vscodium.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main" \
     | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
-sudo apt update -qq && sudo apt install -y codium || log_warn "VSCodium non installato"
+sudo apt update -qq && sudo apt install -y codium || log_warn "VSCodium not installed"
 
-# Risorse OSINT
+# OSINT resources
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources 2>/dev/null \
-    || log_warn "threatintel-resources gia presente"
+    || log_warn "threatintel-resources already present"
 git clone https://github.com/mxm0z/awesome-intelligence-writing ~/Documents/awesome-intelligence-writing 2>/dev/null \
-    || log_warn "awesome-intelligence-writing gia presente"
+    || log_warn "awesome-intelligence-writing already present"
 
 sudo apt autoremove -y
-log_ok "Tool generici installati"
+log_ok "General purpose tools installed"
 
 # ============================================================
-log_step "Personalizzazione script launcher"
+log_step "Script launcher customisation"
 # ============================================================
 echo '#######################################################################'
 echo '#                       Customising scripts                           #'
 echo '#######################################################################'
 
-log_ok "Script pronti"
+log_ok "Scripts ready"
+
+# ── Failed packages summary ──────────────────────────────────
+if [ "${#FAILED_PACKAGES[@]}" -gt 0 ]; then
+    echo ""
+    echo "══════════════════════════════════════════════════════"
+    echo -e "${OKORANGE}  The following packages failed to install:${RESET}"
+    for _p in "${FAILED_PACKAGES[@]}"; do
+        echo -e "  ${OKORANGE}[WARN]${RESET}  $_p"
+    done
+    echo "  Review the log for details: $LOG_FILE"
+    echo "══════════════════════════════════════════════════════"
+fi
 
 # ============================================================
 echo ""
 echo "══════════════════════════════════════════════════════"
-echo -e "$OKGREEN  Installazione completata!$RESET"
-echo "  Log salvato in: $LOG_FILE"
+echo -e "$OKGREEN  Installation complete!$RESET"
+echo "  Log saved to: $LOG_FILE"
 echo "══════════════════════════════════════════════════════"
 echo ""
 echo -e "$OKRED +----=[Si vis pacem, para bellum]=----+ $RESET"
 echo ""
-echo "NOTA: Eseguire 'source ~/.bashrc' o aprire un nuovo terminale"
-echo "      per aggiornare il PATH con i tool pipx."
+echo "NOTE: Run 'source ~/.bashrc' or open a new terminal"
+echo "      to update the PATH with pipx tools."
 echo ""
-read -rsp $'Premi INVIO per riavviare il sistema...\n'
+read -rsp $'Press ENTER to reboot the system...\n'
 sudo reboot now

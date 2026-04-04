@@ -490,9 +490,9 @@ if [ "${#FAILED_PACKAGES[@]}" -gt 0 ]; then
 fi
 
 # ============================================================
+log_quip "Installation complete. The world is marginally better equipped. You're welcome."
 echo ""
 echo "══════════════════════════════════════════════════════"
-log_quip "Installation complete. The world is marginally better equipped. You're welcome."
 echo -e "$OKGREEN  Installation complete!$RESET"
 echo "  Log saved to: $LOG_FILE"
 echo "══════════════════════════════════════════════════════"

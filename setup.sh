@@ -108,8 +108,6 @@ echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 #
 # ─────────────────────────────────────────────────────────────
 
-log_quip "JARVIS is unavailable. You get the manual installation. Try to keep up."
-
 # ── User check ──────────────────────────────────────────────
 if [ "$(id -u)" -eq 0 ]; then
     log_error "Do not run this script as root. Use a regular user with sudo."
@@ -129,6 +127,7 @@ sudo apt -y update -qq
 timeout 30 sudo snap refresh 2>/dev/null || log_warn "snap refresh failed or timed out"
 log_ok "System updated"
 log_quip "System patched. Unlike some people's situational awareness."
+log_quip "JARVIS is unavailable. You get the manual installation. Try to keep up."
 
 # ============================================================
 log_step "Copying scripts, icons, shortcuts and templates"

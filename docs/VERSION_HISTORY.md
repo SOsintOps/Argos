@@ -14,9 +14,6 @@ Patch release focused on installation correctness and user experience.
 **VirtualBox Guest Additions removed from installer.**
 `virtualbox-guest-utils` and `virtualbox-guest-x11` have been removed from the apt install list. The dpkg config file prompt on `virtualbox-guest-x11` blocked non-interactive installation. Guest Additions must now be installed manually before running `setup.sh`. The README Requirements section documents this as a prerequisite.
 
-**Tony Stark easter egg quips.**
-A `log_quip()` function adds 10 contextual one-liners to the installation log, styled as Tony Stark commentary. They appear at key milestones: startup, OS update, dependency install, Python tools, Firefox, Obsidian, theHarvester, Google Earth, and completion.
-
 **Closing motto updated.**
 The final banner motto has been changed from *Si vis pacem, para bellum* to *Audi, vide, tace* — a more fitting motto for an OSINT workstation.
 

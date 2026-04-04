@@ -12,9 +12,6 @@ Patch release focused on installation correctness and user experience.
 
 ### Added
 
-#### setup.sh
-- Tony Stark easter egg quips (`log_quip()` function, cyan `[STARK]` prefix) at 10 contextual points throughout the installation: startup, OS update, apt install block, pipx tools, Firefox, Obsidian, theHarvester, Google Earth, and completion.
-
 #### README.md
 - VirtualBox Guest Additions listed as an explicit prerequisite. The script no longer installs them; they must be present before running `setup.sh`.
 

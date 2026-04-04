@@ -6,6 +6,32 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.0.4-beta] — 2026-04-04
+
+Patch release focused on installation correctness and user experience.
+
+### Added
+
+#### setup.sh
+- Tony Stark easter egg quips (`log_quip()` function, cyan `[STARK]` prefix) at 10 contextual points throughout the installation: startup, OS update, apt install block, pipx tools, Firefox, Obsidian, theHarvester, Google Earth, and completion.
+
+#### README.md
+- VirtualBox Guest Additions listed as an explicit prerequisite. The script no longer installs them; they must be present before running `setup.sh`.
+
+### Fixed
+
+#### setup.sh
+- `virtualbox-guest-utils` and `virtualbox-guest-x11` removed from the apt install list. The dpkg interactive config file prompt on `virtualbox-guest-x11` blocked non-interactive installation.
+- Package count in startup quip corrected from 31 to 29.
+- Known failure points comment block reduced from 6 to 5 entries: the VirtualBox entry removed as those packages are no longer installed.
+
+### Changed
+
+#### setup.sh
+- Closing motto changed from *Si vis pacem, para bellum* to *Audi, vide, tace* — more fitting for an OSINT workstation.
+
+---
+
 ## [2.0.3-beta] — 2026-04-04
 
 Patch release focused on installation resilience and failure transparency.

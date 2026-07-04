@@ -115,6 +115,13 @@ if [ "$(id -u)" -eq 0 ]; then
     exit 1
 fi
 
+# ── Source directory check ──────────────────────────────────
+ARGOS_SRC="$HOME/Downloads/Argos"
+if [ ! -d "$ARGOS_SRC" ]; then
+    log_error "Argos repository not found at $ARGOS_SRC. Clone it there first (see README)."
+    exit 1
+fi
+
 # ============================================================
 log_step "System update"
 # ============================================================
@@ -137,22 +144,47 @@ echo '#######################################################################'
 echo '#                         Support files                              #'
 echo '#######################################################################'
 
+# Guard each copy with compgen so an empty source directory logs a
+# warning instead of aborting the whole install under set -e.
 mkdir -p ~/Documents/scripts
-cp ~/Downloads/Argos/scripts/*.sh ~/Documents/scripts
-sudo chmod +x ~/Documents/scripts/*.sh
+if compgen -G "$ARGOS_SRC/scripts/*.sh" > /dev/null; then
+    cp "$ARGOS_SRC"/scripts/*.sh ~/Documents/scripts
+    sudo chmod +x ~/Documents/scripts/*.sh
+else
+    log_warn "No scripts found in $ARGOS_SRC/scripts — skipping"
+fi
 
 mkdir -p ~/Pictures/icons
-cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
+if compgen -G "$ARGOS_SRC/multimedia/icons/*" > /dev/null; then
+    cp "$ARGOS_SRC"/multimedia/icons/* ~/Pictures/icons
+else
+    log_warn "No icons found in $ARGOS_SRC/multimedia/icons — skipping"
+fi
 
-for f in ~/Downloads/Argos/shortcuts/*.desktop; do
-    sed "s|__HOME__|$HOME|g" "$f" | sudo tee "/usr/share/applications/$(basename "$f")" > /dev/null
-done
+if compgen -G "$ARGOS_SRC/shortcuts/*.desktop" > /dev/null; then
+    for f in "$ARGOS_SRC"/shortcuts/*.desktop; do
+        sed "s|__HOME__|$HOME|g" "$f" | sudo tee "/usr/share/applications/$(basename "$f")" > /dev/null
+    done
+else
+    log_warn "No .desktop shortcuts found in $ARGOS_SRC/shortcuts — skipping"
+fi
 
-cp -r ~/Downloads/Argos/templates/* ~/Templates
+mkdir -p ~/Templates
+if compgen -G "$ARGOS_SRC/templates/*" > /dev/null; then
+    cp -r "$ARGOS_SRC"/templates/* ~/Templates
+else
+    log_warn "No templates found in $ARGOS_SRC/templates — skipping"
+fi
 
-cp ~/Downloads/Argos/multimedia/wallpapers/* ~/Pictures
-sudo chmod +x ~/Downloads/Argos/multimedia/wallpapers/background.sh
-~/Downloads/Argos/multimedia/wallpapers/background.sh || log_warn "Wallpaper script failed"
+if compgen -G "$ARGOS_SRC/multimedia/wallpapers/*" > /dev/null; then
+    cp "$ARGOS_SRC"/multimedia/wallpapers/* ~/Pictures
+fi
+if [ -f "$ARGOS_SRC/multimedia/wallpapers/background.sh" ]; then
+    sudo chmod +x "$ARGOS_SRC/multimedia/wallpapers/background.sh"
+    "$ARGOS_SRC/multimedia/wallpapers/background.sh" || log_warn "Wallpaper script failed"
+else
+    log_warn "background.sh not found — skipping wallpaper setup"
+fi
 
 log_ok "Support files copied"
 
@@ -239,7 +271,7 @@ echo '#                        Customising Firefox                          #'
 echo '#######################################################################'
 log_quip "Firefox. Not my first choice. Or my second. But it is open source, I'll give it that."
 
-POLICIES_SRC="$HOME/Downloads/Argos/config/policies.json"
+POLICIES_SRC="$ARGOS_SRC/config/policies.json"
 
 if [ ! -f "$POLICIES_SRC" ]; then
     log_warn "policies.json not found at $POLICIES_SRC, skipping Firefox customisation"
@@ -473,6 +505,7 @@ sudo snap install cherrytree || {
 }
 
 # VSCodium instead of Atom (discontinued Dec 2022)
+sudo mkdir -p /etc/apt/keyrings
 if wget -qO- https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
     | sudo tee /etc/apt/keyrings/vscodium.gpg > /dev/null; then
@@ -526,5 +559,12 @@ echo ""
 echo "NOTE: Run 'source ~/.bashrc' or open a new terminal"
 echo "      to update the PATH with pipx tools."
 echo ""
-read -rsp $'Press ENTER to reboot the system...\n'
-sudo reboot now
+# Reboot only in an interactive session: without a TTY, read would
+# return immediately and the machine would reboot with no confirmation.
+if [ -t 0 ]; then
+    read -rsp $'Press ENTER to reboot the system...\n'
+    sudo reboot now
+else
+    echo "Non-interactive session detected — automatic reboot skipped."
+    echo "Reboot manually to complete the setup."
+fi

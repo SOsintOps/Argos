@@ -5,6 +5,26 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v2.1.1-beta — 2026-07-04
+
+Robustness release: setup.sh no longer aborts outside the happy path.
+
+### Highlights
+
+**Clear error when the repo is not where expected.**
+If the repository has not been cloned to `~/Downloads/Argos`, the script now stops immediately with an explicit message instead of failing mid-install with a bare line number. The source path is centralised in one `ARGOS_SRC` variable.
+
+**Survives minimal or non-standard systems.**
+`~/Templates` is created if missing, empty source directories are skipped with a warning instead of killing the install, and `/etc/apt/keyrings` is created before deploying the VSCodium signing key (its absence silently skipped VSCodium on clean 24.04 systems).
+
+**No more surprise reboots.**
+The final reboot now requires an interactive terminal. In headless or piped runs the script prints a notice and lets the user reboot manually.
+
+**Repo hygiene and GitHub housekeeping.**
+ShellCheck now runs in CI on every push and PR; a SECURITY.md policy was added; `.idea/` and internal `changes.txt` notes were removed from tracking. On the GitHub side: Issues re-enabled (the README pointed to them but they were off), the placeholder GitHub Pages site and its `gh-pages` branch removed, and the pre-rewrite 2019-2022 history preserved under the `archive/pre-rewrite` tag.
+
+---
+
 ## v2.1.0-beta — 2026-07-04
 
 Exploratores added and wired into Firefox; GUI launchers for uncovered tools; Elasticsearch replaced with Shodan; script bug fixes.

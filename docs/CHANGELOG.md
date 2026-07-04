@@ -26,6 +26,9 @@ CI, `.idea/` untracked, internal notes removed.
 #### README.md
 - OSINT tools table sorted alphabetically.
 
+#### multimedia/images/
+- The Argos mascot (`scribblenauts-argos.png`) replaced with a new illustration inspired by the original "Scribblenauts Argos" icon by Miguel Ángel Aranda. Attribution updated in `License.md` and `multimedia/images/license.txt`.
+
 ### Fixed
 
 #### setup.sh

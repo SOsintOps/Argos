@@ -11,6 +11,8 @@ Argos automatically configures an open-source OSINT workstation from a clean Ubu
 Best practice recommends using a dedicated VM for each OSINT investigation.
 This script follows the methods described by Michael Bazzell in [Open Source Intelligence Techniques](https://inteltechniques.com/book1.html).
 
+<br clear="all">
+
 ## Contents
 - [Requirements](#requirements)
 - [Tools](#tools)
@@ -23,8 +25,6 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 - [Version History](docs/VERSION_HISTORY.md)
 - [OSINT Analysis Guidelines](docs/guidelines.md)
 - [FAQ](docs/faq.md)
-
-<br clear="all">
 
 ---
 

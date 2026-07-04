@@ -61,23 +61,29 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 | [EyeWitness](https://github.com/FortyNorthSecurity/EyeWitness) | Active | Website screenshots |
 | [The Harvester](https://github.com/laramies/theHarvester) | Active | Email and domain recon |
 | [Metagoofil](https://github.com/opsdisk/metagoofil) | Active | Metadata from public documents |
-| [recon-ng](https://github.com/lanmaster53/recon-ng) | Active | Modular OSINT framework |
-| [Sherlock](https://github.com/sherlock-project/sherlock) | Active | Username search |
-| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation |
-| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Advanced username search |
-| [holehe](https://github.com/megadose/holehe) | Active | Email OSINT |
-| [maigret](https://github.com/soxoj/maigret) | Active | Username search (advanced Sherlock fork) |
-| [Maltego](https://www.maltego.com/) | Active | Link analysis (requires account) |
+| [recon-ng](https://github.com/lanmaster53/recon-ng) | Limited | Modular OSINT framework; maintenance reduced |
+| [Sherlock](https://github.com/sherlock-project/sherlock) | Active | Username search across 400+ sites |
+| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation (200+ modules) |
+| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Username and email search across 600+ platforms |
+| [maigret](https://github.com/soxoj/maigret) | Active | Username search across 3000+ sites |
+| [user-scanner](https://github.com/kaifcodec/user-scanner) | Active | Email and username OSINT, 195+ scan vectors |
+| [linkook](https://github.com/JackJuly/linkook) | Active | Linked social accounts and emails from username |
+| [socialscan](https://github.com/iojw/socialscan) | Active | Accurate email and username availability checks |
+| [PhoneInfoga](https://github.com/sundowndev/phoneinfoga) | Stable | Phone number intelligence (stable, unmaintained) |
+| [Shodan CLI](https://cli.shodan.io/) | Active | Internet-exposed host search (requires API key) |
+| [Exploratores](https://github.com/SOsintOps/Exploratores) | Active | Browser-based OSINT toolkit (search tools, PII redactor, IBAN analysis, CyberChef) |
 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Active | Video downloader (replaces youtube-dl) |
+| [Maltego](https://www.maltego.com/) | Manual | Link analysis; not auto-installed (requires paid account), install manually if needed |
 
 **Removed tools (abandoned or discontinued):**
 - ~~Instalooter~~: use Instaloader
 - ~~Sublist3r~~: use Amass
 - ~~Photon~~: use Katana or GoSpider
 - ~~youtube-dl~~: replaced by yt-dlp
-- ~~Moriarty-Project~~: use PhoneInfoga
+- ~~Moriarty-Project~~: replaced by PhoneInfoga
 - ~~Elasticsearch-Crawler~~: use Shodan CLI
 - ~~Atom Editor~~ (discontinued December 2022): replaced by VSCodium
+- ~~holehe~~: abandoned, replaced by user-scanner
 
 ### General Tools
 
@@ -122,7 +128,7 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
     ~/Downloads/Argos/setup.sh
     ```
 
-    > Firefox does not need to be closed or opened manually. The script initialises the Firefox profile automatically if it has not been created yet.
+    > Firefox does not need to be closed or opened manually. The script deploys an enterprise `policies.json` (privacy hardening, OSINT extensions, managed bookmarks) to the Firefox distribution directory; it is applied automatically on the next Firefox launch. Firefox opens the local Exploratores toolkit as its homepage.
 
 ---
 
@@ -140,11 +146,10 @@ The log contains the full installation output with timestamps. If an error occur
 
 ## To Do
 
-- Add PhoneInfoga as a replacement for Moriarty-Project
 - Add Katana or GoSpider as a replacement for Photon
 - Update LibreOffice report templates for OSINT investigations
 - Complete end-to-end testing on Ubuntu Budgie 24.04 LTS VM
-- Add shortcuts for holehe, maigret standalone, and blackbird standalone
+- Add shortcuts for maigret standalone and blackbird standalone
 
 ---
 

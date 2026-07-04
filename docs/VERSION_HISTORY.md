@@ -5,6 +5,84 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v2.1.0-beta — 2026-07-04
+
+Exploratores added and wired into Firefox; GUI launchers for uncovered tools; Elasticsearch replaced with Shodan; script bug fixes.
+
+### Highlights
+
+**Exploratores installed locally.**
+[Exploratores](https://github.com/SOsintOps/Exploratores) (from SOsintOps, the same project behind the Speculator policies) is a browser-based OSINT toolkit: curated search tools, a PII redactor, multi-country IBAN analysis, and an embedded CyberChef — all static HTML/CSS/JS, no backend, all processing client-side. `setup.sh` clones it to `~/Documents/Exploratores`.
+
+**Firefox integration, three ways.**
+- Firefox homepage set to the local `launchme.html` (changeable by the user — the policy is not locked).
+- "Exploratores" bookmark in the managed "Local Tools" OSINT bookmark folder.
+- New `exploratores.desktop` shortcut in the application menu that opens the toolkit in Firefox.
+
+To support local `file://` URLs, `setup.sh` now deploys policies.json with `__HOME__` placeholder substitution, the same mechanism used for the `.desktop` files.
+
+**Previously uncovered tools now reachable from the menu.**
+`user-scanner`, `linkook`, and `socialscan` (installed since v2.0.6 but with no launcher) are now menu entries inside the Usernames tool. PhoneInfoga gets its own `phoneinfoga.desktop` shortcut, launching its web UI on `http://127.0.0.1:5000` like SpiderFoot.
+
+**Elasticsearch-Crawler replaced with Shodan.**
+The dead Elasticsearch-Crawler script (only a deprecation warning) has been removed. In its place, a Shodan CLI wrapper prompts for the API key on first use, then runs searches and shows the results.
+
+**Reliability and consistency fixes.**
+- `amass enum` no longer passes the removed `-src` flag (broke on Amass v4).
+- Blackbird now opens the folder where it actually writes results.
+- EyeWitness prefers its virtualenv and reports failures clearly.
+- `setup.sh` no longer aborts the whole install if the Obsidian or VSCodium downloads fail.
+- All launcher UI messages are now English-only.
+
+---
+
+## v2.0.7-beta — 2026-04-30
+
+Firefox customisation rewritten from scratch.
+
+### Highlights
+
+**Zip-based profile template replaced by enterprise policies.json.**
+The previous method used a ~50 MB zip archive (`argosfox/argos-ff-template.zip`) containing a full Firefox profile snapshot from 2022, including stale telemetry, old cookies databases, and deprecated extensions (HTTPS Everywhere). The script had to launch Firefox, wait 15 seconds for a profile directory to appear, then extract and overwrite it.
+
+The new method deploys a single `config/policies.json` file (based on the [Speculator Project](https://github.com/SOsintOps/Speculator-Project)) to the Firefox distribution directory. It works on both snap (`/etc/firefox/policies/`) and deb (`/usr/lib/firefox/distribution/`) installs. No profile detection, no zip handling, no Firefox auto-launch.
+
+**What the policies.json configures:**
+- Privacy: telemetry, studies, Pocket, form history, password manager disabled. Tracking protection set to strict. WebRTC, geolocation, battery API, beacon, DNS prefetch disabled. Fingerprinting resistance enabled.
+- Permissions: camera, microphone, location, notifications blocked. Autoplay blocked.
+- Sanitise on shutdown: cache, cookies, history, sessions, form data cleared automatically.
+- Extensions (12): uBlock Origin, CanvasBlocker, ClearURLs, Multi-Account Containers, EXIF Viewer, Wayback Machine, GPS Detect, Search by Image, Nimbus Screenshot, Resurrect Pages, Link Gopher, Mitaka.
+- Managed bookmarks: OSINT folder tree with Person Investigation, Domain & Infrastructure, Image & Media, Geolocation, Archives, Social Media, Local Tools, and Resources subfolders.
+
+---
+
+## v2.0.6-beta — 2026-04-08
+
+Toolset update replacing an abandoned tool and adding three new OSINT tools.
+
+### Highlights
+
+**holehe removed; user-scanner added.**
+holehe (last commit September 2024) has many broken modules and produces frequent false positives. It has been replaced by `user-scanner`, a 2-in-1 email and username OSINT suite with 195+ scan vectors, actively maintained in 2025/2026.
+
+**Three new tools added.**
+- `linkook`: maps linked social accounts and associated emails from a single username across multiple platforms.
+- `socialscan`: queries registration endpoints directly for accurate email and username availability checks on 11 platforms.
+- `PhoneInfoga`: phone number intelligence gathering. Installed as a Go binary to `/usr/local/bin/`. The developer has declared the project stable but unmaintained; the binary remains fully functional.
+
+---
+
+## v2.0.5-beta — 2026-04-08
+
+Patch release cleaning up the `.desktop` template files.
+
+### Highlights
+
+**`.desktop` files now use an explicit placeholder.**
+All 12 shortcut files previously contained `/home/osint/` as a de facto placeholder. These paths have been replaced with `__HOME__`, making clear that these are templates, not live paths. The `sed` substitution in `setup.sh` has been updated to match. Behaviour at install time is unchanged.
+
+---
+
 ## v2.0.4-beta — 2026-04-04
 
 Patch release focused on installation correctness and user experience.

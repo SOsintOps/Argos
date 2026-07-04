@@ -2,8 +2,8 @@
 Version=1.0
 Name=Instagram OSInt
 Comment=Launch Instagram OSInt tools
-Exec="/home/osint/Documents/scripts/instagram.sh"
+Exec="__HOME__/Documents/scripts/instagram.sh"
 Type=Application
 Categories=Application;OSINT
-Icon=/home/osint/Pictures/icons/instagram.png
+Icon=__HOME__/Pictures/icons/instagram.png
 Terminal=false

@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Name=Usernames OSINT
-Comment=Sherlock, Maigret, Blackbird
+Comment=Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan
 Categories=Network;OSINT
-Exec=/home/osint/Documents/scripts/usernames.sh
-Icon=/home/osint/Pictures/icons/usernames.png
+Exec=__HOME__/Documents/scripts/usernames.sh
+Icon=__HOME__/Pictures/icons/usernames.png
 Terminal=true

@@ -6,6 +6,116 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.1.0-beta] — 2026-07-04
+
+Exploratores added and integrated with Firefox; GUI launchers for previously
+uncovered tools; Elasticsearch replaced with Shodan; script bug fixes and
+English-only UI messages.
+
+### Added
+
+#### setup.sh
+- New "Exploratores" section: clones [SOsintOps/Exploratores](https://github.com/SOsintOps/Exploratores) to `~/Documents/Exploratores` via `clone_or_update`. Exploratores is a static HTML/CSS/JS OSINT toolkit (curated search tools, PII redactor, multi-country IBAN analysis, embedded CyberChef) with no backend; the entry point is `launchme.html`, opened directly in Firefox.
+- `shodan` added to the pipx tool list.
+
+#### config/policies.json
+- `Homepage` policy: Firefox now opens Exploratores (`file://__HOME__/Documents/Exploratores/launchme.html`) as its homepage. Not locked, so the user can change it from Firefox settings.
+- New "Exploratores" bookmark added to the managed "Local Tools" bookmark folder, pointing to the local `launchme.html`.
+
+#### scripts/ and shortcuts/
+- `exploratores.desktop`: application menu shortcut that launches Exploratores in Firefox. Uses the system Firefox icon.
+- `usernames.sh`: three previously uncovered pipx tools added to the menu — **User Scanner** (`user-scanner -u/-e`), **Linkook** (`linkook`), and **Socialscan** (`socialscan`). They were installed since v2.0.6 but had no launcher.
+- `phoneinfoga.sh` + `phoneinfoga.desktop`: new launcher for PhoneInfoga (installed since v2.0.6 but previously unreachable). Starts the PhoneInfoga web UI (`phoneinfoga serve`) on `http://127.0.0.1:5000` and opens the browser — same pattern as SpiderFoot. Uses the freedesktop `phone` icon.
+- `shodan.sh` + `shodan.desktop`: zenity wrapper for the Shodan CLI (prompts for the API key on first use via `shodan init`, then runs `shodan search`). Replaces the deprecated Elasticsearch-Crawler. Uses the freedesktop `network-server` icon.
+
+### Changed
+
+#### setup.sh
+- policies.json deployment now substitutes the `__HOME__` placeholder with the real `$HOME` at deploy time (`sed` piped to `sudo tee`, replacing the previous `sudo cp`). Required because policies.json now contains local `file://` URLs. This is the same mechanism already used for the `.desktop` shortcut files.
+- Obsidian download, Obsidian version lookup, and the VSCodium key/repo setup are now wrapped so a network failure logs a warning and continues instead of aborting the whole install under `set -euo pipefail` + the `ERR` trap.
+
+#### scripts/
+- All zenity/UI messages translated to English (previously mixed Italian/English across `usernames.sh`, `instagram.sh`, `metagoofil.sh`, `eyewitness.sh`, `ffmpeg_interact.sh`, `youtubedl.sh`).
+
+### Fixed
+
+#### scripts/domains.sh
+- Removed the `-src` flag from `amass enum`. The flag was removed in Amass v4 (the version installed via snap) and caused the command to error.
+
+#### scripts/usernames.sh
+- Blackbird: the script now opens the folder where Blackbird actually writes its reports (`~/Downloads/Programs/blackbird/results/`) instead of an empty `~/Documents/blackbird/`.
+
+#### scripts/eyewitness.sh
+- Uses the EyeWitness virtualenv Python if present, falling back to the system `python3`, and shows a clear error dialog on failure instead of crashing silently (Ubuntu 24.04 / PEP 668 dependency issues).
+
+### Removed
+
+#### scripts/ and shortcuts/
+- Elasticsearch-Crawler removed (`elasticsearch.sh`, `elasticsearch.desktop`, `elasticsearch.png`). The tool was unmaintained and the script only showed a deprecation warning; replaced by Shodan (see Added).
+
+---
+
+## [2.0.7-beta] — 2026-04-30
+
+Firefox customisation replaced: zip-based profile template removed, enterprise policies.json adopted.
+
+### Added
+
+#### config/policies.json
+- Enterprise policies file for Firefox, based on the [Speculator Project](https://github.com/SOsintOps/Speculator-Project) configuration. Covers privacy hardening (telemetry, tracking, fingerprinting, WebRTC, geolocation disabled), permission lockdown (camera, microphone, location, notifications blocked), sanitise-on-shutdown (cache, cookies, history, sessions cleared), 12 OSINT extensions auto-installed (uBlock Origin, CanvasBlocker, ClearURLs, Multi-Account Containers, EXIF Viewer, Wayback Machine, GPS Detect, Search by Image, Nimbus Screenshot, Resurrect Pages, Link Gopher, Mitaka), and managed OSINT bookmark folders.
+
+### Changed
+
+#### setup.sh
+- Firefox customisation block completely rewritten. The old approach launched Firefox to create a profile, extracted a ~50 MB zip archive (`argosfox/argos-ff-template.zip`) from 2022, and copied its contents into the profile directory. The new approach deploys a single `policies.json` file to the Firefox distribution directory. No profile detection, no zip handling, no Firefox auto-launch required.
+- Snap Firefox: policies deployed to `/etc/firefox/policies/policies.json`.
+- Deb Firefox: policies deployed to `/usr/lib/firefox/distribution/policies.json`.
+- Known failure point #4 updated: "Firefox auto-launch" replaced with "Firefox policies.json" describing the new deployment paths.
+
+### Removed
+
+#### setup.sh
+- `zip` dependency is no longer required by the Firefox customisation step. It remains in the apt list only if other steps still use it.
+- Profile detection logic removed (`FIREFOX_SNAP_DIR`, `FIREFOX_DEB_DIR`, `FF_PROFILE`, `find *.default*`).
+- Firefox auto-launch block removed (the `firefox &>/dev/null &`, 15-second wait, and `pkill` sequence).
+- `argosfox/argos-ff-template.zip` reference removed from setup.sh. The `argosfox/` directory is no longer used at install time.
+
+---
+
+## [2.0.6-beta] — 2026-04-08
+
+Toolset update: holehe replaced, three new OSINT tools added.
+
+### Added
+
+#### setup.sh
+- `user-scanner` (pipx): 2-in-1 email and username OSINT suite, 195+ scan vectors. Replaces holehe.
+- `linkook` (pipx): discovers linked social accounts and associated emails from a single username.
+- `socialscan` (pipx): accurate email and username availability checks via direct registration endpoint queries.
+- `PhoneInfoga` (binary): phone number intelligence gathering framework. Installed via the official upstream script to `/usr/local/bin/phoneinfoga`. Note: declared stable but unmaintained by the developer; binary remains functional.
+
+### Removed
+
+#### setup.sh
+- `holehe` (pipx): removed. Last commit September 2024; many modules broken, frequent false positives, superseded by `user-scanner`.
+
+---
+
+## [2.0.5-beta] — 2026-04-08
+
+Patch release replacing hardcoded template paths in `.desktop` shortcut files.
+
+### Changed
+
+#### shortcuts/*.desktop
+- All 12 `.desktop` files: `/home/osint/` replaced with `__HOME__` placeholder. Makes the template nature of these files explicit and removes any ambiguity about the `osint` username dependency.
+- `youtube_dl.desktop`: CRLF line endings converted to LF.
+
+#### setup.sh
+- `sed` substitution in the `.desktop` copy loop updated from `s|/home/osint/|$HOME/|g` to `s|__HOME__|$HOME|g` to match the new placeholder.
+
+---
+
 ## [2.0.4-beta] — 2026-04-04
 
 Patch release focused on installation correctness and user experience.

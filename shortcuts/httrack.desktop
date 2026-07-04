@@ -3,5 +3,5 @@ Type=Application
 Name=HTTrack
 Categories=Network;OSINT
 Exec=httrack
-Icon=/home/osint/Pictures/icons/httrack.png
+Icon=__HOME__/Pictures/icons/httrack.png
 Terminal=true

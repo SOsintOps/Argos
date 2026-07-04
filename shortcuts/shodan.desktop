@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Shodan
+Comment=Search Shodan from the command line
+Categories=Network;OSINT
+Exec=__HOME__/Documents/scripts/shodan.sh
+Icon=network-server
+Terminal=false

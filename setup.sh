@@ -3,7 +3,7 @@
 # ============================================================
 # ARGOS - OSINT Workstation Setup Script
 # Compatible with: Ubuntu 24.04 LTS (Noble Numbat), Ubuntu Budgie 24.04 LTS
-# Updated: 2026-04-04
+# Updated: 2026-07-04
 # ============================================================
 
 set -euo pipefail
@@ -95,10 +95,11 @@ echo -e "$OKRED +----=[Osint Ops]=----+ $RESET"
 #     connection. Any network failure will abort that individual step.
 #     The script does not retry failed downloads automatically.
 #
-#  4. Firefox auto-launch
-#     The profile initialisation block launches Firefox in the background
-#     and waits 15 seconds. This will not work in headless environments or
-#     minimal desktop sessions where a display is not available.
+#  4. Firefox policies.json
+#     The script deploys a policies.json file to the Firefox distribution
+#     directory. On snap installs the target is /etc/firefox/policies/; on
+#     deb installs it is /usr/lib/firefox/distribution/. If neither path
+#     can be created the step is skipped with a warning.
 #
 #  5. EyeWitness/Python/setup/setup.sh
 #     EyeWitness runs its own bundled setup script, which installs pip
@@ -144,7 +145,7 @@ mkdir -p ~/Pictures/icons
 cp ~/Downloads/Argos/multimedia/icons/* ~/Pictures/icons
 
 for f in ~/Downloads/Argos/shortcuts/*.desktop; do
-    sed "s|/home/osint/|$HOME/|g" "$f" | sudo tee "/usr/share/applications/$(basename "$f")" > /dev/null
+    sed "s|__HOME__|$HOME|g" "$f" | sudo tee "/usr/share/applications/$(basename "$f")" > /dev/null
 done
 
 cp -r ~/Downloads/Argos/templates/* ~/Templates
@@ -220,9 +221,12 @@ install_pipx() {
 install_pipx instaloader
 install_pipx toutatis
 install_pipx maigret
-install_pipx holehe
+install_pipx user-scanner
 install_pipx sherlock-project sherlock
 install_pipx spiderfoot
+install_pipx linkook
+install_pipx socialscan
+install_pipx shodan
 
 log_ok "Python tools installed via pipx"
 log_quip "Isolated environments. Because dependency conflicts are someone else's problem now."
@@ -235,47 +239,29 @@ echo '#                        Customising Firefox                          #'
 echo '#######################################################################'
 log_quip "Firefox. Not my first choice. Or my second. But it is open source, I'll give it that."
 
-pkill -f firefox 2>/dev/null || true
-sleep 2
+POLICIES_SRC="$HOME/Downloads/Argos/config/policies.json"
 
-# Detect Firefox profile dynamically (snap or deb)
-FIREFOX_SNAP_DIR="$HOME/snap/firefox/common/.mozilla/firefox"
-FIREFOX_DEB_DIR="$HOME/.mozilla/firefox"
-FF_PROFILE=""
-
-# If Firefox has never been opened, launch it once to create the default profile
-if [ ! -d "$FIREFOX_SNAP_DIR" ] && [ ! -d "$FIREFOX_DEB_DIR" ]; then
-    log_warn "Firefox profile not found. Launching Firefox to initialise it..."
-    firefox &>/dev/null &
-    FF_INIT_PID=$!
-    sleep 15
-    kill "$FF_INIT_PID" 2>/dev/null || true
-    pkill -f firefox 2>/dev/null || true
-    sleep 3
-fi
-
-if [ -d "$FIREFOX_SNAP_DIR" ]; then
-    FF_PROFILE=$(find "$FIREFOX_SNAP_DIR" -maxdepth 1 -name "*.default*" -type d 2>/dev/null | head -1)
-elif [ -d "$FIREFOX_DEB_DIR" ]; then
-    FF_PROFILE=$(find "$FIREFOX_DEB_DIR" -maxdepth 1 -name "*.default*" -type d 2>/dev/null | head -1)
-fi
-
-if cd ~/Downloads/Argos/argosfox/ 2>/dev/null; then
-    if [ -f argos-ff-template.zip ]; then
-        zip -F argos-ff-template.zip --out argos-ff-template2.zip
-        unzip -o argos-ff-template2.zip
-        if [ -n "$FF_PROFILE" ]; then
-            cp -R ~/Downloads/Argos/argosfox/argos-ff-template/* "$FF_PROFILE"
-            log_ok "Firefox profile customised: $FF_PROFILE"
-        else
-            log_warn "Firefox profile not found. Open Firefox at least once before running this script."
-        fi
-    else
-        log_warn "argos-ff-template.zip not found, skipping Firefox customisation"
-    fi
-    cd - > /dev/null
+if [ ! -f "$POLICIES_SRC" ]; then
+    log_warn "policies.json not found at $POLICIES_SRC, skipping Firefox customisation"
 else
-    log_warn "argosfox directory not found, skipping Firefox customisation"
+    FF_POLICY_DIR=""
+    if snap list firefox &>/dev/null; then
+        FF_POLICY_DIR="/etc/firefox/policies"
+    elif [ -d "/usr/lib/firefox" ]; then
+        FF_POLICY_DIR="/usr/lib/firefox/distribution"
+    fi
+
+    if [ -n "$FF_POLICY_DIR" ]; then
+        sudo mkdir -p "$FF_POLICY_DIR"
+        # policies.json contains local file:// URLs (Exploratores) with a
+        # __HOME__ placeholder — substitute the real $HOME at deploy time,
+        # same mechanism used for the .desktop shortcuts.
+        sed "s|__HOME__|$HOME|g" "$POLICIES_SRC" | sudo tee "$FF_POLICY_DIR/policies.json" > /dev/null
+        sudo chmod 644 "$FF_POLICY_DIR/policies.json"
+        log_ok "Firefox policies.json deployed to $FF_POLICY_DIR"
+    else
+        log_warn "Firefox installation not detected (snap or deb). Skipping policies.json deployment."
+    fi
 fi
 
 # ============================================================
@@ -288,17 +274,20 @@ log_quip "Obsidian. Note-taking for people who think in graphs. I can respect th
 
 # Fetch the latest version dynamically
 OBSIDIAN_VERSION=$(curl -s https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest \
-    | jq -r '.tag_name' | sed 's/v//')
-if [ -z "$OBSIDIAN_VERSION" ]; then
+    | jq -r '.tag_name' | sed 's/v//') || true
+if [ -z "$OBSIDIAN_VERSION" ] || [ "$OBSIDIAN_VERSION" = "null" ]; then
     log_warn "Unable to retrieve Obsidian version. Using fallback 1.7.7"
     OBSIDIAN_VERSION="1.7.7"
 fi
 log_step "  Obsidian version: $OBSIDIAN_VERSION"
 cd ~/Downloads
-wget -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.snap"
-sudo snap install --dangerous "obsidian_${OBSIDIAN_VERSION}_amd64.snap" \
-    || log_warn "snap install obsidian failed — install manually from https://obsidian.md"
-sudo rm -f "obsidian_${OBSIDIAN_VERSION}_amd64.snap"
+if wget -q "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/obsidian_${OBSIDIAN_VERSION}_amd64.snap"; then
+    sudo snap install --dangerous "obsidian_${OBSIDIAN_VERSION}_amd64.snap" \
+        || log_warn "snap install obsidian failed — install manually from https://obsidian.md"
+    sudo rm -f "obsidian_${OBSIDIAN_VERSION}_amd64.snap"
+else
+    log_warn "Obsidian download failed — install manually from https://obsidian.md"
+fi
 
 git clone https://github.com/WebBreacher/obsidian-osint-templates ~/Documents/obsidian-osint-templates 2>/dev/null \
     || log_warn "obsidian-osint-templates already present"
@@ -429,6 +418,47 @@ else
 fi
 
 # ============================================================
+log_step "PhoneInfoga"
+# ============================================================
+echo '#######################################################################'
+echo '#                          PhoneInfoga                                #'
+echo '#######################################################################'
+
+# PhoneInfoga is a Go binary — no pip/pipx available.
+# The developer has declared the project stable but unmaintained.
+# The binary remains functional and is widely used.
+PHONEINFOGA_URL="https://raw.githubusercontent.com/sundowndev/phoneinfoga/master/support/scripts/install"
+if curl -sSL "$PHONEINFOGA_URL" -o /tmp/phoneinfoga_install.sh 2>/dev/null; then
+    bash /tmp/phoneinfoga_install.sh || log_warn "PhoneInfoga install script failed"
+    rm -f /tmp/phoneinfoga_install.sh
+    if [ -f ./phoneinfoga ]; then
+        sudo install ./phoneinfoga /usr/local/bin/phoneinfoga || log_warn "PhoneInfoga binary install failed"
+        rm -f ./phoneinfoga
+        log_ok "PhoneInfoga installed"
+    else
+        log_warn "PhoneInfoga binary not found after install — check manually"
+    fi
+else
+    log_warn "PhoneInfoga download failed — install manually from https://github.com/sundowndev/phoneinfoga/releases"
+fi
+
+# ============================================================
+log_step "Exploratores"
+# ============================================================
+echo '#######################################################################'
+echo '#                          Exploratores                               #'
+echo '#######################################################################'
+
+# Exploratores: browser-based OSINT toolkit (static HTML/CSS/JS, no backend).
+# Cloned locally; entry point is launchme.html, opened directly in Firefox.
+clone_or_update "https://github.com/SOsintOps/Exploratores.git" "$HOME/Documents/Exploratores"
+if [ -f "$HOME/Documents/Exploratores/launchme.html" ]; then
+    log_ok "Exploratores installed in ~/Documents/Exploratores"
+else
+    log_warn "Exploratores clone incomplete — launchme.html not found"
+fi
+
+# ============================================================
 log_step "General purpose tools"
 # ============================================================
 echo '#######################################################################'
@@ -443,12 +473,15 @@ sudo snap install cherrytree || {
 }
 
 # VSCodium instead of Atom (discontinued Dec 2022)
-wget -qO- https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
+if wget -qO- https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg \
     | gpg --dearmor \
-    | sudo tee /etc/apt/keyrings/vscodium.gpg > /dev/null
-echo "deb [ signed-by=/etc/apt/keyrings/vscodium.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main" \
-    | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
-sudo apt update -qq && sudo apt install -y codium || log_warn "VSCodium not installed"
+    | sudo tee /etc/apt/keyrings/vscodium.gpg > /dev/null; then
+    echo "deb [ signed-by=/etc/apt/keyrings/vscodium.gpg ] https://paulcarroty.gitlab.io/vscodium-deb-rpm-repo/debs vscodium main" \
+        | sudo tee /etc/apt/sources.list.d/vscodium.list > /dev/null
+    sudo apt update -qq && sudo apt install -y codium || log_warn "VSCodium not installed"
+else
+    log_warn "VSCodium key download failed — skipping VSCodium install"
+fi
 
 # OSINT resources
 git clone https://github.com/pstirparo/threatintel-resources ~/Documents/threatintel-resources 2>/dev/null \

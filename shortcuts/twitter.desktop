@@ -4,5 +4,5 @@ Name=Twitter / X OSINT
 Comment=Apre Twitter/X nel browser
 Categories=Network;OSINT
 Exec=xdg-open https://x.com
-Icon=/home/osint/Pictures/icons/twitter.png
+Icon=__HOME__/Pictures/icons/twitter.png
 Terminal=false

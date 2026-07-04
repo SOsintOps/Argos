@@ -6,6 +6,47 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [2.1.1-beta] — 2026-07-04
+
+Robustness fixes for setup.sh: the script no longer aborts (or misbehaves)
+outside the happy path — missing repo directory, missing standard folders,
+empty source directories, non-interactive execution. Repo hygiene: ShellCheck
+CI, `.idea/` untracked, internal notes removed.
+
+### Added
+
+#### .github/workflows/shellcheck.yml
+- New CI workflow: ShellCheck (severity warning and above) runs on `setup.sh`, all launcher scripts, `background.sh` and the test script on every push to `master` and on pull requests.
+
+#### docs/SECURITY.md
+- New security policy: how to report vulnerabilities, supported versions, and scope notes (third-party tools are reported upstream).
+
+### Fixed
+
+#### setup.sh
+- Startup guard: the script now verifies that the repository exists at `~/Downloads/Argos` and exits with a clear error message if not, instead of dying mid-run with a cryptic line-number error. The path is stored in a single `ARGOS_SRC` variable used throughout (support files, Firefox policies.json).
+- `~/Templates` is now created with `mkdir -p` before copying templates. On systems where `xdg-user-dirs` has not populated the standard folders, the copy previously aborted the whole install.
+- All support-file copies (scripts, icons, `.desktop` shortcuts, templates, wallpapers) are now guarded with `compgen -G`: an empty source directory logs a warning and skips the step instead of aborting under `set -e`. The wallpaper step also checks that `background.sh` exists before running it.
+- `/etc/apt/keyrings` is now created before writing the VSCodium signing key. On a clean Ubuntu 24.04 the directory is not guaranteed to exist, and its absence caused VSCodium to be silently skipped.
+- The final reboot prompt now runs only in an interactive session (`[ -t 0 ]`). Without a TTY, `read` returned immediately and the machine rebooted with no confirmation; the script now prints a notice and leaves the reboot to the user.
+
+#### scripts/recon-ng.sh
+- The launcher now uses its `RECONNG` variable instead of a literal relative path (the variable was defined but never used — flagged by ShellCheck SC2034).
+
+### Removed
+
+#### Repository hygiene
+- `.idea/` (JetBrains IDE files, including `workspace.xml`) removed from git tracking; it was already gitignored but still committed.
+- `scripts/changes.txt` and `shortcuts/changes.txt` removed: internal work notes superseded by this changelog.
+
+### Repository administration (GitHub side)
+
+- Issues re-enabled on the repository: they had been turned off, contradicting the README's "open an issue" instruction.
+- GitHub Pages unpublished and the `gh-pages` branch deleted: the site had been serving the untouched 2020 "Welcome to GitHub Pages" placeholder (created when the repo was still named OsintUbU) — a forgotten, unmonitored surface.
+- New annotated tag `archive/pre-rewrite` on the tip of the old `patch-1` branch (commit `06f08f6`, 2022-09-15): preserves the original 2019-2022 history line (Ryan Foote's OSINT_VM_Setup onward, with all contributor attributions), which has no merge base with the rewritten `master`. The `patch-1` branch can now be deleted without losing that history.
+
+---
+
 ## [2.1.0-beta] — 2026-07-04
 
 Exploratores added and integrated with Firefox; GUI launchers for previously

@@ -1,7 +1,7 @@
 # Argos — Project Status & AI Handoff Document
 
 **Last updated:** 2026-07-04
-**Current version:** 2.1.0-beta
+**Current version:** 2.1.1-beta
 **Target platform:** Ubuntu 24.04 LTS (Noble Numbat) + Ubuntu Budgie 24.04 LTS
 
 ---
@@ -25,6 +25,9 @@ The files in `shortcuts/` are `.desktop` entries that call those wrappers.
 ```
 Argos/
 ├── setup.sh                        # Main install script — run once on a fresh VM
+├── .github/
+│   └── workflows/
+│       └── shellcheck.yml          # CI: ShellCheck on every push to master and on PRs
 ├── config/
 │   └── policies.json               # Firefox enterprise policies (privacy, extensions, bookmarks)
 ├── scripts/                        # GUI launcher scripts (zenity)
@@ -51,10 +54,22 @@ Argos/
 └── docs/
     ├── CHANGELOG.md
     ├── VERSION_HISTORY.md
+    ├── SECURITY.md                 # Security policy (GitHub picks it up from docs/)
     ├── guidelines.md
     ├── faq.md
     └── PROJECT_STATUS.md           # This file
 ```
+
+### Branches and tags
+
+- `master` — the only active branch. Its history was rewritten at some point;
+  it has **no merge base** with the old pre-2022 line.
+- Tag `archive/pre-rewrite` (on commit `06f08f6`) — preserves the original
+  2019-2022 history (Ryan Foote's OSINT_VM_Setup onward, all contributor
+  attributions). The old `patch-1` branch that carried it can be deleted.
+- Tag `0.5` — historical release from the old line.
+- `gh-pages` was deleted in v2.1.1-beta (it served only the 2020 GitHub Pages
+  placeholder); GitHub Pages is unpublished.
 
 > The `argosfox/` Firefox profile template (zip archive from 2022) is no longer used at
 > install time. It was replaced by `config/policies.json` in v2.0.7-beta and the archives
@@ -128,7 +143,7 @@ Verify with `about:policies` in Firefox after installation.
 
 ### High Priority: Must Fix Before Stable Release
 
-1. **Not fully tested on a real VM at v2.1.0-beta.**
+1. **Not fully tested on a real VM at v2.1.1-beta.**
    A full end-to-end test on a fresh Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS VM is
    required before removing the beta label. In particular verify:
    - Firefox picks up `policies.json` (`about:policies`): extensions installed, bookmarks
@@ -221,7 +236,7 @@ The `.gitignore` excludes:
 
 ## How to Continue This Work
 
-1. **Test v2.1.0-beta on a clean VM.** This is the most important next step. Provision
+1. **Test v2.1.1-beta on a clean VM.** This is the most important next step. Provision
    Ubuntu Budgie 24.04 LTS in VirtualBox, clone the repo to `~/Downloads/Argos`, run
    `setup.sh`, and verify each tool launches correctly — especially the new launchers and
    the Firefox `policies.json` (see Known Issues #1).

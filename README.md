@@ -53,27 +53,27 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 | Tool | Status | Notes |
 |------|--------|-------|
 | [Amass](https://github.com/owasp-amass/amass) | Active | Subdomain enumeration |
-| [Instaloader](https://instaloader.github.io/) | Active | Instagram OSINT |
-| [Toutatis](https://github.com/megadose/toutatis) | Limited | Requires Instagram session ID |
-| [HTTrack](https://www.httrack.com/) | Active | Web crawling and mirroring |
-| [MediaInfo](https://mediaarea.net/en/MediaInfo) | Active | Media metadata analysis |
+| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Username and email search across 600+ platforms |
 | [ExifTool](https://exiftool.org/) | Active | Metadata from documents and images |
+| [Exploratores](https://github.com/SOsintOps/Exploratores) | Active | Browser-based OSINT toolkit (search tools, PII redactor, IBAN analysis, CyberChef) |
 | [EyeWitness](https://github.com/FortyNorthSecurity/EyeWitness) | Active | Website screenshots |
-| [The Harvester](https://github.com/laramies/theHarvester) | Active | Email and domain recon |
+| [HTTrack](https://www.httrack.com/) | Active | Web crawling and mirroring |
+| [Instaloader](https://instaloader.github.io/) | Active | Instagram OSINT |
+| [linkook](https://github.com/JackJuly/linkook) | Active | Linked social accounts and emails from username |
+| [maigret](https://github.com/soxoj/maigret) | Active | Username search across 3000+ sites |
+| [Maltego](https://www.maltego.com/) | Manual | Link analysis; not auto-installed (requires paid account), install manually if needed |
+| [MediaInfo](https://mediaarea.net/en/MediaInfo) | Active | Media metadata analysis |
 | [Metagoofil](https://github.com/opsdisk/metagoofil) | Active | Metadata from public documents |
+| [PhoneInfoga](https://github.com/sundowndev/phoneinfoga) | Stable | Phone number intelligence (stable, unmaintained) |
 | [recon-ng](https://github.com/lanmaster53/recon-ng) | Limited | Modular OSINT framework; maintenance reduced |
 | [Sherlock](https://github.com/sherlock-project/sherlock) | Active | Username search across 400+ sites |
-| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation (200+ modules) |
-| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Username and email search across 600+ platforms |
-| [maigret](https://github.com/soxoj/maigret) | Active | Username search across 3000+ sites |
-| [user-scanner](https://github.com/kaifcodec/user-scanner) | Active | Email and username OSINT, 195+ scan vectors |
-| [linkook](https://github.com/JackJuly/linkook) | Active | Linked social accounts and emails from username |
-| [socialscan](https://github.com/iojw/socialscan) | Active | Accurate email and username availability checks |
-| [PhoneInfoga](https://github.com/sundowndev/phoneinfoga) | Stable | Phone number intelligence (stable, unmaintained) |
 | [Shodan CLI](https://cli.shodan.io/) | Active | Internet-exposed host search (requires API key) |
-| [Exploratores](https://github.com/SOsintOps/Exploratores) | Active | Browser-based OSINT toolkit (search tools, PII redactor, IBAN analysis, CyberChef) |
+| [socialscan](https://github.com/iojw/socialscan) | Active | Accurate email and username availability checks |
+| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation (200+ modules) |
+| [The Harvester](https://github.com/laramies/theHarvester) | Active | Email and domain recon |
+| [Toutatis](https://github.com/megadose/toutatis) | Limited | Requires Instagram session ID |
+| [user-scanner](https://github.com/kaifcodec/user-scanner) | Active | Email and username OSINT, 195+ scan vectors |
 | [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Active | Video downloader (replaces youtube-dl) |
-| [Maltego](https://www.maltego.com/) | Manual | Link analysis; not auto-installed (requires paid account), install manually if needed |
 
 **Removed tools (abandoned or discontinued):**
 - ~~Instalooter~~: use Instaloader

@@ -21,6 +21,11 @@ CI, `.idea/` untracked, internal notes removed.
 #### docs/SECURITY.md
 - New security policy: how to report vulnerabilities, supported versions, and scope notes (third-party tools are reported upstream).
 
+### Changed
+
+#### README.md
+- OSINT tools table sorted alphabetically.
+
 ### Fixed
 
 #### setup.sh

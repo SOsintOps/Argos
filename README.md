@@ -24,6 +24,8 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 - [OSINT Analysis Guidelines](docs/guidelines.md)
 - [FAQ](docs/faq.md)
 
+<br clear="all">
+
 ---
 
 ## Requirements

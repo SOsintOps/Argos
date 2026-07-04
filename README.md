@@ -162,9 +162,11 @@ The log contains the full installation output with timestamps. If an error occur
 ## Resources
 
 - [OSIntOps website](https://osintops.com/en/)
-- [Argos project presentation (Italian)](https://osintops.com/progetto-argos/)
+- [The Argos Project: an OSINT-ready VM in minutes](https://osintops.com/en/the-argos-project/)
+- [Argos is back, and it's not alone!](https://osintops.com/en/argos-refresh-speculator-incoming/)
 - [OSInt Daily News](https://t.me/Osintlatestnews)
 - [Open Source Intelligence Techniques by Michael Bazzell](https://inteltechniques.com/book1.html)
+- [Deep Dive: Exploring the Real-world Value of Open Source Intelligence by Rae Baker](https://www.wiley.com/en-us/Deep+Dive%3A+Exploring+the+Real+world+Value+of+Open+Source+Intelligence-p-9781119933243)
 
 ---
 

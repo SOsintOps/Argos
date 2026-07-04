@@ -1,0 +1,16 @@
+name: ShellCheck
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # --severity=warning: info-level notes (e.g. the intentional
+      # SC2015 A && B || C patterns in setup.sh) do not fail the build
+      - name: Run ShellCheck
+        run: shellcheck --severity=warning --shell=bash setup.sh scripts/*.sh multimedia/wallpapers/background.sh test/usernames-test.sh

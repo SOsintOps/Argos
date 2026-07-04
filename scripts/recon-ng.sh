@@ -13,4 +13,4 @@ if [ ! -f "$VENV/bin/python" ]; then
 fi
 
 cd "$HOME/Downloads/Programs/recon-ng" || exit 1
-"$VENV/bin/python" recon-ng
+"$VENV/bin/python" "$RECONNG"

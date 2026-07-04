@@ -1,6 +1,10 @@
 # ARGOS — Beta
 <img align="right" width="215" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
 
+[![ShellCheck](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml)
+[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Ubuntu 24.04 LTS](https://img.shields.io/badge/Ubuntu-24.04%20LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/noble/)
+
 > **WARNING: BETA VERSION**
 > This script has been updated for Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS.
 > It is under active testing. Always run it on a clean VM before using it in production.
@@ -91,18 +95,18 @@ This script follows the methods described by Michael Bazzell in [Open Source Int
 
 | Tool | Status |
 |------|--------|
-| [VLC](https://www.videolan.org/vlc/) | Active |
-| [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) | Active |
-| [VSCodium](https://vscodium.com/) | Active (replaces Atom) |
-| [CherryTree](https://www.giuspen.com/cherrytree/) | Active |
-| [KeePassXC](https://keepassxc.org/) | Active |
-| [Kazam](https://launchpad.net/kazam) | Active |
 | [Audacity](https://www.audacityteam.org/) | Active |
-| [Tor Browser](https://www.torproject.org/) | Active |
-| [OpenShot](https://www.openshot.org/) | Active |
+| [CherryTree](https://www.giuspen.com/cherrytree/) | Active |
+| [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) | Active |
+| [Kazam](https://launchpad.net/kazam) | Active |
+| [KeePassXC](https://keepassxc.org/) | Active |
 | [Obsidian](https://obsidian.md/) | Active (latest version fetched dynamically) |
+| [OpenShot](https://www.openshot.org/) | Active |
 | [Ripgrep](https://github.com/BurntSushi/ripgrep) | Active |
 | [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) | Active |
+| [Tor Browser](https://www.torproject.org/) | Active |
+| [VLC](https://www.videolan.org/vlc/) | Active |
+| [VSCodium](https://vscodium.com/) | Active (replaces Atom) |
 
 ---
 

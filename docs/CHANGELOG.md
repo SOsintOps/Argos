@@ -24,7 +24,9 @@ CI, `.idea/` untracked, internal notes removed.
 ### Changed
 
 #### README.md
-- OSINT tools table sorted alphabetically.
+- OSINT and General Tools tables sorted alphabetically.
+- Status badges added under the title: ShellCheck CI, CC BY-NC-SA 4.0 licence, Ubuntu 24.04 LTS platform.
+- New mascot displayed at 2.5x size with natural aspect ratio; float cleared before the Contents heading so section dividers no longer cross it.
 
 #### multimedia/images/
 - The Argos mascot (`scribblenauts-argos.png`) replaced with a new illustration inspired by the original "Scribblenauts Argos" icon by Miguel Ángel Aranda. Attribution updated in `License.md` and `multimedia/images/license.txt`.

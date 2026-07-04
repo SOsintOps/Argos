@@ -2,6 +2,6 @@
 Type=Application
 Name=Recon-NG
 Categories=Network;OSINT
-Exec=/home/osint/Documents/scripts/recon-ng.sh
-Icon=/home/osint/Pictures/icons/recon-ng.png
+Exec=__HOME__/Documents/scripts/recon-ng.sh
+Icon=__HOME__/Pictures/icons/recon-ng.png
 Terminal=true

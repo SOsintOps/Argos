@@ -2,6 +2,6 @@
 Type=Application
 Name=Metagoofil
 Categories=Network;OSINT
-Exec=/home/osint/Documents/scripts/metagoofil.sh
-Icon=/home/osint/Pictures/icons/metagoofil.png
+Exec=__HOME__/Documents/scripts/metagoofil.sh
+Icon=__HOME__/Pictures/icons/metagoofil.png
 Terminal=true

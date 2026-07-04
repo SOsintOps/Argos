@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Exploratores
+Comment=Avvia Exploratores, toolkit OSINT nel browser
+Categories=Network;OSINT
+Exec=firefox file://__HOME__/Documents/Exploratores/launchme.html
+Icon=firefox
+Terminal=false

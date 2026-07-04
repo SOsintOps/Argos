@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=PhoneInfoga
+Comment=Phone number OSINT (web UI on http://127.0.0.1:5000)
+Categories=Network;OSINT
+Exec=__HOME__/Documents/scripts/phoneinfoga.sh
+Icon=phone
+Terminal=false

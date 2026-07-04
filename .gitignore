@@ -4,6 +4,7 @@
 .mcp.json
 CLAUDE.md
 start.ps1
+node_modules/
 
 # ── IDE ──────────────────────────────────────────────────────
 .idea/
@@ -18,3 +19,4 @@ argos_install_*.log
 *~
 .DS_Store
 Thumbs.db
+.goutputstream-*

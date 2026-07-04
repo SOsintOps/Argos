@@ -1,5 +1,5 @@
 # ARGOS — Beta
-<img align="right" width="86" height="150" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
+<img align="right" width="215" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
 
 > **WARNING: BETA VERSION**
 > This script has been updated for Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS.

@@ -58,6 +58,8 @@ probe eyewitness    "$T/EyeWitness/eyewitness-venv/bin/python" -c "import seleni
 probe metagoofil    "$T/metagoofil/.venv/bin/python" "$T/metagoofil/metagoofil.py" -h
 probe exiftool      exiftool -ver
 probe yt-dlp        "$ARGOS_BIN_DIR/yt-dlp" --version
+probe deno          "$ARGOS_BIN_DIR/deno" --version
+probe chromedriver  chromedriver --version
 probe ffmpeg        ffmpeg -version
 probe shodan        "$ARGOS_BIN_DIR/shodan" version
 probe spiderfoot    "$T/spiderfoot/.venv/bin/python" "$T/spiderfoot/sf.py" --help

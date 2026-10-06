@@ -425,6 +425,20 @@ The full output is in $dir/output.log" ;;
     esac
 }
 
+# firefox_profile_cookies: path of the most recently used Firefox cookie
+# database. Firefox keeps profiles in different places for the .deb, the snap
+# and newer releases that follow the XDG layout. Prints nothing if none exists.
+firefox_profile_cookies() {
+    local root
+    for root in "$HOME/snap/firefox/common/.mozilla/firefox" \
+                "$HOME/snap/firefox/common/.config/mozilla/firefox" \
+                "$HOME/.mozilla/firefox" \
+                "$HOME/.config/mozilla/firefox"; do
+        [ -d "$root" ] || continue
+        find "$root" -maxdepth 2 -name cookies.sqlite -printf '%T@ %p\n' 2>/dev/null
+    done | sort -rn | head -n 1 | cut -d' ' -f2-
+}
+
 # ── OPSEC ───────────────────────────────────────────────────────────────────
 
 # confirm_third_party SERVICE WHAT: explicit consent before sharing a target.

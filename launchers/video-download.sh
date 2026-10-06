@@ -31,7 +31,8 @@ opts=$(ui_checklist "Also save" \
     "thumbnail|Thumbnail image|on" \
     "subs|Subtitles and captions, all languages|on" \
     "comments|Comments (can be slow)|off" \
-    "playlist|The whole playlist, not just this item|off") || exit 0
+    "playlist|The whole playlist, not just this item|off" \
+    "session|Use my Firefox session (when the site asks to sign in or to confirm you are not a bot)|off") || exit 0
 
 run=$(new_run_dir yt-dlp "$(sed -E 's#^https?://##; s#[/?].*##' <<< "$url")") || exit 1
 printf 'Source URL: %s\n' "$url" >> "$run/command.txt"
@@ -49,6 +50,15 @@ has thumbnail "$opts" && args+=(--write-thumbnail)
 has subs "$opts" && args+=(--write-subs --write-auto-subs --sub-langs all)
 has comments "$opts" && args+=(--write-comments)
 if has playlist "$opts"; then args+=(--yes-playlist); else args+=(--no-playlist); fi
+if has session "$opts"; then
+    cookies=$(firefox_profile_cookies)
+    if [ -z "$cookies" ]; then
+        ui_error "No Firefox profile found. Open Firefox and sign in to the site with your research account, then try again."
+        exit 1
+    fi
+    # yt-dlp takes the profile folder, not the cookie file.
+    args+=(--cookies-from-browser "firefox:$(dirname "$cookies")")
+fi
 
 record_version "$run" yt-dlp "$bin" --version
 run_logged "$run" "yt-dlp: $url" -- "$bin" "${args[@]}"

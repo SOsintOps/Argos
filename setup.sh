@@ -116,7 +116,7 @@ deb_arch() { dpkg --print-architecture; }
 # Each step is a function step_NAME. A failing step is reported at the end;
 # it does not stop the other steps.
 
-STEPS=(system packages python-tools theharvester source-tools eyewitness amass phoneinfoga
+STEPS=(system packages python-tools deno theharvester source-tools eyewitness amass phoneinfoga
        obsidian google-earth vscodium resources firefox launchers templates wallpaper)
 
 step_system() {
@@ -131,7 +131,7 @@ step_packages() {
         git curl wget jq zenity xdg-utils ca-certificates gnupg \
         python3 python3-venv python3-pip pipx \
         ffmpeg mediainfo-gui libimage-exiftool-perl httrack \
-        openjdk-21-jre ripgrep 7zip unrar zip subversion \
+        openjdk-21-jre ripgrep 7zip unrar zip unzip subversion \
         vlc openshot-qt audacity kazam keepassxc cherrytree \
         tor torbrowser-launcher proxychains4
 }
@@ -148,6 +148,8 @@ step_python_tools() {
     # One line per tool: package and extra packages it needs.
     #  - maigret[pdf]: PDF reports need the optional extra.
     #  - instaloader + browser_cookie3: needed by --load-cookies (Firefox session).
+    #  - yt-dlp[default]: includes yt-dlp-ejs, the YouTube challenge solvers,
+    #    which run in deno (installed by the deno step).
     #  - shodan + setuptools<81: the CLI still imports pkg_resources.
     while read -r -a spec; do
         if uv_tool "${spec[@]}"; then ok "${spec[0]}"; else warn "${spec[0]} could not be installed"; rc=1; fi
@@ -159,7 +161,7 @@ linkook
 socialscan
 instaloader --with browser_cookie3
 toutatis
-yt-dlp
+yt-dlp[default]
 shodan --with setuptools<81
 EOF_TOOLS
     return "$rc"
@@ -218,6 +220,19 @@ step_amass() {
     tar -xzf "$WORK/$file" -C "$WORK" &&
         install -D -m 755 "$WORK/amass_linux_${arch}/amass" "$BIN/amass" &&
         ok "Amass $tag"
+}
+
+# deno: JavaScript runtime that yt-dlp needs for YouTube.
+step_deno() {
+    local tag arch file
+    tag=$(github_latest denoland/deno) || return 1
+    case "$(deb_arch)" in arm64) arch=aarch64 ;; *) arch=x86_64 ;; esac
+    file="deno-${arch}-unknown-linux-gnu.zip"
+    download_verified "https://github.com/denoland/deno/releases/download/$tag/$file" \
+        "https://github.com/denoland/deno/releases/download/$tag/$file.sha256sum" "$file" || return 1
+    unzip -o -q "$WORK/$file" -d "$WORK" &&
+        install -D -m 755 "$WORK/deno" "$BIN/deno" &&
+        ok "deno $tag"
 }
 
 step_phoneinfoga() {

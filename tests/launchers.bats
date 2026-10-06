@@ -201,6 +201,16 @@ setup() { setup_argos; }
     [ ! -s "$CALLS" ]
 }
 
+@test "yt-dlp: Firefox session passed as a profile folder" {
+    double yt-dlp
+    mkdir -p "$HOME/snap/firefox/common/.mozilla/firefox/p.default"
+    touch "$HOME/snap/firefox/common/.mozilla/firefox/p.default/cookies.sqlite"
+    run bash "$LAUNCHERS/video-download.sh" < <(answers "https://www.youtube.com/watch?v=x" 1 "1 7")
+    call=$(grep -v -- '--version' "$CALLS" | grep '^yt-dlp')
+    [ "$(arg_after --cookies-from-browser "$call")" = "firefox:$HOME/snap/firefox/common/.mozilla/firefox/p.default" ]
+    [[ $call == *"--no-playlist"* ]]
+}
+
 # ── Others ──────────────────────────────────────────────────────────────────
 
 @test "shodan: search downloads results and builds a CSV" {

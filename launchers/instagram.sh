@@ -27,17 +27,6 @@ ask_profile() {
 
 has() { grep -qx -- "$1" <<< "$2"; }
 
-# firefox_cookies: the most recently used Firefox cookie database. Firefox
-# keeps profiles in different places for the .deb, the snap and newer
-# releases that follow the XDG layout.
-firefox_cookies() {
-    local root
-    for root in "$HOME/snap/firefox/common/.mozilla/firefox" "$HOME/snap/firefox/common/.config/mozilla/firefox"                 "$HOME/.mozilla/firefox" "$HOME/.config/mozilla/firefox"; do
-        [ -d "$root" ] && find "$root" -maxdepth 2 -name cookies.sqlite -printf '%T@ %p
-'
-    done 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-
-}
-
 instaloader_run() {
     local profile=$1 bin opts run args cookies
     bin=$(find_tool instaloader "$ARGOS_BIN_DIR/instaloader") || return 1
@@ -61,7 +50,7 @@ instaloader_run() {
     if has session "$opts"; then
         # Reads the cookies of the instagram.com login in Firefox: no password
         # ever passes through Argos.
-        cookies=$(firefox_cookies)
+        cookies=$(firefox_profile_cookies)
         if [ -z "$cookies" ]; then
             ui_error "No Firefox profile found. Open Firefox, log in to instagram.com with your research account, then try again."
             return 1

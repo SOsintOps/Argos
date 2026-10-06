@@ -381,7 +381,9 @@ preflight
 
 if [ $# -gt 0 ]; then selected=("$@"); else selected=("${STEPS[@]}"); fi
 if need_sudo "${selected[@]}"; then
-    sudo -v || exit 1
+    # "sudo true" rather than "sudo -v": Ubuntu 26.04 ships sudo-rs, whose -v
+    # can hang without a terminal even when no password is needed.
+    sudo -n true 2>/dev/null || sudo true || exit 1
     # Keep the sudo timestamp fresh during the long install.
     ( while kill -0 "$$" 2>/dev/null; do sudo -n true; sleep 50; done ) 2>/dev/null &
 fi

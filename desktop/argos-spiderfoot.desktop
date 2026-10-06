@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=SpiderFoot
+Comment=SpiderFoot web interface or scan
+Exec=__ARGOS_HOME__/launchers/spiderfoot.sh
+Icon=__ARGOS_HOME__/icons/argos-spiderfoot.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

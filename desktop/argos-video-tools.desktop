@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Video Tools
+Comment=ffmpeg: report, convert, frames, motion, audio, rotate, cut, contact sheet
+Exec=__ARGOS_HOME__/launchers/video-tools.sh
+Icon=__ARGOS_HOME__/icons/argos-video-tools.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

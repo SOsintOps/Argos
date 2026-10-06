@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Usernames & Emails
+Comment=Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan
+Exec=__ARGOS_HOME__/launchers/usernames.sh
+Icon=__ARGOS_HOME__/icons/argos-usernames.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

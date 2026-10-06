@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Video Download
+Comment=yt-dlp: video, audio and metadata from online platforms
+Exec=__ARGOS_HOME__/launchers/video-download.sh
+Icon=__ARGOS_HOME__/icons/argos-video-download.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

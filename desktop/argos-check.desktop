@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Argos Check
+Comment=Check that every Argos tool is installed and starts
+Exec=__ARGOS_HOME__/launchers/check.sh
+Icon=__ARGOS_HOME__/icons/argos-case.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=recon-ng
+Comment=recon-ng console with a workspace per case
+Exec=__ARGOS_HOME__/launchers/recon-ng.sh
+Icon=__ARGOS_HOME__/icons/argos-recon-ng.svg
+Terminal=true
+Categories=Network;
+Keywords=OSINT;Argos;

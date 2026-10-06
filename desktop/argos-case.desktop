@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Argos Case
+Comment=Create, select and open investigation cases
+Exec=__ARGOS_HOME__/launchers/case.sh
+Icon=__ARGOS_HOME__/icons/argos-case.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

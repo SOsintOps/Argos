@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=PhoneInfoga
+Comment=Phone number intelligence
+Exec=__ARGOS_HOME__/launchers/phoneinfoga.sh
+Icon=__ARGOS_HOME__/icons/argos-phoneinfoga.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

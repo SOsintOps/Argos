@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Documents & Metadata
+Comment=metagoofil and ExifTool: public documents and their metadata
+Exec=__ARGOS_HOME__/launchers/documents.sh
+Icon=__ARGOS_HOME__/icons/argos-documents.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

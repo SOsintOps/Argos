@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Instagram
+Comment=Instaloader and Toutatis
+Exec=__ARGOS_HOME__/launchers/instagram.sh
+Icon=__ARGOS_HOME__/icons/argos-instagram.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

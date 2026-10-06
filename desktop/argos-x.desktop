@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=X (Twitter)
+Comment=Open x.com in the default browser
+Exec=xdg-open https://x.com
+Icon=__ARGOS_HOME__/icons/argos-x.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

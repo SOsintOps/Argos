@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Exploratores
+Comment=Browser-based OSINT toolkit (local copy)
+Exec=firefox file://__HOME__/Documents/Exploratores/launchme.html
+Icon=__ARGOS_HOME__/icons/argos-exploratores.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

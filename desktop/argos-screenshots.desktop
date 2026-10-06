@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Web Screenshots
+Comment=EyeWitness: screenshots and report of web pages
+Exec=__ARGOS_HOME__/launchers/screenshots.sh
+Icon=__ARGOS_HOME__/icons/argos-screenshots.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

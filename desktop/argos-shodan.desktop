@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Shodan
+Comment=Shodan CLI: search, hosts, domains
+Exec=__ARGOS_HOME__/launchers/shodan.sh
+Icon=__ARGOS_HOME__/icons/argos-shodan.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

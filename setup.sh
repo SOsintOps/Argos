@@ -148,8 +148,9 @@ step_python_tools() {
     # One line per tool: package and extra packages it needs.
     #  - maigret[pdf]: PDF reports need the optional extra.
     #  - instaloader + browser_cookie3: needed by --load-cookies (Firefox session).
-    #  - yt-dlp[default]: includes yt-dlp-ejs, the YouTube challenge solvers,
-    #    which run in deno (installed by the deno step).
+    #  - yt-dlp[default,curl-cffi]: yt-dlp-ejs (YouTube challenge solvers) and
+    #    browser impersonation, required by sites such as Vimeo. The solvers
+    #    run in deno (installed by the deno step).
     #  - shodan + setuptools<81: the CLI still imports pkg_resources.
     while read -r -a spec; do
         if uv_tool "${spec[@]}"; then ok "${spec[0]}"; else warn "${spec[0]} could not be installed"; rc=1; fi
@@ -161,7 +162,7 @@ linkook
 socialscan
 instaloader --with browser_cookie3
 toutatis
-yt-dlp[default]
+yt-dlp[default,curl-cffi]
 shodan --with setuptools<81
 EOF_TOOLS
     return "$rc"

@@ -1,0 +1,21 @@
+CASE:                      ANALYST:                  DATE (UTC):
+
+QUESTION
+-
+
+IDENTIFIERS TO CHECK
+Names:
+Usernames:
+Emails:
+Phones:
+Domains / IPs:
+Images:
+
+LEADS (one per line: what, where, why it matters)
+-
+
+DONE (time UTC - what - result - Argos run folder)
+-
+
+OPEN QUESTIONS
+-

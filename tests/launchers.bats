@@ -1,0 +1,218 @@
+#!/usr/bin/env bats
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Ramingo (SOsintOps)
+#
+# Tests for the launchers, run in terminal mode against test doubles.
+
+load helpers
+
+setup() { setup_argos; }
+
+# ── Usernames & Emails ──────────────────────────────────────────────────────
+
+@test "sherlock: default reports, results hashed in the run folder" {
+    double sherlock 'while [ $# -gt 0 ]; do [ "$1" = --folderoutput ] && echo found > "$2/johndoe.csv"; shift; done'
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 1 johndoe "")
+    [ "$status" -eq 0 ]
+    call=$(grep '^sherlock johndoe' "$CALLS")
+    [[ $call == *"--csv"* && $call == *"--txt"* && $call != *"--xlsx"* && $call != *"--nsfw"* ]]
+    dir=$(only_run_dir sherlock)
+    [ "$(arg_after --folderoutput "$call")" = "$dir" ]
+    grep -q './johndoe.csv' "$dir/SHA256SUMS"
+    grep -qx 'Exit code: 0' "$dir/command.txt"
+}
+
+@test "usernames: an invalid username creates nothing" {
+    double sherlock
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 1 "john doe")
+    [ "$status" -eq 1 ]
+    [[ $output == *"not a valid username"* ]]
+    [ ! -s "$CALLS" ]
+    [ ! -d "$ARGOS_CASES_ROOT" ]
+}
+
+@test "usernames: cancelling the prompt runs nothing" {
+    double sherlock
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 1)
+    [ "$status" -eq 0 ]
+    [ ! -s "$CALLS" ]
+}
+
+@test "maigret: HTML, PDF and JSON reports on the top sites by default" {
+    double maigret
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 2 johndoe "" "")
+    call=$(grep '^maigret johndoe' "$CALLS")
+    [[ $call == *"--html"* && $call == *"--pdf"* && $call == *"--json simple"* ]]
+    [[ $call != *"--all-sites"* ]]
+}
+
+@test "maigret: all sites when chosen" {
+    double maigret
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 2 johndoe "" 2)
+    grep -q -- '--all-sites' "$CALLS"
+}
+
+@test "blackbird: email search and its reports moved into the case" {
+    double "$ARGOS_TOOLS_DIR/blackbird/.venv/bin/python" \
+        'mkdir -p results/jd_report && echo r > results/jd_report/report.csv'
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 4 jd@example.com "")
+    grep -q -- '--email jd@example.com' "$CALLS"
+    ! grep -q -- '--ai' "$CALLS"
+    dir=$(only_run_dir blackbird)
+    [ -f "$dir/jd_report/report.csv" ]
+    [ ! -e "$ARGOS_TOOLS_DIR/blackbird/results/jd_report" ]
+    grep -q './jd_report/report.csv' "$dir/SHA256SUMS"
+}
+
+@test "user scanner: loud checks stay off when the warning is declined" {
+    double user-scanner
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 5 johndoe 1 4 n)
+    call=$(grep '^user-scanner' "$CALLS")
+    [[ $call == *"--username johndoe"* && $call == *"--format json"* ]]
+    [[ $call != *"--allow-loud"* ]]
+}
+
+@test "user scanner: third-party lookup only after consent" {
+    double user-scanner
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 5 johndoe 1 3 y)
+    grep -q -- '--hudson' "$CALLS"
+}
+
+@test "socialscan: JSON report in the run folder" {
+    double socialscan
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 7 jd@example.com)
+    dir=$(only_run_dir socialscan)
+    [ "$(arg_after --json "$(cat "$CALLS")")" = "$dir/socialscan.json" ]
+}
+
+# ── Domains ─────────────────────────────────────────────────────────────────
+
+@test "theHarvester: free sources, normalised domain, plain lists" {
+    double theHarvester 'while [ $# -gt 0 ]; do [ "$1" = -f ] && echo "{\"hosts\":[\"b.example.com\",\"a.example.com\"],\"emails\":[]}" > "$2.json"; shift; done'
+    run bash "$LAUNCHERS/domains.sh" < <(answers 1 "https://Example.COM/path" "" "")
+    call=$(grep -v '^theHarvester -h' "$CALLS" | grep '^theHarvester')
+    [[ $call == *"-d example.com"* && $call == *"-b crtsh,certspotter"* && $call == *"-l 500"* ]]
+    dir=$(only_run_dir theharvester)
+    if command -v jq >/dev/null; then
+        [ "$(cat "$dir/hosts.txt")" = $'a.example.com\nb.example.com' ]
+    fi
+}
+
+@test "amass: brute force by default, results exported, engine stopped" {
+    double amass
+    run bash "$LAUNCHERS/domains.sh" < <(answers 2 example.com "" "")
+    grep -q '^amass enum -d example.com .*-brute' "$CALLS"
+    grep -q '^amass subs -d example.com -names' "$CALLS"
+    grep -q '^amass subs -d example.com -ip' "$CALLS"
+    ! grep -q -- '-active' "$CALLS"
+}
+
+@test "domains: an invalid domain is refused" {
+    double theHarvester
+    run bash "$LAUNCHERS/domains.sh" < <(answers 1 "not a domain")
+    [[ $output == *"not a valid domain"* ]]
+    [ ! -s "$CALLS" ]
+}
+
+# ── Instagram ───────────────────────────────────────────────────────────────
+
+@test "instaloader: profile without @, no browser session unless chosen" {
+    double instaloader
+    run bash "$LAUNCHERS/instagram.sh" < <(answers 1 "@some.one" "")
+    call=$(grep '^instaloader some.one' "$CALLS")
+    [[ $call == *"--dirname-pattern"* && $call != *"--load-cookies"* ]]
+}
+
+@test "toutatis: the session ID never reaches the evidence files" {
+    double toutatis 'echo "user info for $2"'
+    run bash "$LAUNCHERS/instagram.sh" < <(answers 2 someone SESSIONXYZ123)
+    dir=$(only_run_dir toutatis)
+    ! grep -rq SESSIONXYZ123 "$dir"
+    grep -q '<redacted>' "$dir/command.txt"
+}
+
+# ── Cases ───────────────────────────────────────────────────────────────────
+
+@test "case: create, then results go into it" {
+    run bash "$LAUNCHERS/case.sh" < <(answers 1 op-alpha "fraud check")
+    [ "$status" -eq 0 ]
+    grep -qx 'ARGOS_CASE=op-alpha' "$ARGOS_CONFIG_DIR/argos.conf"
+    grep -qx 'Description: fraud check' "$ARGOS_CASES_ROOT/op-alpha/case.txt"
+    double socialscan
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 7 johndoe)
+    [ -d "$ARGOS_CASES_ROOT/op-alpha/socialscan" ]
+}
+
+@test "case: a new case starts from the installed skeleton" {
+    export ARGOS_HOME="$BATS_TEST_TMPDIR/argos-home"
+    mkdir -p "$ARGOS_HOME/case-skeleton/notes"
+    cp "$REPO/templates/Argos_Research_Log.csv" "$ARGOS_HOME/case-skeleton/notes/"
+    run bash "$LAUNCHERS/case.sh" < <(answers 1 op-bravo "")
+    [ -f "$ARGOS_CASES_ROOT/op-bravo/notes/Argos_Research_Log.csv" ]
+    [ -f "$ARGOS_CASES_ROOT/op-bravo/case.txt" ]
+}
+
+@test "case: names with spaces or slashes are refused" {
+    run bash "$LAUNCHERS/case.sh" < <(answers 1 "../evil")
+    [[ $output == *"not a valid case name"* ]]
+    [ ! -e "$ARGOS_CONFIG_DIR/argos.conf" ]
+}
+
+@test "case: switch between existing cases" {
+    mkdir -p "$ARGOS_CASES_ROOT/alpha" "$ARGOS_CASES_ROOT/bravo"
+    run bash "$LAUNCHERS/case.sh" < <(answers 2 2)
+    grep -qx 'ARGOS_CASE=bravo' "$ARGOS_CONFIG_DIR/argos.conf"
+}
+
+# ── Video tools ─────────────────────────────────────────────────────────────
+
+@test "video tools: conversion records the source hash" {
+    double ffmpeg
+    printf 'fake video' > "$BATS_TEST_TMPDIR/clip.avi"
+    run bash "$LAUNCHERS/video-tools.sh" < <(answers "$BATS_TEST_TMPDIR/clip.avi" 3)
+    grep -q 'libx264' "$CALLS"
+    dir=$(only_run_dir video-tools)
+    grep -qx "Source SHA-256: $(sha256sum "$BATS_TEST_TMPDIR/clip.avi" | cut -d' ' -f1)" "$dir/command.txt"
+}
+
+@test "video tools: a cut with a bad time is refused" {
+    double ffmpeg
+    printf 'fake video' > "$BATS_TEST_TMPDIR/clip.avi"
+    run bash "$LAUNCHERS/video-tools.sh" < <(answers "$BATS_TEST_TMPDIR/clip.avi" 8 "1; rm -rf ~" 10)
+    [[ $output == *"Times must be"* ]]
+    [ ! -s "$CALLS" ]
+}
+
+# ── Others ──────────────────────────────────────────────────────────────────
+
+@test "shodan: search downloads results and builds a CSV" {
+    double shodan 'case "$1" in download) echo x > "$4.json.gz";; parse) echo "ip_str,port";; esac'
+    run bash "$LAUNCHERS/shodan.sh" < <(answers 1 "product:nginx" 100)
+    grep -q '^shodan download --limit 100 .*/results product:nginx' "$CALLS"
+    dir=$(only_run_dir shodan)
+    grep -q ip_str "$dir/results.csv"
+}
+
+@test "phoneinfoga: number normalised before the scan" {
+    double phoneinfoga
+    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 1 "+39 (06) 123-4567")
+    grep -q '^phoneinfoga scan -n +39061234567' "$CALLS"
+}
+
+@test "website mirror: robots.txt respected unless the user says otherwise" {
+    double httrack
+    run bash "$LAUNCHERS/website-mirror.sh" < <(answers https://example.com/ 2 n)
+    grep -q '^httrack https://example.com/ -O .*/mirror -q -r2$' "$CALLS"
+}
+
+@test "check: missing tools are reported and the exit code says so" {
+    run bash "$LAUNCHERS/check.sh"
+    [ "$status" -ne 0 ]
+    [[ $output == *"sherlock"*"MISSING"* ]]
+}
+
+@test "setup.sh lists its steps without installing anything" {
+    run bash "$REPO/setup.sh" --list
+    [ "$status" -eq 0 ]
+    [[ $output == *"launchers"* && $output == *"amass"* ]]
+}

@@ -1,4 +1,4 @@
-name: ShellCheck
+name: Checks
 
 on:
   push:
@@ -6,11 +6,13 @@ on:
   pull_request:
 
 jobs:
-  shellcheck:
-    runs-on: ubuntu-latest
+  checks:
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      # --severity=warning: info-level notes (e.g. the intentional
-      # SC2015 A && B || C patterns in setup.sh) do not fail the build
-      - name: Run ShellCheck
-        run: shellcheck --severity=warning --shell=bash setup.sh scripts/*.sh multimedia/wallpapers/background.sh test/usernames-test.sh
+      - name: Install bats
+        run: sudo apt-get update -q && sudo apt-get install -y -q bats jq
+      - name: ShellCheck
+        run: shellcheck -x -P launchers setup.sh launchers/*.sh launchers/lib/argos.sh multimedia/wallpapers/set-wallpaper.sh
+      - name: Tests
+        run: bats tests/

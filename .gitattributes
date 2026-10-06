@@ -1,0 +1,5 @@
+# Shell scripts and desktop files must keep LF line endings on every platform.
+* text=auto eol=lf
+*.docx binary
+*.png binary
+*.jpg binary

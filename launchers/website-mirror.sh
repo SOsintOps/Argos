@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Ramingo (SOsintOps)
+#
+# Argos launcher: save a browsable offline copy of a website (HTTrack).
+
+set -uo pipefail
+# shellcheck source=lib/argos.sh
+. "$(dirname "$(readlink -f "$0")")/lib/argos.sh"
+argos_init "Website Mirror"
+
+bin=$(find_tool httrack) || exit 1
+
+url=$(ui_entry "Case: $(case_name)
+Address of the website to copy") || exit 0
+if ! is_url "$url"; then
+    ui_error "\"$url\" is not an http(s) address."
+    exit 1
+fi
+depth=$(ui_entry "How many links deep? (1 = only this page, 3 is usually enough)" 3) || exit 0
+case "$depth" in ''|*[!0-9]*) depth=3 ;; esac
+robots=""
+if ui_question "Ignore the site's robots.txt rules?
+Normally they are respected."; then
+    robots="-s0"
+fi
+
+run=$(new_run_dir httrack "$(sed -E 's#^https?://##; s#[/?].*##' <<< "$url")") || exit 1
+printf 'Source URL: %s\n' "$url" >> "$run/command.txt"
+record_version "$run" httrack "$bin" --version
+# -q: never ask questions; -r: depth; output in the run folder.
+run_logged "$run" "HTTrack: $url" -- "$bin" "$url" -O "$run/mirror" -q "-r$depth" ${robots:+"$robots"}
+rc=$?
+report_outcome "$run" "$rc" HTTrack
+finish_run "$run"
+[ -f "$run/mirror/index.html" ] && open_path "$run/mirror/index.html"

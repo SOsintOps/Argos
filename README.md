@@ -3,9 +3,9 @@
 
 [![Checks](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Ubuntu 24.04 LTS](https://img.shields.io/badge/Ubuntu-24.04%20LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/noble/)
+[![Ubuntu 24.04 | 26.04 LTS](https://img.shields.io/badge/Ubuntu-24.04%20%7C%2026.04%20LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/)
 
-Argos turns a clean Ubuntu 24.04 LTS virtual machine into an OSINT workstation:
+Argos turns a clean Ubuntu 24.04 or 26.04 LTS virtual machine into an OSINT workstation:
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
@@ -43,12 +43,15 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 - **Up-to-date tools**: Amass v5, theHarvester 5, current Maigret with PDF
   reports, SpiderFoot from source, Shodan CLI that actually starts, binaries
   downloaded from the official releases with their checksums verified.
+- **Same result on 24.04 and 26.04**: the Python tools run in environments
+  managed by [uv](https://docs.astral.sh/uv/) on a fixed, tested Python
+  version, whatever Python the system ships.
 - **Works on the desktop and in a terminal**: dialogs on the desktop, plain
   prompts over SSH; a running tool can be cancelled from its progress window.
 
 ## Requirements
 
-- Ubuntu **24.04 LTS** or Ubuntu Budgie **24.04 LTS**, preferably a dedicated
+- Ubuntu or Ubuntu Budgie **24.04 LTS** or **26.04 LTS**, preferably a dedicated
   virtual machine for each investigation.
 - A user with `sudo` rights (do not run the installer as root).
 - System language: English.

@@ -42,10 +42,6 @@ argos_init() {
             fi
             ;;
     esac
-    # zenity dialogs are more reliable through XWayland on some desktops.
-    if [ "$ARGOS_UI" = zenity ] && [ "${XDG_SESSION_TYPE:-}" = wayland ]; then
-        export GDK_BACKEND=x11
-    fi
     case ":$PATH:" in
         *":$ARGOS_BIN_DIR:"*) ;;
         *) export PATH="$ARGOS_BIN_DIR:$PATH" ;;

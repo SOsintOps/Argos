@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Ramingo (SOsintOps)
 #
-# Argos installer: turns a clean Ubuntu 24.04 LTS (or Ubuntu Budgie 24.04 LTS)
+# Argos installer: turns a clean Ubuntu or Ubuntu Budgie 24.04 / 26.04 LTS
 # virtual machine into an OSINT workstation. See README.md and
 # docs/ARCHITECTURE.md.
 #
@@ -70,11 +70,24 @@ git_sync() {
     fi
 }
 
-# venv_requirements DIR REQUIREMENTS_FILE: Python virtual environment in DIR/.venv.
+# Python used by every tool environment. uv downloads it when the system has
+# another version (Ubuntu 24.04 ships 3.12, Ubuntu 26.04 ships 3.14), so the
+# tools run on the same, tested Python on both releases.
+TOOLS_PYTHON=3.12
+
+# venv_requirements DIR REQUIREMENTS_FILE [VENV_NAME]: environment for a tool
+# installed from source, in DIR/.venv (or DIR/VENV_NAME).
 venv_requirements() {
-    python3 -m venv "$1/.venv" &&
-        "$1/.venv/bin/pip" install -q --upgrade pip &&
-        "$1/.venv/bin/pip" install -q -r "$1/$2"
+    local venv="$1/${3:-.venv}"
+    rm -rf "$venv"
+    uv venv -q --python "$TOOLS_PYTHON" "$venv" &&
+        uv pip install -q --python "$venv/bin/python" -r "$1/$2"
+}
+
+# uv_tool PACKAGE [--with EXTRA]...: command-line tool in its own environment,
+# linked into ~/.local/bin.
+uv_tool() {
+    uv tool install -q --force --python "$TOOLS_PYTHON" "$@"
 }
 
 # github_latest OWNER/REPO: tag of the latest release, read from the
@@ -123,25 +136,45 @@ step_packages() {
         tor torbrowser-launcher proxychains4
 }
 
+# install_uv: uv manages the Python environments of all the tools.
+install_uv() {
+    command -v uv >/dev/null 2>&1 && return 0
+    pipx install -q uv >/dev/null && pipx ensurepath >/dev/null 2>&1 && command -v uv >/dev/null
+}
+
 step_python_tools() {
-    local tool rc=0
-    for tool in sherlock-project 'maigret[pdf]' user-scanner linkook socialscan instaloader toutatis yt-dlp uv shodan; do
-        if pipx install --force "$tool" >/dev/null 2>&1; then ok "pipx: $tool"; else warn "pipx: $tool failed"; rc=1; fi
-    done
-    # The Shodan CLI still imports pkg_resources, which newer setuptools removed.
-    pipx inject shodan 'setuptools<81' >/dev/null 2>&1 || { warn "Shodan: setuptools pin failed"; rc=1; }
-    pipx ensurepath >/dev/null 2>&1
+    local rc=0 spec
+    install_uv || { fail "uv could not be installed (needs pipx)"; return 1; }
+    # One line per tool: package and extra packages it needs.
+    #  - maigret[pdf]: PDF reports need the optional extra.
+    #  - instaloader + browser_cookie3: needed by --load-cookies (Firefox session).
+    #  - shodan + setuptools<81: the CLI still imports pkg_resources.
+    while read -r -a spec; do
+        if uv_tool "${spec[@]}"; then ok "${spec[0]}"; else warn "${spec[0]} could not be installed"; rc=1; fi
+    done <<'EOF_TOOLS'
+sherlock-project
+maigret[pdf]
+user-scanner
+linkook
+socialscan
+instaloader --with browser_cookie3
+toutatis
+yt-dlp
+shodan --with setuptools<81
+EOF_TOOLS
     return "$rc"
 }
 
 step_theharvester() {
-    # theHarvester 5 needs Python 3.14: uv downloads it on its own.
+    install_uv || return 1
+    # theHarvester 5 needs Python 3.14: uv provides it on Ubuntu 24.04 as well.
     uv tool install -q --force --python 3.14 "git+https://github.com/laramies/theHarvester" &&
         ok "theHarvester $(theHarvester -h 2>/dev/null | grep -o 'theHarvester [0-9.]*' | head -1)"
 }
 
 step_source_tools() {
     local rc=0 name url req
+    install_uv || return 1
     mkdir -p "$TOOLS"
     # SpiderFoot is not published on PyPI: it is installed from its repository.
     while read -r name url req; do
@@ -163,10 +196,16 @@ EOF_TOOLS
 step_eyewitness() {
     mkdir -p "$TOOLS"
     git_sync https://github.com/FortyNorthSecurity/EyeWitness "$TOOLS/EyeWitness" || return 1
-    # The upstream installer needs root (system packages) and creates
-    # eyewitness-venv inside the clone; give the clone back to the user.
-    sudo bash "$TOOLS/EyeWitness/setup/setup.sh" &&
-        sudo chown -R "$(id -u):$(id -g)" "$TOOLS/EyeWitness"
+    install_uv || return 1
+    # The upstream installer (needs root) adds Chromium, its driver and the
+    # system libraries. Its Python environment is then rebuilt with uv on the
+    # tested Python, whatever the upstream step did with the system Python.
+    sudo bash "$TOOLS/EyeWitness/setup/setup.sh" ||
+        warn "EyeWitness: the upstream installer reported errors; continuing with the Python environment"
+    sudo chown -R "$(id -u):$(id -g)" "$TOOLS/EyeWitness"
+    venv_requirements "$TOOLS/EyeWitness" setup/requirements.txt eyewitness-venv &&
+        "$TOOLS/EyeWitness/eyewitness-venv/bin/python" -c "import selenium" &&
+        ok "EyeWitness"
 }
 
 step_amass() {
@@ -304,12 +343,13 @@ preflight() {
     # shellcheck source=/dev/null
     . /etc/os-release
     if [ "${ID:-}" != ubuntu ]; then
-        fail "Argos supports Ubuntu (and Ubuntu Budgie) 24.04 LTS. This system is ${PRETTY_NAME:-unknown}."
+        fail "Argos supports Ubuntu and Ubuntu Budgie 24.04 / 26.04 LTS. This system is ${PRETTY_NAME:-unknown}."
         exit 1
     fi
-    if [ "${VERSION_ID:-}" != "24.04" ]; then
-        warn "Argos is tested on Ubuntu 24.04 LTS; this is ${PRETTY_NAME}. Continuing anyway."
-    fi
+    case "${VERSION_ID:-}" in
+        24.04|26.04) ok "${PRETTY_NAME}" ;;
+        *) warn "Argos supports Ubuntu 24.04 and 26.04 LTS; this is ${PRETTY_NAME}. Continuing anyway." ;;
+    esac
     if ! curl -fsS -o /dev/null --max-time 15 https://github.com; then
         fail "No internet connection (github.com unreachable)."
         exit 1

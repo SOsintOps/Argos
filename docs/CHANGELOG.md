@@ -37,6 +37,9 @@ changed from CC BY-NC-SA 4.0 to MIT.
 - Automated tests (`tests/`, bats) run in CI together with ShellCheck.
 
 ### Changed
+- Supported releases: Ubuntu and Ubuntu Budgie 24.04 LTS and 26.04 LTS. Python
+  tools run in uv-managed environments on Python 3.12 (theHarvester on 3.14), so
+  the system Python (3.12 on 24.04, 3.14 on 26.04) does not change the result.
 - `setup.sh` rewritten: runs from any folder, named steps (`./setup.sh --list`,
   `./setup.sh STEP`), sudo only for steps that need it, failures collected in a final summary.
 - Amass v5 from the official release (was snap v3.19), PhoneInfoga from the official
@@ -50,6 +53,9 @@ changed from CC BY-NC-SA 4.0 to MIT.
 - SpiderFoot was never installed (not on PyPI): installed from its repository.
 - EyeWitness and theHarvester installs failed after upstream changes.
 - Maigret PDF reports were never produced (missing `maigret[pdf]` extra).
+- Instaloader could not use a browser session (missing `browser_cookie3`); the
+  launcher now finds the Firefox cookie database, snap included.
+- zenity no longer forced onto X11, which fails on Wayland-only sessions.
 - theHarvester launcher used the removed `bing` source and expected an HTML report.
 
 ### Removed

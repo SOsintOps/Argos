@@ -27,6 +27,9 @@ stops the tool, secrets kept out of the logs, checksum-verified downloads, an
 installer that can run single steps, and an **Argos Check** entry that tests
 every tool.
 
+**Ubuntu 24.04 and 26.04.** Both LTS releases are supported, Budgie included;
+the tools run on the same Python on both.
+
 **New report templates** linked to the evidence folders, and automated tests in CI.
 
 ---

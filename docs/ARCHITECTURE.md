@@ -21,7 +21,7 @@ This document describes how Argos is organised from version 3.0 onwards: what
 ## Layout in the repository
 
 ```
-setup.sh                 installer (run once on a clean Ubuntu 24.04 VM)
+setup.sh                 installer (run once on a clean Ubuntu 24.04 or 26.04 VM)
 launchers/lib/argos.sh   shared library used by every launcher
 launchers/*.sh           one launcher per task (usernames, domains, ...)
 desktop/*.desktop        application menu entries (templates)
@@ -38,8 +38,8 @@ tests/                   automated tests (bats) and test doubles
 | `~/.local/share/argos/launchers/` | launchers and `lib/argos.sh` |
 | `~/.local/share/argos/icons/` | launcher icons |
 | `~/.local/share/applications/argos-*.desktop` | menu entries |
-| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot) |
-| `~/.local/bin/` | tools installed with pipx or uv, plus Amass |
+| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot), each with a uv environment on Python 3.12 |
+| `~/.local/bin/` | command-line tools installed with uv (own environment each), Amass and PhoneInfoga |
 | `~/.config/argos/argos.conf` | active case and user settings |
 | `~/Documents/Argos/cases/<case>/` | all results |
 
@@ -104,4 +104,4 @@ terminal mode; the automated tests use it.
 - `bats` tests in `tests/` run the launchers in terminal mode against test
   doubles of each tool, so they check argument building, folder layout, hashes
   and error handling without network access.
-- An end-to-end install on a clean Ubuntu 24.04 VM before every release.
+- An end-to-end install on clean Ubuntu 24.04 and 26.04 systems before every release.

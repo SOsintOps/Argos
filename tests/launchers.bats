@@ -123,6 +123,24 @@ setup() { setup_argos; }
     [[ $call == *"--dirname-pattern"* && $call != *"--load-cookies"* ]]
 }
 
+@test "instaloader: the Firefox session uses the newest cookie database" {
+    double instaloader
+    mkdir -p "$HOME/.mozilla/firefox/old.default" "$HOME/snap/firefox/common/.mozilla/firefox/new.default"
+    touch -d '2026-01-01' "$HOME/.mozilla/firefox/old.default/cookies.sqlite"
+    touch "$HOME/snap/firefox/common/.mozilla/firefox/new.default/cookies.sqlite"
+    run bash "$LAUNCHERS/instagram.sh" < <(answers 1 someone "1 5 6")
+    call=$(grep '^instaloader someone' "$CALLS")
+    [ "$(arg_after --cookiefile "$call")" = "$HOME/snap/firefox/common/.mozilla/firefox/new.default/cookies.sqlite" ]
+    [[ $call == *"--load-cookies firefox"* && $call == *"--stories"* ]]
+}
+
+@test "instaloader: a clear error when Firefox has no profile" {
+    double instaloader
+    run bash "$LAUNCHERS/instagram.sh" < <(answers 1 someone "1 5")
+    [[ $output == *"No Firefox profile found"* ]]
+    [ ! -s "$CALLS" ]
+}
+
 @test "toutatis: the session ID never reaches the evidence files" {
     double toutatis 'echo "user info for $2"'
     run bash "$LAUNCHERS/instagram.sh" < <(answers 2 someone SESSIONXYZ123)

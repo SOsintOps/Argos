@@ -39,7 +39,7 @@ tests/                   automated tests (bats) and test doubles
 | `~/.local/share/argos/icons/` | launcher icons |
 | `~/.local/share/applications/argos-*.desktop` | menu entries |
 | `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot), each with a uv environment on Python 3.12 |
-| `~/.local/bin/` | command-line tools installed with uv (own environment each), Amass and PhoneInfoga |
+| `~/.local/bin/` | command-line tools installed with uv (own environment each), Amass, PhoneInfoga and deno |
 | `~/.config/argos/argos.conf` | active case and user settings |
 | `~/Documents/Argos/cases/<case>/` | all results |
 

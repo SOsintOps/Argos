@@ -329,8 +329,13 @@ step_templates() {
 step_wallpaper() {
     local image="$HOME/Pictures/argos-wallpaper.jpg"
     mkdir -p "$HOME/Pictures"
-    cp "$SRC/multimedia/wallpapers/Be-quiet-Priest-sculpture-in-Venlo.jpg" "$image" &&
-        bash "$SRC/multimedia/wallpapers/set-wallpaper.sh" "$image"
+    cp "$SRC/multimedia/wallpapers/Be-quiet-Priest-sculpture-in-Venlo.jpg" "$image" || return 1
+    if [ -z "${XDG_CURRENT_DESKTOP:-}${DESKTOP_SESSION:-}" ]; then
+        warn "No desktop session: wallpaper copied to $image, set it from the desktop settings"
+        return 0
+    fi
+    bash "$SRC/multimedia/wallpapers/set-wallpaper.sh" "$image" ||
+        warn "Wallpaper not set automatically on this desktop: use $image from the desktop settings"
 }
 
 # ── Main ────────────────────────────────────────────────────────────────────

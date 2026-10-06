@@ -64,6 +64,9 @@ Amass v5 relies on API keys for most passive sources. Without keys, use brute fo
 - **SpiderFoot**: optional keys in its web interface settings.
 - **Maltego**: an account; it is not installed by Argos.
 
+**YouTube says "Sign in to confirm you're not a bot". What do I do?**
+Sign in to YouTube in Firefox with your research account, then tick "Use my Firefox session" in **Video Download**. Some sites (YouTube, Vimeo) also block addresses of data centres and some VPNs whatever you do; try another network.
+
 **How do I open recon-ng?**
 From the menu: it opens a terminal with a workspace named after the active case. Install modules with `marketplace install all`.
 

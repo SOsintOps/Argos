@@ -56,6 +56,11 @@ changed from CC BY-NC-SA 4.0 to MIT.
 - Instaloader could not use a browser session (missing `browser_cookie3`); the
   launcher now finds the Firefox cookie database, snap included.
 - zenity no longer forced onto X11, which fails on Wayland-only sessions.
+- `sudo -v` replaced: with sudo-rs (default on Ubuntu 26.04) it can hang.
+- YouTube downloads: yt-dlp needs a JavaScript runtime and the EJS solvers;
+  deno is installed (checksum verified) and yt-dlp comes with `default` and
+  `curl-cffi` extras. Video Download can use the Firefox session.
+- The wallpaper step warns instead of failing when there is no desktop session.
 - theHarvester launcher used the removed `bing` source and expected an HTML report.
 
 ### Removed

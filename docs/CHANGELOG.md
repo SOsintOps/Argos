@@ -61,6 +61,8 @@ changed from CC BY-NC-SA 4.0 to MIT.
   deno is installed (checksum verified) and yt-dlp comes with `default` and
   `curl-cffi` extras. Video Download can use the Firefox session.
 - The wallpaper step warns instead of failing when there is no desktop session.
+- List dialogs were too short for zenity 4: options beyond the second were hidden.
+  Heights measured on real dialogs; `tests/gui/smoke.sh` checks them on a virtual display.
 - theHarvester launcher used the removed `bing` source and expected an HTML report.
 
 ### Removed

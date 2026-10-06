@@ -13,6 +13,6 @@ jobs:
       - name: Install bats
         run: sudo apt-get update -q && sudo apt-get install -y -q bats jq
       - name: ShellCheck
-        run: shellcheck -x -P launchers setup.sh launchers/*.sh launchers/lib/argos.sh multimedia/wallpapers/set-wallpaper.sh
+        run: shellcheck -x -P launchers -P SCRIPTDIR/../.. setup.sh launchers/*.sh launchers/lib/argos.sh multimedia/wallpapers/set-wallpaper.sh tests/gui/smoke.sh
       - name: Tests
         run: bats tests/

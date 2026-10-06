@@ -125,3 +125,11 @@ setup() {
     grep -q 'Cancelled by the user' "$dir/output.log"
     grep -qx 'Exit code: 130' "$dir/command.txt"
 }
+
+@test "list dialogs are tall enough to show every option" {
+    double zenity 'for a in "$@"; do case $a in --height=*) echo "${a#--height=}" > "$BATS_TEST_TMPDIR/h";; esac; done; echo One'
+    ARGOS_UI=zenity
+    ui_choice "pick" 1 2 3 4 5 6 7 8 > /dev/null
+    # Measured with zenity 4.2: about 220 px of title, text and buttons, 30 px per row.
+    [ "$(cat "$BATS_TEST_TMPDIR/h")" -ge $((220 + 30 * 8)) ]
+}

@@ -154,7 +154,9 @@ bats tests/
 ```
 
 The tests run the launchers in terminal mode against test doubles of every
-tool: no network, a few seconds. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+tool: no network, a few seconds. `tests/gui/smoke.sh` drives the real zenity
+dialogs on a virtual display (needs `xvfb xdotool x11-utils`). See
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Resources
 

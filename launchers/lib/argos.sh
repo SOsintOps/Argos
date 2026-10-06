@@ -130,7 +130,7 @@ ui_choice() {
             rows+=("$first" "$option")
             first=FALSE
         done
-        answer=$(_zen --list --radiolist --width=480 --height=$((160 + 30 * $#)) \
+        answer=$(_zen --list --radiolist --width=480 --height=$((250 + 32 * $#)) \
             --text "$text" --column "" --column "Option" "${rows[@]}") || return 1
         [ -n "$answer" ] || return 1
     else
@@ -161,7 +161,7 @@ ui_checklist() {
             if [ "$state" = on ]; then rows+=(TRUE); else rows+=(FALSE); fi
             rows+=("$key" "$label")
         done
-        answer=$(_zen --list --checklist --width=560 --height=$((180 + 30 * $#)) \
+        answer=$(_zen --list --checklist --width=560 --height=$((270 + 32 * $#)) \
             --text "$text" --column "" --column "Key" --column "Option" \
             --hide-column=2 --print-column=2 --separator=$'\n' "${rows[@]}") || return 1
         [ -n "$answer" ] && printf '%s\n' "$answer"

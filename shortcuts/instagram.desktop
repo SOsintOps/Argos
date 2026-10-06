@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Instagram OSInt
-Comment=Launch Instagram OSInt tools
-Exec="__HOME__/Documents/scripts/instagram.sh"
-Type=Application
-Categories=Application;OSINT
-Icon=__HOME__/Pictures/icons/instagram.png
-Terminal=false

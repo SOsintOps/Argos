@@ -1,183 +1,178 @@
-# ARGOS — Beta
-<img align="right" width="215" src="https://github.com/SOsintOps/Argos/blob/master/multimedia/images/scribblenauts-argos.png">
+# ARGOS
+<img align="right" width="215" src="multimedia/images/scribblenauts-argos.png" alt="Argos mascot">
 
-[![ShellCheck](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml)
-[![License: CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+[![Checks](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Ubuntu 24.04 LTS](https://img.shields.io/badge/Ubuntu-24.04%20LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/noble/)
 
-> **WARNING: BETA VERSION**
-> This script has been updated for Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS.
-> It is under active testing. Always run it on a clean VM before using it in production.
-> Report any problems by opening an issue.
+Argos turns a clean Ubuntu 24.04 LTS virtual machine into an OSINT workstation:
+it installs the tools, adds a menu entry for each task, and saves every result
+in a case folder with the command used, the full output and SHA-256 hashes.
 
-Argos automatically configures an open-source OSINT workstation from a clean Ubuntu 24.04 LTS virtual machine.
-
-Best practice recommends using a dedicated VM for each OSINT investigation.
-This script follows the methods described by Michael Bazzell in [Open Source Intelligence Techniques](https://inteltechniques.com/book1.html).
+> **3.0.0-beta.** Version 3 is a complete rewrite. The launchers are covered by
+> automated tests; the full installation on a fresh VM is being validated
+> before the stable release. Please report problems in the issues.
 
 <br clear="all">
 
 ## Contents
+- [What Argos does](#what-argos-does)
 - [Requirements](#requirements)
-- [Tools](#tools)
 - [Installation](#installation)
-- [Installation Log](#installation-log)
-- [To Do](#to-do)
-- [Resources](#resources)
-- [Credits](#credits)
-- [Licences](#licences)
-- [Version History](docs/VERSION_HISTORY.md)
-- [OSINT Analysis Guidelines](docs/guidelines.md)
-- [FAQ](docs/faq.md)
+- [Working with cases](#working-with-cases)
+- [Launchers](#launchers)
+- [Other tools installed](#other-tools-installed)
+- [Privacy and OPSEC](#privacy-and-opsec)
+- [Report templates](#report-templates)
+- [Development and tests](#development-and-tests)
+- [Resources](#resources) · [Credits](#credits) · [Licence](#licence)
+- [Architecture](docs/ARCHITECTURE.md) · [FAQ](docs/faq.md) · [Analysis guidelines](docs/guidelines.md) · [Version history](docs/VERSION_HISTORY.md)
 
 ---
+
+## What Argos does
+
+- **One menu entry per investigative task**: usernames and emails, Instagram,
+  domains, web screenshots, public documents and metadata, video download and
+  analysis, Shodan, SpiderFoot, phone numbers, recon-ng, website copies.
+- **Cases**: choose a case once, and every result lands in
+  `~/Documents/Argos/cases/<case>/`.
+- **Evidence you can defend**: each run folder holds `command.txt` (exact
+  command, tool version, UTC start/end, exit code), `output.log` (everything
+  the tool printed) and `SHA256SUMS` (hash of every file produced).
+- **Up-to-date tools**: Amass v5, theHarvester 5, current Maigret with PDF
+  reports, SpiderFoot from source, Shodan CLI that actually starts, binaries
+  downloaded from the official releases with their checksums verified.
+- **Works on the desktop and in a terminal**: dialogs on the desktop, plain
+  prompts over SSH; a running tool can be cancelled from its progress window.
 
 ## Requirements
 
-- Ubuntu **24.04 LTS** or **Ubuntu Budgie 24.04 LTS** (VM or workstation)
-- Any Linux username (the previous requirement to use `osint` has been removed)
-- System language: **English**
-- Active internet connection during installation
-- **VirtualBox Guest Additions already installed** — the script does not install them. Install Guest Additions before running `setup.sh` to enable clipboard sharing, drag-and-drop, and fullscreen support.
-
-> The script is optimised for VirtualBox. Code for VMware Tools is available in the comments.
-
-**Tested on:**
-- Ubuntu Budgie 24.04 LTS (VM)
-- Ubuntu 24.04 LTS (VM)
-
-**No longer supported:**
-- Ubuntu 22.04 LTS (some dependencies are incompatible)
-- Ubuntu 20.04 LTS
-
----
-
-## Tools
-
-### OSINT
-
-| Tool | Status | Notes |
-|------|--------|-------|
-| [Amass](https://github.com/owasp-amass/amass) | Active | Subdomain enumeration |
-| [blackbird](https://github.com/p1ngul1n0/blackbird) | Active | Username and email search across 600+ platforms |
-| [ExifTool](https://exiftool.org/) | Active | Metadata from documents and images |
-| [Exploratores](https://github.com/SOsintOps/Exploratores) | Active | Browser-based OSINT toolkit (search tools, PII redactor, IBAN analysis, CyberChef) |
-| [EyeWitness](https://github.com/FortyNorthSecurity/EyeWitness) | Active | Website screenshots |
-| [HTTrack](https://www.httrack.com/) | Active | Web crawling and mirroring |
-| [Instaloader](https://instaloader.github.io/) | Active | Instagram OSINT |
-| [linkook](https://github.com/JackJuly/linkook) | Active | Linked social accounts and emails from username |
-| [maigret](https://github.com/soxoj/maigret) | Active | Username search across 3000+ sites |
-| [Maltego](https://www.maltego.com/) | Manual | Link analysis; not auto-installed (requires paid account), install manually if needed |
-| [MediaInfo](https://mediaarea.net/en/MediaInfo) | Active | Media metadata analysis |
-| [Metagoofil](https://github.com/opsdisk/metagoofil) | Active | Metadata from public documents |
-| [PhoneInfoga](https://github.com/sundowndev/phoneinfoga) | Stable | Phone number intelligence (stable, unmaintained) |
-| [recon-ng](https://github.com/lanmaster53/recon-ng) | Limited | Modular OSINT framework; maintenance reduced |
-| [Sherlock](https://github.com/sherlock-project/sherlock) | Active | Username search across 400+ sites |
-| [Shodan CLI](https://cli.shodan.io/) | Active | Internet-exposed host search (requires API key) |
-| [socialscan](https://github.com/iojw/socialscan) | Active | Accurate email and username availability checks |
-| [SpiderFoot](https://github.com/smicallef/spiderfoot) | Active | OSINT automation (200+ modules) |
-| [The Harvester](https://github.com/laramies/theHarvester) | Active | Email and domain recon |
-| [Toutatis](https://github.com/megadose/toutatis) | Limited | Requires Instagram session ID |
-| [user-scanner](https://github.com/kaifcodec/user-scanner) | Active | Email and username OSINT, 195+ scan vectors |
-| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Active | Video downloader (replaces youtube-dl) |
-
-**Removed tools (abandoned or discontinued):**
-- ~~Instalooter~~: use Instaloader
-- ~~Sublist3r~~: use Amass
-- ~~Photon~~: use Katana or GoSpider
-- ~~youtube-dl~~: replaced by yt-dlp
-- ~~Moriarty-Project~~: replaced by PhoneInfoga
-- ~~Elasticsearch-Crawler~~: use Shodan CLI
-- ~~Atom Editor~~ (discontinued December 2022): replaced by VSCodium
-- ~~holehe~~: abandoned, replaced by user-scanner
-
-### General Tools
-
-| Tool | Status |
-|------|--------|
-| [Audacity](https://www.audacityteam.org/) | Active |
-| [CherryTree](https://www.giuspen.com/cherrytree/) | Active |
-| [Google Earth Pro](https://www.google.com/earth/versions/#earth-pro) | Active |
-| [Kazam](https://launchpad.net/kazam) | Active |
-| [KeePassXC](https://keepassxc.org/) | Active |
-| [Obsidian](https://obsidian.md/) | Active (latest version fetched dynamically) |
-| [OpenShot](https://www.openshot.org/) | Active |
-| [Ripgrep](https://github.com/BurntSushi/ripgrep) | Active |
-| [Threat Intelligence Resources](https://github.com/pstirparo/threatintel-resources) | Active |
-| [Tor Browser](https://www.torproject.org/) | Active |
-| [VLC](https://www.videolan.org/vlc/) | Active |
-| [VSCodium](https://vscodium.com/) | Active (replaces Atom) |
-
----
+- Ubuntu **24.04 LTS** or Ubuntu Budgie **24.04 LTS**, preferably a dedicated
+  virtual machine for each investigation.
+- A user with `sudo` rights (do not run the installer as root).
+- System language: English.
+- Internet access during the installation.
+- VirtualBox users: install the Guest Additions first; Argos does not.
 
 ## Installation
 
-1. Open a terminal.
-
-2. Install Git if it is not already present:
-    ```bash
-    sudo apt install -y git
-    ```
-
-3. Clone the repository into the `Downloads` directory:
-    ```bash
-    git clone https://github.com/SOsintOps/Argos ~/Downloads/Argos
-    ```
-
-4. Make the script executable:
-    ```bash
-    chmod +x ~/Downloads/Argos/setup.sh
-    ```
-
-5. Run the script:
-    ```bash
-    ~/Downloads/Argos/setup.sh
-    ```
-
-    > Firefox does not need to be closed or opened manually. The script deploys an enterprise `policies.json` (privacy hardening, OSINT extensions, managed bookmarks) to the Firefox distribution directory; it is applied automatically on the next Firefox launch. Firefox opens the local Exploratores toolkit as its homepage.
-
----
-
-## Installation Log
-
-The script automatically generates a log file in the Downloads directory:
-
-```
-~/Downloads/argos_install_YYYYMMDD_HHMMSS.log
+```bash
+sudo apt install -y git
+git clone https://github.com/SOsintOps/Argos.git
+cd Argos
+./setup.sh
 ```
 
-The log contains the full installation output with timestamps. If an error occurs, the exact line number is recorded in the log.
+The installer can be run from any folder. It logs everything to
+`~/Downloads/argos_install_<date>.log`, carries on when a single tool fails,
+and lists all problems in a summary at the end. Reboot when it finishes.
 
----
+Then open **Argos Check** from the menu: it starts every tool and reports
+anything that is missing or broken.
 
-## To Do
+Run only some steps, for example to update the launchers after a `git pull`:
 
-- Add Katana or GoSpider as a replacement for Photon
-- Update LibreOffice report templates for OSINT investigations
-- Complete end-to-end testing on Ubuntu Budgie 24.04 LTS VM
-- Add shortcuts for maigret standalone and blackbird standalone
+```bash
+./setup.sh --list          # show the steps
+./setup.sh launchers       # reinstall launchers, icons and menu entries
+./setup.sh python-tools amass theharvester   # update those tools
+```
 
----
+## Working with cases
+
+1. Open **Argos Case** and create a case (for example `2026-017-fraud`).
+   The case folder starts with `notes/` (research log and CherryTree
+   notebook), `reports/`, `manual-captures/` and `deliverables/`.
+2. Use any launcher: results go to
+   `~/Documents/Argos/cases/2026-017-fraud/<tool>/<UTC time>_<target>/`.
+3. Quote the run folder and the SHA-256 in your report's source table.
+
+Without a case, results go to the case `unsorted`.
+
+## Launchers
+
+| Menu entry | Tools | What it adds |
+|---|---|---|
+| Argos Case | — | create, switch and open cases |
+| Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan | report formats, scope, email search, start from a profile URL, all tools in one go |
+| Instagram | Instaloader, Toutatis | posts, reels, tagged posts; stories, highlights, comments and geotags with your Firefox session |
+| Domains | theHarvester 5, Amass v5 | free sources by default; brute force, altered names, optional active checks |
+| Web Screenshots | EyeWitness | one URL, a URL list, or the web services of an Nmap/Nessus XML report |
+| Documents & Metadata | metagoofil, ExifTool | document types, metadata CSV, names and software found in the documents; also for a folder you already have |
+| Video Download | yt-dlp | video, audio or metadata only; description, thumbnail, subtitles, comments, playlists |
+| Video Tools | ffmpeg, ffprobe, ExifTool | technical report, MP4 conversion, frames, motion-only summary, audio, rotation, clip cut, contact sheet |
+| Shodan | Shodan CLI | search saved as JSON and CSV, host history, domain records, free result counts |
+| SpiderFoot | SpiderFoot | web interface, or a passive/footprint/investigate scan saved in the case |
+| PhoneInfoga | PhoneInfoga | single number scan saved in the case, or the web interface |
+| recon-ng | recon-ng | console with a workspace named after the case |
+| Website Mirror | HTTrack | offline copy of a site, depth control, robots.txt respected by default |
+| Exploratores | [Exploratores](https://github.com/SOsintOps/Exploratores) | browser-based OSINT toolkit, also Firefox's home page |
+| X (Twitter) | — | opens x.com |
+| Argos Check | — | checks that every tool starts |
+
+## Other tools installed
+
+Audacity, CherryTree, Google Earth Pro, Kazam, KeePassXC, MediaInfo, Obsidian
+(with [OSINT templates](https://github.com/WebBreacher/obsidian-osint-templates)),
+OpenShot, ripgrep, Tor Browser, proxychains, VLC, VSCodium, 7-Zip, and the
+[threat intelligence](https://github.com/pstirparo/threatintel-resources) and
+[intelligence writing](https://github.com/mxm0z/awesome-intelligence-writing)
+reading lists in `~/Documents/Resources`. Firefox gets enterprise policies for
+privacy, OSINT extensions and bookmarks.
+
+Maltego is not installed (it needs an account); install it manually if you use it.
+
+## Privacy and OPSEC
+
+- Options that send your target to a third-party service (Blackbird AI,
+  Hudson Rock breach lookups) are **off by default** and ask for confirmation
+  each time, naming the service.
+- Options that can alert the target (User Scanner "loud" checks, Amass active
+  checks) show a warning first.
+- API keys and session IDs are never written to `command.txt`.
+- Instaloader uses the session of your Firefox research account: Argos never
+  asks for, or stores, an Instagram password.
+
+## Report templates
+
+`~/Templates` receives report templates written for Argos: full report,
+executive summary, subject profile, event assessment, threat notice, case
+cover sheet with chain of custody, online investigations policy, a plain
+Markdown report, a research log (CSV), scratch notes and a CherryTree case
+notebook. Their source table links each finding to an Argos run folder and
+its SHA-256. The `.docx` files are generated by `templates/src/build_templates.py`.
+
+## Development and tests
+
+```bash
+shellcheck -x -P launchers setup.sh launchers/*.sh launchers/lib/argos.sh
+bats tests/
+```
+
+The tests run the launchers in terminal mode against test doubles of every
+tool: no network, a few seconds. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ## Resources
 
-- [OSIntOps website](https://osintops.com/en/)
+- [OSINT Ops website](https://osintops.com/en/)
 - [The Argos Project: an OSINT-ready VM in minutes](https://osintops.com/en/the-argos-project/)
 - [Argos is back, and it's not alone!](https://osintops.com/en/argos-refresh-speculator-incoming/)
-- [OSInt Daily News](https://t.me/Osintlatestnews)
-- [Open Source Intelligence Techniques by Michael Bazzell](https://inteltechniques.com/book1.html)
-- [Deep Dive: Exploring the Real-world Value of Open Source Intelligence by Rae Baker](https://www.wiley.com/en-us/Deep+Dive%3A+Exploring+the+Real+world+Value+of+Open+Source+Intelligence-p-9781119933243)
-
----
+- [OSINT Daily News](https://t.me/Osintlatestnews)
+- [Open Source Intelligence Techniques](https://inteltechniques.com/book1.html) by Michael Bazzell
+- [Deep Dive: Exploring the Real-world Value of Open Source Intelligence](https://www.wiley.com/en-us/Deep+Dive%3A+Exploring+the+Real+world+Value+of+Open+Source+Intelligence-p-9781119933243) by Rae Baker
 
 ## Credits
 
-- Skykn0t for the original OSINT_VM_Setup script
-- [oh6hay](https://github.com/oh6hay) for the script name
-- [pinkevilpimp](https://github.com/pinkevilpimp) for the wallpaper script
+- Argos started from Skykn0t's OSINT_VM_Setup script and the workstation
+  approach described by Michael Bazzell. Version 3 is a new implementation:
+  its code, launchers, icons and templates were written from scratch.
+- [oh6hay](https://github.com/oh6hay) for the name.
+- The authors of every tool Argos installs: their licences apply to their tools.
+- Media credits: [multimedia/CREDITS.md](multimedia/CREDITS.md).
 
----
+## Licence
 
-## Licences
-
-See the licence files included in the repository.
+Argos is released under the [MIT licence](LICENSE). Versions up to 2.1.1-beta
+were distributed under CC BY-NC-SA 4.0 and remain available under that licence
+in the repository history.

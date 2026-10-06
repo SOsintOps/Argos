@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=SpiderFoot
-Comment=Avvia SpiderFoot su http://127.0.0.1:5001
-Categories=Network;OSINT
-Exec=__HOME__/Documents/scripts/spiderfoot.sh
-Icon=__HOME__/Pictures/icons/spiderfoot.png
-Terminal=false

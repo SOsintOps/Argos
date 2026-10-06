@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Domains
-Categories=Network;OSINT
-Exec=__HOME__/Documents/scripts/domains.sh
-Icon=__HOME__/Pictures/icons/domains.png
-Terminal=true

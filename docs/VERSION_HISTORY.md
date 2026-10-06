@@ -5,6 +5,32 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.0.0-beta — 2026-10-06
+
+Argos rewritten from scratch and released under the MIT licence.
+
+### Highlights
+
+**Cases and evidence.** Choose a case once; every launcher saves its results in
+a run folder with the exact command, the tool version, UTC times, the full
+output and SHA-256 hashes of every file.
+
+**Tools that work again.** Shodan, SpiderFoot, EyeWitness, theHarvester and
+Maigret's PDF reports were broken or missing in 2.x; Amass moves from v3 to v5.
+
+**More from each tool.** Every launcher exposes the options investigators
+actually use, from Maigret's report formats to ffmpeg contact sheets, with
+third-party lookups off unless you confirm them.
+
+**Safer and more predictable.** Input validation, a Cancel button that really
+stops the tool, secrets kept out of the logs, checksum-verified downloads, an
+installer that can run single steps, and an **Argos Check** entry that tests
+every tool.
+
+**New report templates** linked to the evidence folders, and automated tests in CI.
+
+---
+
 ## v2.1.1-beta — 2026-07-04
 
 Robustness release: setup.sh no longer aborts outside the happy path.

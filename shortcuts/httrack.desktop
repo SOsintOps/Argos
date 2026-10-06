@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=HTTrack
-Categories=Network;OSINT
-Exec=httrack
-Icon=__HOME__/Pictures/icons/httrack.png
-Terminal=true

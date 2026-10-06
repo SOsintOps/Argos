@@ -12,7 +12,7 @@ Argos is distributed as a setup script. Only the latest release on the
 
 ## Reporting a Vulnerability
 
-If you find a security issue in the setup script, the launcher scripts, or
+If you find a security issue in the setup script, the launchers, or
 the deployed configuration (e.g. the Firefox `policies.json`):
 
 - Preferred: open a private report via the repository **Security** tab on
@@ -28,7 +28,7 @@ this is a volunteer-maintained project.
 ## Scope Notes
 
 - `setup.sh` intentionally installs third-party OSINT tools from their
-  upstream sources (apt, snap, pipx, GitHub releases). Vulnerabilities in
+  upstream sources (apt, pipx, uv, GitHub releases). Vulnerabilities in
   those tools should be reported upstream; report here only issues in how
   Argos installs or configures them (e.g. unverified downloads, unsafe
   permissions).

@@ -6,6 +6,59 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.0.0-beta] — 2026-10-06
+
+Complete rewrite. New code, launchers, icons and report templates; licence
+changed from CC BY-NC-SA 4.0 to MIT.
+
+### Added
+- `launchers/` with a shared library (`launchers/lib/argos.sh`) and 14
+  launchers: Argos Case, Usernames & Emails, Instagram, Domains, Web
+  Screenshots, Documents & Metadata, Video Download, Video Tools, Shodan,
+  SpiderFoot, PhoneInfoga, recon-ng, Website Mirror, Argos Check.
+- Cases: every result is saved in `~/Documents/Argos/cases/<case>/<tool>/<UTC time>_<target>/`
+  with `command.txt`, `output.log` and `SHA256SUMS`.
+- Working Cancel button in progress windows (stops the tool and its children).
+- Terminal mode for all launchers (no desktop needed).
+- Input validation for usernames, emails, domains, URLs, IPv4 addresses and phone numbers.
+- Explicit consent before options that send the target to third-party services;
+  warnings before options that can alert the target; secrets never written to `command.txt`.
+- New tool features: Maigret PDF/JSON/XMind reports, all-sites scope and profile-URL mode;
+  Blackbird email search and reports; User Scanner formats and cross-scan; Linkook options;
+  Instaloader reels, tagged posts and session-based content via Firefox cookies;
+  theHarvester source presets; Amass brute force, alterations and active mode;
+  EyeWitness URL lists and Nmap/Nessus XML; metadata report of any folder;
+  yt-dlp audio-only and metadata-only modes, comments, playlists;
+  ffmpeg technical report, clip cut and contact sheet; Shodan download+CSV, host history,
+  domain and count; SpiderFoot scans saved in the case; PhoneInfoga single-number scan;
+  HTTrack website mirror launcher.
+- Argos Check: verifies that every tool starts.
+- New SVG icon set, report templates (`templates/`), case skeleton, `docs/ARCHITECTURE.md`.
+- Automated tests (`tests/`, bats) run in CI together with ShellCheck.
+
+### Changed
+- `setup.sh` rewritten: runs from any folder, named steps (`./setup.sh --list`,
+  `./setup.sh STEP`), sudo only for steps that need it, failures collected in a final summary.
+- Amass v5 from the official release (was snap v3.19), PhoneInfoga from the official
+  release, both with SHA-256 verification.
+- theHarvester 5 installed with uv (needs Python 3.14); yt-dlp from pipx (apt version too old);
+  CherryTree from apt (1.1.x, was snap 0.99); Obsidian from the .deb (no .snap is published any more).
+- Menu entries and launchers are installed per user under `~/.local/share`.
+
+### Fixed
+- Shodan CLI crashed at start (`No module named pkg_resources`): setuptools<81 is injected.
+- SpiderFoot was never installed (not on PyPI): installed from its repository.
+- EyeWitness and theHarvester installs failed after upstream changes.
+- Maigret PDF reports were never produced (missing `maigret[pdf]` extra).
+- theHarvester launcher used the removed `bing` source and expected an HTML report.
+
+### Removed
+- Scripts, shortcuts and report templates derived from third-party material.
+- Flaticon icons and two wallpapers without documented licences.
+- Repository clone of a removed project (obsidian-criptovalute).
+
+---
+
 ## [2.1.1-beta] — 2026-07-04
 
 Robustness fixes for setup.sh: the script no longer aborts (or misbehaves)

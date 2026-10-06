@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Metagoofil
-Categories=Network;OSINT
-Exec=__HOME__/Documents/scripts/metagoofil.sh
-Icon=__HOME__/Pictures/icons/metagoofil.png
-Terminal=true

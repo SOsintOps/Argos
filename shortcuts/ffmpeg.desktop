@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Video Utilities       
-Comment=Launch ffmpeg
-Exec="__HOME__/Documents/scripts/ffmpeg_interact.sh"
-Type=Application
-Categories=Application;OSINT
-Icon=__HOME__/Pictures/icons/ffmpeg.png
-Terminal=false

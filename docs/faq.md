@@ -5,61 +5,64 @@
 ## Installation
 
 **Which operating systems does Argos support?**
-Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS. Ubuntu 22.04 LTS and 20.04 LTS are no longer supported due to incompatible dependencies.
+Ubuntu 24.04 LTS and Ubuntu Budgie 24.04 LTS. On other Ubuntu releases the installer warns and continues; on other distributions it stops.
 
-**Do I need an internet connection during installation?**
-Yes. The script downloads packages via apt, clones repositories from GitHub, and fetches the latest Obsidian release from the GitHub API. A stable connection is required throughout.
+**Where do I clone the repository?**
+Anywhere. Version 3 no longer requires `~/Downloads/Argos`: run `./setup.sh` from the folder you cloned.
 
-**The script stopped partway through. What do I do?**
-Check the installation log at `~/Downloads/argos_install_YYYYMMDD_HHMMSS.log`. The exact line number where the failure occurred is recorded. Fix the underlying issue and re-run the script. Most steps are idempotent — already-installed packages will be skipped by apt and already-cloned repositories will be updated via `git pull`.
+**The installer reported errors. What do I do?**
+Read the summary at the end of the run and the log at `~/Downloads/argos_install_<date>.log`. A failing step does not stop the others. Fix the cause (often a network hiccup) and run only that step again, for example `./setup.sh amass`. `./setup.sh --list` shows the step names.
 
-**Some packages showed `[WARN] failed to install`. Is that a problem?**
-It depends on the package. The script lists all failed packages at the end of the run. Core tools (python3, git, curl, ffmpeg) failing would break subsequent steps. Optional tools (kazam, audacity) failing is not critical. Review the log and install any missing critical packages manually with `sudo apt install <package>`.
+**How do I know that every tool works?**
+Open **Argos Check** from the menu. It starts every tool and lists those that are missing or fail to start.
 
-**Firefox customisation was skipped. Why?**
-The script looks for a Firefox profile directory to apply the Argos template. If Firefox has never been opened, the profile does not exist yet. The script attempts to launch Firefox automatically to create it. If that fails (e.g. in a headless session), open Firefox manually, wait for it to load, close it, then re-run the script.
+**How do I update Argos?**
+`git pull` in the repository, then `./setup.sh launchers` for the launchers and templates, or `./setup.sh python-tools theharvester amass` to update the tools as well.
 
-**Do I need to install VirtualBox Guest Additions before running setup.sh?**
-Yes. The script does not install them. Guest Additions must be installed beforehand to enable clipboard sharing, drag-and-drop, and dynamic screen resizing. In VirtualBox, go to Devices → Insert Guest Additions CD Image and follow the prompts, then reboot before running `setup.sh`.
+**Do I need to install VirtualBox Guest Additions first?**
+Yes. Argos does not install them. In VirtualBox use Devices → Insert Guest Additions CD Image, follow the prompts and reboot before running `setup.sh`.
 
-**Can I run the script as root?**
-No. The script explicitly blocks root execution. Run it as a regular user with sudo privileges.
-
-**Where is the installation log?**
-At `~/Downloads/argos_install_YYYYMMDD_HHMMSS.log`. The full path is printed at the start of every run.
+**Can I run the installer as root?**
+No. Run it as a normal user with sudo rights; it asks for the password only for the steps that install system packages.
 
 ---
 
-## OSINT Tools
+## Cases and evidence
+
+**Where are my results?**
+In `~/Documents/Argos/cases/<case>/<tool>/<UTC time>_<target>/`. Choose the case with **Argos Case**; without one, results go to `unsorted`.
+
+**What is in a run folder?**
+`command.txt` (case, target, operator, tool version, exact command, UTC start and end, exit code), `output.log` (everything the tool printed), the tool's own files, and `SHA256SUMS`. Verify the hashes with `sha256sum -c SHA256SUMS` inside the folder.
+
+**Can I stop a long search?**
+Yes. Press Cancel in the progress window: the tool and everything it started are stopped, and the partial results stay in the run folder with exit code 130.
+
+**Can I use the launchers over SSH or without a desktop?**
+Yes. Without a graphical session the launchers ask their questions in the terminal. `ARGOS_UI=tty` forces this mode.
+
+---
+
+## OSINT tools
 
 **Which tool should I use for username searches?**
-Three tools are available, each with different coverage:
-- **Sherlock** — fast, broad coverage, good starting point
-- **Maigret** — deeper coverage, includes Sherlock's sites plus many more
-- **Blackbird** — focuses on social platforms, returns structured output
-
-Start with Maigret for thoroughness. Use Sherlock for speed. All three are accessible from the Usernames launcher.
+Start with Maigret for depth (3000+ sites, HTML and PDF reports) or Sherlock for speed. Blackbird and User Scanner also accept email addresses. Linkook follows the accounts linked from a profile. Socialscan tells whether a username or email is in use. "All username tools" runs them one after the other.
 
 **What is the difference between Instaloader and Toutatis?**
-Instaloader downloads public profile data, posts, and metadata from Instagram without authentication. Toutatis requires an Instagram session ID and returns phone numbers and emails linked to an account. Use Instaloader for public data. Use Toutatis when you have a valid session cookie.
+Instaloader downloads a profile: posts, reels, tagged posts, and, with the session of your Firefox research account, stories, highlights, comments and geotags. Toutatis returns account details and needs a session ID, which Argos never writes to the evidence files.
 
-**Which tools require an API key or account?**
-- **Maltego** — requires a Maltego account (free or commercial)
-- **theHarvester** — works without keys but returns more results with API keys for Bing, VirusTotal, and others. Edit `~/Downloads/Programs/theHarvester/api-keys.yaml` to add keys.
-- **recon-ng** — modules requiring API keys will prompt you inside the framework. Add keys with `keys add <provider> <key>`.
-- **SpiderFoot** — works standalone but supports optional API keys for enriched data sources via the web interface.
+**Why did Amass find so few subdomains?**
+Amass v5 relies on API keys for most passive sources. Without keys, use brute force (on by default) or add keys to `~/.config/amass/datasources.yaml`. theHarvester's free sources are a good first step.
+
+**Which tools need an API key or account?**
+- **Shodan**: an API key, asked the first time you open the launcher.
+- **Amass** and **theHarvester**: optional keys for more sources (`~/.config/amass/datasources.yaml`, `~/.theHarvester/api-keys.yaml`).
+- **recon-ng**: per-module keys, added inside the console with `keys add <name> <key>`.
+- **SpiderFoot**: optional keys in its web interface settings.
+- **Maltego**: an account; it is not installed by Argos.
 
 **How do I open recon-ng?**
-Use the recon-ng desktop shortcut or launcher. The framework opens in a terminal session. Type `help` for available commands. Modules are installed with `marketplace install <module>`.
-
-**theHarvester or EyeWitness setup failed. What do I do?**
-Both tools rely on pip dependencies installed into their own virtual environments. If the pip install step failed, navigate to the tool directory and run the install manually:
-```bash
-~/Downloads/Programs/theHarvester/.venv/bin/pip install -r ~/Downloads/Programs/theHarvester/requirements/base.txt
-```
-Replace the path accordingly for other tools.
-
----
+From the menu: it opens a terminal with a workspace named after the active case. Install modules with `marketplace install all`.
 
 ## Operational Security
 

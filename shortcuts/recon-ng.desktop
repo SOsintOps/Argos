@@ -1,7 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Recon-NG
-Categories=Network;OSINT
-Exec=__HOME__/Documents/scripts/recon-ng.sh
-Icon=__HOME__/Pictures/icons/recon-ng.png
-Terminal=true

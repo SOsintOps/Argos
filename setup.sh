@@ -116,7 +116,7 @@ deb_arch() { dpkg --print-architecture; }
 # Each step is a function step_NAME. A failing step is reported at the end;
 # it does not stop the other steps.
 
-STEPS=(system packages python-tools deno theharvester source-tools eyewitness amass phoneinfoga
+STEPS=(system packages python-tools deno go-tools theharvester source-tools eyewitness amass phoneinfoga
        obsidian google-earth vscodium resources firefox launchers templates wallpaper)
 
 step_system() {
@@ -164,7 +164,18 @@ instaloader --with browser_cookie3
 toutatis
 yt-dlp[default,curl-cffi]
 shodan --with setuptools<81
+telegram-phone-number-checker
 EOF_TOOLS
+    # Offline phone number analysis (Google's libphonenumber) for the
+    # PhoneInfoga launcher.
+    if mkdir -p "$TOOLS/phonenumbers" &&
+        uv venv -q --clear --python "$TOOLS_PYTHON" "$TOOLS/phonenumbers/.venv" &&
+        uv pip install -q --python "$TOOLS/phonenumbers/.venv/bin/python" phonenumbers; then
+        ok "phonenumbers"
+    else
+        warn "phonenumbers could not be installed"
+        rc=1
+    fi
     return "$rc"
 }
 
@@ -225,6 +236,38 @@ step_amass() {
 }
 
 # deno: JavaScript runtime that yt-dlp needs for YouTube.
+# release_binary OWNER/REPO NAME ASSET CHECKSUMS: install one binary from a
+# GitHub release archive (.zip or .tar.gz) after checking its SHA-256.
+# {v} in ASSET and CHECKSUMS stands for the version without the leading v.
+release_binary() {
+    local repo=$1 name=$2 tag v asset sums
+    tag=$(github_latest "$repo") || return 1
+    v=${tag#v}
+    asset=${3//\{v\}/$v}
+    sums=${4//\{v\}/$v}
+    download_verified "https://github.com/$repo/releases/download/$tag/$asset" \
+        "https://github.com/$repo/releases/download/$tag/$sums" "$asset" || return 1
+    case "$asset" in
+        *.zip) unzip -o -q "$WORK/$asset" "$name" -d "$WORK" ;;
+        *) tar -xzf "$WORK/$asset" -C "$WORK" "$name" ;;
+    esac &&
+        install -D -m 755 "$WORK/$name" "$BIN/$name" &&
+        ok "$name $tag"
+}
+
+# go-tools: subfinder (passive subdomains), katana (crawler), gau (known URLs).
+step_go_tools() {
+    local arch rc=0
+    case "$(deb_arch)" in arm64) arch=arm64 ;; *) arch=amd64 ;; esac
+    release_binary projectdiscovery/subfinder subfinder \
+        "subfinder_{v}_linux_${arch}.zip" "subfinder_{v}_checksums.txt" || rc=1
+    release_binary projectdiscovery/katana katana \
+        "katana_{v}_linux_${arch}.zip" "katana-{v}-checksums.txt" || rc=1
+    release_binary lc/gau gau \
+        "gau_{v}_linux_${arch}.tar.gz" "gau_{v}_checksums.txt" || rc=1
+    return "$rc"
+}
+
 step_deno() {
     local tag arch file
     tag=$(github_latest denoland/deno) || return 1
@@ -308,7 +351,7 @@ step_launchers() {
     local f
     mkdir -p "$ARGOS_HOME/launchers/lib" "$ARGOS_HOME/icons" "$APPS" "$HOME/Documents/Argos/cases"
     install -m 755 "$SRC"/launchers/*.sh "$ARGOS_HOME/launchers/"
-    install -m 644 "$SRC/launchers/lib/argos.sh" "$ARGOS_HOME/launchers/lib/"
+    install -m 644 "$SRC/launchers/lib/argos.sh" "$SRC/launchers/lib/phone_info.py" "$ARGOS_HOME/launchers/lib/"
     install -m 644 "$SRC"/multimedia/icons/argos-*.svg "$ARGOS_HOME/icons/"
     # Folders and files that every new case starts with (see the Argos Case launcher).
     rm -rf "$ARGOS_HOME/case-skeleton"

@@ -111,20 +111,67 @@ harvester_run() {
     finish_run "$run"
 }
 
+# ── subfinder ───────────────────────────────────────────────────────────────
+
+subfinder_run() {
+    local domain=$1 bin scope run args rc
+    bin=$(find_tool subfinder "$ARGOS_BIN_DIR/subfinder") || return 1
+    scope=$(ui_choice "subfinder — sources" \
+        "Default sources (fast)" "All sources (slower, more results)") || return 0
+    run=$(new_run_dir subfinder "$domain") || return 1
+    args=(-d "$domain" -o "$run/subdomains.jsonl" -oJ -cs)
+    case "$scope" in All*) args+=(-all) ;; esac
+    record_version "$run" subfinder "$bin" -version
+    run_logged "$run" "subfinder: $domain" -- "$bin" "${args[@]}"
+    rc=$?
+    if [ -f "$run/subdomains.jsonl" ] && command -v jq >/dev/null 2>&1; then
+        jq -r '.host // empty' "$run/subdomains.jsonl" | sort -u > "$run/subdomains.txt"
+    fi
+    report_outcome "$run" "$rc" subfinder
+    finish_run "$run"
+}
+
+# ── gau ─────────────────────────────────────────────────────────────────────
+
+gau_run() {
+    local domain=$1 bin opts run args
+    bin=$(find_tool gau "$ARGOS_BIN_DIR/gau") || return 1
+    opts=$(ui_checklist "gau — known URLs of the domain" \
+        "subs|Include subdomains|on" \
+        "wayback|Wayback Machine|on" "commoncrawl|Common Crawl|on" \
+        "otx|AlienVault OTX|on" "urlscan|urlscan.io|on") || return 0
+    run=$(new_run_dir gau "$domain") || return 1
+    args=("$domain" --o "$run/urls.txt" --threads 5)
+    has subs "$opts" && args+=(--subs)
+    local providers
+    providers=$(grep -vx subs <<< "$opts" | paste -sd, -)
+    [ -n "$providers" ] && args+=(--providers "$providers")
+    record_version "$run" gau "$bin" --version
+    run_logged "$run" "gau: $domain" -- "$bin" "${args[@]}"
+    report_outcome "$run" $? gau
+    [ -f "$run/urls.txt" ] && printf 'URLs found: %s\n' "$(wc -l < "$run/urls.txt")" >> "$run/command.txt"
+    finish_run "$run"
+}
+
 # ── Menu ────────────────────────────────────────────────────────────────────
 
 choice=$(ui_choice "Case: $(case_name)
 Which tool?" \
     "theHarvester — subdomains, hosts, IPs and emails from public sources" \
     "Amass — subdomain enumeration (brute force and sources)" \
-    "Both, one after the other") || exit 0
+    "subfinder — passive subdomains, no API key needed" \
+    "gau — known URLs (Wayback Machine, Common Crawl, OTX, urlscan)" \
+    "All: theHarvester, subfinder and Amass, one after the other") || exit 0
 
 domain=$(ask_domain "Domains") || exit $(($? == 2))
 case "$choice" in
     theHarvester*) harvester_run "$domain" ;;
     Amass*) amass_run "$domain" ;;
-    Both*)
+    subfinder*) subfinder_run "$domain" ;;
+    gau*) gau_run "$domain" ;;
+    All*)
         harvester_run "$domain"
+        subfinder_run "$domain"
         amass_run "$domain"
         ;;
 esac

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Domains
-Comment=theHarvester and Amass: subdomains, hosts, IPs and emails
+Comment=theHarvester, subfinder, Amass and gau: subdomains, hosts, IPs, emails, URLs
 Exec=__ARGOS_HOME__/launchers/domains.sh
 Icon=__ARGOS_HOME__/icons/argos-domains.svg
 Terminal=false

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Name=Website Mirror
-Comment=HTTrack: offline copy of a website
+Comment=HTTrack offline copy or katana crawl of a website
 Exec=__ARGOS_HOME__/launchers/website-mirror.sh
 Icon=__ARGOS_HOME__/icons/argos-website-mirror.svg
 Terminal=false

@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
-Name=PhoneInfoga
-Comment=Phone number intelligence
+Name=Phone Numbers
+Comment=Offline analysis, PhoneInfoga and Telegram check of a phone number
 Exec=__ARGOS_HOME__/launchers/phoneinfoga.sh
 Icon=__ARGOS_HOME__/icons/argos-phoneinfoga.svg
 Terminal=false

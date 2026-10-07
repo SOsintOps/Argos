@@ -9,6 +9,9 @@ ARGOS_VERSION="3.0.0-beta"
 
 # Settings that the environment may override (the tests rely on this).
 ARGOS_HOME="${ARGOS_HOME:-$HOME/.local/share/argos}"
+# Folder of this library (helper scripts such as phone_info.py live here).
+# shellcheck disable=SC2034  # used by the launchers that source this file
+ARGOS_LIB_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ARGOS_CONFIG_DIR="${ARGOS_CONFIG_DIR:-${XDG_CONFIG_HOME:-$HOME/.config}/argos}"
 ARGOS_CONFIG="$ARGOS_CONFIG_DIR/argos.conf"
 ARGOS_TOOLS_DIR="${ARGOS_TOOLS_DIR:-$ARGOS_HOME/tools}"

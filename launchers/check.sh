@@ -59,6 +59,11 @@ probe metagoofil    "$T/metagoofil/.venv/bin/python" "$T/metagoofil/metagoofil.p
 probe exiftool      exiftool -ver
 probe yt-dlp        "$ARGOS_BIN_DIR/yt-dlp" --version
 probe deno          "$ARGOS_BIN_DIR/deno" --version
+probe subfinder     "$ARGOS_BIN_DIR/subfinder" -version
+probe gau           "$ARGOS_BIN_DIR/gau" --version
+probe katana        "$ARGOS_BIN_DIR/katana" -version
+probe phonenumbers  "$T/phonenumbers/.venv/bin/python" -c "import phonenumbers; print(phonenumbers.__version__)"
+probe_runs telegram-check "$ARGOS_BIN_DIR/telegram-phone-number-checker" --help
 probe chromedriver  chromedriver --version
 probe ffmpeg        ffmpeg -version
 probe shodan        "$ARGOS_BIN_DIR/shodan" version

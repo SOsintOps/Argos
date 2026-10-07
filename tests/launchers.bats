@@ -223,14 +223,53 @@ setup() { setup_argos; }
 
 @test "phoneinfoga: number normalised before the scan" {
     double phoneinfoga
-    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 1 "+39 (06) 123-4567")
+    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 2 "+39 (06) 123-4567")
     grep -q '^phoneinfoga scan -n +39061234567' "$CALLS"
 }
 
 @test "website mirror: robots.txt respected unless the user says otherwise" {
     double httrack
-    run bash "$LAUNCHERS/website-mirror.sh" < <(answers https://example.com/ 2 n)
+    run bash "$LAUNCHERS/website-mirror.sh" < <(answers 1 https://example.com/ 2 n)
     grep -q '^httrack https://example.com/ -O .*/mirror -q -r2$' "$CALLS"
+}
+
+@test "subfinder: JSON output with sources, plain list extracted" {
+    double subfinder 'while [ $# -gt 0 ]; do [ "$1" = -o ] && echo "{\"host\":\"a.example.com\",\"sources\":[\"crtsh\"]}" > "$2"; shift; done'
+    run bash "$LAUNCHERS/domains.sh" < <(answers 3 example.com 1)
+    grep -q '^subfinder -d example.com -o .*/subdomains.jsonl -oJ -cs$' "$CALLS"
+    dir=$(only_run_dir subfinder)
+    if command -v jq >/dev/null; then [ "$(cat "$dir/subdomains.txt")" = a.example.com ]; fi
+}
+
+@test "gau: chosen providers and subdomains" {
+    double gau
+    run bash "$LAUNCHERS/domains.sh" < <(answers 4 example.com "1 2 4")
+    grep -q '^gau example.com --o .*/urls.txt --threads 5 --subs --providers wayback,otx$' "$CALLS"
+}
+
+@test "katana: crawl limited to the site, JSONL in the run folder" {
+    double katana
+    run bash "$LAUNCHERS/website-mirror.sh" < <(answers 2 https://example.com/ 2 5)
+    call=$(grep -v -- '-version' "$CALLS" | grep '^katana')
+    [[ $call == *"-u https://example.com/ -d 2"* && $call == *"-fs rdn"* && $call == *"-ct 5m"* ]]
+    dir=$(only_run_dir katana)
+    [ "$(arg_after -o "$call")" = "$dir/crawl.jsonl" ]
+}
+
+@test "phone: offline analysis runs the helper with the normalised number" {
+    double "$ARGOS_TOOLS_DIR/phonenumbers/.venv/bin/python"
+    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 1 "+39 06 1234567")
+    grep -q 'phone_info.py +39061234567 .*/phone.json$' "$CALLS"
+}
+
+@test "phone: Telegram check asks consent, session kept outside the case" {
+    double telegram-phone-number-checker 'echo "cwd=$PWD"'
+    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 3 "+39 06 1234567" n)
+    [ ! -s "$CALLS" ]
+    run bash "$LAUNCHERS/phoneinfoga.sh" < <(answers 3 "+39 06 1234567" y)
+    grep -q '^telegram-phone-number-checker --phone-numbers +39061234567 --output .*/telegram.json$' "$CALLS"
+    dir=$(only_run_dir telegram)
+    grep -q "cwd=$ARGOS_CONFIG_DIR/telegram" "$dir/output.log"
 }
 
 @test "check: missing tools are reported and the exit code says so" {
@@ -243,4 +282,12 @@ setup() { setup_argos; }
     run bash "$REPO/setup.sh" --list
     [ "$status" -eq 0 ]
     [[ $output == *"launchers"* && $output == *"amass"* ]]
+}
+
+@test "domains: the All choice runs theHarvester, subfinder and Amass" {
+    double theHarvester; double subfinder; double amass
+    run bash "$LAUNCHERS/domains.sh" < <(answers 5 example.com "" "" 1 "" "")
+    grep -q '^theHarvester -d example.com' "$CALLS"
+    grep -q '^subfinder -d example.com' "$CALLS"
+    grep -q '^amass enum -d example.com' "$CALLS"
 }

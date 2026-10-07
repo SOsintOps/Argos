@@ -133,3 +133,25 @@ setup() {
     # Measured with zenity 4.2: about 220 px of title, text and buttons, 30 px per row.
     [ "$(cat "$BATS_TEST_TMPDIR/h")" -ge $((220 + 30 * 8)) ]
 }
+
+@test "cancel also works when job control is on (setsid forks)" {
+    double zenity 'case " $* " in *" --progress "*) head -n 2 >/dev/null; exit 1;; esac'
+    ARGOS_UI=zenity
+    set -m
+    dir=$(new_run_dir t x)
+    start=$SECONDS
+    run run_logged "$dir" "label" -- sh -c 'sleep 300 & echo $! > "$0/child.pid"; wait' "$dir"
+    set +m
+    [ "$status" -eq 130 ]
+    [ $((SECONDS - start)) -lt 20 ]
+    ! kill -0 "$(cat "$dir/child.pid")" 2>/dev/null
+}
+
+@test "the tool's exit code survives the progress window" {
+    double zenity 'case " $* " in *" --progress "*) cat >/dev/null; exit 0;; esac'
+    ARGOS_UI=zenity
+    dir=$(new_run_dir t x)
+    run run_logged "$dir" "label" -- sh -c 'echo working; sleep 1; exit 7'
+    [ "$status" -eq 7 ]
+    grep -q working "$dir/output.log"
+}

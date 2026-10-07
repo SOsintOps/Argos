@@ -359,25 +359,39 @@ run_logged() {
     } >> "$meta"
 
     if [ "$ARGOS_UI" = zenity ]; then
-        setsid "$@" >> "$log" 2>&1 < /dev/null &
-        pid=$!
+        # The tool runs in its own session so that Cancel can stop it together
+        # with everything it starts. setsid forks when its caller leads a
+        # process group (job control on), so $! may not be the tool: the tool
+        # writes its own PID to a file, and "setsid -w" waits for it and
+        # returns its exit code.
+        local pidfile waiter _
+        pidfile=$(mktemp)
+        # shellcheck disable=SC2016  # expanded by the inner sh, not here
+        setsid -w sh -c 'echo $$ > "$0"; exec "$@"' "$pidfile" "$@" >> "$log" 2>&1 < /dev/null &
+        waiter=$!
+        for _ in $(seq 1 50); do
+            [ -s "$pidfile" ] && break
+            sleep 0.1
+        done
+        pid=$(cat "$pidfile")
+        rm -f "$pidfile"
         (
-            while kill -0 "$pid" 2>/dev/null; do
+            while kill -0 "$waiter" 2>/dev/null; do
                 printf '# %s  ·  %s\n' "$label" "$(_last_line "$log" | _markup_escape)"
                 sleep 1
             done
             echo 100
         ) | zenity --progress --pulsate --auto-close --width=560 \
                 --title "$ARGOS_TITLE" --text "$label" 2>/dev/null
-        if kill -0 "$pid" 2>/dev/null; then
-            kill -TERM -- "-$pid" 2>/dev/null
+        if kill -0 "$waiter" 2>/dev/null; then
+            [ -n "$pid" ] && kill -TERM -- "-$pid" 2>/dev/null
             sleep 2
-            kill -KILL -- "-$pid" 2>/dev/null
-            wait "$pid" 2>/dev/null
+            [ -n "$pid" ] && kill -KILL -- "-$pid" 2>/dev/null
+            wait "$waiter" 2>/dev/null
             rc=130
             printf '\n[Argos] Cancelled by the user.\n' >> "$log"
         else
-            wait "$pid"
+            wait "$waiter"
             rc=$?
         fi
     else

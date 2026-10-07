@@ -141,7 +141,9 @@ gau_run() {
         "wayback|Wayback Machine|on" "commoncrawl|Common Crawl|on" \
         "otx|AlienVault OTX|on" "urlscan|urlscan.io|on") || return 0
     run=$(new_run_dir gau "$domain") || return 1
-    args=("$domain" --o "$run/urls.txt" --threads 5)
+    # The Wayback Machine often answers slowly: longer timeout, two retries,
+    # and --verbose so that provider timeouts reach output.log.
+    args=("$domain" --o "$run/urls.txt" --threads 5 --timeout 120 --retries 2 --verbose)
     has subs "$opts" && args+=(--subs)
     local providers
     providers=$(grep -vx subs <<< "$opts" | paste -sd, -)
@@ -149,7 +151,13 @@ gau_run() {
     record_version "$run" gau "$bin" --version
     run_logged "$run" "gau: $domain" -- "$bin" "${args[@]}"
     report_outcome "$run" $? gau
-    [ -f "$run/urls.txt" ] && printf 'URLs found: %s\n' "$(wc -l < "$run/urls.txt")" >> "$run/command.txt"
+    local found=0
+    [ -f "$run/urls.txt" ] && found=$(wc -l < "$run/urls.txt")
+    printf 'URLs found: %s\n' "$found" >> "$run/command.txt"
+    if [ "$found" -eq 0 ]; then
+        ui_warn "gau found no URLs. A provider may have timed out (the Wayback Machine often does):
+see $run/output.log and try again, or with fewer providers."
+    fi
     finish_run "$run"
 }
 

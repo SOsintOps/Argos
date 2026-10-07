@@ -244,7 +244,8 @@ setup() { setup_argos; }
 @test "gau: chosen providers and subdomains" {
     double gau
     run bash "$LAUNCHERS/domains.sh" < <(answers 4 example.com "1 2 4")
-    grep -q '^gau example.com --o .*/urls.txt --threads 5 --subs --providers wayback,otx$' "$CALLS"
+    grep -q '^gau example.com --o .*/urls.txt --threads 5 --timeout 120 --retries 2 --verbose --subs --providers wayback,otx$' "$CALLS"
+    [[ $output == *"gau found no URLs"* ]]
 }
 
 @test "katana: crawl limited to the site, JSONL in the run folder" {

@@ -171,7 +171,8 @@ EOF_TOOLS
 step_theharvester() {
     install_uv || return 1
     # theHarvester 5 needs Python 3.14: uv provides it on Ubuntu 24.04 as well.
-    uv tool install -q --force --python 3.14 "git+https://github.com/laramies/theHarvester" &&
+    # Pinned to the commit tested with Argos: 5.0 has no release yet.
+    uv tool install -q --force --python 3.14 "git+https://github.com/laramies/theHarvester@49a38f8d33c32336bbf6a111ea723ea223116265" &&
         ok "theHarvester $(theHarvester -h 2>/dev/null | grep -o 'theHarvester [0-9.]*' | head -1)"
 }
 
@@ -188,7 +189,7 @@ step_source_tools() {
             rc=1
         fi
     done <<'EOF_TOOLS'
-blackbird https://github.com/p1ngul1n0/blackbird requirements.txt
+blackbird https://github.com/antoniaci/blackbird requirements.txt
 metagoofil https://github.com/opsdisk/metagoofil requirements.txt
 recon-ng https://github.com/lanmaster53/recon-ng REQUIREMENTS
 spiderfoot https://github.com/smicallef/spiderfoot requirements.txt
@@ -198,7 +199,7 @@ EOF_TOOLS
 
 step_eyewitness() {
     mkdir -p "$TOOLS"
-    git_sync https://github.com/FortyNorthSecurity/EyeWitness "$TOOLS/EyeWitness" || return 1
+    git_sync https://github.com/RedSiege/EyeWitness "$TOOLS/EyeWitness" || return 1
     install_uv || return 1
     # The upstream installer (needs root) adds Chromium, its driver and the
     # system libraries. Its Python environment is then rebuilt with uv on the

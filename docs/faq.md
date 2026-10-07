@@ -62,6 +62,7 @@ Amass v5 relies on API keys for most passive sources. Without keys, use brute fo
 - **Amass** and **theHarvester**: optional keys for more sources (`~/.config/amass/datasources.yaml`, `~/.theHarvester/api-keys.yaml`).
 - **recon-ng**: per-module keys, added inside the console with `keys add <name> <key>`.
 - **SpiderFoot**: optional keys in its web interface settings.
+- **Telegram check**: a Telegram account (use a research account) and an API ID and hash from https://my.telegram.org/apps; asked in the terminal the first time.
 - **Maltego**: an account; it is not installed by Argos.
 
 **YouTube says "Sign in to confirm you're not a bot". What do I do?**

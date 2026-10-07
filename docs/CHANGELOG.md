@@ -33,6 +33,9 @@ changed from CC BY-NC-SA 4.0 to MIT.
   domain and count; SpiderFoot scans saved in the case; PhoneInfoga single-number scan;
   HTTrack website mirror launcher.
 - Argos Check: verifies that every tool starts.
+- New tools: subfinder and gau (Domains), katana (Website Mirror), offline
+  phone number analysis with libphonenumber and Bellingcat's Telegram phone
+  number checker (Phone Numbers, formerly PhoneInfoga). Tool status table in the README.
 - Social preview image (`multimedia/images/argos-social-preview.png`, 1280×640).
 - New SVG icon set, report templates (`templates/`), case skeleton, `docs/ARCHITECTURE.md`.
 - Automated tests (`tests/`, bats) run in CI together with ShellCheck.
@@ -62,6 +65,10 @@ changed from CC BY-NC-SA 4.0 to MIT.
   deno is installed (checksum verified) and yt-dlp comes with `default` and
   `curl-cffi` extras. Video Download can use the Firefox session.
 - The wallpaper step warns instead of failing when there is no desktop session.
+- Cancel reported success while the tool kept running when setsid forked
+  (job control on); the tool now records its own PID.
+- Blackbird and EyeWitness installed from their current repositories;
+  theHarvester pinned to the tested commit (5.0 has no release yet).
 - List dialogs were too short for zenity 4: options beyond the second were hidden.
   Heights measured on real dialogs; `tests/gui/smoke.sh` checks them on a virtual display.
 - theHarvester launcher used the removed `bing` source and expected an HTML report.

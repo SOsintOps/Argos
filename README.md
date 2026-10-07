@@ -35,15 +35,16 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 ## What Argos does
 
 - **One menu entry per investigative task**: usernames and emails, Instagram,
-  domains, web screenshots, public documents and metadata, video download and
-  analysis, Shodan, SpiderFoot, phone numbers, recon-ng, website copies.
+  domains and URLs, web screenshots, public documents and metadata, video
+  download and analysis, Shodan, SpiderFoot, phone numbers, recon-ng, website
+  copies and crawls.
 - **Cases**: choose a case once, and every result lands in
   `~/Documents/Argos/cases/<case>/`.
 - **Evidence you can defend**: each run folder holds `command.txt` (exact
   command, tool version, UTC start/end, exit code), `output.log` (everything
   the tool printed) and `SHA256SUMS` (hash of every file produced).
-- **Up-to-date tools**: Amass v5, theHarvester 5, current Maigret with PDF
-  reports, SpiderFoot from source, Shodan CLI that actually starts, binaries
+- **Up-to-date tools**: Amass v5, theHarvester 5, subfinder, katana, gau,
+  current Maigret with PDF reports, yt-dlp with deno for YouTube, SpiderFoot from source, Shodan CLI that actually starts, binaries
   downloaded from the official releases with their checksums verified.
 - **Same result on 24.04 and 26.04**: the Python tools run in environments
   managed by [uv](https://docs.astral.sh/uv/) on a fixed, tested Python
@@ -112,19 +113,52 @@ Without a case, results go to the case `unsorted`.
 | Argos Case | — | create, switch and open cases |
 | Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan | report formats, scope, email search, start from a profile URL, all tools in one go |
 | Instagram | Instaloader, Toutatis | posts, reels, tagged posts; stories, highlights, comments and geotags with your Firefox session |
-| Domains | theHarvester 5, Amass v5 | free sources by default; brute force, altered names, optional active checks |
+| Domains | theHarvester 5, subfinder, Amass v5, gau | free sources by default; passive subdomains without keys; brute force, altered names, optional active checks; known URLs from Wayback Machine, Common Crawl, OTX, urlscan |
 | Web Screenshots | EyeWitness | one URL, a URL list, or the web services of an Nmap/Nessus XML report |
 | Documents & Metadata | metagoofil, ExifTool | document types, metadata CSV, names and software found in the documents; also for a folder you already have |
-| Video Download | yt-dlp | video, audio or metadata only; description, thumbnail, subtitles, comments, playlists |
+| Video Download | yt-dlp (with deno) | video, audio or metadata only; description, thumbnail, subtitles, comments, playlists; your Firefox session when a site asks to sign in |
 | Video Tools | ffmpeg, ffprobe, ExifTool | technical report, MP4 conversion, frames, motion-only summary, audio, rotation, clip cut, contact sheet |
 | Shodan | Shodan CLI | search saved as JSON and CSV, host history, domain records, free result counts |
 | SpiderFoot | SpiderFoot | web interface, or a passive/footprint/investigate scan saved in the case |
-| PhoneInfoga | PhoneInfoga | single number scan saved in the case, or the web interface |
+| Phone Numbers | libphonenumber, PhoneInfoga, Telegram phone number checker | offline analysis (country, original carrier, line type, time zones), PhoneInfoga scan, Telegram account check with your own Telegram account |
 | recon-ng | recon-ng | console with a workspace named after the case |
-| Website Mirror | HTTrack | offline copy of a site, depth control, robots.txt respected by default |
+| Website Mirror | HTTrack, katana | offline copy of a site, or a crawl that lists its pages, links and files |
 | Exploratores | [Exploratores](https://github.com/SOsintOps/Exploratores) | browser-based OSINT toolkit, also Firefox's home page |
 | X (Twitter) | — | opens x.com |
 | Argos Check | — | checks that every tool starts |
+
+### Tool status
+
+How actively each tool is maintained by its authors (checked October 2026).
+Every tool works with Argos today; "low" and "unmaintained" tools may break
+when the services they query change.
+
+| Tool | Licence | Status |
+|---|---|---|
+| [Sherlock](https://github.com/sherlock-project/sherlock) | MIT | active |
+| [Maigret](https://github.com/soxoj/maigret) | MIT | active |
+| [Blackbird](https://github.com/antoniaci/blackbird) | not stated | low (last change July 2025) |
+| [User Scanner](https://github.com/kaifcodec/user-scanner) | MIT | active |
+| [Linkook](https://github.com/JackJuly/linkook) | MIT | active |
+| [Socialscan](https://github.com/iojw/socialscan) | MPL-2.0 | low (last release 2023) |
+| [Instaloader](https://github.com/instaloader/instaloader) | MIT | active |
+| [Toutatis](https://github.com/megadose/toutatis) | GPL-3.0 | unmaintained (last change 2024) |
+| [theHarvester](https://github.com/laramies/theHarvester) | GPL-2.0 | active |
+| [subfinder](https://github.com/projectdiscovery/subfinder) | MIT | active |
+| [Amass](https://github.com/owasp-amass/amass) | Apache-2.0 | active |
+| [gau](https://github.com/lc/gau) | MIT | active |
+| [EyeWitness](https://github.com/RedSiege/EyeWitness) | GPL-3.0 | low (last change January 2026) |
+| [metagoofil](https://github.com/opsdisk/metagoofil) | GPL-3.0 | active |
+| [ExifTool](https://exiftool.org/) | Perl/GPL | active |
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | Unlicense | active |
+| [Shodan CLI](https://github.com/achillean/shodan-python) | MIT | unmaintained (last change 2024, needs a fix to start) |
+| [SpiderFoot](https://github.com/smicallef/spiderfoot) | MIT | low (last release 2022) |
+| [libphonenumber](https://github.com/daviddrysdale/python-phonenumbers) | Apache-2.0 | active |
+| [PhoneInfoga](https://github.com/sundowndev/phoneinfoga) | GPL-3.0 | unmaintained (declared by the author) |
+| [Telegram phone number checker](https://github.com/bellingcat/telegram-phone-number-checker) | MIT | active |
+| [recon-ng](https://github.com/lanmaster53/recon-ng) | GPL-3.0 | active |
+| [HTTrack](https://github.com/xroche/httrack) | GPL-3.0 | active |
+| [katana](https://github.com/projectdiscovery/katana) | MIT | active |
 
 ## Other tools installed
 
@@ -141,11 +175,12 @@ Maltego is not installed (it needs an account); install it manually if you use i
 ## Privacy and OPSEC
 
 - Options that send your target to a third-party service (Blackbird AI,
-  Hudson Rock breach lookups) are **off by default** and ask for confirmation
+  Hudson Rock breach lookups, the Telegram check) are **off by default** and ask for confirmation
   each time, naming the service.
 - Options that can alert the target (User Scanner "loud" checks, Amass active
   checks) show a warning first.
-- API keys and session IDs are never written to `command.txt`.
+- API keys and session IDs are never written to `command.txt`; the Telegram
+  login session is kept in `~/.config/argos/telegram`, outside the cases.
 - Instaloader uses the session of your Firefox research account: Argos never
   asks for, or stores, an Instagram password.
 

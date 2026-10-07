@@ -39,7 +39,7 @@ tests/                   automated tests (bats) and test doubles
 | `~/.local/share/argos/icons/` | launcher icons |
 | `~/.local/share/applications/argos-*.desktop` | menu entries |
 | `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot), each with a uv environment on Python 3.12 |
-| `~/.local/bin/` | command-line tools installed with uv (own environment each), Amass, PhoneInfoga and deno |
+| `~/.local/bin/` | command-line tools installed with uv (own environment each); Amass, PhoneInfoga, deno, subfinder, katana and gau from their releases |
 | `~/.config/argos/argos.conf` | active case and user settings |
 | `~/Documents/Argos/cases/<case>/` | all results |
 
@@ -86,16 +86,16 @@ terminal mode; the automated tests use it.
 | Argos Case | — | create, select or open a case |
 | Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan | username or email, report formats, scope |
 | Instagram | Instaloader, Toutatis | profile; optional session for Toutatis |
-| Domains | Amass v5, theHarvester 5 | domain, passive or brute force, sources |
+| Domains | theHarvester 5, subfinder, Amass v5, gau | domain, sources, passive or brute force, URL providers |
 | Web Screenshots | EyeWitness | one URL, a URL list or an Nmap/Nessus XML |
 | Documents & Metadata | metagoofil, ExifTool | domain, file types, metadata report |
 | Video Download | yt-dlp | URL, video or audio, metadata and comments |
 | Video Tools | ffmpeg, ffprobe, ExifTool | video file, operation |
 | Shodan | Shodan CLI | API key once; search, host, domain, count, download |
 | SpiderFoot | SpiderFoot web UI | — |
-| PhoneInfoga | PhoneInfoga | web UI or a single number scan |
+| Phone Numbers | libphonenumber, PhoneInfoga, Telegram phone number checker | number; offline analysis, scan, Telegram check (terminal), web UI |
 | recon-ng | recon-ng | workspace named after the case |
-| Website Mirror | HTTrack | URL, depth |
+| Website Mirror | HTTrack, katana | URL, depth; copy or crawl |
 | Exploratores | Exploratores (local) | — |
 
 ## Testing

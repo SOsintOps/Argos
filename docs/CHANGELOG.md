@@ -33,6 +33,7 @@ changed from CC BY-NC-SA 4.0 to MIT.
   domain and count; SpiderFoot scans saved in the case; PhoneInfoga single-number scan;
   HTTrack website mirror launcher.
 - Argos Check: verifies that every tool starts.
+- Social preview image (`multimedia/images/argos-social-preview.png`, 1280×640).
 - New SVG icon set, report templates (`templates/`), case skeleton, `docs/ARCHITECTURE.md`.
 - Automated tests (`tests/`, bats) run in CI together with ShellCheck.
 

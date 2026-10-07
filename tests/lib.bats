@@ -155,3 +155,15 @@ setup() {
     [ "$status" -eq 7 ]
     grep -q working "$dir/output.log"
 }
+
+@test "cancel works where SIGPIPE is ignored (as on CI runners)" {
+    double zenity 'case " $* " in *" --progress "*) head -n 2 >/dev/null; exit 1;; esac'
+    ARGOS_UI=zenity
+    dir=$(new_run_dir t x)
+    start=$SECONDS
+    # An ignored signal stays ignored in every child process.
+    run bash -c 'trap "" PIPE; . "$1/lib/argos.sh"; argos_init T; run_logged "$2" L -- sh -c "sleep 300 & echo \$! > \"\$0/child.pid\"; wait" "$2"' _ "$LAUNCHERS" "$dir"
+    [ "$status" -eq 130 ]
+    [ $((SECONDS - start)) -lt 20 ]
+    ! kill -0 "$(cat "$dir/child.pid")" 2>/dev/null
+}

@@ -379,11 +379,13 @@ run_logged() {
         pid=$(cat "$pidfile")
         rm -f "$pidfile"
         (
+            # Stop as soon as the dialog is gone (Cancel): a failed write ends
+            # the loop even where SIGPIPE is ignored, as on some CI runners.
             while kill -0 "$waiter" 2>/dev/null; do
-                printf '# %s  ·  %s\n' "$label" "$(_last_line "$log" | _markup_escape)"
+                printf '# %s  ·  %s\n' "$label" "$(_last_line "$log" | _markup_escape)" 2>/dev/null || break
                 sleep 1
             done
-            echo 100
+            echo 100 2>/dev/null
         ) | zenity --progress --pulsate --auto-close --width=560 \
                 --title "$ARGOS_TITLE" --text "$label" 2>/dev/null
         if kill -0 "$waiter" 2>/dev/null; then

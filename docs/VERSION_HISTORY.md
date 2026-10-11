@@ -5,6 +5,12 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.1.1-beta — 2026-10-11
+
+The documentation and the installer messages name the target correctly: Ubuntu Budgie 24.04 and 26.04 LTS.
+
+---
+
 ## v3.1.0-beta — 2026-10-10
 
 Two graph tools join the workstation.

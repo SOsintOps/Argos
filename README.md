@@ -3,9 +3,9 @@
 
 [![Checks](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml/badge.svg)](https://github.com/SOsintOps/Argos/actions/workflows/shellcheck.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Ubuntu 24.04 | 26.04 LTS](https://img.shields.io/badge/Ubuntu-24.04%20%7C%2026.04%20LTS-E95420?logo=ubuntu&logoColor=white)](https://releases.ubuntu.com/)
+[![Ubuntu Budgie 24.04 | 26.04 LTS](https://img.shields.io/badge/Ubuntu%20Budgie-24.04%20%7C%2026.04%20LTS-6D8EB7?logo=ubuntu&logoColor=white)](https://ubuntubudgie.org/)
 
-Argos turns a clean Ubuntu 24.04 or 26.04 LTS virtual machine into an OSINT workstation:
+Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSINT workstation:
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
@@ -56,7 +56,7 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 
 ## Requirements
 
-- Ubuntu or Ubuntu Budgie **24.04 LTS** or **26.04 LTS**, preferably a dedicated
+- Ubuntu Budgie **24.04 LTS** or **26.04 LTS**, preferably a dedicated
   virtual machine for each investigation.
 - A user with `sudo` rights (do not run the installer as root).
 - System language: English. Argos uses the standard English folder names

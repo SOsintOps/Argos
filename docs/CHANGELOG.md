@@ -6,6 +6,15 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.1.1-beta] — 2026-10-11
+
+### Changed
+- Target named correctly everywhere: Argos is for **Ubuntu Budgie** 24.04 LTS and
+  26.04 LTS (README badge and requirements, FAQ, ARCHITECTURE, the header of
+  `setup.sh` and its version-check messages).
+
+---
+
 ## [3.1.0-beta] — 2026-10-10
 
 ### Added

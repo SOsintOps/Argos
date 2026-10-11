@@ -21,7 +21,7 @@ This document describes how Argos is organised from version 3.0 onwards: what
 ## Layout in the repository
 
 ```
-setup.sh                 installer (run once on a clean Ubuntu 24.04 or 26.04 VM)
+setup.sh                 installer (run once on a clean Ubuntu Budgie 24.04 or 26.04 VM)
 launchers/lib/argos.sh   shared library used by every launcher
 launchers/*.sh           one launcher per task (usernames, domains, ...)
 desktop/*.desktop        application menu entries (templates)
@@ -108,4 +108,4 @@ terminal mode; the automated tests use it.
 - `bats` tests in `tests/` run the launchers in terminal mode against test
   doubles of each tool, so they check argument building, folder layout, hashes
   and error handling without network access.
-- An end-to-end install on clean Ubuntu 24.04 and 26.04 systems before every release.
+- An end-to-end install on clean Ubuntu Budgie 24.04 and 26.04 systems before every release.

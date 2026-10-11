@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: MIT
 # Copyright (c) 2026 Ramingo (SOsintOps)
 #
-# Argos installer: turns a clean Ubuntu or Ubuntu Budgie 24.04 / 26.04 LTS
+# Argos installer: turns a clean Ubuntu Budgie 24.04 / 26.04 LTS
 # virtual machine into an OSINT workstation. See README.md and
 # docs/ARCHITECTURE.md.
 #
@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.1.0-beta"
+ARGOS_VERSION="3.1.1-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -474,12 +474,12 @@ preflight() {
     # shellcheck source=/dev/null
     . /etc/os-release
     if [ "${ID:-}" != ubuntu ]; then
-        fail "Argos supports Ubuntu and Ubuntu Budgie 24.04 / 26.04 LTS. This system is ${PRETTY_NAME:-unknown}."
+        fail "Argos supports Ubuntu Budgie 24.04 / 26.04 LTS. This system is ${PRETTY_NAME:-unknown}."
         exit 1
     fi
     case "${VERSION_ID:-}" in
         24.04|26.04) ok "${PRETTY_NAME}" ;;
-        *) warn "Argos supports Ubuntu 24.04 and 26.04 LTS; this is ${PRETTY_NAME}. Continuing anyway." ;;
+        *) warn "Argos supports Ubuntu Budgie 24.04 and 26.04 LTS; this is ${PRETTY_NAME}. Continuing anyway." ;;
     esac
     if ! curl -fsS -o /dev/null --max-time 15 https://github.com; then
         fail "No internet connection (github.com unreachable)."

@@ -5,7 +5,7 @@
 ## Installation
 
 **Which operating systems does Argos support?**
-Ubuntu and Ubuntu Budgie 24.04 LTS and 26.04 LTS. On other Ubuntu releases the installer warns and continues; on other distributions it stops.
+Ubuntu Budgie 24.04 LTS and 26.04 LTS. On other releases of the Ubuntu family the installer warns and continues; on other distributions it stops.
 
 **Ubuntu 26.04 ships Python 3.14. Does that matter?**
 No. The Python tools run in their own environments created by uv with Python 3.12 (theHarvester with 3.14, which it requires), so they behave the same on 24.04 and 26.04.

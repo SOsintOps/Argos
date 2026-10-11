@@ -5,6 +5,23 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.1.0-beta — 2026-10-10
+
+Two graph tools join the workstation.
+
+### Highlights
+
+**Quaesitor.** The SOsintOps fork of OSInt Graph: the case as an interactive
+graph of people, phones, emails, profiles, vehicles, places and documents,
+with CSV/Excel import and OCR of document sources. Everything stays on the
+computer, in `~/Documents/Argos/quaesitor`.
+
+**Flowsint.** Graph-based investigation platform with enrichers, run from its
+Docker images at the latest release. Start, open and stop it from the menu;
+the passwords are generated once and kept in `~/.config/argos/flowsint.env`.
+
+---
+
 ## v3.0.0-beta — 2026-10-06
 
 Argos rewritten from scratch and released under the MIT licence.

@@ -6,6 +6,28 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.1.0-beta] — 2026-10-10
+
+### Added
+- **Quaesitor** (`setup.sh quaesitor`, launcher "Quaesitor"): the SOsintOps
+  fork of OSInt Graph, the case as a graph in the browser. Installed from its
+  repository into a uv environment; the archive goes to
+  `~/Documents/Argos/quaesitor`, outside the program. `tesseract-ocr` and the
+  Italian, Chinese, Russian and Arabic language packs are added to the packages
+  for its document OCR, as the Quaesitor README's Linux section asks.
+- **Flowsint** (`setup.sh flowsint`, launcher "Flowsint"): graph-based
+  investigation platform run from its Docker images at the latest release
+  (`docker.io` and `docker-compose-v2` from Ubuntu). The installer generates
+  the passwords once in `~/.config/argos/flowsint.env`, pulls the images and
+  adds the user to the `docker` group (active after the reboot). The launcher
+  starts the containers, opens `http://127.0.0.1:5173` and can stop them (the
+  data stays in the Docker volumes). Port 5001 is shared with SpiderFoot: the
+  launcher refuses to start while something else listens there.
+- Argos Check probes Quaesitor, Tesseract and Flowsint.
+
+### Changed
+- New `git_sync_tag` helper for tools pinned to a release.
+
 ## [3.0.0-beta] — 2026-10-06
 
 Complete rewrite. New code, launchers, icons and report templates; licence

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Flowsint
+Comment=Graph-based investigation platform (Docker, local)
+Exec=__ARGOS_HOME__/launchers/flowsint.sh
+Icon=__ARGOS_HOME__/icons/argos-flowsint.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

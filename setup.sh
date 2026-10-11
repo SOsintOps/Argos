@@ -12,10 +12,11 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.0.0-beta"
+ARGOS_VERSION="3.1.0-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
+CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/argos"
 BIN="$HOME/.local/bin"
 APPS="$HOME/.local/share/applications"
 WORK="$(mktemp -d)"
@@ -70,6 +71,21 @@ git_sync() {
     fi
 }
 
+# git_sync_tag URL DIR TAG: shallow clone of a release tag, or move an
+# existing clone to that tag.
+git_sync_tag() {
+    if [ -d "$2/.git" ]; then
+        git -C "$2" fetch -q --depth 1 origin "refs/tags/$3:refs/tags/$3" &&
+            git -C "$2" checkout -q "$3"
+    else
+        rm -rf "$2"
+        git clone -q --depth 1 -b "$3" "$1" "$2"
+    fi
+}
+
+# random_secret: 32 letters and digits (safe inside connection URLs).
+random_secret() { tr -dc 'A-Za-z0-9' < /dev/urandom | head -c 32; }
+
 # Python used by every tool environment. uv downloads it when the system has
 # another version (Ubuntu 24.04 ships 3.12, Ubuntu 26.04 ships 3.14), so the
 # tools run on the same, tested Python on both releases.
@@ -117,7 +133,7 @@ deb_arch() { dpkg --print-architecture; }
 # it does not stop the other steps.
 
 STEPS=(system packages python-tools deno go-tools theharvester source-tools eyewitness amass phoneinfoga
-       obsidian google-earth vscodium resources firefox launchers templates wallpaper)
+       quaesitor flowsint obsidian google-earth vscodium resources firefox launchers templates wallpaper)
 
 step_system() {
     sudo add-apt-repository -y universe >/dev/null &&
@@ -131,6 +147,7 @@ step_packages() {
         git curl wget jq zenity xdg-utils ca-certificates gnupg \
         python3 python3-venv python3-pip pipx \
         ffmpeg mediainfo-gui libimage-exiftool-perl httrack \
+        tesseract-ocr tesseract-ocr-ita tesseract-ocr-chi-sim tesseract-ocr-rus tesseract-ocr-ara \
         openjdk-21-jre ripgrep 7zip unrar zip unzip subversion \
         vlc openshot-qt audacity kazam keepassxc cherrytree \
         tor torbrowser-launcher proxychains4
@@ -292,6 +309,55 @@ step_phoneinfoga() {
         ok "PhoneInfoga $tag"
 }
 
+# Quaesitor: SOsintOps fork of OSInt Graph (the case as a graph in the
+# browser), installed from its repository like SpiderFoot.
+step_quaesitor() {
+    local dir="$TOOLS/quaesitor" f
+    install_uv || return 1
+    mkdir -p "$TOOLS"
+    git_sync https://github.com/SOsintOps/quaesitor "$dir" || return 1
+    venv_requirements "$dir" requirements.txt || return 1
+    # Settings files next to the program, from the examples; never overwritten.
+    for f in chatbot.conf services.conf; do
+        [ -f "$dir/$f" ] || cp "$dir/$f.example" "$dir/$f"
+    done
+    ok "Quaesitor"
+}
+
+# Flowsint: graph-based investigation platform, run from its Docker images
+# (API, worker, web app, PostgreSQL, Redis, Neo4j) at the latest release.
+# Docker comes from Ubuntu; the user joins the docker group, active from the
+# next login. The passwords live in ~/.config/argos/flowsint.env: the
+# databases are initialised with them, so the file must never be deleted.
+step_flowsint() {
+    local dir="$TOOLS/flowsint" env="$CONFIG/flowsint.env" tag
+    apt_install docker.io docker-compose-v2 || return 1
+    sudo systemctl enable --now docker >/dev/null 2>&1 || warn "the docker service could not be started"
+    sudo usermod -aG docker "$(id -un)" || warn "$(id -un) could not be added to the docker group"
+    tag=$(github_latest reconurge/flowsint) || return 1
+    mkdir -p "$TOOLS" "$CONFIG"
+    git_sync_tag https://github.com/reconurge/flowsint "$dir" "$tag" || return 1
+    if [ -f "$env" ]; then
+        sed -i "s/^FLOWSINT_VERSION=.*/FLOWSINT_VERSION=$tag/" "$env"
+    else
+        (
+            umask 077
+            {
+                printf 'NEO4J_USERNAME=neo4j\n'
+                printf 'NEO4J_PASSWORD=%s\n' "$(random_secret)"
+                printf 'POSTGRES_PASSWORD=%s\n' "$(random_secret)"
+                printf 'AUTH_SECRET=%s\n' "$(random_secret)"
+                printf 'MASTER_VAULT_KEY_V1=base64:%s\n' "$(head -c 32 /dev/urandom | base64 -w0)"
+                printf 'FLOWSINT_VERSION=%s\n' "$tag"
+            } > "$env"
+        )
+    fi
+    # The images (a few GB) are pulled now, as root: the docker group is not
+    # active in this session yet.
+    sudo docker compose --env-file "$env" -f "$dir/docker-compose.prod.yml" pull --quiet &&
+        ok "Flowsint $tag (log out and in again before the first start)"
+}
+
 step_obsidian() {
     local tag version
     tag=$(github_latest obsidianmd/obsidian-releases) || return 1
@@ -425,7 +491,7 @@ preflight() {
 need_sudo() {
     local s
     for s in "$@"; do
-        case "$s" in system|packages|eyewitness|obsidian|google-earth|vscodium|firefox) return 0 ;; esac
+        case "$s" in system|packages|eyewitness|flowsint|obsidian|google-earth|vscodium|firefox) return 0 ;; esac
     done
     return 1
 }

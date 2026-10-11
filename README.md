@@ -9,11 +9,12 @@ Argos turns a clean Ubuntu 24.04 or 26.04 LTS virtual machine into an OSINT work
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.0.0-beta.** Version 3 is a complete rewrite. The full installation has
-> been tested on an Ubuntu 24.04.5 virtual machine and on Ubuntu 26.04.1, and
-> the launchers are covered by automated tests, real dialogs included. Field
-> testing on Ubuntu Budgie desktops continues before the stable release:
-> please report problems in the issues.
+> **3.1.0-beta.** Version 3 is a complete rewrite. The full installation of
+> 3.0.0-beta has been tested on an Ubuntu 24.04.5 virtual machine and on Ubuntu
+> 26.04.1, and the launchers are covered by automated tests, real dialogs
+> included. 3.1.0-beta adds two case graphs, Quaesitor and Flowsint, still to
+> be tested on a virtual machine. Field testing on Ubuntu Budgie desktops
+> continues before the stable release: please report problems in the issues.
 
 <br clear="all">
 
@@ -37,7 +38,8 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 - **One menu entry per investigative task**: usernames and emails, Instagram,
   domains and URLs, web screenshots, public documents and metadata, video
   download and analysis, Shodan, SpiderFoot, phone numbers, recon-ng, website
-  copies and crawls.
+  copies and crawls, and two case graphs in the browser (Quaesitor and
+  Flowsint).
 - **Cases**: choose a case once, and every result lands in
   `~/Documents/Argos/cases/<case>/`.
 - **Evidence you can defend**: each run folder holds `command.txt` (exact
@@ -123,6 +125,8 @@ Without a case, results go to the case `unsorted`.
 | Phone Numbers | libphonenumber, PhoneInfoga, Telegram phone number checker | offline analysis (country, original carrier, line type, time zones), PhoneInfoga scan, Telegram account check with your own Telegram account |
 | recon-ng | recon-ng | console with a workspace named after the case |
 | Website Mirror | HTTrack, katana | offline copy of a site, or a crawl that lists its pages, links and files |
+| Quaesitor | [Quaesitor](https://github.com/SOsintOps/quaesitor) | the case as a graph in the browser: people, phones, emails, profiles, vehicles, places, documents; CSV/Excel import, document sources with OCR; archive kept in `~/Documents/Argos/quaesitor`, nothing leaves the computer |
+| Flowsint | [Flowsint](https://github.com/reconurge/flowsint) | graph-based investigation platform with enrichers, in Docker containers on this computer; start, open and stop from the launcher |
 | Exploratores | [Exploratores](https://github.com/SOsintOps/Exploratores) | browser-based OSINT toolkit, also Firefox's home page |
 | X (Twitter) | — | opens x.com |
 | Argos Check | — | checks that every tool starts |
@@ -159,12 +163,22 @@ when the services they query change.
 | [recon-ng](https://github.com/lanmaster53/recon-ng) | GPL-3.0 | active |
 | [HTTrack](https://github.com/xroche/httrack) | GPL-3.0 | active |
 | [katana](https://github.com/projectdiscovery/katana) | MIT | active |
+| [Quaesitor](https://github.com/SOsintOps/quaesitor) (fork of [OSInt Graph](https://github.com/tingon11/OsintGraph)) | GPL-3.0 with attribution terms | active |
+| [Flowsint](https://github.com/reconurge/flowsint) | Apache-2.0 | active |
+
+Flowsint runs in Docker: the installer adds your
+user to the `docker` group, active after the reboot, and keeps the generated
+passwords in `~/.config/argos/flowsint.env` (never delete that file: the
+databases are initialised with them). Its containers mount the Docker socket,
+as its own `docker-compose.prod.yml` requires.
 
 ## Other tools installed
 
 Audacity, CherryTree, Google Earth Pro, Kazam, KeePassXC, MediaInfo, Obsidian
 (with [OSINT templates](https://github.com/WebBreacher/obsidian-osint-templates)),
-OpenShot, ripgrep, Tor Browser, proxychains, VLC, VSCodium, 7-Zip, and the
+OpenShot, ripgrep, Tesseract OCR (with the Italian, Chinese, Russian and
+Arabic language packs, used by Quaesitor for scanned documents), Docker (for
+Flowsint), Tor Browser, proxychains, VLC, VSCodium, 7-Zip, and the
 [threat intelligence](https://github.com/pstirparo/threatintel-resources) and
 [intelligence writing](https://github.com/mxm0z/awesome-intelligence-writing)
 reading lists in `~/Documents/Resources`. Firefox gets enterprise policies for

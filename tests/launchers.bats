@@ -283,6 +283,59 @@ setup() { setup_argos; }
     run bash "$REPO/setup.sh" --list
     [ "$status" -eq 0 ]
     [[ $output == *"launchers"* && $output == *"amass"* ]]
+    [[ $output == *"quaesitor"* && $output == *"flowsint"* ]]
+}
+
+# ── Quaesitor and Flowsint ──────────────────────────────────────────────────
+
+@test "quaesitor: a clear error when it is not installed" {
+    run bash "$LAUNCHERS/quaesitor.sh"
+    [ "$status" -eq 1 ]
+    [[ $output == *"Quaesitor is not installed"* ]]
+}
+
+@test "quaesitor: started from its environment with the archive next to the cases" {
+    mkdir -p "$ARGOS_TOOLS_DIR/quaesitor"
+    : > "$ARGOS_TOOLS_DIR/quaesitor/app.py"
+    double "$ARGOS_TOOLS_DIR/quaesitor/.venv/bin/python" \
+        'echo "cwd=$PWD data=$DATA_DIR port=$PORT" >> "$CALLS"'
+    # The page answers from the second check on, as if the server had started.
+    double curl 'case "$*" in *127.0.0.1:5000*) [ -f "$HOME/up" ] || { touch "$HOME/up"; exit 1; } ;; esac'
+    run bash "$LAUNCHERS/quaesitor.sh"
+    [ "$status" -eq 0 ]
+    # The server is started detached (setsid): give it time to record the call.
+    for _ in $(seq 1 50); do grep -q '^cwd=' "$CALLS" 2>/dev/null && break; sleep 0.1; done
+    grep -q '^python app.py$' "$CALLS"
+    grep -q "^cwd=$ARGOS_TOOLS_DIR/quaesitor data=$HOME/quaesitor port=5000$" "$CALLS"
+    [ -f "$HOME/quaesitor/server.log" ]
+}
+
+@test "flowsint: a clear error when it is not installed" {
+    run bash "$LAUNCHERS/flowsint.sh"
+    [ "$status" -eq 1 ]
+    [[ $output == *"Flowsint is not installed"* ]]
+}
+
+@test "flowsint: compose runs with the env file, stop keeps the data" {
+    mkdir -p "$ARGOS_TOOLS_DIR/flowsint" "$ARGOS_CONFIG_DIR"
+    : > "$ARGOS_TOOLS_DIR/flowsint/docker-compose.prod.yml"
+    : > "$ARGOS_CONFIG_DIR/flowsint.env"
+    double docker
+    run bash "$LAUNCHERS/flowsint.sh" < <(answers 2)
+    [ "$status" -eq 0 ]
+    [[ $output == *"Flowsint stopped"* ]]
+    grep -q "^docker compose --env-file $ARGOS_CONFIG_DIR/flowsint.env -f $ARGOS_TOOLS_DIR/flowsint/docker-compose.prod.yml down$" "$CALLS"
+}
+
+@test "flowsint: open starts the containers when the page is down, then opens it" {
+    mkdir -p "$ARGOS_TOOLS_DIR/flowsint" "$ARGOS_CONFIG_DIR"
+    : > "$ARGOS_TOOLS_DIR/flowsint/docker-compose.prod.yml"
+    : > "$ARGOS_CONFIG_DIR/flowsint.env"
+    double docker
+    double curl 'case "$*" in *5173*) [ -f "$HOME/up" ] || { touch "$HOME/up"; exit 1; } ;; *5001*) exit 1 ;; esac'
+    run bash "$LAUNCHERS/flowsint.sh" < <(answers 1)
+    [ "$status" -eq 0 ]
+    grep -q ' up -d$' "$CALLS"
 }
 
 @test "domains: the All choice runs theHarvester, subfinder and Amass" {

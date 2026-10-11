@@ -38,7 +38,9 @@ tests/                   automated tests (bats) and test doubles
 | `~/.local/share/argos/launchers/` | launchers and `lib/argos.sh` |
 | `~/.local/share/argos/icons/` | launcher icons |
 | `~/.local/share/applications/argos-*.desktop` | menu entries |
-| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot), each with a uv environment on Python 3.12 |
+| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot, Quaesitor), each with a uv environment on Python 3.12; Flowsint's repository at its latest release (its services run as Docker containers) |
+| `~/.config/argos/flowsint.env` | Flowsint passwords and release, generated once |
+| `~/Documents/Argos/quaesitor/` | Quaesitor archive (cases, uploaded images, server log) |
 | `~/.local/bin/` | command-line tools installed with uv (own environment each); Amass, PhoneInfoga, deno, subfinder, katana and gau from their releases |
 | `~/.config/argos/argos.conf` | active case and user settings |
 | `~/Documents/Argos/cases/<case>/` | all results |
@@ -96,6 +98,8 @@ terminal mode; the automated tests use it.
 | Phone Numbers | libphonenumber, PhoneInfoga, Telegram phone number checker | number; offline analysis, scan, Telegram check (terminal), web UI |
 | recon-ng | recon-ng | workspace named after the case |
 | Website Mirror | HTTrack, katana | URL, depth; copy or crawl |
+| Quaesitor | Quaesitor web UI | — |
+| Flowsint | Flowsint web UI (Docker) | open or stop |
 | Exploratores | Exploratores (local) | — |
 
 ## Testing

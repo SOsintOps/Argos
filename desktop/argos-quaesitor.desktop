@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Quaesitor
+Comment=The case as a graph: people, phones, emails, profiles, places, documents
+Exec=__ARGOS_HOME__/launchers/quaesitor.sh
+Icon=__ARGOS_HOME__/icons/argos-quaesitor.svg
+Terminal=false
+Categories=Network;
+Keywords=OSINT;Argos;

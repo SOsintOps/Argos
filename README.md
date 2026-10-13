@@ -10,8 +10,8 @@ it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
 > **3.1.3-beta.** Version 3 is a complete rewrite. The full installation of
-> 3.0.0-beta has been tested on virtual machines with the Ubuntu 24.04.5 and
-> 26.04.1 base releases, and the launchers are covered by automated tests, real
+> 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
+> 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,
 > still to be tested on a virtual machine. 3.1.2-beta aligned the analysis
 > guidelines and the report templates with the

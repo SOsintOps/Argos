@@ -1,15 +1,15 @@
 # Analysis Guidelines
 
-How the analytic method applies to a case run on Argos. The method itself (analytic standards, OSINT methodology, analytic techniques, estimative language, source evaluation and report writing) is kept in one place for all the SOsintOps tools, the [Intelligence Field Notes](https://github.com/SOsintOps/intelligence-field-notes): personal notes, shared for convenience and with no claim to be exhaustive. A copy for offline use is in [`docs/field-notes/`](field-notes/README.md). This page covers only what is specific to Argos.
+How the analytic method applies to a case run on Argos. The method itself (analytic standards, OSINT methodology, analytic techniques, estimative language, source evaluation and report writing) is kept in one place for all the SOsintOps tools, the [Intelligence Field Notes](https://github.com/SOsintOps/intelligence-field-notes): personal notes, shared for convenience and with no claim to be exhaustive. A copy for offline use is in [`docs/field-notes/`](field-notes/README.md). This page covers only what is specific to Argos; its sister project [Speculator](https://github.com/SOsintOps/Speculator-Project) follows the same rules on Debian 13.
 
 ## The Common Method
 | Read | For |
 | :--- | :--- |
-| [Analytic Standards](field-notes/analytic-standards.md) | The intelligence cycle and the ICD 203 standards every product must meet |
+| [Analytic Standards](field-notes/analytic-standards.md) | The intelligence cycle and the [ICD 203](https://www.dni.gov/files/documents/ICD/ICD-203.pdf) standards every product must meet |
 | [OSINT Methodology](field-notes/osint-methodology.md) | The OSINT cycle, the 5W1H method, collection discipline and OPSEC |
 | [Analytic Techniques](field-notes/analytic-techniques.md) | Biases, key assumptions check, ACH, deception |
 | [Estimative Language](field-notes/estimative-language.md) | Likelihood terms and confidence levels, and how not to mix them |
-| [Source Evaluation](field-notes/source-evaluation.md) | The UNODC 4 x 4 grading used in the Argos templates |
+| [Source Evaluation](field-notes/source-evaluation.md) | The [UNODC](https://www.unodc.org/documents/organized-crime/Law-Enforcement/Criminal_Intelligence_for_Analysts.pdf) 4 x 4 grading used in the Argos templates |
 | [Report Writing](field-notes/report-writing.md) | BLUF, structure, prose, checklist; see also [Writing the report with Argos](report-writing.md) |
 
 ## The Standards in an Argos Case

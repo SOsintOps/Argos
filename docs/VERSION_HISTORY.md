@@ -5,6 +5,17 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.1.3-beta — 2026-10-13
+
+The report templates follow the structure of the Report Writing page: key
+judgements, each with its likelihood or confidence, are kept apart from the
+findings, which state facts with their sources and 4 x 4 grades; the full
+report gains numbered sections, a version field, gaps and next steps and
+annexes, and recommendations appear only if requested. The FAQ moves to the
+standard layout with a table of contents.
+
+---
+
 ## v3.1.2-beta — 2026-10-13
 
 Analysis guidelines and report templates aligned with the

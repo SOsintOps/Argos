@@ -6,6 +6,37 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.1.3-beta] — 2026-10-13
+
+### Changed
+- `Argos_Report_Full.docx`: numbered sections in the order of the
+  [Report Writing](field-notes/report-writing.md) page: header with version and
+  handling, bottom line, tasking, **key judgements** (numbered, each with a
+  likelihood or a confidence level and what it rests on), **findings** (facts
+  with source references and 4 x 4 grades, no confidence column: facts take no
+  qualifier), subject overview, narrative, timeline, analysis, **gaps and next
+  steps**, recommendations only if requested, sources, method and limitations,
+  **annexes**. The bottom line no longer asks for a recommendation.
+- `Argos_Report_Executive.docx`: bottom line, key judgements, key findings
+  without a confidence column, recommended action only if requested.
+- `Argos_Report_Plain.md`: header with reference, version and handling; key
+  judgements, analysis and gaps and next steps added; findings graded.
+- `docs/report-writing.md` describes the new templates (the full report row
+  listed sections the template did not have).
+- `docs/faq.md` in the standard FAQ layout: table of contents, one heading per
+  question, separators between the groups.
+- FAQ, guidelines and README: ICD 203 and UNODC linked at first mention;
+  Ubuntu Budgie named wherever the target is meant; the guidelines name the
+  sister project Speculator.
+
+### Added
+- FAQ: TGchat-analytics next to the Telegram check, the
+  awesome-intelligence-writing list and its SOsintOps fork, Il Conclave and
+  Claudii Exploratores.
+- `docs/field-notes/`: copy of the Intelligence Field Notes 0.1.2.
+
+---
+
 ## [3.1.2-beta] — 2026-10-13
 
 ### Changed

@@ -33,6 +33,16 @@ GRADING = (
     "personally but corroborated, 4 = not known personally and not corroborated. "
     "Grade the source and the information separately, e.g. B2."
 )
+JUDGEMENTS = (
+    "Key judgements: numbered, one sentence each, each with either a likelihood "
+    "word or a confidence level and the findings or sources it rests on."
+)
+FINDINGS = (
+    "Findings are the facts established, stated plainly: facts take no likelihood "
+    "word and no confidence level. Each carries the references of its sources "
+    "(S1, S2) and their 4 x 4 grades (e.g. B2). Anything inferred is a judgement: "
+    "put it under Key judgements or Analysis."
+)
 
 
 def new_document(title, subtitle):
@@ -105,8 +115,8 @@ def checkboxes(doc, items):
         doc.add_paragraph("☐  " + item)
 
 
-def sources_annex(doc):
-    doc.add_heading("Sources and evidence", level=1)
+def sources_annex(doc, number=""):
+    doc.add_heading(number + "Sources and evidence", level=1)
     note(doc, "One row per source. Run folder and SHA-256 come from the Argos run "
               "folder (command.txt and SHA256SUMS), so every statement can be traced "
               "back to the exact capture. " + GRADING)
@@ -123,53 +133,73 @@ def save(doc, name):
 
 def full_report():
     doc = new_document("Investigation Report", "Open-source intelligence — full report")
-    fields(doc, ["Case", "Report reference", "Subject(s)", "Requested by", "Prepared by",
-                 "Reviewed by", "Date of report", "Period covered"], cols=4)
+    fields(doc, ["Case", "Report reference", "Version", "Subject(s)", "Requested by",
+                 "Prepared by", "Reviewed by", "Date of report (UTC)", "Period covered",
+                 "Handling (e.g. TLP:AMBER)"], cols=4)
     doc.add_heading("1. Bottom line", level=1)
-    note(doc, "Three to five sentences a busy reader can act on: what was asked, "
-              "what was found, how confident you are, what you recommend.")
+    note(doc, "Three to five sentences a busy reader can act on: the question that "
+              "was asked, what was found, what it means, how sure you are. If this "
+              "report changes the judgement of an earlier one, say so here and why.")
     doc.add_heading("2. Tasking and scope", level=1)
     note(doc, "The question you were asked, the legal basis or authorisation, what "
               "was in scope and out of scope, and any restrictions (no contact, "
               "no account creation, passive only).")
-    doc.add_heading("3. Key findings", level=1)
-    note(doc, CONFIDENCE)
-    grid(doc, ["#", "Finding", "Confidence", "Sources (Ref)"], rows=5)
-    doc.add_heading("4. Subject overview", level=1)
+    doc.add_heading("3. Key judgements", level=1)
+    note(doc, JUDGEMENTS + " " + CONFIDENCE)
+    grid(doc, ["#", "Judgement", "Likelihood or confidence", "Based on (Findings / Sources)"],
+         rows=4)
+    doc.add_heading("4. Findings", level=1)
+    note(doc, FINDINGS)
+    grid(doc, ["#", "Finding", "Sources (Ref)", "Grade (4 x 4)"], rows=5)
+    doc.add_heading("5. Subject overview", level=1)
     fields(doc, ["Name(s) and aliases", "Date / place of birth", "Nationality",
                  "Addresses", "Phone numbers", "Email addresses", "Usernames",
                  "Employer / role", "Vehicles", "Associates"])
-    doc.add_heading("Online presence", level=2)
+    doc.add_heading("5.1 Online presence", level=2)
     grid(doc, ["Platform", "Handle / URL", "Account ID", "Status", "Ref"], rows=6)
-    doc.add_heading("5. Narrative", level=1)
+    doc.add_heading("6. Narrative", level=1)
     note(doc, "Chronological account of the research: what you looked for, where, "
               "and what each step showed. Mention dead ends too: they show coverage.")
-    doc.add_heading("6. Timeline", level=1)
+    doc.add_heading("7. Timeline", level=1)
     grid(doc, ["Date / time (UTC)", "Event", "Ref"], rows=6)
-    doc.add_heading("7. Analysis", level=1)
-    note(doc, "Links between people, accounts and infrastructure; alternative "
-              "explanations you considered and why you discarded them; gaps that "
-              "remain and how they could be closed.")
-    doc.add_heading("8. Recommendations", level=1)
-    note(doc, "Next steps, further collection, referrals.")
-    sources_annex(doc)
-    doc.add_heading("Method and limitations", level=1)
+    doc.add_heading("8. Analysis", level=1)
+    note(doc, "How the findings support the key judgements: links between people, "
+              "accounts and infrastructure; the alternative explanations you "
+              "considered and why you rejected them; the key assumptions the "
+              "judgements depend on.")
+    doc.add_heading("9. Gaps and next steps", level=1)
+    note(doc, "What you could not establish, what would close each gap (further "
+              "collection, referrals), and the indicators that would change the "
+              "judgements.")
+    doc.add_heading("10. Recommendations (only if requested)", level=1)
+    note(doc, "Only if the requester asked for recommendations: the actions, kept in "
+              "this section and nowhere else. Otherwise delete this section.")
+    sources_annex(doc, "11. ")
+    doc.add_heading("12. Method and limitations", level=1)
     note(doc, "Workstation and tools used (Argos version), research identity and "
-              "network used, date range of collection, and the limits of open "
-              "sources for this question.")
+              "network used, date range of collection, what was not searched and "
+              "why, and the limits of open sources for this question.")
+    doc.add_heading("13. Annexes", level=1)
+    note(doc, "Charts, timelines, maps, screenshots, raw extracts, for example "
+              "Quaesitor or Flowsint charts exported to PDF. An annex supports the "
+              "report, it does not replace it.")
     save(doc, "Argos_Report_Full.docx")
 
 
 def executive_report():
     doc = new_document("Executive Summary", "Open-source intelligence — short report")
     fields(doc, ["Case", "Subject", "Analyst", "Date"], cols=4)
-    doc.add_heading("Summary", level=1)
+    doc.add_heading("Bottom line", level=1)
     note(doc, "One paragraph: the question and the answer.")
+    doc.add_heading("Key judgements", level=1)
+    note(doc, JUDGEMENTS + " " + CONFIDENCE)
+    grid(doc, ["#", "Judgement", "Likelihood or confidence", "Based on"], rows=3)
     doc.add_heading("Key findings", level=1)
-    note(doc, CONFIDENCE)
-    grid(doc, ["#", "Finding", "Confidence"], rows=5)
-    doc.add_heading("Recommended action", level=1)
-    note(doc, "What the reader should do now.")
+    note(doc, FINDINGS)
+    grid(doc, ["#", "Finding", "Sources (Ref)", "Grade (4 x 4)"], rows=5)
+    doc.add_heading("Recommended action (only if requested)", level=1)
+    note(doc, "Only if the requester asked for it: what the reader should do now. "
+              "Otherwise delete this section.")
     doc.add_heading("Subject at a glance", level=1)
     fields(doc, ["Name(s)", "Usernames", "Email addresses", "Phone numbers",
                  "Location", "Main profiles"])

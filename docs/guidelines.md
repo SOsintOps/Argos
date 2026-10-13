@@ -1,90 +1,51 @@
-# OSINT Analysis Guidelines
+# Analysis Guidelines
 
-## Core Analytic Standards
-Adherence to the five Core Analytic Standards is strongly suggested for all intelligence products. 
-These standards ensure the rigor and integrity of the analysis.
+How the analytic method applies to a case run on Argos. The method itself (analytic standards, OSINT methodology, analytic techniques, estimative language, source evaluation and report writing) is kept in one place for all the SOsintOps tools, the [Intelligence Field Notes](https://github.com/SOsintOps/intelligence-field-notes): personal notes, shared for convenience and with no claim to be exhaustive. A copy for offline use is in [`docs/field-notes/`](field-notes/README.md). This page covers only what is specific to Argos.
 
-### The Five Analytic Standards
-**Objective:** Analysts must perform their functions with objectivity, be aware of their own assumptions, and employ reasoning techniques to mitigate bias.
+## The Common Method
+| Read | For |
+| :--- | :--- |
+| [Analytic Standards](field-notes/analytic-standards.md) | The intelligence cycle and the ICD 203 standards every product must meet |
+| [OSINT Methodology](field-notes/osint-methodology.md) | The OSINT cycle, the 5W1H method, collection discipline and OPSEC |
+| [Analytic Techniques](field-notes/analytic-techniques.md) | Biases, key assumptions check, ACH, deception |
+| [Estimative Language](field-notes/estimative-language.md) | Likelihood terms and confidence levels, and how not to mix them |
+| [Source Evaluation](field-notes/source-evaluation.md) | The UNODC 4 x 4 grading used in the Argos templates |
+| [Report Writing](field-notes/report-writing.md) | BLUF, structure, prose, checklist; see also [Writing the report with Argos](report-writing.md) |
 
-**Independent of political consideration:** Analytic assessments must not be distorted by advocacy of a particular audience, agenda, or policy viewpoint.
+## The Standards in an Argos Case
+Argos does the record-keeping that the standards require; the judgement stays with the analyst.
 
-**Timely:** Analysis must be disseminated in time for it to be actionable by stakeholders.
+| Standard | Where Argos helps |
+| :--- | :--- |
+| Describe the quality of sources and method (tradecraft 1) | Every run folder holds `command.txt` (tool, version, exact command, UTC times, operator) and `SHA256SUMS`. The source table of every template has a column for the run folder, the SHA-256 and the 4 x 4 grade. |
+| Express uncertainty (tradecraft 2) | The templates print the confidence levels and the likelihood row to use, so that the wording is the same in every report. |
+| Separate information from judgement (tradecraft 3) | Run folders are raw captures, never edited. Notes, leads and draft judgements go in the CherryTree case notebook (`Argos_Case_Notebook.ctd`); the report keeps findings and judgements in separate sections. |
+| Analysis of alternatives (tradecraft 4) | Add a "Hypotheses" node to the case notebook and keep the ACH matrix there; Quaesitor draws hypothesised links dashed, apart from confirmed ones. |
+| Explain change (tradecraft 7) | Reports carry a reference and a date; a later report quotes the reference it updates. |
+| Visual information (tradecraft 9) | Quaesitor and Flowsint for link charts, Google Earth Pro for places. A chart is an annex of the written report, never a substitute. |
+| Based on all available sources | The research log (`Argos_Research_Log.csv`) records every search, including those that found nothing, so the gaps are visible. |
 
-**Based on all available sources of intelligence information:** Analysis should be informed by all relevant available information and address critical information gaps.
+## Tool Output Is a Lead, Not a Source
+Most Argos launchers return pointers, not facts. Grade what the pointer leads to, after you have opened and captured it:
+- **Username tools** (Maigret, Sherlock, Blackbird, User Scanner, Socialscan): a "found" is a page that answered; it says nothing about who owns the account. Open the profile, capture it, then decide whether it is the same person and with what confidence.
+- **Breach and lookup services** (Hudson Rock and similar): third-party claims about a leak. Grade the service as the source and the data as information it does not know personally (`4` unless corroborated).
+- **Domain and infrastructure tools** (theHarvester, Amass, Shodan, WHOIS): records from registries and scanners. The registry is usually a reliable source; what a registrant declared about themselves is their claim.
+- **Media and metadata** (yt-dlp, Instaloader, ExifTool): the file is first-hand, its metadata can be stripped or forged. Corroborate dates and places from metadata before using them.
 
-**Implements and exhibits Analytic Tradecraft Standards:** This standard serves as an overarching requirement for the nine standards below.
-
-### The Nine Analytic Tradecraft Standards
-1.  Properly describes quality and credibility of underlying sources, data, and methodologies.
-2.  Properly expresses and explains uncertainties associated with major analytic judgments. For expressions of likelihood, an analytic product must use standardized sets of terms:
-
-| Almost No Chance | Very Unlikely | Unlikely | Roughly Even Chance | Likely | Very Likely | Almost Certain(ly) |
-| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Remote | Highly Improbable | Improbable | Roughly Even Odds | Probable | Highly Probable | Nearly Certain |
-| 01-05% | 05-20% | 20-45% | 45-55% | 55-80% | 80-95% | 95-99% |
-
-3.  Properly distinguishes between underlying intelligence information and analysts’ assumptions and judgments.
-4.  Incorporates analysis of alternatives by systematically evaluating differing hypotheses.
-5.  Demonstrates stakeholder relevance and addresses implications for action.
-6.  Uses clear and logical argumentation with a clear main message supported by coherent reasoning.
-7.  Explicitly explains change to or consistency of analytic judgments compared to previous analysis.
-8.  Makes accurate judgments and assessments based on available information and known gaps.
-9.  Incorporates effective visual information where appropriate to clarify the analytic message.
-
-## The 5W1H Analytical Method
-The 5W1H method (Who, What, When, Where, Why, How) is a cognitive tool that imposes order on chaotic data streams, enhances analytical clarity, and provides a structured pathway for transforming raw open-source information into finished intelligence. It serves as a safeguard against common analytical pitfalls and cognitive biases, such as confirmation bias and tunnel vision.
-
-### The Six Components
-#### Who: Identifying Actors and Networks
-This component focuses on identifying all individuals, companies, or entities connected to the investigation. It moves beyond simple identification to focus on the relationships, motivations, and structures of the individuals and groups involved.
-- **Guiding Question:** Who are the primary and secondary actors (individuals, groups, organizations)?
-- **Guiding Question:** Who are the key nodes and influencers within the network?
-- **Guiding Question:** Who provides financial, logistical, or ideological support?
-
-#### What: Defining the Event and Assets
-This element involves understanding the core incident or event and setting the focus of the investigation. It seeks to clearly define the nature of the event, action, or capability being investigated.
-- **Guiding Question:** What specific event or activity is under investigation?
-- **Guiding Question:** What capabilities or TTPs (Tactics, Techniques, and Procedures) were demonstrated?
-- **Guiding Question:** What specific vulnerability was exploited?
-
-#### When: Establishing the Temporal Dimension
-This dimension addresses timeline matters and temporal context. It is the foundation of timeline analysis, placing events in a chronological context to reveal patterns, triggers, and sequences.
-- **Guiding Question:** What is the precise start and end date/time of the event?
-- **Guiding Question:** What is the full timeline of significant actions?
-- **Guiding Question:** Is there a discernible pattern related to time-of-day, day-of-week, or season?
-
-#### Where: Pinpointing Location and Jurisdiction
-This component encompasses both physical and digital locations relevant to the investigation. It is crucial for understanding the operational environment and applicable constraints.
-- **Guiding Question:** Where is the physical location (country, city, address, coordinates)?
-- **Guiding Question:** Where is the digital location (website, IP address, social platform, forum)?
-- **Guiding Question:** What legal or administrative jurisdictions apply to the location?
-
-#### Why: Assessing Intent and Motivation
-This is often the most critical and challenging question, as it seeks to uncover the underlying purpose or motive behind an action. Answering "Why" is essential for assessing threats and predicting future behavior.
-- **Guiding Question:** What is the stated or inferred motive (e.g., financial, political, ideological, personal)?
-- **Guiding Question:** Why was this specific target, timing, or method chosen over others?
-- **Guiding Question:** What is the root cause of the problem or event?
-
-#### How: Detailing the Modus Operandi
-This question focuses on the operational mechanics: the methods, tools, and procedures used to carry out an action, often referred to as Tactics, Techniques, and Procedures (TTPs).
-- **Guiding Question:** How were the actions executed (step-by-step process)?
-- **Guiding Question:** What specific tools, software, or hardware were used?
-- **Guiding Question:** How was detection avoided or security circumvented?
-
-## Operational Security (OPSEC) Best Practices
-Effective OPSEC is not optional. It is a core discipline required to protect yourself, your investigations, and the organization from exposure and adversarial counter-intelligence. Conduct all activities with the highest ethical standards and in accordance with all applicable laws.
-- **Identity Segregation:** Never use personal accounts or equipment for investigative activities. Create and use dedicated, non-attributable online accounts and personas for your work. Do not link these personas to each other or to your real identity.
-- **Secure Infrastructure:** Always use a trusted, no-log Virtual Private Network (VPN) to mask your true IP address. For sensitive investigations, conduct your work from within a dedicated Virtual Machine (VM) to sandbox your activities from your host machine. Consider using the Tor Browser for enhanced anonymization.
-- **Sterile Browse Environment:** Use a dedicated web browser with separate profiles for each digital persona. Install privacy-enhancing extensions (e.g., ad blockers, script blockers, anti-tracking tools). Regularly clear cookies, cache, and history.
-- **Disciplined Online Conduct:** Be aware of your digital footprint. Avoid providing unnecessary personal information when registering for services. Use unique, strong passwords and email addresses for each persona. Be cautious about the information you "like," share, or post, as it can be used to profile your persona.
-- **Secure Data Handling:** All information collected during an investigation must be stored securely. Use encrypted storage for your case files. Establish a clear data retention and destruction policy to securely delete information that is no longer needed.
+## OPSEC on the Argos Virtual Machine
+The general rules are in [OSINT Methodology](field-notes/osint-methodology.md#operational-security-opsec-best-practices). On Argos in particular:
+- Take a clean snapshot of the virtual machine after installation and return to it between unrelated cases.
+- Use the Firefox research profile only with research accounts; Instaloader and the "use my Firefox session" options borrow its cookies.
+- Options that send the target to a third party are off by default and name the service when they ask; read the name before saying yes.
+- Options that may alert the target (User Scanner "loud" checks, Amass active checks) warn first: treat the warning as a decision point, not a formality.
+- Keep `~/Documents/Argos` on an encrypted disk and the credentials in KeePassXC.
 
 ## Further Reading
-For a more in-depth analysis of the methodologies and practices discussed, the following foundational texts are recommended:
-- **"Psychology of Intelligence Analysis"** by Richards J. Heuer Jr. - A crucial text for understanding and mitigating the cognitive biases that affect analytical judgment.
-- **"Criminal Intelligence: Manual for Analysts"** by Howard Atkin (UNODC, 2011) - A UNODC reference manual covering the full intelligence process: source evaluation, link analysis, event charting, flow analysis, and telephone analysis. Equips practitioners to develop inferences and present analytical results.
-- **"Structured Analytic Techniques for Intelligence Analysis"** by Richards J. Heuer Jr. and Randolph H. Pherson - A reference manual that presents dozens of structured analytical techniques to improve the rigor and quality of analysis.
-- **"Extreme Privacy: What It Takes to Disappear"** by Michael Bazzell - An extensive guide on digital security and maintaining anonymity, which directly supports the OPSEC principles discussed.
-- **"Open Source Intelligence Techniques"** by Michael Bazzell - A comprehensive, practical guide to the tools and techniques for gathering information from open sources.
-- **"Deep Dive: Exploring the Real-World Value of Open Source Intelligence"** by Rae L. Baker - Real-world case studies demonstrating the practical application and value of OSINT across various sectors.
+The full list, with a link for every text, is the [Reading List](field-notes/reading-list.md). The essentials:
+- **"Psychology of Intelligence Analysis"** by Richards J. Heuer Jr. (CIA, 1999). [PDF](https://www.cia.gov/resources/csi/static/Pyschology-of-Intelligence-Analysis.pdf)
+- **"ICD 203: Analytic Standards"** (ODNI). [PDF](https://www.dni.gov/files/documents/ICD/ICD-203.pdf)
+- **"Criminal Intelligence: Manual for Analysts"** by Howard Atkin (UNODC, 2011). [PDF](https://www.unodc.org/documents/organized-crime/Law-Enforcement/Criminal_Intelligence_for_Analysts.pdf)
+- **"Structured Analytic Techniques for Intelligence Analysis"** by Randolph H. Pherson and Richards J. Heuer Jr. (CQ Press / SAGE). [SAGE](https://www.sagepub.com/en-us/cab/structured-analytic-techniques-for-intelligence-analysis/book255432)
+- **"OSINT Techniques"** (11th edition) by Michael Bazzell and Jason Edison. [IntelTechniques](https://inteltechniques.com/book1.html)
+- **"Extreme Privacy"** (5th edition) by Michael Bazzell. [IntelTechniques](https://inteltechniques.com/book7.html)
+- **"Deep Dive: Exploring the Real-World Value of Open Source Intelligence"** by Rae L. Baker (Wiley, 2023). [Wiley](https://www.wiley.com/en-us/Deep+Dive%3A+Exploring+the+Real+world+Value+of+Open+Source+Intelligence-p-9781119933243)

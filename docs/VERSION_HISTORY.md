@@ -5,6 +5,16 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.1.2-beta — 2026-10-13
+
+Analysis guidelines and report templates aligned with the
+[Intelligence Field Notes](https://github.com/SOsintOps/intelligence-field-notes):
+sources graded on the UNODC 4 x 4 scale, one ICD 203 likelihood row, a page on
+writing the report with the Argos templates, and an offline copy of the notes in
+`docs/field-notes`. The run folders record the right Argos version again.
+
+---
+
 ## v3.1.1-beta — 2026-10-11
 
 The documentation and the installer messages name the target correctly: Ubuntu Budgie 24.04 and 26.04 LTS.

@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.1.1-beta"
+ARGOS_VERSION="3.1.2-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -394,6 +394,7 @@ step_resources() {
     mkdir -p "$HOME/Documents/Resources"
     git_sync https://github.com/pstirparo/threatintel-resources "$HOME/Documents/Resources/threatintel-resources" || rc=1
     git_sync https://github.com/mxm0z/awesome-intelligence-writing "$HOME/Documents/Resources/awesome-intelligence-writing" || rc=1
+    git_sync https://github.com/SOsintOps/intelligence-field-notes "$HOME/Documents/Resources/intelligence-field-notes" || rc=1
     return "$rc"
 }
 

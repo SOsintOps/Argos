@@ -20,7 +20,7 @@ Read the summary at the end of the run and the log at `~/Downloads/argos_install
 Open **Argos Check** from the menu. It starts every tool and lists those that are missing or fail to start.
 
 **How do I update Argos?**
-`git pull` in the repository, then `./setup.sh launchers` for the launchers and templates, or `./setup.sh python-tools theharvester amass` to update the tools as well.
+`git pull` in the repository, then `./setup.sh launchers templates` for the launchers and the report templates, or `./setup.sh python-tools theharvester amass` to update the tools as well.
 
 **Do I need to install VirtualBox Guest Additions first?**
 Yes. Argos does not install them. In VirtualBox use Devices → Insert Guest Additions CD Image, follow the prompts and reboot before running `setup.sh`.
@@ -70,6 +70,38 @@ Sign in to YouTube in Firefox with your research account, then tick "Use my Fire
 
 **How do I open recon-ng?**
 From the menu: it opens a terminal with a workspace named after the active case. Install modules with `marketplace install all`.
+
+## Analysis and reporting
+
+**Where is the analysis method explained?**
+In the [analysis guidelines](guidelines.md), which cover what is specific to Argos, and in the [Intelligence Field Notes](https://github.com/SOsintOps/intelligence-field-notes), the notes on analytic standards, OSINT method, estimative language, source evaluation and report writing shared by all the SOsintOps tools. A copy is in [`docs/field-notes`](field-notes/README.md) and the installer clones the notes into `~/Documents/Resources` for offline reading.
+
+**Which report template should I use?**
+See [Writing the report with Argos](report-writing.md): full report, executive summary, plain Markdown report, subject profile, event assessment, threat notice, case cover sheet and investigations policy, with what each is for.
+
+**How do I grade a source?**
+With the UNODC 4 x 4 system printed in every template: the source A, B, C or X, the information 1 to 4, written together as `B2`. The platform is not the source: grade the person or body that produced the information. See [Source Evaluation](field-notes/source-evaluation.md). Templates made before 3.1.2-beta used the 6 x 6 scale; run `./setup.sh templates` to get the new ones.
+
+**How do I say how sure I am?**
+Use one of the ICD 203 likelihood terms printed in the templates (almost no chance, very unlikely, unlikely, roughly even chance, likely, very likely, almost certain) for events, and High, Moderate or Low confidence for your judgements, never both in the same sentence. See [Estimative Language](field-notes/estimative-language.md).
+
+**Is a Maigret or Sherlock hit a finding?**
+No. It is a lead: a site answered for that username. Open the profile, capture it, and decide with stated confidence whether it belongs to your subject. The same holds for every tool that returns matches or scores.
+
+**Are there other SOsintOps projects that work with Argos?**
+Yes:
+- [Speculator](https://github.com/SOsintOps/Speculator-Project) is the sister workstation for Debian 13, with the same templates.
+- [Wukong](https://github.com/SOsintOps/Wukong) is the China-focused spin-off of Speculator.
+- [Quaesitor](https://github.com/SOsintOps/quaesitor), the case graph, is installed by Argos.
+- [Exploratores](https://github.com/SOsintOps/Exploratores), the browser toolkit, is Firefox's home page.
+
+For particular cases:
+- [Elementary CTI](https://github.com/SOsintOps/elementary-CTI) tracks ransomware victims and actors.
+- [Aethelburg](https://github.com/SOsintOps/Aethelburg-project) analyses UK company registers for shell companies.
+- [TelEgrapherX](https://github.com/SOsintOps/TelEgrapherX) collects Telegram groups and channels.
+- [Acta Diurna](https://github.com/SOsintOps/acta-diurna) monitors Italian law-enforcement news.
+
+[Codex Machinae](https://github.com/SOsintOps/codex-machinae) is the playbook the projects are built with.
 
 ## Operational Security
 

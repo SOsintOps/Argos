@@ -6,6 +6,24 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.1-beta] — 2026-10-17
+
+### Changed
+- `config/policies.json`: the Firefox extension set is revised against the
+  add-on listings of 17 October 2026. Removed GPSDetect and Nimbus Screen
+  Capture (last releases in 2020) and Exif Viewer (code unchanged for years,
+  only re-signed in 2024). Added Exify (EXIF and GPS data), Sputnik,
+  Wappalyzer, IP Address and Domain Information (DNSlytics), Hunter,
+  User-Agent Switcher and Manager, SingleFile (saves the whole page as one
+  HTML file) and Web Archives (looks the page up on the Wayback Machine,
+  archive.today, Ghostarchive and the search engine caches). 17 extensions in
+  all; full-page screenshots use the one built into Firefox (Ctrl+Shift+S).
+  Hunter needs an account and sends the visited domains to its service;
+  Wappalyzer is closed source since 2023.
+- README lists the extensions.
+
+---
+
 ## [3.2.0-beta] — 2026-10-17
 
 ### Added

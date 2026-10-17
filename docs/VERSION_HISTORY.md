@@ -5,6 +5,15 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.1-beta — 2026-10-17
+
+The Firefox extension set is revised against the add-on listings: three
+abandoned extensions go (GPSDetect, Nimbus Screen Capture, Exif Viewer) and
+eight maintained ones come in (Exify, Sputnik, Wappalyzer, DNSlytics, Hunter,
+User-Agent Switcher and Manager, SingleFile, Web Archives), 17 in all.
+
+---
+
 ## v3.2.0-beta — 2026-10-17
 
 ONLYOFFICE Desktop Editors joins the installed tools, from its official APT

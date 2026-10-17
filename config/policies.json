@@ -155,25 +155,17 @@
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi"
       },
-      "exif_viewer@mozilla.doslash.org": {
+      "exify@dev13.version": {
         "installation_mode": "normal_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/exif-viewer/latest.xpi"
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/exify/latest.xpi"
       },
       "wayback_machine@mozilla.org": {
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/wayback-machine_new/latest.xpi"
       },
-      "gps-detect@allanwirth.com": {
-        "installation_mode": "normal_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/gpsdetect/latest.xpi"
-      },
       "{2e5ff8c8-32fe-46d0-9fc8-6b8986621f3c}": {
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/search_by_image/latest.xpi"
-      },
-      "nimbusscreencaptureff@everhelper.me": {
-        "installation_mode": "normal_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/nimbus-screenshot/latest.xpi"
       },
       "{0c8fbd76-bdeb-4c52-9b24-d587ce7b9dc3}": {
         "installation_mode": "normal_installed",
@@ -186,6 +178,34 @@
       "{9efc0280-b125-400e-b53d-2d09d7effab4}": {
         "installation_mode": "normal_installed",
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/mitaka/latest.xpi"
+      },
+      "{78eea43d-42ab-4410-98b9-de9d50ddb1a3}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/sputnik-osint/latest.xpi"
+      },
+      "wappalyzer@crunchlabz.com": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/wappalyzer/latest.xpi"
+      },
+      "jid0-jJRRRBMgoShUhb07IvnxTBAl29w@jetpack": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ip-address-and-domain-info/latest.xpi"
+      },
+      "firefox@hunter.io": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/hunterio/latest.xpi"
+      },
+      "{a6c4a591-f1b2-4f03-b3ff-767e5bedf4e7}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/user-agent-string-switcher/latest.xpi"
+      },
+      "{531906d3-e22f-4a6c-a102-8057b88a1a63}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/single-file/latest.xpi"
+      },
+      "{d07ccf11-c0cd-4938-a265-2a4d6ad01189}": {
+        "installation_mode": "normal_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/view-page-archive/latest.xpi"
       }
     },
     "ManagedBookmarks": [

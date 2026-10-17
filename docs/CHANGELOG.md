@@ -6,6 +6,18 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.0-beta] — 2026-10-17
+
+### Added
+- `setup.sh` step `onlyoffice`: installs ONLYOFFICE Desktop Editors
+  (`onlyoffice-desktopeditors`) from the official ONLYOFFICE APT repository,
+  signed with its key in `/etc/apt/keyrings/onlyoffice.gpg`, so the `.docx`
+  report templates in `~/Templates` can be opened and filled with the layout
+  fidelity of Word. The step needs sudo and is listed by `setup.sh --list`;
+  `launchers/check.sh` probes `desktopeditors --version`.
+
+---
+
 ## [3.1.3-beta] — 2026-10-13
 
 ### Changed

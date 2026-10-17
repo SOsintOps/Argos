@@ -283,7 +283,7 @@ setup() { setup_argos; }
     run bash "$REPO/setup.sh" --list
     [ "$status" -eq 0 ]
     [[ $output == *"launchers"* && $output == *"amass"* ]]
-    [[ $output == *"quaesitor"* && $output == *"flowsint"* ]]
+    [[ $output == *"quaesitor"* && $output == *"flowsint"* && $output == *"onlyoffice"* ]]
 }
 
 # ── Quaesitor and Flowsint ──────────────────────────────────────────────────

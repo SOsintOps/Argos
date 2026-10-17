@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.1.3-beta"
+ARGOS_VERSION="3.2.0-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -133,7 +133,7 @@ deb_arch() { dpkg --print-architecture; }
 # it does not stop the other steps.
 
 STEPS=(system packages python-tools deno go-tools theharvester source-tools eyewitness amass phoneinfoga
-       quaesitor flowsint obsidian google-earth vscodium resources firefox launchers templates wallpaper)
+       quaesitor flowsint obsidian google-earth vscodium onlyoffice resources firefox launchers templates wallpaper)
 
 step_system() {
     sudo add-apt-repository -y universe >/dev/null &&
@@ -388,6 +388,18 @@ step_vscodium() {
         apt_install codium
 }
 
+# ONLYOFFICE Desktop Editors opens the .docx report templates. The official
+# APT repository is still named "squeeze" and serves every Debian derivative.
+step_onlyoffice() {
+    sudo install -d -m 755 /etc/apt/keyrings &&
+        curl -fsSL https://download.onlyoffice.com/GPG-KEY-ONLYOFFICE |
+        gpg --dearmor | sudo tee /etc/apt/keyrings/onlyoffice.gpg >/dev/null &&
+        echo "deb [signed-by=/etc/apt/keyrings/onlyoffice.gpg] https://download.onlyoffice.com/repo/debian squeeze main" |
+        sudo tee /etc/apt/sources.list.d/onlyoffice.list >/dev/null &&
+        sudo apt-get update -q >/dev/null &&
+        apt_install onlyoffice-desktopeditors
+}
+
 step_resources() {
     local rc=0
     git_sync https://github.com/SOsintOps/Exploratores "$HOME/Documents/Exploratores" && ok "Exploratores" || rc=1
@@ -492,7 +504,7 @@ preflight() {
 need_sudo() {
     local s
     for s in "$@"; do
-        case "$s" in system|packages|eyewitness|flowsint|obsidian|google-earth|vscodium|firefox) return 0 ;; esac
+        case "$s" in system|packages|eyewitness|flowsint|obsidian|google-earth|vscodium|onlyoffice|firefox) return 0 ;; esac
     done
     return 1
 }

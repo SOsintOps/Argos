@@ -74,6 +74,7 @@ probe httrack       httrack --version
 probe quaesitor     "$T/quaesitor/.venv/bin/python" -c "import flask; print('flask', flask.__version__)"
 probe tesseract     tesseract --version
 probe flowsint      docker compose --env-file /dev/null -f "$T/flowsint/docker-compose.prod.yml" version
+probe onlyoffice    desktopeditors --version
 
 printf '\n%s problem(s) found.\n' "$failures" >> "$report"
 if [ "$ARGOS_UI" = zenity ]; then ui_text_file "$report"; else cat "$report"; fi

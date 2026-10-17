@@ -5,6 +5,14 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.0-beta — 2026-10-17
+
+ONLYOFFICE Desktop Editors joins the installed tools, from its official APT
+repository, so the `.docx` report templates open with the fidelity of Word
+without leaving the workstation.
+
+---
+
 ## v3.1.3-beta — 2026-10-13
 
 The report templates follow the structure of the Report Writing page: key

@@ -35,6 +35,7 @@ Frequently asked questions about Argos — installation, cases and evidence, the
 * [Operational Security](#operational-security)
     * [Should I use my personal identity or personal accounts during OSINT investigations?](#should-i-use-my-personal-identity-or-personal-accounts-during-osint-investigations)
     * [Is a VPN enough to protect my identity during investigations?](#is-a-vpn-enough-to-protect-my-identity-during-investigations)
+    * [How is Firefox hardened, and can I change it?](#how-is-firefox-hardened-and-can-i-change-it)
     * [Is running Argos inside a VirtualBox VM sufficient for anonymity?](#is-running-argos-inside-a-virtualbox-vm-sufficient-for-anonymity)
     * [What is the correct way to use Tor Browser for OSINT?](#what-is-the-correct-way-to-use-tor-browser-for-osint)
     * [How should I store data collected during an investigation?](#how-should-i-store-data-collected-during-an-investigation)
@@ -156,6 +157,9 @@ No. Use dedicated, non-attributable accounts and personas for all investigative 
 
 ### Is a VPN enough to protect my identity during investigations?
 A VPN masks your IP address from the targets you query, but it does not protect against browser fingerprinting, account linkage, or metadata leakage. For most investigations, a VPN combined with a dedicated VM and a sanitised browser profile provides an adequate baseline. For high-risk targets, add Tor Browser and treat every session as potentially observed.
+
+### How is Firefox hardened, and can I change it?
+`setup.sh` deploys an enterprise policy (`config/policies.json`) that Firefox reads at every start; `about:policies` shows what is active. The policy disables telemetry, Studies, Pocket, Firefox Accounts, form history and the password manager; sets Enhanced Tracking Protection to strict and locks it (trackers, cryptominers, fingerprinters, email trackers and suspected fingerprinting); locks the fingerprinting protection (`privacy.fingerprintingProtection`); disables WebRTC, geolocation, camera and microphone, the battery API, DNS prefetching and link prefetching; turns off Google Safe Browsing (every visited address would otherwise be checked against Google); blocks the camera, microphone, location and notification permissions and autoplay; and clears cache, cookies, history and sessions on shutdown. The 17 extensions and the OSINT bookmarks come from the same file. Locked settings cannot be changed in the Settings page or in `about:config`; the Exploratores home page is not locked. Two settings are deliberately absent because Firefox does not let a policy set them: `privacy.resistFingerprinting` (enable it yourself in `about:config` if you want it; it forces the UTC time zone and a fixed window size, which some sites notice) and `beacon.enabled` (uBlock Origin and strict tracking protection block the tracker beacons). To change a locked setting, edit `/etc/firefox/policies/policies.json` (Firefox from snap) or `/usr/lib/firefox/distribution/policies.json` (Firefox from a deb) and restart Firefox.
 
 ### Is running Argos inside a VirtualBox VM sufficient for anonymity?
 A VM sandboxes your investigative activity from your host machine, which limits forensic exposure if the VM is ever examined. It does not anonymise your network traffic. Always route traffic through a VPN before your VM connects to the internet. For sensitive work, use a VM on a device that is not associated with your real identity, connected to a network that is not linked to you.

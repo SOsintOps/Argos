@@ -1,6 +1,15 @@
 {
   "policies": {
     "DisableTelemetry": true,
+    "EnableTrackingProtection": {
+      "Value": true,
+      "Locked": true,
+      "Cryptomining": true,
+      "Fingerprinting": true,
+      "EmailTracking": true,
+      "SuspectedFingerprinting": true,
+      "Category": "strict"
+    },
     "DisableFirefoxStudies": true,
     "DisablePocket": true,
     "DisableFirefoxAccounts": true,
@@ -73,20 +82,12 @@
       "Locked": true
     },
     "Preferences": {
-      "privacy.resistFingerprinting": {
+      "privacy.fingerprintingProtection": {
         "Value": true,
         "Status": "locked"
       },
-      "privacy.trackingprotection.enabled": {
+      "privacy.fingerprintingProtection.pbmode": {
         "Value": true,
-        "Status": "locked"
-      },
-      "privacy.trackingprotection.socialtracking.enabled": {
-        "Value": true,
-        "Status": "locked"
-      },
-      "browser.contentblocking.category": {
-        "Value": "strict",
         "Status": "locked"
       },
       "media.peerconnection.enabled": {
@@ -101,10 +102,6 @@
         "Value": false,
         "Status": "locked"
       },
-      "beacon.enabled": {
-        "Value": false,
-        "Status": "locked"
-      },
       "dom.battery.enabled": {
         "Value": false,
         "Status": "locked"
@@ -114,18 +111,6 @@
         "Status": "locked"
       },
       "network.prefetch-next": {
-        "Value": false,
-        "Status": "locked"
-      },
-      "toolkit.telemetry.enabled": {
-        "Value": false,
-        "Status": "locked"
-      },
-      "toolkit.telemetry.unified": {
-        "Value": false,
-        "Status": "locked"
-      },
-      "datareporting.healthreport.uploadEnabled": {
         "Value": false,
         "Status": "locked"
       },

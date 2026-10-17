@@ -5,7 +5,7 @@
 # Argos shared launcher library. Launchers source this file; it is not meant
 # to be executed on its own. See docs/ARCHITECTURE.md for the design.
 
-ARGOS_VERSION="3.2.1-beta"
+ARGOS_VERSION="3.2.2-beta"
 
 # Settings that the environment may override (the tests rely on this).
 ARGOS_HOME="${ARGOS_HOME:-$HOME/.local/share/argos}"

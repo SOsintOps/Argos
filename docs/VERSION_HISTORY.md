@@ -5,6 +5,16 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.2-beta — 2026-10-17
+
+Seven entries of the Firefox `Preferences` policy had always been rejected by
+Firefox, fingerprinting resistance among them. Tracking protection now comes
+from the `EnableTrackingProtection` policy, fingerprinting protection from
+`privacy.fingerprintingProtection`, and the FAQ explains what the browser
+policy locks and how to change it.
+
+---
+
 ## v3.2.1-beta — 2026-10-17
 
 The Firefox extension set is revised against the add-on listings: three

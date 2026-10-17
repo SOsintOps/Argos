@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.2.1-beta"
+ARGOS_VERSION="3.2.2-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"

@@ -6,6 +6,31 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.2-beta] — 2026-10-17
+
+### Fixed
+- `config/policies.json`: Firefox silently rejected seven of the sixteen
+  entries of the `Preferences` policy (`privacy.resistFingerprinting`,
+  `privacy.trackingprotection.enabled`,
+  `privacy.trackingprotection.socialtracking.enabled`, `beacon.enabled`,
+  `toolkit.telemetry.enabled`, `toolkit.telemetry.unified`,
+  `datareporting.healthreport.uploadEnabled`), whose prefixes are not on the
+  allow-list of that policy; `about:policies` marked the block "Not fully
+  applied" and fingerprinting resistance had never been active. Tracking
+  protection now comes from the `EnableTrackingProtection` policy (strict
+  category, locked, with cryptomining, fingerprinting, email tracking and
+  suspected fingerprinting), which also sets `browser.contentblocking.category`;
+  `privacy.fingerprintingProtection` (and its private-browsing twin) replaces
+  `privacy.resistFingerprinting`, which no policy can set; the telemetry
+  entries go because `DisableTelemetry` already locks the upload; and
+  `beacon.enabled` goes because no policy can set it.
+
+### Added
+- FAQ: what the Firefox policy locks, what it deliberately leaves out and how
+  to change it. The README points to it.
+
+---
+
 ## [3.2.1-beta] — 2026-10-17
 
 ### Changed

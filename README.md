@@ -9,7 +9,7 @@ Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSI
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.2.1-beta.** Version 3 is a complete rewrite. The full installation of
+> **3.2.2-beta.** Version 3 is a complete rewrite. The full installation of
 > 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
 > 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,
@@ -20,7 +20,8 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 > [ICD 203](https://www.dni.gov/files/documents/ICD/ICD-203.pdf) likelihood row); 3.1.3-beta adds
 > key judgements, gaps and annexes to the report templates, separate from the
 > findings. 3.2.0-beta adds ONLYOFFICE Desktop Editors to open and fill the
-> `.docx` report templates; 3.2.1-beta revises the Firefox extensions. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
+> `.docx` report templates; 3.2.1-beta revises the Firefox extensions and 3.2.2-beta
+> fixes the Firefox privacy policy. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
 > continues before the stable release: please report problems in the issues.
 
 <br clear="all">
@@ -198,7 +199,11 @@ Pages, Search by Image, Link Gopher, Mitaka, Sputnik, Wappalyzer, IP Address
 and Domain Information (DNSlytics), Hunter, User-Agent Switcher and Manager
 and SingleFile. Hunter needs an account and sends the visited domains to its
 service; Wappalyzer is closed source. Full-page screenshots use the one built
-into Firefox (Ctrl+Shift+S).
+into Firefox (Ctrl+Shift+S). The same policy locks strict tracking protection
+and fingerprinting protection, disables WebRTC, geolocation, telemetry and
+Safe Browsing and clears the browsing data on shutdown; the
+[FAQ](docs/faq.md#how-is-firefox-hardened-and-can-i-change-it) lists every
+setting and how to change it.
 
 Maltego is not installed (it needs an account); install it manually if you use it.
 

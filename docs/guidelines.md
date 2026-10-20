@@ -27,7 +27,7 @@ Argos does the record-keeping that the standards require; the judgement stays wi
 
 ## Tool Output Is a Lead, Not a Source
 Most Argos launchers return pointers, not facts. Grade what the pointer leads to, after you have opened and captured it:
-- **Username tools** (Maigret, Sherlock, Blackbird, User Scanner, Socialscan): a "found" is a page that answered; it says nothing about who owns the account. Open the profile, capture it, then decide whether it is the same person and with what confidence.
+- **Username tools** (Maigret, Sherlock, Blackbird, User Scanner, Socialscan, Consensus): a "found" is a page that answered; it says nothing about who owns the account. Open the profile, capture it, then decide whether it is the same person and with what confidence.
 - **Breach and lookup services** (Hudson Rock and similar): third-party claims about a leak. Grade the service as the source and the data as information it does not know personally (`4` unless corroborated).
 - **Domain and infrastructure tools** (theHarvester, Amass, Shodan, WHOIS): records from registries and scanners. The registry is usually a reliable source; what a registrant declared about themselves is their claim.
 - **Media and metadata** (yt-dlp, Instaloader, ExifTool): the file is first-hand, its metadata can be stripped or forged. Corroborate dates and places from metadata before using them.

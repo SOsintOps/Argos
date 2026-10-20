@@ -19,7 +19,8 @@ Versioning follows [Semantic Versioning](https://semver.org/).
   repository was created on 8 October 2026 and the project still has to earn
   its place as the first choice. The Usernames & Emails launcher offers it
   (Quick, up to 300 checks, or Full) and "All username tools" runs it in
-  Quick mode; `check.sh` probes it. No telemetry; the start-up version check
+  Quick mode; `check.sh` probes it; the FAQ, the guidelines and the desktop
+  entry name it. No telemetry; the start-up version check
   against PyPI is disabled with `--no-update-check`. Their own `install.sh`
   is not used: it downloads uv and a private Python runtime. Checked on
   Debian 13.7 (WSL, pipx): 232 MB, 40 checks in 13 seconds.

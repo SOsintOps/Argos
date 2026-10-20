@@ -5,6 +5,13 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.4-beta — 2026-10-20
+
+The Consensus entry saves its scan as JSON and derives the HTML report from
+it, so one scan gives both forms, and can route its checks through Tor.
+
+---
+
 ## v3.2.3-beta — 2026-10-20
 
 Consensus joins the Usernames & Emails launcher: one search over the lookup

@@ -217,22 +217,35 @@ socialscan_run() {
 
 # ── Consensus ───────────────────────────────────────────────────────────────
 
-# consensus_run TARGET [SCOPE]: one search over the lookup catalogues of 19
-# projects (Maigret, Sherlock, WhatsMyName, Holehe, Socialscan...), HTML report.
+# consensus_run TARGET [OPTS] [SCOPE]: one search over the lookup catalogues of
+# 19 projects (Maigret, Sherlock, WhatsMyName, Holehe, Socialscan...). The scan
+# saves every outcome as JSON; the HTML report is derived from it with
+# "consensus report", so one scan gives both the readable and the machine form.
 consensus_run() {
-    local target=$1 scope=${2-} bin run kind args
+    local target=$1 opts=${2-} scope=${3-} bin run kind args rc
     bin=$(find_tool consensus "$ARGOS_BIN_DIR/consensus") || return 1
     if [ -z "${2+set}" ]; then
+        opts=$(ui_checklist "Consensus — options" \
+            "tor|Route the checks through Tor (socks5 127.0.0.1:9050; the tor service must be running)|off") || return 0
         scope=$(ui_choice "Consensus — how many checks?" \
             "Quick (up to 300 checks, faster)" "Full (all eligible checks, slower)") || return 0
     fi
     if is_email "$target"; then kind=email; else kind=user; fi
     run=$(new_run_dir consensus "$target") || return 1
-    args=(--no-update-check --no-color "$kind" "$target" -o "$run/consensus.html")
+    args=(--no-update-check --no-color "$kind" "$target" -a -o "$run/consensus.json")
     case "$scope" in Full*) args+=(--full) ;; *) args+=(--fast) ;; esac
+    has tor "$opts" && args+=(--tor)
     record_version "$run" consensus "$bin" --no-update-check version
     run_logged "$run" "Consensus: $target" -- env -C "$run" "$bin" "${args[@]}"
-    report_outcome "$run" $? Consensus
+    rc=$?
+    # "report" takes no global options: "consensus --no-color report X" treats
+    # "report" and "X" as usernames and starts a full scan (checked on 0.4.11).
+    if [ "$rc" -eq 0 ] && [ -s "$run/consensus.json" ]; then
+        run_logged "$run" "Consensus report: $target" -- env -C "$run" "$bin" \
+            report "$run/consensus.json" -o "$run/consensus.html"
+        rc=$?
+    fi
+    report_outcome "$run" $rc Consensus
     finish_run "$run"
 }
 
@@ -271,7 +284,7 @@ case "$choice" in
         user_scanner_run "$target" "" JSON
         linkook_run "$target" ""
         socialscan_run "$target"
-        consensus_run "$target" "Quick (up to 300 checks, faster)"
+        consensus_run "$target" "" "Quick (up to 300 checks, faster)"
         ARGOS_NO_OPEN=0
         open_path "$(case_root)"
         ;;

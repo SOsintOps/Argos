@@ -85,22 +85,35 @@ setup() { setup_argos; }
     [ "$(arg_after --json "$(cat "$CALLS")")" = "$dir/socialscan.json" ]
 }
 
-@test "consensus: quick scope by default, HTML report in the run folder" {
-    double consensus
-    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 johndoe "")
+@test "consensus: quick scope by default, JSON scan then HTML report in the run folder" {
+    double consensus 'while [ $# -gt 0 ]; do [ "$1" = -o ] && echo "{}" > "$2"; shift; done'
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 johndoe "" "")
     [ "$status" -eq 0 ]
     call=$(grep '^consensus .* user johndoe' "$CALLS")
-    [[ $call == *"--fast"* && $call != *"--full"* && $call == *"--no-update-check"* ]]
+    [[ $call == *"--fast"* && $call != *"--full"* && $call != *"--tor"* && $call == *" -a "* ]]
     dir=$(only_run_dir consensus)
-    [ "$(arg_after -o "$call")" = "$dir/consensus.html" ]
+    [ "$(arg_after -o "$call")" = "$dir/consensus.json" ]
+    report=$(grep '^consensus report ' "$CALLS")
+    [ "$(arg_after report "$report")" = "$dir/consensus.json" ]
+    [ "$(arg_after -o "$report")" = "$dir/consensus.html" ]
+    grep -q './consensus.json' "$dir/SHA256SUMS"
+    grep -q './consensus.html' "$dir/SHA256SUMS"
 }
 
-@test "consensus: an email address runs the email search, full scope on request" {
+@test "consensus: no report when the scan fails or saves nothing" {
+    double consensus 'exit 2'
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 johndoe "" "")
+    [ "$status" -eq 0 ]
+    ! grep -q '^consensus report ' "$CALLS"
+    grep -qx 'Exit code: 2' "$(only_run_dir consensus)/command.txt"
+}
+
+@test "consensus: an email address runs the email search, Tor and full scope on request" {
     double consensus
-    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 jd@example.com 2)
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 jd@example.com 1 2)
     [ "$status" -eq 0 ]
     call=$(grep '^consensus .* email jd@example.com' "$CALLS")
-    [[ $call == *"--full"* && $call != *"--fast"* ]]
+    [[ $call == *"--full"* && $call != *"--fast"* && $call == *"--tor"* ]]
 }
 
 # ── Domains ─────────────────────────────────────────────────────────────────

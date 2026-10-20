@@ -91,7 +91,7 @@ Yes. Without a graphical session the launchers ask their questions in the termin
 ## OSINT Tools
 
 ### Which tool should I use for username searches?
-Start with Maigret for depth (3000+ sites, HTML and PDF reports) or Sherlock for speed. Blackbird and User Scanner also accept email addresses. Linkook follows the accounts linked from a profile. Socialscan tells whether a username or email is in use. Consensus runs one search over the lookup catalogues of 19 projects (Maigret, Sherlock, WhatsMyName, Holehe and others), deduplicated, with a confidence score per result: a good second opinion, Quick (300 checks) or Full. "All username tools" runs them one after the other.
+Start with Maigret for depth (3000+ sites, HTML and PDF reports) or Sherlock for speed. Blackbird and User Scanner also accept email addresses. Linkook follows the accounts linked from a profile. Socialscan tells whether a username or email is in use. Consensus runs one search over the lookup catalogues of 19 projects (Maigret, Sherlock, WhatsMyName, Holehe and others), deduplicated, with a confidence score per result: a good second opinion, Quick (300 checks) or Full, optionally through Tor. Its run folder holds the scan as JSON (every outcome, matches and blocked or inconclusive checks alike) and the HTML report derived from it. "All username tools" runs them one after the other.
 
 ### What is the difference between Instaloader and Toutatis?
 Instaloader downloads a profile: posts, reels, tagged posts, and, with the session of your Firefox research account, stories, highlights, comments and geotags. Toutatis returns account details and needs a session ID, which Argos never writes to the evidence files.

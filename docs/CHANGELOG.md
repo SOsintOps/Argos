@@ -6,6 +6,28 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.4-beta] — 2026-10-20
+
+### Changed
+- Usernames & Emails, Consensus: the scan now saves every outcome as JSON
+  (`-a -o consensus.json`) and the HTML report is derived from it with
+  `consensus report`, so one scan gives both the readable and the machine
+  form; the report step is skipped when the scan fails or saves nothing, and
+  both files are hashed in `SHA256SUMS`. "All username tools" keeps the
+  Quick scope. Note for maintainers: `consensus report` takes no global
+  options; with one in front (`consensus --no-color report FILE`) Consensus
+  0.4.11 treats `report` and the file name as usernames and starts a full
+  scan.
+
+### Added
+- Usernames & Emails, Consensus: an option to route the checks through Tor
+  (`--tor`, socks5 127.0.0.1:9050; the `tor` service installed by `setup.sh`
+  must be running). Consensus then also skips its version check.
+- `tests/launchers.bats`: the Consensus tests cover the JSON-then-report
+  sequence, the skipped report on a failed scan and the Tor option.
+
+---
+
 ## [3.2.3-beta] — 2026-10-20
 
 ### Added

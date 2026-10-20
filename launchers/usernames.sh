@@ -215,6 +215,27 @@ socialscan_run() {
     finish_run "$run"
 }
 
+# ── Consensus ───────────────────────────────────────────────────────────────
+
+# consensus_run TARGET [SCOPE]: one search over the lookup catalogues of 19
+# projects (Maigret, Sherlock, WhatsMyName, Holehe, Socialscan...), HTML report.
+consensus_run() {
+    local target=$1 scope=${2-} bin run kind args
+    bin=$(find_tool consensus "$ARGOS_BIN_DIR/consensus") || return 1
+    if [ -z "${2+set}" ]; then
+        scope=$(ui_choice "Consensus — how many checks?" \
+            "Quick (up to 300 checks, faster)" "Full (all eligible checks, slower)") || return 0
+    fi
+    if is_email "$target"; then kind=email; else kind=user; fi
+    run=$(new_run_dir consensus "$target") || return 1
+    args=(--no-update-check --no-color "$kind" "$target" -o "$run/consensus.html")
+    case "$scope" in Full*) args+=(--full) ;; *) args+=(--fast) ;; esac
+    record_version "$run" consensus "$bin" --no-update-check version
+    run_logged "$run" "Consensus: $target" -- env -C "$run" "$bin" "${args[@]}"
+    report_outcome "$run" $? Consensus
+    finish_run "$run"
+}
+
 # ── Menu ────────────────────────────────────────────────────────────────────
 
 choice=$(ui_choice "Case: $(case_name)
@@ -226,6 +247,7 @@ Which search?" \
     "User Scanner — username or email" \
     "Linkook — accounts linked to a username" \
     "Socialscan — is a username or email in use?" \
+    "Consensus — username or email over the catalogues of 19 projects" \
     "All username tools, one after the other") || exit 0
 
 # Cancelling a prompt ends quietly; an invalid value ends with an error code.
@@ -239,6 +261,7 @@ case "$choice" in
     "User Scanner"*) target=$(ask_username_or_email "User Scanner") || quit $?; user_scanner_run "$target" ;;
     "Linkook"*) target=$(ask_username Linkook) || quit $?; linkook_run "$target" ;;
     "Socialscan"*) target=$(ask_username_or_email Socialscan) || quit $?; socialscan_run "$target" ;;
+    "Consensus"*) target=$(ask_username_or_email Consensus) || quit $?; consensus_run "$target" ;;
     "All"*)
         target=$(ask_username "All tools") || quit $?
         ARGOS_NO_OPEN=1
@@ -248,6 +271,7 @@ case "$choice" in
         user_scanner_run "$target" "" JSON
         linkook_run "$target" ""
         socialscan_run "$target"
+        consensus_run "$target" "Quick (up to 300 checks, faster)"
         ARGOS_NO_OPEN=0
         open_path "$(case_root)"
         ;;

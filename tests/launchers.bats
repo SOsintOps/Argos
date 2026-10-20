@@ -85,6 +85,24 @@ setup() { setup_argos; }
     [ "$(arg_after --json "$(cat "$CALLS")")" = "$dir/socialscan.json" ]
 }
 
+@test "consensus: quick scope by default, HTML report in the run folder" {
+    double consensus
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 johndoe "")
+    [ "$status" -eq 0 ]
+    call=$(grep '^consensus .* user johndoe' "$CALLS")
+    [[ $call == *"--fast"* && $call != *"--full"* && $call == *"--no-update-check"* ]]
+    dir=$(only_run_dir consensus)
+    [ "$(arg_after -o "$call")" = "$dir/consensus.html" ]
+}
+
+@test "consensus: an email address runs the email search, full scope on request" {
+    double consensus
+    run bash "$LAUNCHERS/usernames.sh" < <(answers 8 jd@example.com 2)
+    [ "$status" -eq 0 ]
+    call=$(grep '^consensus .* email jd@example.com' "$CALLS")
+    [[ $call == *"--full"* && $call != *"--fast"* ]]
+}
+
 # ── Domains ─────────────────────────────────────────────────────────────────
 
 @test "theHarvester: free sources, normalised domain, plain lists" {

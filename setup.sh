@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.2.2-beta"
+ARGOS_VERSION="3.2.3-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -169,6 +169,8 @@ step_python_tools() {
     #    browser impersonation, required by sites such as Vimeo. The solvers
     #    run in deno (installed by the deno step).
     #  - shodan + setuptools<81: the CLI still imports pkg_resources.
+    #  - consensus-osint[modules,pdf]: the vendored lookup modules (Holehe,
+    #    Socialscan, Ignorant, User Scanner, Numint) and PDF reports.
     while read -r -a spec; do
         if uv_tool "${spec[@]}"; then ok "${spec[0]}"; else warn "${spec[0]} could not be installed"; rc=1; fi
     done <<'EOF_TOOLS'
@@ -177,6 +179,7 @@ maigret[pdf]
 user-scanner
 linkook
 socialscan
+consensus-osint[modules,pdf]
 instaloader --with browser_cookie3
 toutatis
 yt-dlp[default,curl-cffi]

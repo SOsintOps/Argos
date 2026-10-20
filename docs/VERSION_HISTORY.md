@@ -5,6 +5,15 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.3-beta — 2026-10-20
+
+Consensus joins the Usernames & Emails launcher: one search over the lookup
+catalogues of 19 username and email projects, deduplicated, with a confidence
+score per result and an HTML report. The single tools stay; Consensus is a
+few weeks old and complements them.
+
+---
+
 ## v3.2.2-beta — 2026-10-17
 
 Seven entries of the Firefox `Preferences` policy had always been rejected by

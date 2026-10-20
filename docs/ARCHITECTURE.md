@@ -86,7 +86,7 @@ terminal mode; the automated tests use it.
 | Launcher | Tools | Inputs |
 |---|---|---|
 | Argos Case | — | create, select or open a case |
-| Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan | username or email, report formats, scope |
+| Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan, Consensus | username or email, report formats, scope |
 | Instagram | Instaloader, Toutatis | profile; optional session for Toutatis |
 | Domains | theHarvester 5, subfinder, Amass v5, gau | domain, sources, passive or brute force, URL providers |
 | Web Screenshots | EyeWitness | one URL, a URL list or an Nmap/Nessus XML |

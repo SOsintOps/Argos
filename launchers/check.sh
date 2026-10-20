@@ -50,6 +50,7 @@ probe_runs blackbird env -C "$T/blackbird" "$T/blackbird/.venv/bin/python" black
 probe user-scanner  "$ARGOS_BIN_DIR/user-scanner" --version
 probe linkook       "$ARGOS_BIN_DIR/linkook" --version
 probe socialscan    "$ARGOS_BIN_DIR/socialscan" --version
+probe consensus     "$ARGOS_BIN_DIR/consensus" --no-update-check version
 probe instaloader   "$ARGOS_BIN_DIR/instaloader" --version
 probe_runs toutatis "$ARGOS_BIN_DIR/toutatis" -h
 probe theHarvester  "$ARGOS_BIN_DIR/theHarvester" -h

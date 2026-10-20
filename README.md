@@ -9,7 +9,7 @@ Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSI
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.2.2-beta.** Version 3 is a complete rewrite. The full installation of
+> **3.2.3-beta.** Version 3 is a complete rewrite. The full installation of
 > 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
 > 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,
@@ -21,7 +21,8 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 > key judgements, gaps and annexes to the report templates, separate from the
 > findings. 3.2.0-beta adds ONLYOFFICE Desktop Editors to open and fill the
 > `.docx` report templates; 3.2.1-beta revises the Firefox extensions and 3.2.2-beta
-> fixes the Firefox privacy policy. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
+> fixes the Firefox privacy policy; 3.2.3-beta adds Consensus, one search over the
+> lookup catalogues of 19 username and email projects. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
 > continues before the stable release: please report problems in the issues.
 
 <br clear="all">
@@ -121,7 +122,7 @@ Without a case, results go to the case `unsorted`.
 | Menu entry | Tools | What it adds |
 |---|---|---|
 | Argos Case | — | create, switch and open cases |
-| Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan | report formats, scope, email search, start from a profile URL, all tools in one go |
+| Usernames & Emails | Sherlock, Maigret, Blackbird, User Scanner, Linkook, Socialscan, Consensus | report formats, scope, email search, start from a profile URL, all tools in one go |
 | Instagram | Instaloader, Toutatis | posts, reels, tagged posts; stories, highlights, comments and geotags with your Firefox session |
 | Domains | theHarvester 5, subfinder, Amass v5, gau | free sources by default; passive subdomains without keys; brute force, altered names, optional active checks; known URLs from Wayback Machine, Common Crawl, OTX, urlscan |
 | Web Screenshots | EyeWitness | one URL, a URL list, or the web services of an Nmap/Nessus XML report |
@@ -153,6 +154,7 @@ when the services they query change.
 | [User Scanner](https://github.com/kaifcodec/user-scanner) | MIT | active |
 | [Linkook](https://github.com/JackJuly/linkook) | MIT | active |
 | [Socialscan](https://github.com/iojw/socialscan) | MPL-2.0 | low (last release 2023) |
+| [Consensus](https://github.com/OSINT-Experts-Society/Consensus-OSINT) | GPL-3.0-or-later | active (repository created October 2026) |
 | [Instaloader](https://github.com/instaloader/instaloader) | MIT | active |
 | [Toutatis](https://github.com/megadose/toutatis) | GPL-3.0 | unmaintained (last change 2024) |
 | [theHarvester](https://github.com/laramies/theHarvester) | GPL-2.0 | active |

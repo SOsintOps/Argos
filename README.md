@@ -9,7 +9,7 @@ Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSI
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.2.4-beta.** Version 3 is a complete rewrite. The full installation of
+> **3.2.5-beta.** Version 3 is a complete rewrite. The full installation of
 > 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
 > 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,

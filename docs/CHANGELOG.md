@@ -6,6 +6,18 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.5-beta] — 2026-10-20
+
+### Fixed
+- Usernames & Emails, Consensus: the subcommand now comes first
+  (`consensus user TARGET ...`). Consensus 0.4.11 only strips
+  `--no-update-check` before it looks for the subcommand; with `--no-color`
+  in front the whole line became a scan and the word `user` or `email` was
+  searched as an extra username, so the JSON and the HTML report carried
+  results for that word too. Reported upstream.
+
+---
+
 ## [3.2.4-beta] — 2026-10-20
 
 ### Changed

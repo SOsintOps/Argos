@@ -5,6 +5,13 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.5-beta — 2026-10-20
+
+The Consensus command puts the subcommand first; before, the word `user` or
+`email` was searched as an extra username.
+
+---
+
 ## v3.2.4-beta — 2026-10-20
 
 The Consensus entry saves its scan as JSON and derives the HTML report from

@@ -89,7 +89,7 @@ setup() { setup_argos; }
     double consensus 'while [ $# -gt 0 ]; do [ "$1" = -o ] && echo "{}" > "$2"; shift; done'
     run bash "$LAUNCHERS/usernames.sh" < <(answers 8 johndoe "" "")
     [ "$status" -eq 0 ]
-    call=$(grep '^consensus .* user johndoe' "$CALLS")
+    call=$(grep '^consensus user johndoe ' "$CALLS")
     [[ $call == *"--fast"* && $call != *"--full"* && $call != *"--tor"* && $call == *" -a "* ]]
     dir=$(only_run_dir consensus)
     [ "$(arg_after -o "$call")" = "$dir/consensus.json" ]
@@ -112,7 +112,7 @@ setup() { setup_argos; }
     double consensus
     run bash "$LAUNCHERS/usernames.sh" < <(answers 8 jd@example.com 1 2)
     [ "$status" -eq 0 ]
-    call=$(grep '^consensus .* email jd@example.com' "$CALLS")
+    call=$(grep '^consensus email jd@example.com ' "$CALLS")
     [[ $call == *"--full"* && $call != *"--fast"* && $call == *"--tor"* ]]
 }
 

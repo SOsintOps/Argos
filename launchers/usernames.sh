@@ -232,14 +232,16 @@ consensus_run() {
     fi
     if is_email "$target"; then kind=email; else kind=user; fi
     run=$(new_run_dir consensus "$target") || return 1
-    args=(--no-update-check --no-color "$kind" "$target" -a -o "$run/consensus.json")
+    # Subcommand first: Consensus only strips --no-update-check before it looks
+    # for the subcommand; with any other option in front the line becomes a
+    # scan and the word "user" or "email" is searched too (checked on 0.4.11).
+    args=("$kind" "$target" --no-update-check --no-color -a -o "$run/consensus.json")
     case "$scope" in Full*) args+=(--full) ;; *) args+=(--fast) ;; esac
     has tor "$opts" && args+=(--tor)
     record_version "$run" consensus "$bin" --no-update-check version
     run_logged "$run" "Consensus: $target" -- env -C "$run" "$bin" "${args[@]}"
     rc=$?
-    # "report" takes no global options: "consensus --no-color report X" treats
-    # "report" and "X" as usernames and starts a full scan (checked on 0.4.11).
+    # "report" takes no global options at all, for the same reason.
     if [ "$rc" -eq 0 ] && [ -s "$run/consensus.json" ]; then
         run_logged "$run" "Consensus report: $target" -- env -C "$run" "$bin" \
             report "$run/consensus.json" -o "$run/consensus.html"

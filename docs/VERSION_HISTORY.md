@@ -5,6 +5,12 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.2.6-beta — 2026-10-23
+
+A small easter egg joins the installed desktop.
+
+---
+
 ## v3.2.5-beta — 2026-10-20
 
 The Consensus command puts the subcommand first; before, the word `user` or

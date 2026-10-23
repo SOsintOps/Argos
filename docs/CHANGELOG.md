@@ -6,6 +6,13 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.2.6-beta] — 2026-10-23
+
+### Added
+- A small easter egg in the installed desktop. Finding it is part of the fun.
+
+---
+
 ## [3.2.5-beta] — 2026-10-20
 
 ### Fixed

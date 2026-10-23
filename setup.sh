@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.2.5-beta"
+ARGOS_VERSION="3.2.6-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -149,7 +149,7 @@ step_packages() {
         ffmpeg mediainfo-gui libimage-exiftool-perl httrack \
         tesseract-ocr tesseract-ocr-ita tesseract-ocr-chi-sim tesseract-ocr-rus tesseract-ocr-ara \
         openjdk-21-jre ripgrep 7zip unrar zip unzip subversion \
-        vlc openshot-qt audacity kazam keepassxc cherrytree \
+        vlc openshot-qt audacity kazam keepassxc cherrytree cool-retro-term \
         tor torbrowser-launcher proxychains4
 }
 

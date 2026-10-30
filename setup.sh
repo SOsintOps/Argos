@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.3.0-beta"
+ARGOS_VERSION="3.3.1-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -61,13 +61,25 @@ apt_install() {
     [ ${#failed[@]} -eq 0 ]
 }
 
-# git_sync URL DIR: clone, or update an existing clone.
+# git_sync URL DIR [BRANCH]: clone, or update an existing clone. With BRANCH,
+# a fresh clone checks out BRANCH and an existing clone, even one made from
+# another repository, is pointed at URL and moved to the tip of BRANCH.
 git_sync() {
     if [ -d "$2/.git" ]; then
-        git -C "$2" pull --ff-only -q
+        if [ -n "${3:-}" ]; then
+            git -C "$2" remote set-url origin "$1" &&
+                git -C "$2" fetch -q --depth 1 origin "$3" &&
+                git -C "$2" checkout -q -B "$3" FETCH_HEAD
+        else
+            git -C "$2" pull --ff-only -q
+        fi
     else
         rm -rf "$2"
-        git clone -q --depth 1 "$1" "$2"
+        if [ -n "${3:-}" ]; then
+            git clone -q --depth 1 --branch "$3" "$1" "$2"
+        else
+            git clone -q --depth 1 "$1" "$2"
+        fi
     fi
 }
 
@@ -332,12 +344,15 @@ step_quaesitor() {
 # settings and its tools/ folder live next to the program, so it stays in
 # the user's tools directory. The interface needs Tk; on Ubuntu 24.04 the
 # environment uses the system Python 3.12, hence python3-tk.
+# It is installed from the SOsintOps fork, branch linux: the program with the
+# Linux fixes proposed to its author (wheel, folders, system fonts, audio
+# preview, icon, cursors) until they are merged: https://github.com/SOsintOps/EditSimple/tree/linux
 step_editsimple() {
     local dir="$TOOLS/editsimple" major
     install_uv || return 1
     apt_install python3-tk || return 1
     mkdir -p "$TOOLS"
-    git_sync https://github.com/tingon11/EditSimple "$dir" || return 1
+    git_sync https://github.com/SOsintOps/EditSimple "$dir" linux || return 1
     venv_requirements "$dir" requirements.txt || return 1
     if [ ! -f "$dir/tools/vittrack/object_tracking_vittrack_2023sep.onnx" ]; then
         editsimple_vittrack "$dir/tools/vittrack" ||

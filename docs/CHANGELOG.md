@@ -6,6 +6,32 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.3.1-beta] — 2026-10-30
+
+### Changed
+- **EditSimple** comes from the SOsintOps fork
+  ([SOsintOps/EditSimple](https://github.com/SOsintOps/EditSimple/tree/linux),
+  branch `linux`), the upstream program with the Linux fixes proposed to its
+  author: on Linux the mouse wheel moves the cursor and zooms the timeline,
+  "Open tools folder" and "Open folder" use `xdg-open`, the font picker lists
+  the system fonts, the preview plays its audio through `pw-cat` or `aplay`,
+  the window shows the program icon, the resize cursors work on X11, the
+  ffmpeg texts and the start-up errors fit Linux, and `avvia.sh` starts it.
+  Tested on Ubuntu 24.04 in a virtual machine.
+- `git_sync` takes an optional branch: a fresh clone checks it out, an
+  existing clone is pointed at the repository URL and moved to the tip of the
+  branch, so `./setup.sh editsimple` moves a 3.3.0-beta install to the fork.
+  Without a branch nothing changes.
+- Tests: `setup.sh` installs the fork on `linux`; `git_sync` with a branch on
+  a fresh and on an existing clone.
+
+### Fixed
+- The known limits of EditSimple listed for 3.3.0-beta (silent audio preview,
+  only the bundled DejaVu fonts, "Open tools folder" not working) no longer
+  apply.
+
+---
+
 ## [3.3.0-beta] — 2026-10-30
 
 ### Added

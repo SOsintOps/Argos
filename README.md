@@ -9,7 +9,7 @@ Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSI
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.3.0-beta.** Version 3 is a complete rewrite. The full installation of
+> **3.3.1-beta.** Version 3 is a complete rewrite. The full installation of
 > 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
 > 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,
@@ -24,8 +24,8 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 > fixes the Firefox privacy policy; 3.2.3-beta adds Consensus, one search over the
 > lookup catalogues of 19 username and email projects, and 3.2.4-beta saves its
 > scan as JSON with the HTML report derived from it, with an optional Tor route. 3.3.0-beta adds EditSimple, a video editor that
-> turns footage into evidence (tracking, zoom, pixelation, slides), still to be
-> tested on a virtual machine. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
+> turns footage into evidence (tracking, zoom, pixelation, slides); 3.3.1-beta installs it
+> from a fork with the Linux fixes, tested on Ubuntu 24.04 in a virtual machine. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
 > continues before the stable release: please report problems in the issues.
 
 <br clear="all">
@@ -138,7 +138,7 @@ Without a case, results go to the case `unsorted`.
 | recon-ng | recon-ng | console with a workspace named after the case |
 | Website Mirror | HTTrack, katana | offline copy of a site, or a crawl that lists its pages, links and files |
 | Quaesitor | [Quaesitor](https://github.com/SOsintOps/quaesitor) | the case as a graph in the browser: people, phones, emails, profiles, vehicles, places, documents; CSV/Excel import, document sources with OCR; archive kept in `~/Documents/Argos/quaesitor`, nothing leaves the computer |
-| EditSimple | [EditSimple](https://github.com/tingon11/EditSimple) | video editor to explain a fact or show evidence: cuts, freeze frames, fast or slow motion with a clock, text, boxes and arrows that follow a subject, zoom box, pixelation of faces and plates that follows them, slides, audio tracks, logo; export to MP4 with ffmpeg. Audio preview is Windows-only: on Linux the export has sound, playback in the editor does not |
+| EditSimple | [EditSimple](https://github.com/tingon11/EditSimple) | video editor to explain a fact or show evidence: cuts, freeze frames, fast or slow motion with a clock, text, boxes and arrows that follow a subject, zoom box, pixelation of faces and plates that follows them, slides, audio tracks, logo; export to MP4 with ffmpeg. Installed from the [SOsintOps fork](https://github.com/SOsintOps/EditSimple/tree/linux) with the Linux fixes: audio preview through pw-cat or aplay, mouse wheel, system fonts, folder buttons |
 | Flowsint | [Flowsint](https://github.com/reconurge/flowsint) | graph-based investigation platform with enrichers, in Docker containers on this computer; start, open and stop from the launcher |
 | Exploratores | [Exploratores](https://github.com/SOsintOps/Exploratores) | browser-based OSINT toolkit, also Firefox's home page |
 | X (Twitter) | — | opens x.com |
@@ -181,7 +181,7 @@ when the services they query change.
 | [EditSimple](https://github.com/tingon11/EditSimple) | GPL-3.0 with attribution terms | active (repository created October 2026) |
 | [Flowsint](https://github.com/reconurge/flowsint) | Apache-2.0 | active |
 
-EditSimple is installed from its repository in
+EditSimple is installed from the [SOsintOps fork](https://github.com/SOsintOps/EditSimple/tree/linux) (branch `linux`, with the Linux fixes proposed to its author) in
 `~/.local/share/argos/tools/editsimple`, where it also keeps its settings
 (`config.json`) and its `tools/` folder. The installer downloads there the
 VitTrack tracking model ([opencv_zoo](https://github.com/opencv/opencv_zoo/tree/main/models/object_tracking_vittrack),

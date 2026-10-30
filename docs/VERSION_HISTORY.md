@@ -5,6 +5,14 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.3.1-beta — 2026-10-30
+
+EditSimple now comes from a fork with the Linux fixes proposed to its author:
+on Ubuntu its audio preview, mouse wheel, system fonts and folder buttons
+work. `./setup.sh editsimple` moves an existing install to the fork.
+
+---
+
 ## v3.3.0-beta — 2026-10-30
 
 EditSimple joins the menu: a video editor that turns footage into evidence,

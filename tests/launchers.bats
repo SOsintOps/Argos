@@ -360,6 +360,51 @@ setup() { setup_argos; }
     grep -q "^cwd=$ARGOS_TOOLS_DIR/editsimple$" "$CALLS"
 }
 
+# load_git_sync: define git_sync as setup.sh does (sourcing setup.sh would run its steps).
+load_git_sync() {
+    eval "$(sed -n '/^git_sync() {/,/^}/p' "$REPO/setup.sh")"
+}
+
+# git_repo DIR [BRANCH]: repository with one commit on main and, given BRANCH, one more on it.
+git_repo() {
+    git init -q -b main "$1"
+    git -C "$1" -c user.name=test -c user.email=test@example.invalid commit -q --allow-empty -m main
+    if [ -n "${2:-}" ]; then
+        git -C "$1" checkout -q -b "$2"
+        git -C "$1" -c user.name=test -c user.email=test@example.invalid commit -q --allow-empty -m "$2"
+        git -C "$1" checkout -q main
+    fi
+}
+
+@test "editsimple: setup.sh installs the Linux fork on branch linux" {
+    grep -qF 'git_sync https://github.com/SOsintOps/EditSimple "$dir" linux' "$REPO/setup.sh"
+    [ "$(grep -c 'git_sync https://github.com/[^ ]*/EditSimple' "$REPO/setup.sh")" -eq 1 ]
+}
+
+@test "git_sync: a fresh clone follows the branch, without one the default branch as before" {
+    load_git_sync
+    git_repo "$BATS_TEST_TMPDIR/fork" linux
+    git_sync "file://$BATS_TEST_TMPDIR/fork" "$BATS_TEST_TMPDIR/a" linux
+    [ "$(git -C "$BATS_TEST_TMPDIR/a" rev-parse --abbrev-ref HEAD)" = linux ]
+    [ "$(git -C "$BATS_TEST_TMPDIR/a" rev-parse HEAD)" = "$(git -C "$BATS_TEST_TMPDIR/fork" rev-parse linux)" ]
+    git_sync "file://$BATS_TEST_TMPDIR/fork" "$BATS_TEST_TMPDIR/b"
+    [ "$(git -C "$BATS_TEST_TMPDIR/b" rev-parse --abbrev-ref HEAD)" = main ]
+    git -C "$BATS_TEST_TMPDIR/fork" -c user.name=test -c user.email=test@example.invalid commit -q --allow-empty -m main2
+    git_sync "file://$BATS_TEST_TMPDIR/fork" "$BATS_TEST_TMPDIR/b"
+    [ "$(git -C "$BATS_TEST_TMPDIR/b" rev-parse HEAD)" = "$(git -C "$BATS_TEST_TMPDIR/fork" rev-parse main)" ]
+}
+
+@test "git_sync: a branch moves an existing clone of another repository to the fork" {
+    load_git_sync
+    git_repo "$BATS_TEST_TMPDIR/upstream"
+    git_repo "$BATS_TEST_TMPDIR/fork" linux
+    git_sync "file://$BATS_TEST_TMPDIR/upstream" "$BATS_TEST_TMPDIR/clone"
+    git_sync "file://$BATS_TEST_TMPDIR/fork" "$BATS_TEST_TMPDIR/clone" linux
+    [ "$(git -C "$BATS_TEST_TMPDIR/clone" rev-parse --abbrev-ref HEAD)" = linux ]
+    [ "$(git -C "$BATS_TEST_TMPDIR/clone" rev-parse HEAD)" = "$(git -C "$BATS_TEST_TMPDIR/fork" rev-parse linux)" ]
+    [ "$(git -C "$BATS_TEST_TMPDIR/clone" remote get-url origin)" = "file://$BATS_TEST_TMPDIR/fork" ]
+}
+
 @test "flowsint: a clear error when it is not installed" {
     run bash "$LAUNCHERS/flowsint.sh"
     [ "$status" -eq 1 ]

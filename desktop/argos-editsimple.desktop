@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=EditSimple
+Comment=Video editor to explain a fact or show evidence: tracking, zoom, pixelation, slides
+Exec=__ARGOS_HOME__/launchers/editsimple.sh %f
+Icon=__ARGOS_HOME__/icons/argos-editsimple.svg
+Terminal=false
+Categories=AudioVideo;Video;
+MimeType=video/mp4;video/x-matroska;video/quicktime;video/webm;video/x-msvideo;
+Keywords=OSINT;Argos;video;

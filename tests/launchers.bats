@@ -315,6 +315,7 @@ setup() { setup_argos; }
     [ "$status" -eq 0 ]
     [[ $output == *"launchers"* && $output == *"amass"* ]]
     [[ $output == *"quaesitor"* && $output == *"flowsint"* && $output == *"onlyoffice"* ]]
+    [[ $output == *"editsimple"* ]]
 }
 
 # ── Quaesitor and Flowsint ──────────────────────────────────────────────────
@@ -339,6 +340,24 @@ setup() { setup_argos; }
     grep -q '^python app.py$' "$CALLS"
     grep -q "^cwd=$ARGOS_TOOLS_DIR/quaesitor data=$HOME/quaesitor port=5000$" "$CALLS"
     [ -f "$HOME/quaesitor/server.log" ]
+}
+
+@test "editsimple: a clear error when it is not installed" {
+    run bash "$LAUNCHERS/editsimple.sh"
+    [ "$status" -eq 1 ]
+    [[ $output == *"EditSimple is not installed"* ]]
+}
+
+@test "editsimple: started from its folder with its environment and the file to open" {
+    mkdir -p "$ARGOS_TOOLS_DIR/editsimple"
+    : > "$ARGOS_TOOLS_DIR/editsimple/EditSimple.py"
+    double "$ARGOS_TOOLS_DIR/editsimple/.venv/bin/python" 'echo "cwd=$PWD" >> "$CALLS"'
+    run bash "$LAUNCHERS/editsimple.sh" "$HOME/clip.mp4"
+    [ "$status" -eq 0 ]
+    # The program is started detached (setsid): give it time to record the call.
+    for _ in $(seq 1 50); do grep -q '^cwd=' "$CALLS" 2>/dev/null && break; sleep 0.1; done
+    grep -q "^python EditSimple.py $HOME/clip.mp4$" "$CALLS"
+    grep -q "^cwd=$ARGOS_TOOLS_DIR/editsimple$" "$CALLS"
 }
 
 @test "flowsint: a clear error when it is not installed" {

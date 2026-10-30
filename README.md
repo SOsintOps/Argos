@@ -9,7 +9,7 @@ Argos turns a clean Ubuntu Budgie 24.04 or 26.04 LTS virtual machine into an OSI
 it installs the tools, adds a menu entry for each task, and saves every result
 in a case folder with the command used, the full output and SHA-256 hashes.
 
-> **3.2.6-beta.** Version 3 is a complete rewrite. The full installation of
+> **3.3.0-beta.** Version 3 is a complete rewrite. The full installation of
 > 3.0.0-beta has been tested on virtual machines with Ubuntu Budgie 24.04.5 and
 > 26.04.1 LTS, and the launchers are covered by automated tests, real
 > dialogs included. 3.1.0-beta added two case graphs, Quaesitor and Flowsint,
@@ -23,7 +23,9 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 > `.docx` report templates; 3.2.1-beta revises the Firefox extensions and 3.2.2-beta
 > fixes the Firefox privacy policy; 3.2.3-beta adds Consensus, one search over the
 > lookup catalogues of 19 username and email projects, and 3.2.4-beta saves its
-> scan as JSON with the HTML report derived from it, with an optional Tor route. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
+> scan as JSON with the HTML report derived from it, with an optional Tor route. 3.3.0-beta adds EditSimple, a video editor that
+> turns footage into evidence (tracking, zoom, pixelation, slides), still to be
+> tested on a virtual machine. Field testing on Ubuntu Budgie 24.04 and 26.04 LTS desktops
 > continues before the stable release: please report problems in the issues.
 
 <br clear="all">
@@ -48,8 +50,8 @@ in a case folder with the command used, the full output and SHA-256 hashes.
 - **One menu entry per investigative task**: usernames and emails, Instagram,
   domains and URLs, web screenshots, public documents and metadata, video
   download and analysis, Shodan, SpiderFoot, phone numbers, recon-ng, website
-  copies and crawls, and two case graphs in the browser (Quaesitor and
-  Flowsint).
+  copies and crawls, two case graphs in the browser (Quaesitor and
+  Flowsint) and a video editor to present what a video shows (EditSimple).
 - **Cases**: choose a case once, and every result lands in
   `~/Documents/Argos/cases/<case>/`.
 - **Evidence you can defend**: each run folder holds `command.txt` (exact
@@ -136,6 +138,7 @@ Without a case, results go to the case `unsorted`.
 | recon-ng | recon-ng | console with a workspace named after the case |
 | Website Mirror | HTTrack, katana | offline copy of a site, or a crawl that lists its pages, links and files |
 | Quaesitor | [Quaesitor](https://github.com/SOsintOps/quaesitor) | the case as a graph in the browser: people, phones, emails, profiles, vehicles, places, documents; CSV/Excel import, document sources with OCR; archive kept in `~/Documents/Argos/quaesitor`, nothing leaves the computer |
+| EditSimple | [EditSimple](https://github.com/tingon11/EditSimple) | video editor to explain a fact or show evidence: cuts, freeze frames, fast or slow motion with a clock, text, boxes and arrows that follow a subject, zoom box, pixelation of faces and plates that follows them, slides, audio tracks, logo; export to MP4 with ffmpeg. Audio preview is Windows-only: on Linux the export has sound, playback in the editor does not |
 | Flowsint | [Flowsint](https://github.com/reconurge/flowsint) | graph-based investigation platform with enrichers, in Docker containers on this computer; start, open and stop from the launcher |
 | Exploratores | [Exploratores](https://github.com/SOsintOps/Exploratores) | browser-based OSINT toolkit, also Firefox's home page |
 | X (Twitter) | — | opens x.com |
@@ -175,7 +178,17 @@ when the services they query change.
 | [HTTrack](https://github.com/xroche/httrack) | GPL-3.0 | active |
 | [katana](https://github.com/projectdiscovery/katana) | MIT | active |
 | [Quaesitor](https://github.com/SOsintOps/quaesitor) (fork of [OSInt Graph](https://github.com/tingon11/OsintGraph)) | GPL-3.0 with attribution terms | active |
+| [EditSimple](https://github.com/tingon11/EditSimple) | GPL-3.0 with attribution terms | active (repository created October 2026) |
 | [Flowsint](https://github.com/reconurge/flowsint) | Apache-2.0 | active |
+
+EditSimple is installed from its repository in
+`~/.local/share/argos/tools/editsimple`, where it also keeps its settings
+(`config.json`) and its `tools/` folder. The installer downloads there the
+VitTrack tracking model ([opencv_zoo](https://github.com/opencv/opencv_zoo/tree/main/models/object_tracking_vittrack),
+Apache-2.0, checked against its SHA-256) and, when the system ffmpeg is older
+than 7 (Ubuntu 24.04 ships 6.1), a release build of ffmpeg from
+[BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds), as EditSimple
+asks for ffmpeg 7 or later.
 
 Flowsint runs in Docker: the installer adds your
 user to the `docker` group, active after the reboot, and keeps the generated

@@ -38,7 +38,8 @@ tests/                   automated tests (bats) and test doubles
 | `~/.local/share/argos/launchers/` | launchers and `lib/argos.sh` |
 | `~/.local/share/argos/icons/` | launcher icons |
 | `~/.local/share/applications/argos-*.desktop` | menu entries |
-| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot, Quaesitor), each with a uv environment on Python 3.12; Flowsint's repository at its latest release (its services run as Docker containers) |
+| `~/.local/share/argos/tools/` | tools installed from source (Blackbird, EyeWitness, metagoofil, recon-ng, SpiderFoot, Quaesitor, EditSimple), each with a uv environment on Python 3.12; Flowsint's repository at its latest release (its services run as Docker containers) |
+| `~/.local/share/argos/tools/editsimple/` | EditSimple, with its `config.json` and `tools/` (VitTrack model; ffmpeg 7+ when the system one is older) |
 | `~/.config/argos/flowsint.env` | Flowsint passwords and release, generated once |
 | `~/Documents/Argos/quaesitor/` | Quaesitor archive (cases, uploaded images, server log) |
 | `~/.local/bin/` | command-line tools installed with uv (own environment each); Amass, PhoneInfoga, deno, subfinder, katana and gau from their releases |
@@ -99,6 +100,7 @@ terminal mode; the automated tests use it.
 | recon-ng | recon-ng | workspace named after the case |
 | Website Mirror | HTTrack, katana | URL, depth; copy or crawl |
 | Quaesitor | Quaesitor web UI | — |
+| EditSimple | EditSimple (desktop window) | video or project to open (optional) |
 | Flowsint | Flowsint web UI (Docker) | open or stop |
 | Exploratores | Exploratores (local) | — |
 

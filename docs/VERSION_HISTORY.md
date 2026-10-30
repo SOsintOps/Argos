@@ -5,6 +5,15 @@ For the full technical changelog see [CHANGELOG.md](CHANGELOG.md).
 
 ---
 
+## v3.3.0-beta — 2026-10-30
+
+EditSimple joins the menu: a video editor that turns footage into evidence,
+with tracking boxes, zoom, pixelation of faces and plates, slides and audio
+tracks, exported to MP4. The installer adds its tracking model and, on
+Ubuntu 24.04, an ffmpeg recent enough for it.
+
+---
+
 ## v3.2.6-beta — 2026-10-23
 
 A small easter egg joins the installed desktop.

@@ -6,6 +6,33 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [3.3.0-beta] — 2026-10-30
+
+### Added
+- **EditSimple** (`setup.sh editsimple`, launcher "EditSimple"): a video
+  editor by the author of OSInt Graph, made to explain a fact or show
+  evidence: cuts, freeze frames, fast or slow motion with a clock, overlays
+  that follow a subject, zoom box, pixelation that follows faces and plates,
+  slides, audio tracks, export to MP4 with ffmpeg. Installed from its
+  repository in `~/.local/share/argos/tools/editsimple` with a uv environment
+  on Python 3.12; `python3-tk` is installed for its Tk interface. The step
+  also downloads the VitTrack tracking model (opencv_zoo, Apache-2.0),
+  checked against the SHA-256 the program expects, and, when the system
+  ffmpeg is older than 7 (Ubuntu 24.04 has 6.1), the newest ffmpeg release
+  build of BtbN/FFmpeg-Builds, checked against its checksums, in the
+  program's `tools/ffmpeg/`. The menu entry opens a video or a project passed
+  to it.
+- Argos Check probes EditSimple (Tk, OpenCV and CustomTkinter in its
+  environment).
+
+### Known limits
+- EditSimple plays audio in its preview only on Windows; on Linux the
+  exported MP4 has sound, playback in the editor is silent. Its font picker
+  lists the DejaVu fonts it ships, not the system fonts, and the "Open tools
+  folder" button does not work on Linux.
+
+---
+
 ## [3.2.6-beta] — 2026-10-23
 
 ### Added

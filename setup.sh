@@ -12,7 +12,7 @@
 
 set -uo pipefail
 
-ARGOS_VERSION="3.2.6-beta"
+ARGOS_VERSION="3.3.0-beta"
 SRC="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
 ARGOS_HOME="$HOME/.local/share/argos"
 TOOLS="$ARGOS_HOME/tools"
@@ -133,7 +133,7 @@ deb_arch() { dpkg --print-architecture; }
 # it does not stop the other steps.
 
 STEPS=(system packages python-tools deno go-tools theharvester source-tools eyewitness amass phoneinfoga
-       quaesitor flowsint obsidian google-earth vscodium onlyoffice resources firefox launchers templates wallpaper)
+       quaesitor editsimple flowsint obsidian google-earth vscodium onlyoffice resources firefox launchers templates wallpaper)
 
 step_system() {
     sudo add-apt-repository -y universe >/dev/null &&
@@ -327,6 +327,60 @@ step_quaesitor() {
     ok "Quaesitor"
 }
 
+# EditSimple: video editor to explain a fact or show evidence (subject
+# tracking, zoom, pixelation, slides), by the author of OSInt Graph. Its
+# settings and its tools/ folder live next to the program, so it stays in
+# the user's tools directory. The interface needs Tk; on Ubuntu 24.04 the
+# environment uses the system Python 3.12, hence python3-tk.
+step_editsimple() {
+    local dir="$TOOLS/editsimple" major
+    install_uv || return 1
+    apt_install python3-tk || return 1
+    mkdir -p "$TOOLS"
+    git_sync https://github.com/tingon11/EditSimple "$dir" || return 1
+    venv_requirements "$dir" requirements.txt || return 1
+    if [ ! -f "$dir/tools/vittrack/object_tracking_vittrack_2023sep.onnx" ]; then
+        editsimple_vittrack "$dir/tools/vittrack" ||
+            warn "EditSimple: VitTrack model not downloaded (Configure > Download in the program)"
+    fi
+    # EditSimple wants ffmpeg 7 or later; Ubuntu 24.04 ships 6.1. In that case
+    # a release build from BtbN/FFmpeg-Builds goes in tools/ffmpeg/, where the
+    # program looks before the PATH.
+    major=$(ffmpeg -version 2>/dev/null | sed -n '1s/^ffmpeg version n\{0,1\}\([0-9]*\).*/\1/p')
+    if [ "${major:-0}" -lt 7 ] && [ ! -x "$dir/tools/ffmpeg/ffmpeg" ]; then
+        editsimple_ffmpeg "$dir/tools/ffmpeg" ||
+            warn "EditSimple: ffmpeg ${major:-?} is older than 7, exports may come out wrong"
+    fi
+    ok "EditSimple"
+}
+
+# editsimple_vittrack DIR: VitTrack tracking model (opencv_zoo, Apache 2.0)
+# with its licence, checked against the fingerprint the program expects.
+editsimple_vittrack() {
+    local url=https://github.com/opencv/opencv_zoo/raw/main/models/object_tracking_vittrack
+    curl -fsSL -o "$WORK/vittrack.onnx" "$url/object_tracking_vittrack_2023sep.onnx" || return 1
+    [ "$(sha256sum "$WORK/vittrack.onnx" | cut -d' ' -f1)" = 2990f0b7cd44d92afa48cd97db6de7be113fc1d9594fddb74e2725c10478e91d ] || return 1
+    mkdir -p "$1" &&
+        curl -fsSL -o "$1/LICENSE" "$url/LICENSE" &&
+        mv "$WORK/vittrack.onnx" "$1/object_tracking_vittrack_2023sep.onnx"
+}
+
+# editsimple_ffmpeg DIR: newest ffmpeg release build of BtbN/FFmpeg-Builds,
+# checked against its checksums, with its licence.
+editsimple_ffmpeg() {
+    local base=https://github.com/BtbN/FFmpeg-Builds/releases/download/latest arch file
+    case "$(deb_arch)" in arm64) arch=linuxarm64 ;; *) arch=linux64 ;; esac
+    file=$(curl -fsSL "$base/checksums.sha256" |
+        awk -v a="$arch" '$2 ~ "^ffmpeg-n[0-9.]+-latest-" a "-gpl-[0-9.]+[.]tar[.]xz$" {print $2}' |
+        sort -V | tail -n 1)
+    [ -n "$file" ] || return 1
+    download_verified "$base/$file" "$base/checksums.sha256" "$file" &&
+        tar -xJf "$WORK/$file" -C "$WORK" &&
+        install -D -m 755 "$WORK/${file%.tar.xz}/bin/ffmpeg" "$1/ffmpeg" &&
+        install -m 644 "$WORK/${file%.tar.xz}/LICENSE.txt" "$1/LICENSE.txt" &&
+        ok "ffmpeg $(cut -d- -f2 <<< "$file" | tr -d n) for EditSimple"
+}
+
 # Flowsint: graph-based investigation platform, run from its Docker images
 # (API, worker, web app, PostgreSQL, Redis, Neo4j) at the latest release.
 # Docker comes from Ubuntu; the user joins the docker group, active from the
@@ -507,7 +561,7 @@ preflight() {
 need_sudo() {
     local s
     for s in "$@"; do
-        case "$s" in system|packages|eyewitness|flowsint|obsidian|google-earth|vscodium|onlyoffice|firefox) return 0 ;; esac
+        case "$s" in system|packages|eyewitness|editsimple|flowsint|obsidian|google-earth|vscodium|onlyoffice|firefox) return 0 ;; esac
     done
     return 1
 }
